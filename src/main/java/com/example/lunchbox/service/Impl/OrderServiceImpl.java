@@ -61,7 +61,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(Integer id) {
-        return orderRepository.findOne(id);
+       Order order  = orderRepository.findOne(id);
+        Integer customerId = order.getOrderCustomerId();
+        Integer foodmakerId = order.getFoodmakerId();
+        for (Orderdishes orderdishes : order.getOrderdishes()){
+            Integer dishId = orderdishes.getDishId();
+            Dishes dish = dishRepository.findOne(dishId);
+            orderdishes.setDishes(dish);
+        }
+        Customer customer = customerRepository.findByCustomerId(customerId);
+        Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
+        order.setCustomer(customer);
+        order.setFoodmaker(foodmaker);
+        return order;
+        //return orderRepository.findOne(id);
     }
 
     @Override

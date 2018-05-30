@@ -1,11 +1,18 @@
+
+
+<%@ page import="java.util.*" %>
+<%@ page import="com.example.lunchbox.model.entity.Order" %>
+<%@ page import="com.example.lunchbox.model.entity.Orderdishes" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Khizar
   Date: 2/17/2018
   Time: 11:47 PM
-  To change this template use File | Settings | File Templates.
---%>
+  To change this template use File | Settings | File Tempclates.
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,33 +25,33 @@
     <meta name="author" content="Huban Creative">
 
     <!-- Base Css Files -->
-    <link href="assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="assets/libs/fontello/css/fontello.css" rel="stylesheet" />
-    <link href="assets/libs/animate-css/animate.min.css" rel="stylesheet" />
-    <link href="assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
-    <link href="assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" />
-    <link href="assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet" />
-    <link href="assets/libs/pace/pace.css" rel="stylesheet" />
-    <link href="assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" />
-    <link href="assets/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
-    <link href="assets/libs/jquery-icheck/skins/all.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/fontello/css/fontello.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/animate-css/animate.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/pace/pace.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet" />
     <!-- Code Highlighter for Demo -->
-    <link href="assets/libs/prettify/github.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/prettify/github.css" rel="stylesheet" />
 
     <!-- Extra CSS Libraries Start -->
-    <link href="assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/jquery-clock/clock.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" />
     <!-- Extra CSS Libraries End -->
-    <link href="assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,15 +60,15 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="assets/img/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/img/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/img/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/img/apple-touch-icon-152x152.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-152x152.png" />
 </head>
 <body class="fixed-left">
 <!-- Modal Start -->
@@ -341,21 +348,16 @@
             <div class="widget-content padding">
                 <div class="row">
                     <div class="col-sm-4">
-
+                        <% Order data = (Order) request.getAttribute("orderDetail"); %>
                         <div class="company-column">
-                            <h4><img src="assets/img/inv-logo.png" alt="Logo"></h4>
-                            <address>
-                                <br>
-                                3049 Anmoore Road<br>
-                                Brooklyn, NY 11230 <br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                            </address>
+                            <h4><img src="${pageContext.request.contextPath}/assets/img/inv-logo.png" alt="Logo"></h4>
+
                         </div>
 
                     </div>
                     <div class="col-sm-8 text-right">
                         <h1>INVOICE</h1>
-                        <h4>#HKN-27813123</h4>
+                        <h4>#ORD-<%= data.getOrderId() %></h4>
                         <a href="#" class="btn btn-primary btn-sm invoice-print"><i class="icon-print-2"></i> Print</a>
                     </div>
                 </div>
@@ -364,10 +366,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h4><strong>Customer </strong> Details</h4>
+                            <p><%= data.getCustomer().getCustomerName() %></p>
                             <address>
                                 795 Folsom Ave, Suite 600<br>
                                 San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
+                                <abbr title="Phone">P:</abbr> <%= data.getCustomer().getCustomerPhoneNumber() %>
                             </address>
                         </div>
                         <div class="col-sm-6"><br>
@@ -375,7 +378,7 @@
                                 <p><strong>ORDER DATE : </strong> January 15, 2014</p>
                                 <p><strong>ORDER TIME : </strong> January 15, 2014</p>
                                 <p><strong>ORDER STATUS : </strong> <span class="label label-warning">Pending</span></p>
-                                <p><strong>ORDER ID : </strong> #123456</p>
+                                <p><strong>ORDER ID : </strong> #<%= data.getOrderId() %></p>
                             </small>
                         </div>
                     </div>
@@ -387,10 +390,11 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h4><strong>Foodmaker </strong> Details</h4>
+                            <p><%= data.getFoodmaker().getFoodmakerName() %></p>
                             <address>
                                 795 Folsom Ave, Suite 600<br>
                                 San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
+                                <abbr title="Phone">P:</abbr> <%= data.getFoodmaker().getFoodmakerPhoneNumber() %>
                             </address>
                         </div>
                         <div class="col-sm-6"><br>
@@ -398,7 +402,7 @@
                                 <p><strong>ORDER DATE : </strong> January 15, 2014</p>
                                 <p><strong>ORDER TIME : </strong> January 15, 2014</p>
                                 <p><strong>ORDER STATUS : </strong> <span class="label label-warning">Pending</span></p>
-                                <p><strong>ORDER ID : </strong> #123456</p>
+                                <p><strong>ORDER ID : </strong> #${orderDetail.orderId}</p>
                             </small>
                         </div>
                     </div>
@@ -420,47 +424,59 @@
                         </thead>
 
                         <tbody>
+                        <%
+                        double total = 0;
+                        %>
+                        <%
+                             for (Orderdishes orderdishes : data.getOrderdishes()) {
+                        %>
                         <tr>
-                            <td>Nasi Gudeg Pakai Suwir</td>
-                            <td>5</td>
-                            <td>&#36;2.00</td>
-                            <td>&#36;10.00</td>
+                            <td><%= orderdishes.getDishes().getDishName() %>,</td>
+                            <td><%= orderdishes.getQuantity() %>,</td>
+                            <td><%= orderdishes.getDishes().getDishSellingPrice() %>,</td>
+                            <td><%= (orderdishes.getDishes().getDishSellingPrice() * orderdishes.getQuantity()) %>,</td>
+                            <%  total += (orderdishes.getDishes().getDishSellingPrice() * orderdishes.getQuantity()); %>
                         </tr>
-                        <tr>
-                            <td>Jeruk Anget Gelas Gede</td>
-                            <td>3</td>
-                            <td>&#36;0.50</td>
-                            <td>&#36;1.50</td>
-                        </tr>
-                        <tr>
-                            <td>Teh Tawar Anget Gelas Gede</td>
-                            <td>2</td>
-                            <td>&#36;0.50</td>
-                            <td>&#36;1.00</td>
-                        </tr>
+                        <%}%>
+
+
                         <tr>
                             <td colspan="3" class="text-right"><strong>Subtotal</strong></td>
-                            <td>&#36;12.50</td>
+                            <td><%=total%></td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-right"><strong>Shipping</strong></td>
-                            <td>&#36;4.50</td>
+                            <td>0.00</td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-right"><strong>Discount</strong></td>
-                            <td><strong class="text-red-1">&#36;2.00</strong></td>
+                            <td><strong class="text-red-1">0.00</strong></td>
                         </tr>
-                        <tr>
-                            <td colspan="3" class="text-right"><strong>Tax (20%)</strong></td>
-                            <td>&#36;3.00</td>
-                        </tr>
+
                         <tr>
                             <td colspan="3" class="text-right"><strong>TOTAL</strong></td>
-                            <td><strong class="text-primary">&#36;18.00</strong></td>
+                            <td><strong class="text-primary"><%=total%></strong></td>
                         </tr>
                         </tbody>
 
                     </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <br><br>
                     <h4 class="text-center">Thank you for your payment!</h4><br><br>
                     <p class="text-right payment-methods"><i class="fa fa-cc-visa"></i> <i class="fa fa-cc-mastercard"></i> <i class="fa fa-cc-discover"></i> <i class="fa fa-cc-amex"></i> <i class="fa fa-cc-paypal"></i> <i class="fa fa-cc-stripe"></i></p>
@@ -509,50 +525,50 @@
 
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="assets/libs/jquery/jquery-1.11.1.min.js"></script>
-<script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>
-<script src="assets/libs/jquery-detectmobile/detect.js"></script>
-<script src="assets/libs/jquery-animate-numbers/jquery.animateNumbers.js"></script>
-<script src="assets/libs/ios7-switch/ios7.switch.js"></script>
-<script src="assets/libs/fastclick/fastclick.js"></script>
-<script src="assets/libs/jquery-blockui/jquery.blockUI.js"></script>
-<script src="assets/libs/bootstrap-bootbox/bootbox.min.js"></script>
-<script src="assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
-<script src="assets/libs/jquery-sparkline/jquery-sparkline.js"></script>
-<script src="assets/libs/nifty-modal/js/classie.js"></script>
-<script src="assets/libs/nifty-modal/js/modalEffects.js"></script>
-<script src="assets/libs/sortable/sortable.min.js"></script>
-<script src="assets/libs/bootstrap-fileinput/bootstrap.file-input.js"></script>
-<script src="assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
-<script src="assets/libs/bootstrap-select2/select2.min.js"></script>
-<script src="assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="assets/libs/pace/pace.min.js"></script>
-<script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="assets/libs/jquery-icheck/icheck.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-detectmobile/detect.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-animate-numbers/jquery.animateNumbers.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7.switch.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/fastclick/fastclick.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-blockui/jquery.blockUI.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-bootbox/bootbox.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-sparkline/jquery-sparkline.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/nifty-modal/js/classie.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/nifty-modal/js/modalEffects.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/sortable/sortable.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-fileinput/bootstrap.file-input.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-select2/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/pace/pace.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-icheck/icheck.min.js"></script>
 
 <!-- Demo Specific JS Libraries -->
-<script src="assets/libs/prettify/prettify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/prettify/prettify.js"></script>
 
-<script src="assets/js/init.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/init.js"></script>
 <!-- Page Specific JS Libraries -->
-<script src="assets/libs/d3/d3.v3.js"></script>
-<script src="assets/libs/rickshaw/rickshaw.min.js"></script>
-<script src="assets/libs/raphael/raphael-min.js"></script>
-<script src="assets/libs/morrischart/morris.min.js"></script>
-<script src="assets/libs/jquery-knob/jquery.knob.js"></script>
-<script src="assets/libs/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="assets/libs/jquery-jvectormap/js/jquery-jvectormap-us-aea-en.js"></script>
-<script src="assets/libs/jquery-clock/clock.js"></script>
-<script src="assets/libs/jquery-easypiechart/jquery.easypiechart.min.js"></script>
-<script src="assets/libs/jquery-weather/jquery.simpleWeather-2.6.min.js"></script>
-<script src="assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js"></script>
-<script src="assets/libs/bootstrap-calendar/js/bic_calendar.min.js"></script>
-<script src="assets/js/apps/calculator.js"></script>
-<script src="assets/js/apps/todo.js"></script>
-<script src="assets/js/apps/notes.js"></script>
-<script src="assets/js/pages/index.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/d3/d3.v3.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/raphael/raphael-min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/morrischart/morris.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-knob/jquery.knob.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/js/jquery-jvectormap-us-aea-en.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-easypiechart/jquery.easypiechart.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-weather/jquery.simpleWeather-2.6.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/js/bic_calendar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apps/calculator.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apps/todo.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apps/notes.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/pages/index.js"></script>
 
 <script>
 

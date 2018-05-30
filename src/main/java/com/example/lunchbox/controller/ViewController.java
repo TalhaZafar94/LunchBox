@@ -95,7 +95,7 @@ public class ViewController {
         return "add-dishes";
     }
 
-    @RequestMapping(value = "/order-lisitng" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/order-listing" ,method = RequestMethod.GET)
     public String  getOrderListing(){
         return "order-listing";
     }

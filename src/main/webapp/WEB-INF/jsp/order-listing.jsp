@@ -362,6 +362,11 @@
                             </div>
                         </div>
 
+                        <form action="/order/order-view" id="actions-form" method="post">
+                            <input type="hidden" name="orderId" />
+                        </form>
+
+
                         <div class="table-responsive">
                             <table  data-sortable class="table table-hover table-striped">
                                 <thead>
@@ -510,7 +515,7 @@
 <script>
 
     $.ajax({
-        url:'http://localhost:8080/foodmaker/foodmakers-list',
+        url:'http://localhost:8080/order/get-order-list',
         type:'get',
         dataType:'json',
         data:'',
@@ -519,26 +524,31 @@
             console.log(response);
             var status;
             var classes;
-            response.forEach(function(foodmaker) {
-                if(foodmaker.foodmakerActive == 1){
-                    status = "Active";
+            response.forEach(function(data) {
+                if(data.orderDate == 1){
+                    status = "Complete";
                     classes="label label-success"
                 }else{
-                    status = "UnActive";
+                    status = "In Process";
                     classes ="label label-warning";
                 }
 
 
                 html = '<tr>'+ '<td> <input type="checkbox" name="record"> </td>'+
-                    '<td>'+foodmaker.foodmakerName+'</td>'+
-                    '<td>'+((foodmaker.adminAddressId != null)? foodmaker.adminAddressId.address+' '+foodmaker.adminAddressId.city: 'not avaible' )+'</td>'+
-                    '<td>'+foodmaker.foodmakerEmail+'</td>'+
-                    '<td>'+foodmaker.foodmakerCreatedAt+'</td>'+
+                    '<td>'+data.customer.customerName+'</td>'+
+                    '<td>'+data.foodmaker.foodmakerName+'</td>'+
+                    '<td>'+data.orderDate+'</td>'+
+                    '<td>'+data.orderDate+'</td>'+
                     '<td><span class="'+classes+'">'+status+'</span></td>'+
+
+                    '<td>'+data.orderShipmentAddress+'</td>'+
+                    '<td></td>'+
+
+
                     '<td>'+
                     '<div class="btn-group btn-group-xs">'+
-                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default"><i class="fa fa-power-off" value="'+foodmaker.foodmakerId+'" ></i></a>'+
-                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default" value="'+foodmaker.foodmakerId+'" ><i class="fa fa-edit"></i></a>'+
+                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+data.orderId+'"><i class="fa fa-power-off"  ></i></a>'+
+                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-view" data-id="'+data.orderId+'" ><i class="fa fa-edit"></i></a>'+
                     '</div>'+
                     '</td>'+
                     '</tr>';
@@ -552,6 +562,15 @@
 
     });
 
+
+    viewOrderDetail();
+    function viewOrderDetail(){
+        $('.btn-view').on('click',function(){
+            var rowId = $(this).attr('data-id');
+            $('input[type=hidden][name=orderId]').val(rowId);
+            $('#actions-form').submit();
+        });
+    }
 </script>
 
 

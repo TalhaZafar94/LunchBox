@@ -5,6 +5,7 @@ import com.example.lunchbox.service.OrderService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -44,4 +45,17 @@ public class OrderController {
     public List<Order> getOrderList(){
         return orderService.findAllOrders();
     }
+
+
+    @RequestMapping(value = "/order-view" ,method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer orderId){
+        Order order = orderService.getOrderById(orderId);
+        ModelAndView modelAndView = new ModelAndView("order-detail");
+        modelAndView.addObject("orderDetail", order);
+
+
+        return modelAndView;
+    }
+
+
 }
