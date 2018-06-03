@@ -34,29 +34,26 @@
                 <li class='has_sub'>
                     <a href='javascript:void(0);'><i class='icon-feather'></i><span>Admin</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='/add-admin'><span>Add Admin</span></a></li>
-                        <li><a href='/admin-listing'><span>Admin Details</span></a></li>
+                        <li><a href='/admin/add-admin'><span>Add Admin</span></a></li>
+                        <li><a href='/admin/admin-listing'><span>Admin Listing</span></a></li>
                     </ul>
                 </li>
                 <!--end:: if super admin -->
                 <li class='has_sub'>
                     <a href='javascript:void(0);'><i class='icon-feather'></i><span>FoodMaker</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='/add-foodmaker'><span>Add FoodMaker</span></a></li>
-                        <li><a href='/foodmaker-listing'><span>FoodMaker Details</span></a></li>
-                        <li><a href='#'><span>Activate FoodMaker</span></a></li>
-                        <li><a href='#'><span>FoodMaker Order Details</span></a></li>
+                        <li><a href='/foodmaker/add-foodmaker'><span>Add FoodMaker</span></a></li>
+                        <li><a href='/foodmaker/foodmaker-listing'><span>FoodMaker Listing</span></a></li>
+
                     </ul>
                 </li>
 
                 <li class='has_sub'>
                     <a href='javascript:void(0);'><i class='icon-feather'></i><span>Customer</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='/add-customer'><span>Add Customer</span></a></li>
-                        <li><a href='/customer-listing'><span>Customer Details</span></a></li>
-                        <li><a href='#'><span>Activate Customer</span></a></li>
-                        <li><a href='#'><span>Customer Order Details</span></a></li>
-                        <li><a href='#'><span>Customer Requests</span></a></li>
+                        <li><a href='/customer/add-customer'><span>Add Customer</span></a></li>
+                        <li><a href='/customer/customer-listing'><span>Customer Listing</span></a></li>
+
                     </ul>
                 </li>
 
@@ -64,18 +61,23 @@
                     <a href='javascript:void(0);'><i class='icon-feather'></i><span>Rider</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
                         <li><a href='/add-rider'><span>Add Rider</span></a></li>
-                        <li><a href='/rider-listing'><span>Rider Details</span></a></li>
+                        <li><a href='/rider-listing'><span>Rider Listing</span></a></li>
                         <li><a href='#'><span>Activate Rider</span></a></li>
                     </ul>
                 </li>
                 <li class='has_sub'>
                     <a href='javascript:void(0);'><i class='icon-feather'></i><span>Dishes</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='/add-dishes'><span>Add Dish</span></a></li>
-                        <li><a href='/dishes-listing'><span>Dishes Details</span></a></li>
+                        <li><a href='/dishes/add-dishes'><span>Add Dish</span></a></li>
+                        <li><a href='/dishes/dishes-listing'><span>Dishes Listing</span></a></li>
                     </ul>
                 </li>
-
+                <li class='has_sub'>
+                    <a href='javascript:void(0);'><i class='icon-feather'></i><span>Order</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
+                    <ul>
+                        <li><a href='/order-listing'><span>Order Listing</span></a></li>
+                    </ul>
+                </li>
 
 
             </ul>

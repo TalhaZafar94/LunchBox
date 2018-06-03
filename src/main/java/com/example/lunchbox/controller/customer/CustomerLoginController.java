@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -90,5 +91,26 @@ public class CustomerLoginController{
     @RequestMapping(value = "/findId",method = RequestMethod.GET)
     public Customer findId(@RequestParam Integer id){
         return customerService.findByCustomerId(id);
+    }
+
+    @RequestMapping(value = "/customer-listing" , method = RequestMethod.GET)
+    public ModelAndView adminDetail() {
+        ModelAndView modelAndView = new ModelAndView("customer-listing");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add-customer" ,method = RequestMethod.GET)
+    public ModelAndView getAddAdminView(){
+        ModelAndView modelAndView = new ModelAndView("add-customer");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add-customer" ,method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+        Customer customer = customerService.getCustomerById(rowId);
+        ModelAndView modelAndView = new ModelAndView("add-customer");
+        modelAndView.addObject("customerDetail", customer);
+
+        return modelAndView;
     }
 }

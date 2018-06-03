@@ -4,6 +4,7 @@ import com.example.lunchbox.model.entity.Dishes;
 import com.example.lunchbox.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -48,6 +49,28 @@ public class DishController  {
     public List<Dishes> getDishesList(){
         return dishService.findAllDishes();
 
+    }
+
+    @RequestMapping(value = "/dishes-listing" , method = RequestMethod.GET)
+    public ModelAndView adminDetail() {
+        ModelAndView modelAndView = new ModelAndView("dishes-listing");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/add-dishes" ,method = RequestMethod.GET)
+    public ModelAndView getAddAdminView(){
+        ModelAndView modelAndView = new ModelAndView("add-dishes");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add-dishes" ,method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+        Dishes dishes = dishService.getDishesById(rowId);
+        ModelAndView modelAndView = new ModelAndView("add-dishes");
+        modelAndView.addObject("dishDetail", dishes);
+
+        return modelAndView;
     }
 
 }

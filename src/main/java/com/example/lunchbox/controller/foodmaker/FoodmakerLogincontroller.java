@@ -5,6 +5,8 @@ import com.example.lunchbox.service.FoodmakerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -76,6 +78,27 @@ public class FoodmakerLogincontroller {
     @RequestMapping(value = "/search-foodmaker", method = RequestMethod.POST)
     public List<Foodmaker> searchFoodmakers(@RequestParam String foodmakerName) {
         return foodmakerService.getFoodmakerByname(foodmakerName);
+    }
+
+    @RequestMapping(value = "/foodmaker-listing" , method = RequestMethod.GET)
+    public ModelAndView adminDetail() {
+        ModelAndView modelAndView = new ModelAndView("foodmaker-listing");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add-foodmaker" ,method = RequestMethod.GET)
+    public ModelAndView getAddAdminView(){
+        ModelAndView modelAndView = new ModelAndView("add-foodmaker");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add-foodmaker" ,method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+        Foodmaker foodmaker = foodmakerService.getFoodmakerById(rowId);
+        ModelAndView modelAndView = new ModelAndView("add-foodmaker");
+        modelAndView.addObject("foodmakerDetail", foodmaker);
+
+        return modelAndView;
     }
 
 }

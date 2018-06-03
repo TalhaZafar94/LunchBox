@@ -1,10 +1,12 @@
 package com.example.lunchbox.controller.admin;
 
 import com.example.lunchbox.model.entity.Admin;
+import com.example.lunchbox.model.entity.Foodmaker;
 import com.example.lunchbox.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -96,5 +98,27 @@ public class AdminLoginConntroller {
     @RequestMapping(value = "/delete-admin-id", method = RequestMethod.POST)
     public void deleteAdminThroughId(@RequestParam Integer adminId){
         adminService.deleteAdminById(adminId);
+    }
+
+
+    @RequestMapping(value = "/admin-listing" , method = RequestMethod.GET)
+    public ModelAndView adminDetail() {
+        ModelAndView modelAndView = new ModelAndView("admin-listing");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add-admin" ,method = RequestMethod.GET)
+    public ModelAndView getAddAdminView(){
+        ModelAndView modelAndView = new ModelAndView("add-admin");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add-admin" ,method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+        Admin admin = adminService.getAdminById(rowId);
+        ModelAndView modelAndView = new ModelAndView("add-admin");
+        modelAndView.addObject("foodmakerDetail", admin);
+
+        return modelAndView;
     }
 }

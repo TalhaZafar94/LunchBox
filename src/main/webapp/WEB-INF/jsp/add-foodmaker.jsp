@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.lunchbox.model.entity.Foodmaker" %><%--
   Created by IntelliJ IDEA.
   User: Khizar
   Date: 2/17/2018
@@ -18,33 +18,33 @@
     <meta name="author" content="Huban Creative">
 
     <!-- Base Css Files -->
-    <link href="assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="assets/libs/fontello/css/fontello.css" rel="stylesheet" />
-    <link href="assets/libs/animate-css/animate.min.css" rel="stylesheet" />
-    <link href="assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
-    <link href="assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" />
-    <link href="assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet" />
-    <link href="assets/libs/pace/pace.css" rel="stylesheet" />
-    <link href="assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" />
-    <link href="assets/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
-    <link href="assets/libs/jquery-icheck/skins/all.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/fontello/css/fontello.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/animate-css/animate.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/pace/pace.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet" />
     <!-- Code Highlighter for Demo -->
-    <link href="assets/libs/prettify/github.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/prettify/github.css" rel="stylesheet" />
 
     <!-- Extra CSS Libraries Start -->
-    <link href="assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/jquery-clock/clock.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
-    <link href="assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" />
     <!-- Extra CSS Libraries End -->
-    <link href="assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,15 +53,15 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="assets/img/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/img/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/img/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/img/apple-touch-icon-152x152.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-152x152.png" />
 </head>
 <body class="fixed-left">
 <!-- Modal Start -->
@@ -345,44 +345,47 @@
                             <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
                         </div>
                     </div>
+                    <% Foodmaker data = (Foodmaker) request.getAttribute("foodmakerDetail"); %>
+
+                    <input type="hidden" id="rowId" name="rowId" value="<%= (data != null ?data.getFoodmakerId():"") %>" >
                     <div class="widget-content padding">
                         <form class="form-horizontal" role="form" action="foodmaker-listing.html" id="form">
                             <div class="form-group">
                                 <label for="inp-foodmaker-name" class="col-sm-2 control-label">Full Name</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inp-foodmaker-name" placeholder="Name" required>
+                                    <input type="text" class="form-control" id="inp-foodmaker-name" placeholder="Name" value="<%= (data != null ?data.getFoodmakerName():"") %>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-foodmaker-email" class="col-sm-2 control-label">Email Address</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inp-foodmaker-email" placeholder="Email Address" required>
+                                    <input type="text" class="form-control" id="inp-foodmaker-email" placeholder="Email Address" value="<%= (data != null ?data.getFoodmakerEmail():"") %>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-foodmaker-pass" class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="inp-foodmaker-pass" placeholder="Password" required>
+                                    <input type="password" class="form-control" id="inp-foodmaker-pass" placeholder="Password" value="<%= (data != null ?data.getFoodmakerpassword():"") %>" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="inp-foodmaker-cnic" class="col-sm-2 control-label">Cnic</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inp-foodmaker-cnic" placeholder="cnic" required>
+                                    <input type="text" class="form-control" id="inp-foodmaker-cnic" placeholder="cnic" value="<%= (data != null ?data.getFoodmakerNic():"") %>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-foodmaker-phoneNum" class="col-sm-2 control-label">Phone Number</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inp-foodmaker-phoneNum" placeholder="phone number" required>
+                                    <input type="text" class="form-control" id="inp-foodmaker-phoneNum" placeholder="phone number" value="<%= (data != null ?data.getFoodmakerPhoneNumber():"") %>" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="inp-foodmaker-address" class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-6">
-                                    <textarea id="inp-foodmaker-address" col="12" row="5" class="form-control" placeholder="Enter Address" required></textarea>
+                                    <textarea id="inp-foodmaker-address" col="12" row="5" class="form-control" placeholder="Enter Address" required><%= (data != null ?data.getFoodmakerAddresId().getAddress() :"") %></textarea>
                                 </div>
                             </div>
 
@@ -409,7 +412,7 @@
                             <div class="form-group">
                                 <div class="col-sm-10">
                                     <%--<button type="button" id="btn-add-foomaker" class="btn btn-success" Value="submit" >Submit</button>--%>
-                                    <input type="submit" class="form-control" value="submit" style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"/>
+                                    <button type="button" id="btn-add-detail" class="form-control"  style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px">Add</button>
                                 </div>
                             </div>
                             <div id="Message" style="color:green;display:none">Please enter a valid password</div>
@@ -462,68 +465,61 @@
 
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="assets/libs/jquery/jquery-1.11.1.min.js"></script>
-<script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>
-<script src="assets/libs/jquery-detectmobile/detect.js"></script>
-<script src="assets/libs/jquery-animate-numbers/jquery.animateNumbers.js"></script>
-<script src="assets/libs/ios7-switch/ios7.switch.js"></script>
-<script src="assets/libs/fastclick/fastclick.js"></script>
-<script src="assets/libs/jquery-blockui/jquery.blockUI.js"></script>
-<script src="assets/libs/bootstrap-bootbox/bootbox.min.js"></script>
-<script src="assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
-<script src="assets/libs/jquery-sparkline/jquery-sparkline.js"></script>
-<script src="assets/libs/nifty-modal/js/classie.js"></script>
-<script src="assets/libs/nifty-modal/js/modalEffects.js"></script>
-<script src="assets/libs/sortable/sortable.min.js"></script>
-<script src="assets/libs/bootstrap-fileinput/bootstrap.file-input.js"></script>
-<script src="assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
-<script src="assets/libs/bootstrap-select2/select2.min.js"></script>
-<script src="assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="assets/libs/pace/pace.min.js"></script>
-<script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="assets/libs/jquery-icheck/icheck.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jqueryui/jquery-ui-1.10.4.custom.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-ui-touch/jquery.ui.touch-punch.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-detectmobile/detect.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-animate-numbers/jquery.animateNumbers.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7.switch.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/fastclick/fastclick.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-blockui/jquery.blockUI.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-bootbox/bootbox.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-sparkline/jquery-sparkline.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/nifty-modal/js/classie.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/nifty-modal/js/modalEffects.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/sortable/sortable.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-fileinput/bootstrap.file-input.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-select2/select2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/pace/pace.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-icheck/icheck.min.js"></script>
 
 <!-- Demo Specific JS Libraries -->
-<script src="assets/libs/prettify/prettify.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/prettify/prettify.js"></script>
 
-<script src="assets/js/init.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/init.js"></script>
 <!-- Page Specific JS Libraries -->
-<script src="assets/libs/d3/d3.v3.js"></script>
-<script src="assets/libs/rickshaw/rickshaw.min.js"></script>
-<script src="assets/libs/raphael/raphael-min.js"></script>
-<script src="assets/libs/morrischart/morris.min.js"></script>
-<script src="assets/libs/jquery-knob/jquery.knob.js"></script>
-<script src="assets/libs/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="assets/libs/jquery-jvectormap/js/jquery-jvectormap-us-aea-en.js"></script>
-<script src="assets/libs/jquery-clock/clock.js"></script>
-<script src="assets/libs/jquery-easypiechart/jquery.easypiechart.min.js"></script>
-<script src="assets/libs/jquery-weather/jquery.simpleWeather-2.6.min.js"></script>
-<script src="assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js"></script>
-<script src="assets/libs/bootstrap-calendar/js/bic_calendar.min.js"></script>
-<script src="assets/js/apps/calculator.js"></script>
-<script src="assets/js/apps/todo.js"></script>
-<script src="assets/js/apps/notes.js"></script>
-<script src="assets/js/pages/index.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/d3/d3.v3.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/raphael/raphael-min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/morrischart/morris.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-knob/jquery.knob.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/js/jquery-jvectormap-us-aea-en.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-easypiechart/jquery.easypiechart.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-weather/jquery.simpleWeather-2.6.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/js/bic_calendar.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apps/calculator.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apps/todo.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/apps/notes.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/pages/index.js"></script>
 
 <script>
 
-    $(document).on('submit','form',function () {
+    $('#btn-add-detail').on('click',function () {
+        if($('#rowId').val() == ""){
+            var dataString = generateDataString("new");
+        }else{
+            var dataString =generateDataString("update");
+        }
 
 
-        var dataString = '{ "foodmakerName" :"'+$('#inp-foodmaker-name').val()+'",' +
-            '"foodmakerEmail" :"'+$('#inp-foodmaker-email').val()+'",' +
-            '"foodmakerpassword" :"'+$('#inp-foodmaker-pass').val()+'",' +
-            '"foodmakerNic" :"'+$('#inp-foodmaker-cnic').val()+'", ' +
-            '"foodmakerPhoneNumber" :"'+$('#inp-foodmaker-phoneNum').val()+'", ' +
-            '"foodmakerActive" :"'+$('#inp-foodmaker-status').val()+'" ,' +
-            '"foodmakerAddresId" : {' +
-            '"address": "'+$('#inp-foodmaker-address').val()+'",'+
-            '"city":"karachi"'+
-            '}'+
-
-            '}';
 
         console.log(dataString);
         // dataString = JSON.parse(dataString);
@@ -547,6 +543,41 @@
 
         }
         });
+
+
+    function generateDataString(action){
+        if(action == "update"){
+
+            var dataString = '{ "foodmakerId" :"'+$('#rowId').val()+'","foodmakerName" :"'+$('#inp-foodmaker-name').val()+'",' +
+                '"foodmakerEmail" :"'+$('#inp-foodmaker-email').val()+'",' +
+                '"foodmakerpassword" :"'+$('#inp-foodmaker-pass').val()+'",' +
+                '"foodmakerNic" :"'+$('#inp-foodmaker-cnic').val()+'", ' +
+                '"foodmakerPhoneNumber" :"'+$('#inp-foodmaker-phoneNum').val()+'", ' +
+                '"foodmakerActive" :"'+$('#inp-foodmaker-status').val()+'" ,' +
+                '"foodmakerAddresId" : {' +
+                '"address": "'+$('#inp-foodmaker-address').val()+'",'+
+                '"city":"karachi"'+
+                '}'+
+
+                '}';
+            return dataString;
+        }else{
+            var dataString = '{ "foodmakerName" :"'+$('#inp-foodmaker-name').val()+'",' +
+                '"foodmakerEmail" :"'+$('#inp-foodmaker-email').val()+'",' +
+                '"foodmakerpassword" :"'+$('#inp-foodmaker-pass').val()+'",' +
+                '"foodmakerNic" :"'+$('#inp-foodmaker-cnic').val()+'", ' +
+                '"foodmakerPhoneNumber" :"'+$('#inp-foodmaker-phoneNum').val()+'", ' +
+                '"foodmakerActive" :"'+$('#inp-foodmaker-status').val()+'" ,' +
+                '"foodmakerAddresId" : {' +
+                '"address": "'+$('#inp-foodmaker-address').val()+'",'+
+                '"city":"karachi"'+
+                '}'+
+
+                '}';
+            return dataString;
+        }
+    }
+
 </script>
 
 
