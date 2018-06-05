@@ -42,6 +42,11 @@
     <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
+
+    <link href="${pageContext.request.contextPath}/${pageContext.request.contextPath}/assets/libs/jquery-datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/${pageContext.request.contextPath}/assets/libs/jquery-datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet" type="text/css" />
+
+
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" />
     <!-- Extra CSS Libraries End -->
     <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet" />
@@ -353,9 +358,7 @@
                         <div class="data-table-toolbar">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <form role="form">
-                                        <input type="text" class="form-control" placeholder="Search...">
-                                    </form>
+
                                 </div>
                                 <div class="col-md-8">
                                     <div class="toolbar-btn-action">
@@ -368,7 +371,7 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table data-sortable class="table table-hover table-striped">
+                            <table data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
                                     <th> <input type="checkbox" name="select_all" id="select_allcheckbox"> </th>
@@ -387,17 +390,6 @@
                             </table>
                         </div>
 
-                        <div class="data-table-toolbar">
-                            <ul class="pagination">
-                                <li class="disabled"><a href="#">&laquo;</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -410,12 +402,10 @@
 
 
             <!-- Footer Start -->
-            <footer>
-                Huban Creative &copy; 2014
-                <div class="footer-links pull-right">
-                    <a href="#">About</a><a href="#">Support</a><a href="#">Terms of Service</a><a href="#">Legal</a><a href="#">Help</a><a href="#">Contact Us</a>
-                </div>
-            </footer>
+
+        <!-- Footer Start -->
+        <%@include file="includes/footer.jsp" %>
+        <!-- Footer End -->
             <!-- Footer End -->
     </div>
         <!-- ============================================================== -->
@@ -487,7 +477,19 @@
 <script src="${pageContext.request.contextPath}/assets/js/apps/notes.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/pages/index.js"></script>
 
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-datatables/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-datatables/js/dataTables.bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/assets/libs/jquery-datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/pages/datatables.js"></script>
+
 <script>
+    function dataTableInit(){
+        $('#datatables-table-act').DataTable( {
+            responsive: true,"paging": true
+        } );
+    }
+
+
     $.ajax({
         url:'http://localhost:8080/admin/admins-list',
         type:'get',
@@ -524,7 +526,7 @@
                 $('#foodermaker-listing-tbl').append(html);
 
             });
-            viewOrderDetail();
+            viewOrderDetail();dataTableInit();
         }
 
     });

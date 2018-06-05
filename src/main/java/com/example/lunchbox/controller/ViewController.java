@@ -1,20 +1,54 @@
 package com.example.lunchbox.controller;
 
+import com.example.lunchbox.service.CustomerService;
+import com.example.lunchbox.service.DishService;
+import com.example.lunchbox.service.FoodmakerService;
+import com.example.lunchbox.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class ViewController {
+    private CustomerService customerService;
+    private OrderService orderService;
+    private FoodmakerService foodmakerService;
+    private DishService dishService;
+    @Autowired
+    public ViewController(CustomerService customerService,OrderService orderService,FoodmakerService foodmakerService,DishService dishService) {
+        this.customerService = customerService;
+        this.orderService =  orderService;
+        this.foodmakerService = foodmakerService;
+        this.dishService = dishService;
+    }
+
+
 
     @RequestMapping(path = "/")
-    public String welcome(HttpSession session) {
+    public ModelAndView welcome(HttpSession session) {
+        ModelAndView modelAndView;
+
         if(session.getAttribute("loggedinAdmin") != null)
         {
-            return "index";
+            modelAndView = new ModelAndView("index");
+            long totalCustomer = customerService.countAllCustomers();
+            long totalOrder = orderService.countAllOrders();
+            long totalFoodmaker = foodmakerService.countAllFoodMmkers();
+            long totalDishes = dishService.countAllDishes();
+
+            modelAndView.addObject("totalCustomer",totalCustomer);
+            modelAndView.addObject("totalOrder",totalOrder);
+            modelAndView.addObject("totalFoodmaker",totalFoodmaker);
+            modelAndView.addObject("totalDishes",totalDishes);
+            return modelAndView;
+            //return "index";
         }
-        return "login";
+        modelAndView = new ModelAndView("login");
+        return modelAndView;
+      //  return "login";
     }
 
     @RequestMapping(value = "/signup")

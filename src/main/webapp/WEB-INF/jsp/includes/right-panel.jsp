@@ -12,7 +12,7 @@
     <div class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-collapse2">
-                <ul class="nav navbar-nav hidden-xs">
+                <ul class="nav navbar-nav hidden-xs" style="float:  right;">
                     <!--
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th"></i></a>

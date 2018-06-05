@@ -756,7 +756,7 @@
   color: #333;
 }
 body {
-  background: #E4EAE6;
+  /*background: #E4EAE6;*/
   margin: 0;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizelegibility;
@@ -1641,7 +1641,7 @@ iframe {
 #wrapper {
   width: 100%;
   height: 100%;
-  background: #E4EAE6;
+  /*background: #E4EAE6;*/
   position: relative;
 }
 .page {
@@ -5515,4 +5515,13 @@ footer .footer-links a:last-child {
 
 .widget .widget-header{
   margin-top: 9%;
+}
+
+.table-responsive{
+  width: 100%;
+  overflow-x: hidden;
+
+}
+.dataTables_filter{
+  float: right;
 }
