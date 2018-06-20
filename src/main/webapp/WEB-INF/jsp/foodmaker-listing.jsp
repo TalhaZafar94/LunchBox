@@ -370,7 +370,7 @@
                             <table  data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
-                                    <th> <input type="checkbox" name="select_all"> </th>
+
                                     <th>Full Name</th>
                                     <th>Address</th>
                                     <th>Email Address</th>
@@ -417,6 +417,33 @@
         </div>
 
         <!--end :: admin listing -->
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="fm-dishes-modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body" id="fm-dishes-modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--end :: modal -->
+
+
+
+
+
 
         <!-- Footer Start -->
        <%@include file="includes/footer.jsp" %>
@@ -524,12 +551,13 @@
               }
 
 
-         html = '<tr>'+ '<td> <input type="checkbox" name="record"> </td>'+
+         html = '<tr>'+
                 '<td>'+foodmaker.foodmakerName+'</td>'+
                 '<td>'+((foodmaker.adminAddressId != null)? foodmaker.adminAddressId.address+' '+foodmaker.adminAddressId.city: 'not avaible' )+'</td>'+
                 '<td>'+foodmaker.foodmakerEmail+'</td>'+
                 '<td>'+foodmaker.foodmakerCreatedAt+'</td>'+
                 '<td><span class="'+classes+'">'+status+'</span></td>'+
+                '<td><a href="#" class="view-link-dishes" data-id="'+foodmaker.foodmakerId+'">view dishes</a></td>'+
                 '<td>'+
                 '<div class="btn-group btn-group-xs">'+
                     '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+foodmaker.foodmakerId+'" ><i class="fa fa-power-off"  ></i></a>'+
@@ -540,8 +568,10 @@
             $('#foodermaker-listing-tbl').append(html);
 
             });
+            viewFoodmakerDishes();
             viewOrderDetail();
             dataTableInit();
+
         }
 
 
@@ -555,6 +585,43 @@
             $('#actions-form').submit();
         });
     }
+
+
+
+
+
+    function viewFoodmakerDishes() {
+        $('.view-link-dishes').unbind();
+        $('.view-link-dishes').on('click',function(){
+            var rowId = $(this).attr('data-id');
+            var thisElem = $(this);
+            $('#fm-dishes-modal-title').html($(this).parents(':eq(1)').children().first('td').html());
+
+            modalajax(rowId,thisElem);
+            $('#myModal').modal('show');
+        });
+    }
+    function modalajax(id,element) {
+        $.ajax({
+            url:'http://localhost:8080/foodmaker_dishes/foodmakersdishes-list-byfoodmakerid?foodmakerId='+id,
+            type:'get',
+            dataType:'json',
+            data:'',
+            success:function(response){
+                var html = '';
+                console.log(response);
+                response.forEach(function(data){
+                    html +='<div>'+
+                             '<div>image area</div>'+
+                                '<div>Heading<p>'+data.description+'</p></div>'+
+                            ' </div>';
+                });
+                $('#fm-dishes-modal-body').html(html);
+
+            }
+        });
+    }
+
 
 </script>
 

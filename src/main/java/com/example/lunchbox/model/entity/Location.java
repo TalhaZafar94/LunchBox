@@ -12,17 +12,21 @@ public class Location {
     private Integer locationId;
 
     @Column(name = "longitude")
-    private Long locationLongitude;
+    private Double locationLongitude;
 
     @Column(name = "latitude")
-    private Long locationLatitude;
+    private Double locationLatitude;
+
+    @Column(name = "foodmaker_id")
+    private Integer foodmakerId;
 
     public Location() {
     }
 
-    public Location(Long locationLongitude, Long locationLatitude) {
+    public Location(Double locationLongitude, Double locationLatitude,Integer foodmakerId) {
         this.locationLongitude = locationLongitude;
         this.locationLatitude = locationLatitude;
+        this.foodmakerId = foodmakerId;
     }
 
     public Integer getLocationId() {
@@ -33,19 +37,27 @@ public class Location {
         this.locationId = locationId;
     }
 
-    public Long getLocationLongitude() {
+    public Double getLocationLongitude() {
         return locationLongitude;
     }
 
-    public void setLocationLongitude(Long locationLongitude) {
+    public void setLocationLongitude(Double locationLongitude) {
         this.locationLongitude = locationLongitude;
     }
 
-    public Long getLocationLatitude() {
+    public Double getLocationLatitude() {
         return locationLatitude;
     }
 
-    public void setLocationLatitude(Long locationLatitude) {
+    public void setLocationLatitude(Double locationLatitude) {
         this.locationLatitude = locationLatitude;
+    }
+
+    public Integer getFoodmakerId() {
+        return foodmakerId;
+    }
+
+    public void setFoodmakerId(Integer foodmakerId) {
+        this.foodmakerId = foodmakerId;
     }
 }

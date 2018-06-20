@@ -371,8 +371,8 @@
                             <table data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
-                                    <th> <input type="checkbox" name="select_all"> </th>
-                                    <th>Full Name</th>
+                                    <th> Image</th>
+                                    <th> Name</th>
                                     <th>Address</th>
                                     <th>Email Address</th>
                                     <th data-sortable="false">Date of Joining</th>
@@ -409,7 +409,7 @@
         </div>
 
 
-
+        <%@include file="includes/upload-image-model.jsp" %>
         <!--end :: admin listing -->
 
         <!-- Footer Start -->
@@ -519,7 +519,8 @@
                 }
 
 
-                html = '<tr>'+'<td> <input type="checkbox" name="record"> </td>'+
+                html = '<tr data-row-id="'+customer.customerId+'" id="row-id-'+customer.customerId+'">'+
+                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((customer.customerImagePath == null) ? 'Upload Image' : '<img src="'+customer.customerImagePath+'" alt="img"/>' )+'</a></td>'+
                     '<td>'+customer.customerName+'</td>'+
                     '<td>'+((customer.adminAddressId != null)? customer.adminAddressId.address+' '+customer.adminAddressId.city: 'not avaible' )+'</td>'+
                      '<td>'+customer.customerEmail+'</td>'+
@@ -536,6 +537,7 @@
 
             });
             viewOrderDetail();
+            openImageModal();
             dataTableInit();
         }
 
@@ -548,6 +550,45 @@
             $('#actions-form').submit();
         });
     }
+    function openImageModal() {
+        $('.open-img-modal').on('click',function(){
+            var rowId = $(this).parents(':eq(1)').attr('data-row-id');
+            $('#hd-img-user-id').val(rowId);
+            $('#image-upload-modal').modal('show');
+
+        });
+    }
+    $('#btn-upload-img').on('click',function(){
+        var thisElem = $(this);
+        var file = $('#file-img')[0].files[0];
+        //     if(file.length > 0){
+        var userId = $('#hd-img-user-id').val();
+        data = new FormData();
+        data.append('file',file);
+        $.ajax({
+            url:'http://localhost:8080/customer/upload-img?id='+userId,
+            type:'post',
+            data:data,
+            dataType:'json',
+            contentType: false,
+            cache:false,
+            processData: false,
+            success:function(response){
+                if(response.uploadedPath != null){
+                    var html = '<img src="'+response.uploadedPath+'" alt="img"/>';
+                    $('#row-id-'+userId).children('td').first().html(html);
+                }
+                $('#image-upload-modal').modal('hide');
+            }
+
+        })
+
+
+
+        //      }
+
+    });
+
 
 </script>
 

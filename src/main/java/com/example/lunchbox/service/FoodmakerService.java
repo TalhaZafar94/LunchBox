@@ -22,4 +22,6 @@ public interface FoodmakerService {
     Foodmaker getFoodmakerByFoodmakerCreatedAt(Date date);
     Foodmaker getFoodmakerByFoodmakerLastUpdated(Date date);
 
+    List<Foodmaker> getFoodmakersNearBy(Integer km, Double lat, Double longt);
+
 }

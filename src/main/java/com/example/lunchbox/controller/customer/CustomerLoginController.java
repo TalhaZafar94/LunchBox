@@ -7,12 +7,18 @@ import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -22,6 +28,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 public class CustomerLoginController{
 
     private CustomerService customerService;
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
     public CustomerLoginController(CustomerService customerService) {
@@ -114,5 +122,29 @@ public class CustomerLoginController{
         modelAndView.addObject("customerDetail", customer);
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
+    public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
+        String uploadedPath = null;
+        //  adminService.findAllAdmin();
+        Customer customer = customerService.getCustomerById(id);
+        String UPLOADED_FOLDER = uploadPath;
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            customer.setCustomerImagePath(path.toString());
+
+            uploadedPath = path.toString();
+                        customerService.customerSignup(customer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "{ \"uploadedPath\" : \"+uploadedPath+\"}";
     }
 }

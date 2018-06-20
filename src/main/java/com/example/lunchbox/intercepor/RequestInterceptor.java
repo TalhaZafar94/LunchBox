@@ -16,11 +16,11 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 // httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getServerPort() + httpServletRequest.getContextPath() + httpServletRequest.getRequestURI();
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String loginUrl = httpServletRequest.getContextPath() + "/";
-        if (httpServletRequest.getSession().getAttribute("loggedinAdmin") == null) {
-            httpServletResponse.sendRedirect(loginUrl);
-            return false;
-        }
+//        String loginUrl = httpServletRequest.getContextPath() + "/";
+//        if (httpServletRequest.getSession().getAttribute("loggedinAdmin") == null && httpServletRequest.getSession().getAttribute("loggedInUser") == null) {
+//            httpServletResponse.sendRedirect(loginUrl);
+//            return false;
+//        }
         return true;
     }
 

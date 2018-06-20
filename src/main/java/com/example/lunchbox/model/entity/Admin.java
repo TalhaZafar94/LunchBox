@@ -1,6 +1,10 @@
 package com.example.lunchbox.model.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -32,22 +36,26 @@ public class Admin {
     @JoinColumn(name = "address_id", nullable = false)
     private Address adminAddressId;
 
+    @Lob
     @Column(name = "admin_imagepath")
-    private String adminImagePath;
+    private String adminImage;
 
     @Column(name = "admin_phonenumber")
     private String adminPhoneNumber;
 
+    @Temporal(TemporalType.DATE)
+    @CreatedDate
     @Column(name = "admin_createdat")
     private Date adminCreatedAt;
 
+
     @Column(name = "admin_lastupdated")
-    private Date adminLastUpdated;
+    private Timestamp adminLastUpdated;
 
     public Admin() {
     }
 
-    public Admin(Integer adminId, String adminName, String adminEmail, String adminNic, Integer adminAccessType, String adminPassword, Address adminAddressId, String adminImagePath, String adminPhoneNumber, Date adminCreatedAt, Date adminLastUpdated) {
+    public Admin(Integer adminId, String adminName, String adminEmail, String adminNic, Integer adminAccessType, String adminPassword, Address adminAddressId, String adminImage, String adminPhoneNumber, Date adminCreatedAt, Timestamp adminLastUpdated) {
         this.adminId = adminId;
         this.adminName = adminName;
         this.adminEmail = adminEmail;
@@ -55,7 +63,7 @@ public class Admin {
         this.adminAccessType = adminAccessType;
         this.adminPassword = adminPassword;
         this.adminAddressId = adminAddressId;
-        this.adminImagePath = adminImagePath;
+        this.adminImage = adminImage;
         this.adminPhoneNumber = adminPhoneNumber;
         this.adminCreatedAt = adminCreatedAt;
         this.adminLastUpdated = adminLastUpdated;
@@ -117,12 +125,12 @@ public class Admin {
         this.adminAddressId = adminAddressId;
     }
 
-    public String getAdminImagePath() {
-        return adminImagePath;
+    public String getAdminImage() {
+        return adminImage;
     }
 
-    public void setAdminImagePath(String adminImagePath) {
-        this.adminImagePath = adminImagePath;
+    public void setAdminImage(String adminImagePath) {
+        this.adminImage = adminImagePath;
     }
 
     public String getAdminPhoneNumber() {
@@ -141,11 +149,11 @@ public class Admin {
         this.adminCreatedAt = adminCreatedAt;
     }
 
-    public Date getAdminLastUpdated() {
+    public Timestamp getAdminLastUpdated() {
         return adminLastUpdated;
     }
 
-    public void setAdminLastUpdated(Date adminLastUpdated) {
+    public void setAdminLastUpdated(Timestamp adminLastUpdated) {
         this.adminLastUpdated = adminLastUpdated;
     }
 }

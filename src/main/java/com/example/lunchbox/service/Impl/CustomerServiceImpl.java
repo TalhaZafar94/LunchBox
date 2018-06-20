@@ -23,12 +23,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void customerSignup(Customer customer) {
-
+    if(customer.getCustomerId() == null){
         try {
             customer.setCustomerPassword(getSHA256(customer.getCustomerPassword()));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+    }
+
         customerRepository.saveAndFlush(customer);
     }
 

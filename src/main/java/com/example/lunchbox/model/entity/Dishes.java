@@ -32,6 +32,11 @@ public class Dishes {
     @JoinColumn(name = "dish_id", nullable = false)
     private Orderdishes orderDishes;
 
+    //foodmakerdishes
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dish_id", nullable = false)
+    private FoodmakerDishes fDishes;
+
     public Dishes() {
     }
 

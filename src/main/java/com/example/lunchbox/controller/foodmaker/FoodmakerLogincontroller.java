@@ -42,13 +42,13 @@ public class FoodmakerLogincontroller {
 
     @RequestMapping(value = "/signup" ,method = RequestMethod.POST)
     public String  signup(@RequestBody Foodmaker foodmaker){
-        if(foodmaker.getFoodmakerpassword() != null && foodmaker.getFoodmakerEmail() != null && foodmaker.getFoodmakerName() != null &&
-                foodmaker.getFoodmakerNic() != null && foodmaker.getFoodmakerPhoneNumber() != null)
-        {
+     //   if(foodmaker.getFoodmakerpassword() != null && foodmaker.getFoodmakerEmail() != null && foodmaker.getFoodmakerName() != null &&
+     //           foodmaker.getFoodmakerNic() != null && foodmaker.getFoodmakerPhoneNumber() != null)
+     //   {
             foodmakerService.foodmakerSignup(foodmaker);
             return "foodmaker added";
-        }
-        return "please specify the fields";
+     //   }
+       // return "please specify the fields";
     }
 
     @RequestMapping(value = "/update-password" ,method = RequestMethod.POST)
@@ -63,6 +63,12 @@ public class FoodmakerLogincontroller {
     public long countFoodmakers() {
         return foodmakerService.countAllFoodMmkers();
     }
+
+    @RequestMapping(value = "/foodmakers-nearBy-list", method = RequestMethod.GET)
+    public List<Foodmaker> findNearByFoodmakers(@RequestParam Integer miles,@RequestParam Double lat,@RequestParam Double longt ) {
+        return foodmakerService.getFoodmakersNearBy(miles,lat,longt);
+    }
+
 
     @RequestMapping(value = "/foodmakers-list", method = RequestMethod.GET)
     public List<Foodmaker> findAllFoodmakers() {

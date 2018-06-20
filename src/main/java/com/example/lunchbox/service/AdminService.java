@@ -1,6 +1,7 @@
 package com.example.lunchbox.service;
 
 import com.example.lunchbox.model.entity.Admin;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -22,4 +23,7 @@ public interface AdminService {
     Admin getAdminByAdminCreatedAt(Date date);
     void deleteAdminById(Integer adminId);
     void updateAdmin(Admin admin);
+
+
+
 }
