@@ -1,4 +1,4 @@
-package com.example.lunchbox.controller.admin;
+package com.example.lunchbox.controller.Admin;
 
 import com.example.lunchbox.model.entity.Admin;
 import com.example.lunchbox.model.entity.Foodmaker;
@@ -82,6 +82,7 @@ public class AdminLoginConntroller {
 @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
 public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
     String uploadedPath = null;
+    String final_Path = "localhost:8080/images/";
     adminService.findAllAdmin();
     Admin admin = adminService.getAdminById(id);
     String UPLOADED_FOLDER = uploadPath;
@@ -92,14 +93,16 @@ public String uploadImage(@RequestParam Integer id,@RequestParam("file") Multipa
         Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
         Files.write(path, bytes);
 
-        admin.setAdminImage(path.toString());
+        final_Path +=  file.getOriginalFilename();
+
+        admin.setAdminImage(final_Path);
         uploadedPath = path.toString();
         adminService.adminSignup(admin);
     } catch (IOException e) {
         e.printStackTrace();
     }
 
-    return "{ \"uploadedPath\" : \"+uploadedPath+\"}";
+    return "{ \"uploadedPath\" : \""+final_Path+"\"}";
 }
 
 

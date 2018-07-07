@@ -1,6 +1,7 @@
 package com.example.lunchbox.controller.foodmaker;
 
 import com.example.lunchbox.model.entity.Foodmaker;
+import com.example.lunchbox.model.entity.Ratings;
 import com.example.lunchbox.service.FoodmakerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -41,11 +42,12 @@ public class FoodmakerLogincontroller {
     }
 
     @RequestMapping(value = "/signup" ,method = RequestMethod.POST)
-    public String  signup(@RequestBody Foodmaker foodmaker){
+    public String  signup(@RequestBody Foodmaker foodmaker,@RequestParam byte[] image){
      //   if(foodmaker.getFoodmakerpassword() != null && foodmaker.getFoodmakerEmail() != null && foodmaker.getFoodmakerName() != null &&
      //           foodmaker.getFoodmakerNic() != null && foodmaker.getFoodmakerPhoneNumber() != null)
      //   {
             foodmakerService.foodmakerSignup(foodmaker);
+            foodmakerService.saveImage(image,foodmaker);
             return "foodmaker added";
      //   }
        // return "please specify the fields";
@@ -105,6 +107,26 @@ public class FoodmakerLogincontroller {
         modelAndView.addObject("foodmakerDetail", foodmaker);
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/set-status",method = RequestMethod.POST)
+    public String setStatus(@RequestParam Integer foodmakerId, @RequestParam Integer status)
+    {
+        foodmakerService.setStatus(foodmakerId,status);
+        return "{ \"status\" : \""+status+"\"}";
+    }
+
+    @RequestMapping(value = "/set-ratings",method = RequestMethod.POST)
+    public String setRatings(@RequestParam Integer customerId, @RequestParam Integer foodmakerId, @RequestParam Integer stars)
+    {
+        foodmakerService.setRatings(customerId,foodmakerId,stars);
+        return "{\"status\":\"true\"}";
+    }
+
+    @RequestMapping(value = "/get-ratings",method = RequestMethod.GET)
+    public List<Ratings> getRatings(@RequestParam Integer foodmakerId)
+    {
+        return foodmakerService.getRatingsByFoodmakerId(foodmakerId);
     }
 
 }

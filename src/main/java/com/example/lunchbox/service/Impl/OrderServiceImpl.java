@@ -24,6 +24,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDishesRepository orderDishesRepository;
     private DishRepository dishRepository;
 
+    private FoodmakerDishesRepository foodmakerDishesRepository;
+
 
     private Orderdishes orderdishes;
     private EntityManager entityManager;
@@ -31,12 +33,13 @@ public class OrderServiceImpl implements OrderService {
     private Order order;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository,CustomerRepository customerRepository,FoodmakerRepository foodmakerRepository,DishRepository dishRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository,CustomerRepository customerRepository,FoodmakerRepository foodmakerRepository,DishRepository dishRepository,FoodmakerDishesRepository foodmakerDishesRepository) {
         this.orderRepository = orderRepository;
         this.orderDishesRepository = orderDishesRepository;
         this.customerRepository = customerRepository;
         this.foodmakerRepository = foodmakerRepository;
         this.dishRepository = dishRepository;
+        this.foodmakerDishesRepository = foodmakerDishesRepository;
     }
 
     @Override
@@ -61,13 +64,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(Integer id) {
-       Order order  = orderRepository.findOne(id);
+        Order order  = orderRepository.findOne(id);
         Integer customerId = order.getOrderCustomerId();
         Integer foodmakerId = order.getFoodmakerId();
         for (Orderdishes orderdishes : order.getOrderdishes()){
-            Integer dishId = orderdishes.getDishId();
-            Dishes dish = dishRepository.findOne(dishId);
-            orderdishes.setDishes(dish);
+            Integer foodmakerdishId = orderdishes.getDishId();
+            FoodmakerDishes foodmakerDishes = foodmakerDishesRepository.findOne(foodmakerdishId);
+            orderdishes.setDishes(foodmakerDishes);
+            //  Dishes dish = foodmakerDishesRepository.findOne(foodmakerdishId);
+            // orderdishes.setDishes(dish);
         }
         Customer customer = customerRepository.findByCustomerId(customerId);
         Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
@@ -104,9 +109,9 @@ public class OrderServiceImpl implements OrderService {
                 //List<Dishes> orderDishesList = new ArrayList<>();
 
                 for (Orderdishes orderdishes : order.getOrderdishes()){
-                    Integer dishId = orderdishes.getDishId();
-                    Dishes dish = dishRepository.findOne(dishId);
-                    orderdishes.setDishes(dish);
+                    Integer foodmakerdishId = orderdishes.getDishId();
+                    FoodmakerDishes foodmakerDishes = foodmakerDishesRepository.findOne(foodmakerdishId);
+                    orderdishes.setDishes(foodmakerDishes);
                 }
                 Customer customer = customerRepository.findByCustomerId(customerId);
                 Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
@@ -118,7 +123,7 @@ public class OrderServiceImpl implements OrderService {
         }catch (Exception e){
 
         }
-         return returnList;
-     //    return orderRepository.findAll();
+        return returnList;
+        //    return orderRepository.findAll();
     }
 }

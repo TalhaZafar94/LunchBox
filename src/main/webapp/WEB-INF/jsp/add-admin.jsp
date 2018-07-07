@@ -503,8 +503,96 @@
 
 
 <script>
+    $('input').focus(function(){ $(this).next('div').css('display','none')});
+    function formValidation(){
+        var isVlaid = true;
+        if($('input#input-text').val() == ''){
+            $('input#input-text').next('div').html("*This field is required can't be empty");
+            $('input#input-text').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#input-text').val().length > 16){
+                $('input#input-text').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#input-text').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#input-email').val() == ''){
+            $('input#input-email').next('div').html("*This field is required can't be empty");
+            $('input#input-email').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if( $('input#input-email').val().length > 16){
+                $('input#input-email').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#input-email').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#inputPassword').val() == ''){
+            $('input#inputPassword').next('div').html("*This field is required can't be empty");
+            $('input#inputPassword').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#inputPassword').val().length > 16){
+                $('input#inputPassword').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inputPassword').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#inp-phoneNum').val() == ''){
+            $('input#inp-phoneNum').next('div').html("*This field is required can't be empty");
+            $('input#inp-phoneNum').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#inp-phoneNum').val().length > 16){
+                $('input#inp-phoneNum').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-phoneNum').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#inp-cnic').val() == ''){
+            $('input#inp-cnic').next('div').html("*This field is required can't be empty");
+            $('input#inp-cnic').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#inp-cnic').val().length > 16){
+                $('input#inp-cnic').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-cnic').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+
+        return isVlaid;
+    }
+
+
+    $('input#inp-phoneNum').keypress(function(key) {
+        if(key.charCode < 48 || key.charCode > 57){
+            $(this).next('div').html('*Input Field only accept number');
+            $(this).next('div').css('display','block');
+            return false;
+        }
+    });
+    $('input#inp-cnic').keypress(function(key) {
+        if(key.charCode < 48 || key.charCode > 57){
+            $(this).next('div').html('*Input Field only accept number');
+            $(this).next('div').css('display','block');
+            return false;
+        }
+    });
+
 
     $('#btn-add-detail').on('click',function () {
+        if(!formValidation()){
+            return;
+        }
+
+
         if($('#rowId').val() == ""){
            var dataString = generateDataString("new");
         }else{

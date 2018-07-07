@@ -4,8 +4,13 @@ import com.example.lunchbox.model.entity.Customer;
 import com.example.lunchbox.repository.CustomerRepository;
 import com.example.lunchbox.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -15,6 +20,8 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     private CustomerRepository customerRepository;
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository) {
@@ -121,6 +128,21 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer findByCustomerId(Integer customerId) {
         return customerRepository.findByCustomerId(customerId);
+    }
+
+    @Override
+    public void saveImage(byte[] image,Customer customer) {
+
+        String final_Path = "localhost:8080/images/";
+        Path path = Paths.get(uploadPath + customer.getCustomerName());
+        try {
+            Files.write(path, image);
+            final_Path += customer.getCustomerName();
+            customer.setCustomerImagePath(final_Path);
+            customerRepository.save(customer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

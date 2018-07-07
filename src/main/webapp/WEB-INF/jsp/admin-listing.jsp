@@ -509,9 +509,13 @@
                     classes ="label label-warning";
                 }
                 if(admin.adminAddressId){}
-
+                var uploadPath = admin.adminImage;
+               // var ctx  = ${pageContext.request.contextPath}+uploadPath;
+                var ctx = "/images/260px-Shahid-afridi-left-pic.jpg";
+                var contextPath='<%=pageContext.getServletContext().getContextPath()%>'.concat(uploadPath);
                 html = '<tr data-row-id="'+admin.adminId+'" id="row-id-'+admin.adminId+'">'+
-                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((admin.adminImage == null) ? 'Upload Image' : '<img src="'+admin.adminImage+'" alt="img"/>' )+'</a></td>'+
+                  //  '<td><a href="javascript:void(0)" class="open-img-modal">'+((admin.adminImage == null) ? 'Upload Image' : '<img src="${pageContext.request.contextPath}/images/260px-Shahid-afridi-left-pic.jpg" alt="img" width="40px" height="40px"/>' )+'</a></td>'+
+                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((admin.adminImage == null) ? 'Upload Image' : '<img src="'+uploadPath+'" alt="img" width="40px" height="40px"/>' )+'</a></td>'+
                     '<td>'+admin.adminName+'</td>'+
                     '<td>'+((admin.adminAddressId != null)? admin.adminAddressId.address+' '+admin.adminAddressId.city: 'not avaible' )+'</td>'+
                     '<td>'+admin.adminEmail+'</td>'+
@@ -568,15 +572,13 @@
                 processData: false,
                 success:function(response){
                     if(response.uploadedPath != null){
-                        var html = '<img src="'+response.uploadedPath+'" alt="img"/>';
+                        var uploadPath = response.uploadedPath;
+                        var html = '<img src="'+uploadPath+'" alt="img"/>';
                         $('#row-id-'+userId).children('td').first().html(html);
                     }
                     $('#image-upload-modal').modal('hide');
                  }
-
             })
-
-
 
   //      }
 

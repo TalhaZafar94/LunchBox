@@ -28,9 +28,9 @@ public class Dishes {
     @Column(name = "dish_imagepath")
     private String dishImagePath;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dish_id", nullable = false)
-    private Orderdishes orderDishes;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "dish_id", nullable = false)
+//    private Orderdishes orderDishes;
 
     //foodmakerdishes
     @OneToOne(fetch = FetchType.LAZY)

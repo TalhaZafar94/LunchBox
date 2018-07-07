@@ -35,22 +35,23 @@ public class AdminServiceImpl implements AdminService {
         this.entityManager = entityManager;
     }
 
-//    @Override
-//    public void adminSignup(Admin admin) {
-//
-//        if (admin.getAdminPassword() != null)
-//        {
-//            try {
-//                admin.setAdminPassword(getSHA256(admin.getAdminPassword()));
-//            } catch (NoSuchAlgorithmException e) {
-//                e.printStackTrace();
-//            }
-//            adminRepository.saveAndFlush(admin);
-//        }
-//    }
+    @Override
+    public void adminSignup(Admin admin) {
+
+        if (admin.getAdminPassword() != null)
+        {
+            try {
+                admin.setAdminPassword(getSHA256(admin.getAdminPassword()));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            adminRepository.saveAndFlush(admin);
+        }
+    }
 
 
 
+/*
     @Override
     public void adminSignup(Admin admin) {
 
@@ -60,6 +61,7 @@ public class AdminServiceImpl implements AdminService {
             adminRepository.saveAndFlush(admin);
         }
     }
+*/
 
     public byte[] readImageOldWay(File file) throws IOException
     {

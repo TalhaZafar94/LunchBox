@@ -4,16 +4,23 @@ package com.example.lunchbox.service.Impl;
 import com.example.lunchbox.model.entity.Address;
 import com.example.lunchbox.model.entity.Foodmaker;
 import com.example.lunchbox.model.entity.Location;
+import com.example.lunchbox.model.entity.Ratings;
 import com.example.lunchbox.repository.FoodmakerRepository;
 import com.example.lunchbox.repository.LocationRepository;
+import com.example.lunchbox.repository.RatingRepository;
 import com.example.lunchbox.service.FoodmakerService;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -25,12 +32,17 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
     private FoodmakerRepository foodmakerRepository;
     private LocationRepository locationRepository;
+    private RatingRepository ratingRepository;
     private static final String key = "AIzaSyD6zBHiASrQgjYjoEyRJphf8uOpVbPtQCg";
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
-    public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository,LocationRepository locationRepository) {
+    public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository,LocationRepository locationRepository
+                                ,RatingRepository ratingRepository) {
         this.foodmakerRepository = foodmakerRepository;
         this.locationRepository = locationRepository;
+        this.ratingRepository = ratingRepository;
     }
 
     @Override
@@ -83,7 +95,16 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
     @Override
     public List<Foodmaker> findAllFoodmakers() {
-        return foodmakerRepository.findAll();
+
+        List<Foodmaker> getAll = new ArrayList<>();
+
+        for(Foodmaker foodmaker:foodmakerRepository.findAll())
+        {
+            foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
+            getAll.add(foodmaker);
+        }
+
+        return getAll;
     }
 
     @Override
@@ -190,4 +211,39 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         }
         return inlocations;
     }
+
+    @Override
+    public void setStatus(int foodmakerId,int status)
+    {
+        Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
+        foodmaker.setFoodmakerActive(status);
+        foodmakerRepository.save(foodmaker);
+    }
+
+    @Override
+    public void setRatings(int customerId, int foodmakerId, int stars) {
+        Ratings ratings = new Ratings(customerId,foodmakerId,stars);
+        ratingRepository.save(ratings);
+    }
+
+    @Override
+    public List<Ratings> getRatingsByFoodmakerId(Integer foodmakerId) {
+        return ratingRepository.getRatingsByFoodmakerId(foodmakerId);
+    }
+
+    @Override
+    public void saveImage(byte[] image,Foodmaker foodmaker) {
+
+        String final_Path = "localhost:8080/images/";
+        Path path = Paths.get(uploadPath + foodmaker.getFoodmakerName());
+        try {
+            Files.write(path, image);
+            final_Path += foodmaker.getFoodmakerName();
+            foodmaker.setFoodmakerImagePath(final_Path);
+            foodmakerRepository.save(foodmaker);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

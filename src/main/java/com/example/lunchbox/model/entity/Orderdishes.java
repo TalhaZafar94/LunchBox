@@ -19,11 +19,14 @@ public class Orderdishes {
 //    @Column(name = "order_id", insertable = false, updatable = false)
 //    private Integer orderId;
 
-    @Column(name = "dish_id")
+    @Column(name = "foodmaker_dishes_id")
     private Integer dishId;
 
+    //    @OneToOne(fetch = FetchType.LAZY , mappedBy = "orderDishes", cascade = {CascadeType.ALL})
+//    private Dishes dishes;
     @OneToOne(fetch = FetchType.LAZY , mappedBy = "orderDishes", cascade = {CascadeType.ALL})
-    private Dishes dishes;
+    private FoodmakerDishes foodmakerDishes;
+
 
     @Column(name = "quantity")
     private Double quantity;
@@ -36,9 +39,9 @@ public class Orderdishes {
     public Orderdishes() {
     }
 
-    public Orderdishes(Order order, Dishes dishes, Double quantity) {
+    public Orderdishes(Order order, FoodmakerDishes dishes, Double quantity) {
         this.order = order;
-        this.dishes = dishes;
+        this.foodmakerDishes = dishes;
         this.quantity = quantity;
 
     }
@@ -76,12 +79,12 @@ public class Orderdishes {
         this.order = order;
     }
 
-    public Dishes getDishes() {
-        return dishes;
+    public FoodmakerDishes getDishes() {
+        return foodmakerDishes;
     }
 
-    public void setDishes(Dishes dishes) {
-        this.dishes = dishes;
+    public void setDishes(FoodmakerDishes dishes) {
+        this.foodmakerDishes = dishes;
     }
 
     public Double getQuantity() {
@@ -100,13 +103,13 @@ public class Orderdishes {
         Orderdishes that = (Orderdishes) o;
 
         if (!order.equals(that.order)) return false;
-        return dishes.equals(that.dishes);
+        return foodmakerDishes.equals(that.foodmakerDishes);
     }
 
     @Override
     public int hashCode() {
         int result = order.hashCode();
-        result = 31 * result + dishes.hashCode();
+        result = 31 * result + foodmakerDishes.hashCode();
         return result;
     }
 }

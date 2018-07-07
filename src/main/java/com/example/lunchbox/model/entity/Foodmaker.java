@@ -1,5 +1,6 @@
 package com.example.lunchbox.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -56,6 +57,13 @@ public class Foodmaker {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "foodmaker_id", nullable = false)
     private Order order;
+
+    //foodmakerdishes
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "foodmaker_id", nullable = false)
+    private FoodmakerDishes foodmakerDishes;
+
+    private Double averageRatings;
 
     public Foodmaker() {
     }
@@ -177,5 +185,13 @@ public class Foodmaker {
 
     public void setFoodmakerLastUpdated(Date foodmakerLastUpdated) {
         this.foodmakerLastUpdated = foodmakerLastUpdated;
+    }
+
+    public Double getAverageRatings() {
+        return averageRatings;
+    }
+
+    public void setAverageRatings(Double averageRatings) {
+        this.averageRatings = averageRatings;
     }
 }

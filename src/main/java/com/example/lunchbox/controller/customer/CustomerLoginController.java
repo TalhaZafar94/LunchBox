@@ -38,18 +38,15 @@ public class CustomerLoginController{
     }
 
     @RequestMapping(value = "/login" , method = RequestMethod.POST ,produces = "application/json")
-    public String verifyLogin(@RequestParam String customerEmail, @RequestParam String customerPassword,
+    public Customer verifyLogin(@RequestParam String customerEmail, @RequestParam String customerPassword,
                               HttpSession session, Model model){
 
         Customer customer = customerService.login(customerEmail, customerPassword);
-        if (customer == null) {
-            model.addAttribute("loginError", "Error logging in. Please try again");
-            //return JSONObject.quote("login");
-            return "{\"status\":\"false\"}";
+        if (customer != null) {
+            session.setAttribute("loggedInUser", customer);
+            return customer;
         }
-        session.setAttribute("loggedInUser", customer);
-       // return JSONObject.quote("index");
-        return "{\"status\":\"true\"}";
+       return null;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -59,11 +56,12 @@ public class CustomerLoginController{
     }
 
     @RequestMapping(value = "/signup" ,method = RequestMethod.POST,produces = "application/json")
-    public String  signup(@RequestBody Customer customer){
+    public String  signup(@RequestBody Customer customer,@RequestParam byte[] image){
         if(customer.getCustomerPassword() != null && customer.getCustomerEmail() != null && customer.getCustomerName() != null &&
                 customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null)
         {
             customerService.customerSignup(customer);
+            customerService.saveImage(image,customer.getCustomerName());
             return "{\"status\":\"true\"}";
         }
         return "{\"status\":\"false\"}";
