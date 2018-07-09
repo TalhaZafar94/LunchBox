@@ -61,7 +61,7 @@ public class CustomerLoginController{
                 customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null)
         {
             customerService.customerSignup(customer);
-            customerService.saveImage(image,customer.getCustomerName());
+            customerService.saveImage(image,customer);
             return "{\"status\":\"true\"}";
         }
         return "{\"status\":\"false\"}";
