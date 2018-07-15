@@ -65,6 +65,36 @@
     <link rel="apple-touch-icon" sizes="120x120" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-120x120.png" />
     <link rel="apple-touch-icon" sizes="144x144" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-144x144.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-152x152.png" />
+<style>
+    .dishes-div-wrapper{
+        border-bottom: 2px solid #eeeaea;
+    }
+    .dishes-img-area{
+
+        display: inline-block;
+        width: 30%;
+        float: left;
+        /*height: 500px;*/
+    }
+    .dishes-head-area{
+        font-weight: bolder;
+        text-transform: capitalize;
+        font-size: 20px;
+    }
+    .dishes-desc-area{
+        display: inline-block;
+        /* float: left; */
+        width: 70%;
+    }
+    .dishes-price-area{
+        float: right;
+        margin-right: 50px;
+    }
+
+
+</style>
+
+
 </head>
 <body class="fixed-left">
 <!-- Modal Start -->
@@ -611,9 +641,9 @@
                 var html = '';
                 console.log(response);
                 response.forEach(function(data){
-                    html +='<div>'+
-                             '<div>image area</div>'+
-                                '<div>Heading<p>'+data.description+'</p></div>'+
+                    html +='<div class="dishes-div-wrapper">'+
+                             '<div class="dishes-img-area"><image src="'+data.imagepath+'" target="dish image not avaible"></div>'+
+                                '<div class="dishes-desc-area"><span class="dishes-head-area">'+data.dishes.dishName+'</span><span class="dishes-price-area">Price :<span>'+((data.price == null)?"not Set":data.price )+' </span></span><p>'+data.description+'</p></div>'+
                             ' </div>';
                 });
                 $('#fm-dishes-modal-body').html(html);
