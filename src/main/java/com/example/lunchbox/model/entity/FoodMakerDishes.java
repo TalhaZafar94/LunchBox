@@ -23,20 +23,29 @@ public class FoodmakerDishes {
     @Column(name = "image_path")
     private String imagepath;
 
+    @Column(name = "price")
+    private Double price;
+
     @OneToOne(fetch = FetchType.LAZY , mappedBy = "foodmakerDishes", cascade = {CascadeType.ALL})
     private Foodmaker foodmaker;
 
     @OneToOne(fetch = FetchType.LAZY , mappedBy = "fDishes", cascade = {CascadeType.ALL})
     private Dishes dishes;
 
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "foodmaker_dishes_id", nullable = false)
+    private Orderdishes orderDishes;
+
     public FoodmakerDishes() {
     }
 
-    public FoodmakerDishes(Integer dishId, Integer foodmakerid, String imagepath, String description) {
+    public FoodmakerDishes(Integer dishId, Integer foodmakerid, String imagepath, String description, Double price) {
         this.dishId = dishId;
         this.foodmakerid = foodmakerid;
         this.description = description;
         this.imagepath = imagepath;
+        this.price = price;
     }
 
     public String getDescription() {
@@ -93,5 +102,13 @@ public class FoodmakerDishes {
 
     public void setDishes(Dishes dishes) {
         this.dishes = dishes;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
