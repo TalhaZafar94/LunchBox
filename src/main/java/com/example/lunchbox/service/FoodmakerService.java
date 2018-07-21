@@ -1,6 +1,7 @@
 package com.example.lunchbox.service;
 
 import com.example.lunchbox.model.entity.Foodmaker;
+import com.example.lunchbox.model.entity.Order;
 import com.example.lunchbox.model.entity.Ratings;
 
 import java.security.NoSuchAlgorithmException;
@@ -16,15 +17,16 @@ public interface FoodmakerService {
     void deleteFoodmaker(String foodmakerEmail);
     List <Foodmaker> getFoodmakerByname(String foodmakerName);
     List<Foodmaker> findAllFoodmakers();
-    Foodmaker login(String foodmakerEmail, String foodmakerPassword);
+    Foodmaker login(String foodmakerEmail, String foodmakerPassword,String token);
     Foodmaker findByFoodmakerEmail(String foodmakerEmail);
     boolean updatePassword(String oldpassword, String newpassword , String foodmakerEmail);
     String getSHA256(String password) throws NoSuchAlgorithmException;
     Foodmaker getFoodmakerByFoodmakerCreatedAt(Date date);
     Foodmaker getFoodmakerByFoodmakerLastUpdated(Date date);
-    List<Foodmaker> getFoodmakersNearBy(Integer km, Double lat, Double longt);
+    List<Foodmaker> getFoodmakersNearBy(Double lat, Double longt);
     void setStatus(int foodmakerId,int status);
     void setRatings(int customerId,int foodmakerId,int stars);
     List<Ratings> getRatingsByFoodmakerId(Integer foodmakerId);
     void saveImage(byte[] image,Foodmaker foodmaker);
+    List<Order> getOrdersByfoodmakerId(Integer foodmakerId);
 }

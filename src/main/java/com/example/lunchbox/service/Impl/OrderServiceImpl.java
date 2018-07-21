@@ -5,15 +5,23 @@ import com.example.lunchbox.repository.*;
 import com.example.lunchbox.service.CustomerService;
 import com.example.lunchbox.service.OrderService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.json.JSONObject;
 import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -31,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
     private EntityManager entityManager;
     private CustomerService customerService;
     private Order order;
+    @Value("${foodmakerKey}")
+    private String foodmakerServerKey;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository,CustomerRepository customerRepository,FoodmakerRepository foodmakerRepository,DishRepository dishRepository,FoodmakerDishesRepository foodmakerDishesRepository) {
@@ -42,6 +52,9 @@ public class OrderServiceImpl implements OrderService {
         this.foodmakerDishesRepository = foodmakerDishesRepository;
     }
 
+    public OrderServiceImpl() {
+    }
+
     @Override
     public void saveOrder(Order order) {
         try {
@@ -51,6 +64,8 @@ public class OrderServiceImpl implements OrderService {
                 orderDishesRepository.save(orderdishe);
             }
             orderRepository.save(order);
+            Foodmaker foodmaker =  foodmakerRepository.findOne(order.getFoodmakerId());
+            sendNotification(foodmaker.getFoodmakerRegToken());
         }catch (Exception e){
 
         }
@@ -125,5 +140,42 @@ public class OrderServiceImpl implements OrderService {
         }
         return returnList;
         //    return orderRepository.findAll();
+    }
+
+    public ResponseEntity<String> sendNotification(String token)
+    {
+        AndroidPushNotificationsService androidPushNotificationsService = new AndroidPushNotificationsService(foodmakerServerKey);
+
+        JSONObject body = new JSONObject();
+        body.put("to", token);
+        body.put("priority", "high");
+
+        JSONObject notification = new JSONObject();
+        notification.put("title", "lunchbox Notification");
+        notification.put("body", "you have an order!");
+
+        JSONObject data = new JSONObject();
+        data.put("Key-1", "order Data 1");
+        data.put("Key-2", "order Data 2");
+
+        body.put("notification", notification);
+        body.put("data", data);
+
+        HttpEntity<String> request = new HttpEntity<>(body.toString());
+
+        CompletableFuture<String> pushNotification = androidPushNotificationsService.send(request);
+        CompletableFuture.allOf(pushNotification).join();
+
+        try {
+            String firebaseResponse = pushNotification.get();
+
+            return new ResponseEntity<>(firebaseResponse, HttpStatus.OK);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
     }
 }

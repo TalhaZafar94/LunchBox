@@ -1,12 +1,10 @@
 package com.example.lunchbox.service.Impl;
 
 
-import com.example.lunchbox.model.entity.Address;
-import com.example.lunchbox.model.entity.Foodmaker;
-import com.example.lunchbox.model.entity.Location;
-import com.example.lunchbox.model.entity.Ratings;
+import com.example.lunchbox.model.entity.*;
 import com.example.lunchbox.repository.FoodmakerRepository;
 import com.example.lunchbox.repository.LocationRepository;
+import com.example.lunchbox.repository.OrderRepository;
 import com.example.lunchbox.repository.RatingRepository;
 import com.example.lunchbox.service.FoodmakerService;
 
@@ -33,16 +31,18 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     private FoodmakerRepository foodmakerRepository;
     private LocationRepository locationRepository;
     private RatingRepository ratingRepository;
+    private OrderRepository orderRepository;
     private static final String key = "AIzaSyD6zBHiASrQgjYjoEyRJphf8uOpVbPtQCg";
     @Value("${upload.path}")
     private String uploadPath;
 
     @Autowired
     public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository,LocationRepository locationRepository
-                                ,RatingRepository ratingRepository) {
+                                ,RatingRepository ratingRepository,OrderRepository orderRepository) {
         this.foodmakerRepository = foodmakerRepository;
         this.locationRepository = locationRepository;
         this.ratingRepository = ratingRepository;
+        this.orderRepository = orderRepository;
     }
 
     @Override
@@ -100,6 +100,10 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
         for(Foodmaker foodmaker:foodmakerRepository.findAll())
         {
+            if(foodmaker.getFoodmakerActive() == 0)
+            {
+                continue;
+            }
             foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
             getAll.add(foodmaker);
         }
@@ -113,10 +117,15 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public Foodmaker login(String foodmakerEmail, String foodmakerPassword) {
+    public Foodmaker login(String foodmakerEmail, String foodmakerPassword,String token) {
         Foodmaker foodmaker = this.findByFoodmakerEmail(foodmakerEmail);
         try {
             if (foodmaker != null && getSHA256(foodmakerPassword).equals(foodmaker.getFoodmakerpassword())) {
+                if(foodmaker.getFoodmakerRegToken().isEmpty() || foodmaker.getFoodmakerRegToken() == null || !foodmaker.getFoodmakerRegToken().equals(token))
+                {
+                    foodmaker.setFoodmakerRegToken(token);
+                    foodmakerRepository.save(foodmaker);
+                }
                 return foodmaker;
             }
         } catch (NoSuchAlgorithmException e) {
@@ -183,32 +192,104 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public List<Foodmaker> getFoodmakersNearBy(Integer miles, Double lat, Double longt){
-        List<Location> locations = locationRepository.findAll();
-        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=";
-        url = String.format("%s%s,%s%s", url, String.valueOf(lat), String.valueOf(longt),"&destinations=");
-        List<Foodmaker> inlocations = new ArrayList<>();
-        for(Location location : locations){
-            url = String.format("%s%s,%s", url,
-                    String.valueOf(location.getLocationLatitude()), String.valueOf(location.getLocationLongitude()) + "|");
-        }
-        url = url.substring(0, url.length()-2);
-        url = String.format("%s%s%s", url, "&key=", key);
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(url, String.class);
-        JSONObject jsonObject = new JSONObject(result);
-        JSONArray jsonArray = (JSONArray) jsonObject.get("rows");
-        JSONObject firstObject = (JSONObject) jsonArray.get(0);
-        JSONArray geometryObject = (JSONArray) firstObject.get("elements");
-        for(int i = 0; i< geometryObject.length(); i++){
-            JSONObject object = geometryObject.getJSONObject(i);
-            JSONObject distance = (JSONObject) object.get("distance");
+    public List<Foodmaker> getFoodmakersNearBy(Double lat, Double longt){
 
-            if(miles >= Double.parseDouble(distance.get("text").toString().replace(" mi", "").replace(",",""))){
-                // inlocations.add(locations.get(i));
-                inlocations.add(this.getFoodmakerById(locations.get(i).getFoodmakerId()));
-            }
-        }
+        List<Foodmaker> inlocations = new ArrayList<>();
+        try {
+           int count = 6;
+           List<Location> locations = locationRepository.findAll();
+           String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=";
+           url = String.format("%s%s,%s%s", url, String.valueOf(lat), String.valueOf(longt),"&destinations=");
+
+           for(Location location : locations){
+               url = String.format("%s%s,%s", url,
+                       String.valueOf(location.getLocationLatitude()), String.valueOf(location.getLocationLongitude()) + "|");
+           }
+           url = url.substring(0, url.length()-2);
+           url = String.format("%s%s%s", url, "&key=", key);
+           RestTemplate restTemplate = new RestTemplate();
+           String result = restTemplate.getForObject(url, String.class);
+           JSONObject jsonObject = new JSONObject(result);
+           JSONArray jsonArray = (JSONArray) jsonObject.get("rows");
+           JSONObject firstObject = (JSONObject) jsonArray.get(0);
+           JSONArray geometryObject = (JSONArray) firstObject.get("elements");
+
+           for(int i = 0; i< geometryObject.length(); i++){
+               JSONObject object = geometryObject.getJSONObject(i);
+               if(object.has("distance"))
+               {
+                   JSONObject distance = (JSONObject) object.get("distance");
+                   try {
+                       if(count >= Double.parseDouble(distance.get("text").toString().replace(" mi", "").replace(",",""))){
+                           // inlocations.add(locations.get(i));
+                           //inlocations.add(this.getFoodmakerById(locations.get(i).getFoodmakerId()));
+                           Foodmaker foodmaker = this.getFoodmakerById(locations.get(i).getFoodmakerId());
+                           if(foodmaker.getFoodmakerActive() == 0)
+                           {
+                               continue;
+                           }
+                           foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
+                           inlocations.add(foodmaker);
+                       }
+                   }
+                   catch (NumberFormatException e)
+                   {
+                       inlocations = this.findAllFoodmakers();
+                       return inlocations;
+                   }
+
+               }
+               else
+               {
+                   inlocations = this.findAllFoodmakers();
+                   return inlocations;
+               }
+           }
+
+           if(inlocations.size() > 0)
+           {
+               return inlocations;
+           }
+
+           while (count <= 9)
+           {
+               if(inlocations.size() > 0)
+               {
+                   return inlocations;
+               }
+               else {
+                   count++;
+                   for (int i = 0; i < geometryObject.length(); i++) {
+                       JSONObject object = geometryObject.getJSONObject(i);
+                       JSONObject distance = (JSONObject) object.get("distance");
+
+                       if (count >= Double.parseDouble(distance.get("text").toString().replace(" mi", "").replace(",", ""))) {
+                           // inlocations.add(locations.get(i));
+                           //inlocations.add(this.getFoodmakerById(locations.get(i).getFoodmakerId()));
+                           Foodmaker foodmaker = this.getFoodmakerById(locations.get(i).getFoodmakerId());
+                           if(foodmaker.getFoodmakerActive() == 0)
+                           {
+                               continue;
+                           }
+                           foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
+                           inlocations.add(foodmaker);
+                       }
+                   }
+               }
+           }
+
+           if(inlocations.size() == 0)
+           {
+               inlocations = this.findAllFoodmakers();
+               return inlocations;
+           }
+
+       }
+       catch (Exception e)
+       {
+           e.printStackTrace();
+       }
+
         return inlocations;
     }
 
@@ -244,6 +325,19 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Order> getOrdersByfoodmakerId(Integer foodmakerId)
+    {
+        List<Order> orderList = orderRepository.getAllByFoodmakerId(foodmakerId);
+
+        if(orderList.size() > 0)
+        {
+            return orderList;
+        }
+
+        return orderList;
     }
 
 }

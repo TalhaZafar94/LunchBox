@@ -53,6 +53,8 @@ public class Foodmaker {
     @Column(name = "foodmaker_lastupdated")
     private Date foodmakerLastUpdated;
 
+    @Column(name = "foodaker_RegToken")
+    private String foodmakerRegToken;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "foodmaker_id", nullable = false)
@@ -68,7 +70,7 @@ public class Foodmaker {
     public Foodmaker() {
     }
 
-    public Foodmaker(String foodmakerName, String foodmakerEmail, String foodmakerNic, String foodmakerpassword, Address foodmakerAddresId, Integer foodmakerAccessType, String foodmakerImagePath, Integer foodmakerActive, String foodmakerPhoneNumber, Integer foodmakerAdminId, Date foodmakerCreatedAt, Date foodmakerLastUpdated) {
+    public Foodmaker(String foodmakerName, String foodmakerEmail, String foodmakerNic, String foodmakerpassword, Address foodmakerAddresId, Integer foodmakerAccessType, String foodmakerImagePath, Integer foodmakerActive, String foodmakerPhoneNumber, Integer foodmakerAdminId, Date foodmakerCreatedAt, Date foodmakerLastUpdated,String foodmakerRegToken) {
         this.foodmakerName = foodmakerName;
         this.foodmakerEmail = foodmakerEmail;
         this.foodmakerNic = foodmakerNic;
@@ -81,6 +83,7 @@ public class Foodmaker {
         this.foodmakerAdminId = foodmakerAdminId;
         this.foodmakerCreatedAt = foodmakerCreatedAt;
         this.foodmakerLastUpdated = foodmakerLastUpdated;
+        this.foodmakerRegToken = foodmakerRegToken;
     }
 
     public Integer getFoodmakerId() {
@@ -193,5 +196,13 @@ public class Foodmaker {
 
     public void setAverageRatings(Double averageRatings) {
         this.averageRatings = averageRatings;
+    }
+
+    public String getFoodmakerRegToken() {
+        return foodmakerRegToken;
+    }
+
+    public void setFoodmakerRegToken(String foodmakerRegToken) {
+        this.foodmakerRegToken = foodmakerRegToken;
     }
 }

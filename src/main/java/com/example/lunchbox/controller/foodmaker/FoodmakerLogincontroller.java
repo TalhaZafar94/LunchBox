@@ -1,6 +1,7 @@
 package com.example.lunchbox.controller.foodmaker;
 
 import com.example.lunchbox.model.entity.Foodmaker;
+import com.example.lunchbox.model.entity.Order;
 import com.example.lunchbox.model.entity.Ratings;
 import com.example.lunchbox.service.FoodmakerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class FoodmakerLogincontroller {
 
     @RequestMapping(value = "/login" , method = RequestMethod.POST)
     public String verifyLogin(@RequestParam String userName, @RequestParam String password,
-                              HttpSession session, Model model){
+                              HttpSession session, Model model,@RequestParam String token){
 
-        Foodmaker foodmaker = foodmakerService.login(userName, password);
+        Foodmaker foodmaker = foodmakerService.login(userName, password,token);
         if (foodmaker == null) {
             model.addAttribute("loginError", "Error logging in. Please try again");
             return "login";
@@ -67,8 +68,8 @@ public class FoodmakerLogincontroller {
     }
 
     @RequestMapping(value = "/foodmakers-nearBy-list", method = RequestMethod.GET)
-    public List<Foodmaker> findNearByFoodmakers(@RequestParam Integer miles,@RequestParam Double lat,@RequestParam Double longt ) {
-        return foodmakerService.getFoodmakersNearBy(miles,lat,longt);
+    public List<Foodmaker> findNearByFoodmakers(@RequestParam Double lat,@RequestParam Double longt ) {
+        return foodmakerService.getFoodmakersNearBy(lat,longt);
     }
 
 
@@ -128,5 +129,14 @@ public class FoodmakerLogincontroller {
     {
         return foodmakerService.getRatingsByFoodmakerId(foodmakerId);
     }
+
+    @RequestMapping(value = "/get-orderByFoodmakerId",method = RequestMethod.GET)
+    public List<Order> getOrderByFoodmakerId(@RequestParam Integer foodmakerId)
+    {
+        return foodmakerService.getOrdersByfoodmakerId(foodmakerId);
+    }
+
+
+
 
 }

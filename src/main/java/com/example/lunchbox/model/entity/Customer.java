@@ -49,6 +49,8 @@ public class Customer{
     @Column(name = "location_id" ,unique = true)
     private Integer customerLocationId;
 
+    @Column(name = "customer_RegToken")
+    private String customerRegToken;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
@@ -57,7 +59,7 @@ public class Customer{
     public Customer() {
     }
 
-    public Customer(Integer customerId, String customerName, String customerNic,String customerEmail,Integer customerAccessType, String customerPassword,Address customerAddressId,String customerImagePath,String customerPhoneNumber, Date customerCreatedAt,Date customerLastUpdated,Integer customerLocationId) {
+    public Customer(Integer customerId, String customerName, String customerNic,String customerEmail,Integer customerAccessType, String customerPassword,Address customerAddressId,String customerImagePath,String customerPhoneNumber, Date customerCreatedAt,Date customerLastUpdated,Integer customerLocationId,String customerRegToken) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerNic = customerNic;
@@ -70,6 +72,7 @@ public class Customer{
         this.customerCreatedAt = customerCreatedAt;
         this.customerLastUpdated = customerLastUpdated;
         this.customerLocationId = customerLocationId;
+        this.customerRegToken = customerRegToken;
     }
 
     public Integer getCustomerId() {
@@ -166,5 +169,13 @@ public class Customer{
 
     public void setCustomerLocationId(Integer customerLocationId) {
         this.customerLocationId = customerLocationId;
+    }
+
+    public String getCustomerRegToken() {
+        return customerRegToken;
+    }
+
+    public void setCustomerRegToken(String customerRegToken) {
+        this.customerRegToken = customerRegToken;
     }
 }

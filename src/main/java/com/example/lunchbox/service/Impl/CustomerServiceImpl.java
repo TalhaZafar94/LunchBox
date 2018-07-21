@@ -22,6 +22,8 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
     @Value("${upload.path}")
     private String uploadPath;
+    @Value("${customerKey}")
+    private String customerServerKey;
 
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository) {
@@ -73,10 +75,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer login(String customerEmail, String customerPassword) {
+    public Customer login(String customerEmail, String customerPassword,String token) {
         Customer customer = this.findByCustomerEmail(customerEmail);
         try {
             if (customer != null && getSHA256(customerPassword).equals(customer.getCustomerPassword())) {
+                if(customer.getCustomerRegToken().isEmpty() || customer.getCustomerRegToken() == null || !customer.getCustomerRegToken().equals(token))
+                {
+                    customer.setCustomerRegToken(token);
+                    customerRepository.save(customer);
+                }
                 return customer;
             }
         } catch (NoSuchAlgorithmException e) {

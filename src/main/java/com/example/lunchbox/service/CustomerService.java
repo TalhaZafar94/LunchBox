@@ -14,7 +14,7 @@ public interface CustomerService {
     void deleteCustomer(String customerEmail);
     List<Customer> getCustomerByname(String customerName);
     List<Customer> findAllCustomers();
-    Customer login(String customerEmail, String customerPassword);
+    Customer login(String customerEmail, String customerPassword,String token);
     Customer findByCustomerEmail(String customerEmail);
     boolean updatePassword(String oldpassword, String newpassword , String customerEmail);
     String getSHA256(String password) throws NoSuchAlgorithmException;

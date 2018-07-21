@@ -2,13 +2,18 @@ package com.example.lunchbox.controller.customer;
 
 import com.example.lunchbox.model.entity.Customer;
 import com.example.lunchbox.service.CustomerService;
+import com.example.lunchbox.service.Impl.AndroidPushNotificationsService;
+import com.example.lunchbox.service.Impl.SendPushNotification;
 import com.example.lunchbox.service.OrderService;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +25,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -39,9 +46,9 @@ public class CustomerLoginController{
 
     @RequestMapping(value = "/login" , method = RequestMethod.POST ,produces = "application/json")
     public Customer verifyLogin(@RequestParam String customerEmail, @RequestParam String customerPassword,
-                              HttpSession session, Model model){
+                              HttpSession session,@RequestParam String token){
 
-        Customer customer = customerService.login(customerEmail, customerPassword);
+        Customer customer = customerService.login(customerEmail, customerPassword,token);
         if (customer != null) {
             session.setAttribute("loggedInUser", customer);
             return customer;
@@ -145,4 +152,42 @@ public class CustomerLoginController{
 
         return "{ \"uploadedPath\" : \"+uploadedPath+\"}";
     }
+
+/*    @RequestMapping(value = "/send",method = RequestMethod.POST)
+    public ResponseEntity<String> send(@RequestParam String token)
+    {
+        AndroidPushNotificationsService androidPushNotificationsService = new AndroidPushNotificationsService(deviceId);
+
+        JSONObject body = new JSONObject();
+        body.put("to", token);
+        body.put("priority", "high");
+
+        JSONObject notification = new JSONObject();
+        notification.put("title", "lunchbox Notification");
+        notification.put("body", "you have an order!");
+
+        JSONObject data = new JSONObject();
+        data.put("Key-1", "order Data 1");
+        data.put("Key-2", "order Data 2");
+
+        body.put("notification", notification);
+        body.put("data", data);
+
+        HttpEntity<String> request = new HttpEntity<>(body.toString());
+
+        CompletableFuture<String> pushNotification = androidPushNotificationsService.send(request);
+        CompletableFuture.allOf(pushNotification).join();
+
+        try {
+            String firebaseResponse = pushNotification.get();
+
+            return new ResponseEntity<>(firebaseResponse, HttpStatus.OK);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
+    }*/
 }
