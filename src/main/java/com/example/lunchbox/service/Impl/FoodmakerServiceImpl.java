@@ -121,7 +121,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         Foodmaker foodmaker = this.findByFoodmakerEmail(foodmakerEmail);
         try {
             if (foodmaker != null && getSHA256(foodmakerPassword).equals(foodmaker.getFoodmakerpassword())) {
-                if(foodmaker.getFoodmakerRegToken().isEmpty() || foodmaker.getFoodmakerRegToken() == null || !foodmaker.getFoodmakerRegToken().equals(token))
+                if(foodmaker.getFoodmakerRegToken() == null || !foodmaker.getFoodmakerRegToken().equals(token))
                 {
                     foodmaker.setFoodmakerRegToken(token);
                     foodmakerRepository.save(foodmaker);

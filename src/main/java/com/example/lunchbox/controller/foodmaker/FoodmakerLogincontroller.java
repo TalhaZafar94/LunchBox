@@ -24,16 +24,15 @@ public class FoodmakerLogincontroller {
     }
 
     @RequestMapping(value = "/login" , method = RequestMethod.POST)
-    public String verifyLogin(@RequestParam String userName, @RequestParam String password,
+    public Foodmaker verifyLogin(@RequestParam String userName, @RequestParam String password,
                               HttpSession session, Model model,@RequestParam String token){
 
         Foodmaker foodmaker = foodmakerService.login(userName, password,token);
-        if (foodmaker == null) {
-            model.addAttribute("loginError", "Error logging in. Please try again");
-            return "login";
+        if (foodmaker != null) {
+            session.setAttribute("loggedInUser", foodmaker);
+            return foodmaker;
         }
-        session.setAttribute("loggedInUser", foodmaker);
-        return "index";
+        return null;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

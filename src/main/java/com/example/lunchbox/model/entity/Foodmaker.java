@@ -53,7 +53,7 @@ public class Foodmaker {
     @Column(name = "foodmaker_lastupdated")
     private Date foodmakerLastUpdated;
 
-    @Column(name = "foodaker_RegToken")
+    @Column(name = "foodmaker_reg_token")
     private String foodmakerRegToken;
 
     @OneToOne(fetch = FetchType.LAZY)
