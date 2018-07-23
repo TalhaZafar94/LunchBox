@@ -52,10 +52,12 @@ public class OrderController {
         Order order = orderService.getOrderById(orderId);
         ModelAndView modelAndView = new ModelAndView("order-detail");
         modelAndView.addObject("orderDetail", order);
-
-
         return modelAndView;
     }
 
+    @RequestMapping(value = "/update-order-status" ,method = RequestMethod.GET)
+    public void updateOrderStatus(@RequestParam Integer orderStatus,@RequestParam Integer orderId){
+        orderService.updateOrderStatus(orderStatus,orderId);
 
+    }
 }

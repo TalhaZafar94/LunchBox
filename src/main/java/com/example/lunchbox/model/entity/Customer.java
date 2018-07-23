@@ -49,7 +49,7 @@ public class Customer{
     @Column(name = "location_id" ,unique = true)
     private Integer customerLocationId;
 
-    @Column(name = "customer_RegToken")
+    @Column(name = "customer_reg_token")
     private String customerRegToken;
 
     @OneToOne(fetch = FetchType.LAZY)
