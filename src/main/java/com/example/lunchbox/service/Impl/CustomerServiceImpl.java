@@ -79,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = this.findByCustomerEmail(customerEmail);
         try {
             if (customer != null && getSHA256(customerPassword).equals(customer.getCustomerPassword())) {
-                if(customer.getCustomerRegToken().isEmpty() || customer.getCustomerRegToken() == null || !customer.getCustomerRegToken().equals(token))
+                if(customer.getCustomerRegToken() == null || !customer.getCustomerRegToken().equals(token))
                 {
                     customer.setCustomerRegToken(token);
                     customerRepository.save(customer);
