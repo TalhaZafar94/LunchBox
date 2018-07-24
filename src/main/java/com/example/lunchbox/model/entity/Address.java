@@ -1,6 +1,9 @@
 package com.example.lunchbox.model.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -23,7 +26,6 @@ public class Address {
 
     @Column(name = "address_lastupdated")
     private Date addressLastUpdated;
-
 
     public Address() {
     }
@@ -69,8 +71,9 @@ public class Address {
         this.addressPostalCode = addressPostalCode;
     }
 
-    public Date getAddressLastUpdated() {
-        return addressLastUpdated;
+    public String getAddressLastUpdated() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(addressLastUpdated);
     }
 
     public void setAddressLastUpdated(Date addressLastUpdated) {

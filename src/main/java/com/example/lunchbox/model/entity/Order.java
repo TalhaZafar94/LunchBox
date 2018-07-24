@@ -4,6 +4,8 @@ package com.example.lunchbox.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
@@ -15,8 +17,6 @@ public class Order {
     @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer orderId;
-
-
 
     @Column(name = "customer_id")
     private Integer orderCustomerId;
@@ -30,10 +30,10 @@ public class Order {
     @Column(name = "shipment_address")
     private String orderShipmentAddress;
 
-    @Column(name = "order_date")
+    @Column(name = "order_date",columnDefinition = "DATETIME")
     private Date orderDate;
 
-    @Column(name = "order_deliver_date")
+    @Column(name = "order_deliver_date",columnDefinition = "DATETIME")
     private Date orderDeliverDate;
 
     @Column(name = "order_totalamount")
@@ -47,8 +47,6 @@ public class Order {
 
     @OneToOne(fetch = FetchType.LAZY , mappedBy = "order", cascade = {CascadeType.ALL})
     private Customer customer;
-
-
 
     @OneToOne(fetch = FetchType.LAZY , mappedBy = "order", cascade = {CascadeType.ALL})
     private Foodmaker foodmaker;
@@ -109,19 +107,21 @@ public class Order {
         this.orderShipmentAddress = orderShipmentAddress;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public String getOrderDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(orderDate);
     }
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Date getOrderDeliverDate() {
-        return orderDeliverDate;
+    public String getOrderDeliverDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(orderDeliverDate);
     }
 
-    public void setOrderDeliverDate(Date orderDeliverDate) {
+    public void setOrderDeliverDate(Timestamp orderDeliverDate) {
         this.orderDeliverDate = orderDeliverDate;
     }
 
@@ -136,7 +136,6 @@ public class Order {
     public Integer getOrderStatus() {
         return orderStatus;
     }
-
 
     public Integer getFoodmakerId() {
         return foodmakerId;
@@ -161,8 +160,6 @@ public class Order {
     public void setFoodmaker(Foodmaker foodmaker) {
         this.foodmaker = foodmaker;
     }
-
-
 
     @Override
     public boolean equals(Object o) {
