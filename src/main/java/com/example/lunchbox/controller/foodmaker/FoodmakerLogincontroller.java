@@ -28,11 +28,12 @@ public class FoodmakerLogincontroller {
                               HttpSession session, Model model,@RequestParam String token){
 
         Foodmaker foodmaker = foodmakerService.login(userName, password,token);
-        if (foodmaker != null) {
-            session.setAttribute("loggedInUser", foodmaker);
-            return foodmaker;
+        if (foodmaker == null) {
+            model.addAttribute("loginError", "Error logging in. Please try again");
+            return null;
         }
-        return null;
+        session.setAttribute("loggedInUser", foodmaker);
+        return foodmaker;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

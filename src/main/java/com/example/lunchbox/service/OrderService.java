@@ -12,6 +12,7 @@ public interface OrderService {
     long countAllOrders();
     void deleteOrder(Order order);
     List<Order> findAllOrders();
+    void updateOrderStatus(Integer statusValue,Integer orderId);
 
 
 }
