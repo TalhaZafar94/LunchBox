@@ -17,6 +17,10 @@ public class FoodmakerDishes {
     @Column(name = "foodmaker_id")
     private Integer foodmakerid;
 
+    @Column(name = "name")
+    private String name;
+
+
     @Column(name = "description")
     private String description;
 
@@ -40,9 +44,10 @@ public class FoodmakerDishes {
     public FoodmakerDishes() {
     }
 
-    public FoodmakerDishes(Integer dishId, Integer foodmakerid, String imagepath, String description, Double price) {
+    public FoodmakerDishes(Integer dishId, Integer foodmakerid,String name, String imagepath, String description, Double price) {
         this.dishId = dishId;
         this.foodmakerid = foodmakerid;
+        this.name = name;
         this.description = description;
         this.imagepath = imagepath;
         this.price = price;
@@ -111,4 +116,13 @@ public class FoodmakerDishes {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
