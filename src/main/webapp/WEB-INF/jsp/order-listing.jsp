@@ -114,7 +114,7 @@
             <p class="text-center">Are you sure want to logout from this awesome system?</p>
             <p class="text-center">
                 <button class="btn btn-danger md-close">Nope!</button>
-                <a href="login.html" class="btn btn-success md-close">Yeah, I'm sure</a>
+                <a href="localhost:8080" class="btn btn-success md-close">Yeah, I'm sure</a>
             </p>
         </div>
     </div>
@@ -358,8 +358,8 @@
                                 <div class="col-md-8">
                                     <div class="toolbar-btn-action">
                                         <a href="/add-foodmaker?add=new" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add new</a>
-                                        <a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
-                                        <a class="btn btn-primary"><i class="fa fa-refresh"></i> Update</a>
+                       <%--                 <a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                        <a class="btn btn-primary"><i class="fa fa-refresh"></i> Update</a>--%>
                                     </div>
                                 </div>
                             </div>
@@ -374,17 +374,16 @@
                             <table  data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
-                                    <th> <input type="checkbox" name="select_all"> </th>
                                     <th>Customer</th>
                                     <th>Foodmaker</th>
-                                    <th>Date</th>
+                                    <th>Order Date</th>
+                                    <th>Order deliver Date</th>
                                     <th>Status</th>
-                                    <th>Shipment address</th>
+                                    <th style="width: 4px">Shipment address</th>
                                     <th>Total Amount</th>
                                     <th data-sortable="false">Option</th>
                                 </tr>
                                 </thead>
-
                                 <tbody id="foodermaker-listing-tbl">
                                 <%-- <tr>
                                      <td>Yogyakarta, Indonesia</td>
@@ -399,12 +398,9 @@
                                          </div>
                                      </td>
                                  </tr>--%>
-
-
                                 </tbody>
                             </table>
                         </div>
-
                         <%--                        <c:if test="${not empty lists}">
 
                                                 <ul>
@@ -414,10 +410,6 @@
                                                 </ul>
 
                                             </c:if>--%>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -511,7 +503,6 @@
             responsive: true,"paging": true
         } );
     }
-
     $.ajax({
         url:'http://localhost:8080/order/get-order-list',
         type:'get',
@@ -530,39 +521,27 @@
                     status = "In Process";
                     classes ="label label-warning";
                 }
-
-
-                html = '<tr>'+ '<td> <input type="checkbox" name="record"> </td>'+
+                html = '<tr>'+
                     '<td>'+data.customer.customerName+'</td>'+
                     '<td>'+data.foodmaker.foodmakerName+'</td>'+
                     '<td>'+data.orderDate+'</td>'+
-                    '<td>'+data.orderDate+'</td>'+
+                    '<td>'+data.orderDeliverDate+'</td>'+
                     '<td><span class="'+classes+'">'+status+'</span></td>'+
-
                     '<td>'+data.orderShipmentAddress+'</td>'+
-                    '<td></td>'+
-
-
+                    '<td>'+data.orderTotalAmount+'</td>'+
                     '<td>'+
                     '<div class="btn-group btn-group-xs">'+
-                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+data.orderId+'"><i class="fa fa-power-off"  ></i></a>'+
+                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+data.orderId+'"><i class="fa fa-power-off"></i></a>'+
                     '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-view" data-id="'+data.orderId+'" ><i class="fa fa-edit"></i></a>'+
                     '</div>'+
                     '</td>'+
                     '</tr>';
                 $('#foodermaker-listing-tbl').append(html);
-
             });
             viewOrderDetail();
             dataTableInit();
         }
-
-
-
     });
-
-
-
     function viewOrderDetail(){
         $('.btn-view').on('click',function(){
             var rowId = $(this).attr('data-id');
@@ -571,9 +550,5 @@
         });
     }
 </script>
-
-
-
-
 </body>
 </html>

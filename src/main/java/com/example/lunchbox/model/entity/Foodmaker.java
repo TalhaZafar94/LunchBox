@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -174,16 +175,18 @@ public class Foodmaker {
         this.foodmakerAdminId = foodmakerAdminId;
     }
 
-    public Date getFoodmakerCreatedAt() {
-        return foodmakerCreatedAt;
+    public String getFoodmakerCreatedAt() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(foodmakerCreatedAt);
     }
 
     public void setFoodmakerCreatedAt(Date foodmakerCreatedAt) {
         this.foodmakerCreatedAt = foodmakerCreatedAt;
     }
 
-    public Date getFoodmakerLastUpdated() {
-        return foodmakerLastUpdated;
+    public String getFoodmakerLastUpdated() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(foodmakerLastUpdated);
     }
 
     public void setFoodmakerLastUpdated(Date foodmakerLastUpdated) {

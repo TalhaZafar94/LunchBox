@@ -142,7 +142,7 @@
             <p class="text-center">Are you sure want to logout from this awesome system?</p>
             <p class="text-center">
                 <button class="btn btn-danger md-close">Nope!</button>
-                <a href="login.html" class="btn btn-success md-close">Yeah, I'm sure</a>
+                <a href="localhost:8080" class="btn btn-success md-close">Yeah, I'm sure</a>
             </p>
         </div>
     </div>
@@ -386,8 +386,8 @@
                                 <div class="col-md-8">
                                     <div class="toolbar-btn-action">
                                         <a href="/add-foodmaker?add=new" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add new</a>
-                                        <a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
-                                        <a class="btn btn-primary"><i class="fa fa-refresh"></i> Update</a>
+                                        <%--<a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
+                                        <a class="btn btn-primary"><i class="fa fa-refresh"></i> Update</a>--%>
                                     </div>
                                 </div>
                             </div>
@@ -400,12 +400,12 @@
                             <table  data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
-
                                     <th>Full Name</th>
-                                    <th>Address</th>
+                                    <th style="width: 4px">Address</th>
                                     <th>Email Address</th>
                                     <th data-sortable="false">Date of Joining</th>
                                     <th>Status</th>
+                                    <th>Dishes</th>
                                     <th data-sortable="false">Option</th>
                                 </tr>
                                 </thead>
@@ -583,7 +583,7 @@
 
          html = '<tr>'+
                 '<td>'+foodmaker.foodmakerName+'</td>'+
-                '<td>'+((foodmaker.adminAddressId != null)? foodmaker.adminAddressId.address+' '+foodmaker.adminAddressId.city: 'not avaible' )+'</td>'+
+                '<td>'+((foodmaker.foodmakerAddresId != null)? foodmaker.foodmakerAddresId.address+' '+foodmaker.foodmakerAddresId.city: 'not avaible' )+'</td>'+
                 '<td>'+foodmaker.foodmakerEmail+'</td>'+
                 '<td>'+foodmaker.foodmakerCreatedAt+'</td>'+
                 '<td><span class="'+classes+'">'+status+'</span></td>'+

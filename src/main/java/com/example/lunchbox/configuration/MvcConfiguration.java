@@ -21,9 +21,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestInterceptor()).excludePathPatterns("/").excludePathPatterns("/admin/login").excludePathPatterns("/admin/signup")
-        .excludePathPatterns("/login").excludePathPatterns("/signup").excludePathPatterns("/customer/login").excludePathPatterns("/customer/signup")
-        .excludePathPatterns("/foodmaker/login").excludePathPatterns("/foodmaker/signup").excludePathPatterns("/rider/login").excludePathPatterns("/rider/signup");
+        registry.addInterceptor(new RequestInterceptor()).addPathPatterns("add-customer").addPathPatterns("/add-dishes")
+                .addPathPatterns("/add-foodmaker").addPathPatterns("/add-rider").addPathPatterns("/admin-listing").addPathPatterns("/customer-listing")
+                .addPathPatterns("/dishes-listing").addPathPatterns("/foodmaker-listing").addPathPatterns("/index").addPathPatterns("/order-detail")
+                .addPathPatterns("/order-listing").addPathPatterns("/rider-listing").addPathPatterns("/admin/admin-listing")
+                .addPathPatterns("/foodmaker/foodmaker-listing").addPathPatterns("/customer/customer-listing").addPathPatterns("/rider/rider-listing")
+                .addPathPatterns("/dishes/dishes-listing");
     }
 
 

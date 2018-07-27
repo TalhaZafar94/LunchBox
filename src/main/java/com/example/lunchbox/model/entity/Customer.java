@@ -3,6 +3,7 @@ package com.example.lunchbox.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -40,10 +41,10 @@ public class Customer{
     @Column(name = "customer_phonenumber")
     private String customerPhoneNumber;
 
-    @Column(name = "customer_createdat")
+    @Column(name = "customer_createdat",columnDefinition = "DATETIME")
     private Date customerCreatedAt;
 
-    @Column(name = "customer_lastupdated")
+    @Column(name = "customer_lastupdated",columnDefinition = "DATETIME")
     private Date customerLastUpdated;
 
     @Column(name = "location_id" ,unique = true)
@@ -147,16 +148,18 @@ public class Customer{
         this.customerPhoneNumber = customerPhoneNumber;
     }
 
-    public Date getCustomerCreatedAt() {
-        return customerCreatedAt;
+    public String getCustomerCreatedAt() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(customerCreatedAt);
     }
 
     public void setCustomerCreatedAt(Date customerCreatedAt) {
         this.customerCreatedAt = customerCreatedAt;
     }
 
-    public Date getCustomerLastUpdated() {
-        return customerLastUpdated;
+    public String getCustomerLastUpdated() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(customerLastUpdated);
     }
 
     public void setCustomerLastUpdated(Date customerLastUpdated) {

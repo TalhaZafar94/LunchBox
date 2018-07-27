@@ -43,6 +43,7 @@ public class AdminLoginConntroller {
         }
 
         session.setAttribute("loggedinAdmin", admin);
+        session.setAttribute("adminName",admin.getAdminName());
         return "index";
     }
 

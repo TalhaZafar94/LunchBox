@@ -9,10 +9,13 @@
             <div class="col-xs-4">
                 <a href="profile.html" class="rounded-image profile-image"><img src="images/users/user-100.jpg"></a>
             </div>
+
             <div class="col-xs-8">
-
-                <div class="profile-text">Welcome <b>User</b></div>
-
+                <div class="profile-text">
+                    <a href="http://localhost:8080">
+                    <label style="font-size: larger;color: white"><%= pageContext.getSession().getAttribute("adminName") %></label>
+                    </a>
+                </div>
             </div>
         </div>
         <!--- Divider -->
