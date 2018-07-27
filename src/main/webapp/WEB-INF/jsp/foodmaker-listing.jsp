@@ -134,7 +134,7 @@
     </div>
 </div>
 
-<!-- Modal Logout -->
+<!-- Modal Logout
 <div class="md-modal md-just-me" id="logout-modal">
     <div class="md-content">
         <h3><strong>Logout</strong> Confirmation</h3>
@@ -146,7 +146,7 @@
             </p>
         </div>
     </div>
-</div>        <!-- Modal End -->
+</div>        Modal End --><%@include file="includes/logout-modal.jsp" %>
 <!-- Begin page -->
 <div id="wrapper">
 

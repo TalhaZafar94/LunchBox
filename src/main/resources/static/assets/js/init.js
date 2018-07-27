@@ -43,7 +43,12 @@ var changeptype = function(){
 }
 
 $(document).ready(function(){
-	FastClick.attach(document.body);
+	$("#btn-logout").on("click",function(){
+        $("#logout-form").submit();
+
+    });
+
+    FastClick.attach(document.body);
 	resizefunc.push("initscrolls");
 	resizefunc.push("changeptype");
 	$('.sparkline').sparkline('html', { enableTagOptions: true });
