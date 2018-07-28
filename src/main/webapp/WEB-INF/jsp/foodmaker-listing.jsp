@@ -641,8 +641,8 @@
                 var html = '';
                 console.log(response);
                 response.forEach(function(data){
-                    html +='<div class="dishes-div-wrapper">'+
-                             '<div class="dishes-img-area"><image src="'+data.imagepath+'" target="dish image not avaible"></div>'+
+                    html +='<div class="dishes-div-wrapper" xmlns="http://www.w3.org/1999/html">'+
+                        '</br>'+'<div class="dishes-img-area"><image src="'+data.imagepath+'" target="dish image not avaible" style="width: 80px;height: 80px"></div>'+'</br>'+
                                 '<div class="dishes-desc-area"><span class="dishes-head-area">'+data.dishes.dishName+'</span><span class="dishes-price-area">Price :<span>'+((data.price == null)?"not Set":data.price )+' </span></span><p>'+data.description+'</p></div>'+
                             ' </div>';
                 });

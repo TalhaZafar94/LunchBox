@@ -178,12 +178,11 @@ public class OrderServiceImpl implements OrderService {
 
         return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
     }
+    @Override
     public void updateOrderStatus(Integer statusValue,Integer orderId){
         if(orderId != 0){
              orderRepository.updateOrderStatus(statusValue,orderId);
-
         }
-
     }
 
 }

@@ -30,4 +30,6 @@ public interface FoodmakerService {
     List<Ratings> getRatingsByFoodmakerId(Integer foodmakerId);
     void saveImage(byte[] image,Foodmaker foodmaker);
     List<Order> getOrdersByfoodmakerId(Integer foodmakerId);
+    List<Order> getAckOrdersByfoodmakerId(Integer foodmakerId);
+    List<Order> getDoneOrdersByfoodmakerId(Integer foodmakerId);
 }

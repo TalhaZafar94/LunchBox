@@ -15,6 +15,7 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order , Integer> {
 
     List<Order> getAllByFoodmakerId(Integer foodmakerId);
+    List<Order> getAllByOrderStatus(Integer status);
 
 
     @Transactional

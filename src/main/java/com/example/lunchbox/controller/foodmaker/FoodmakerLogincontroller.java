@@ -136,7 +136,17 @@ public class FoodmakerLogincontroller {
         return foodmakerService.getOrdersByfoodmakerId(foodmakerId);
     }
 
+    @RequestMapping(value = "/get-ack-orderByFoodmakerId",method = RequestMethod.GET)
+    public List<Order> getAckOrderByFoodmakerId(@RequestParam Integer foodmakerId)
+    {
+        return foodmakerService.getAckOrdersByfoodmakerId(foodmakerId);
+    }
 
 
+    @RequestMapping(value = "/get-done-orderByFoodmakerId",method = RequestMethod.GET)
+    public List<Order> getDoneOrderByFoodmakerId(@RequestParam Integer foodmakerId)
+    {
+        return foodmakerService.getDoneOrdersByfoodmakerId(foodmakerId);
+    }
 
 }

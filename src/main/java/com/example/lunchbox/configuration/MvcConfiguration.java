@@ -21,14 +21,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestInterceptor()).addPathPatterns("add-customer").addPathPatterns("/add-dishes")
+        registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/add-customer").addPathPatterns("/add-dishes")
                 .addPathPatterns("/add-foodmaker").addPathPatterns("/add-rider").addPathPatterns("/admin-listing").addPathPatterns("/customer-listing")
                 .addPathPatterns("/dishes-listing").addPathPatterns("/foodmaker-listing").addPathPatterns("/index").addPathPatterns("/order-detail")
-                .addPathPatterns("/order-listing").addPathPatterns("/rider-listing").addPathPatterns("/admin/admin-listing")
+                .addPathPatterns("/order-listing").addPathPatterns("/rider-listing").addPathPatterns("/admin/admin-listing").addPathPatterns("/add-admin")
                 .addPathPatterns("/foodmaker/foodmaker-listing").addPathPatterns("/customer/customer-listing").addPathPatterns("/rider/rider-listing")
                 .addPathPatterns("/dishes/dishes-listing").addPathPatterns("/admin/add-admin").addPathPatterns("/order/order-view")
                 .addPathPatterns("/customer/add-customer").addPathPatterns("/foodmaker/add-foodmaker").addPathPatterns("/dishes/add-dishes").addPathPatterns("/rider/add-rider")
-                .addPathPatterns("add-customer?add=new").addPathPatterns("add-foodmaker?add=new").addPathPatterns("add-dishes?add=new");
+                .addPathPatterns("/add-customer?add=new").addPathPatterns("/add-foodmaker?add=new").addPathPatterns("/add-dishes?add=new").addPathPatterns("/login");
     }
 
 

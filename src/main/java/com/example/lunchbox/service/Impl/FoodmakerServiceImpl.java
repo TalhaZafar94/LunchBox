@@ -330,14 +330,41 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     @Override
     public List<Order> getOrdersByfoodmakerId(Integer foodmakerId)
     {
-        List<Order> orderList = orderRepository.getAllByFoodmakerId(foodmakerId);
-
-        if(orderList.size() > 0)
+        List<Order> orderListbyf_id = orderRepository.getAllByFoodmakerId(foodmakerId);
+        List<Order> orderListbys_id = orderRepository.getAllByOrderStatus(1);
+        if(orderListbyf_id.size() > 0)
         {
-            return orderList;
+            orderListbyf_id.retainAll(orderListbys_id);
+            return orderListbyf_id;
         }
 
-        return orderList;
+        return null;
+    }
+
+    @Override
+    public List<Order> getAckOrdersByfoodmakerId(Integer foodmakerId) {
+        List<Order> orderListbyf_id = orderRepository.getAllByFoodmakerId(foodmakerId);
+        List<Order> orderListbys_id = orderRepository.getAllByOrderStatus(2);
+        if(orderListbyf_id.size() > 0)
+        {
+            orderListbyf_id.retainAll(orderListbys_id);
+            return orderListbyf_id;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Order> getDoneOrdersByfoodmakerId(Integer foodmakerId) {
+        List<Order> orderListbyf_id = orderRepository.getAllByFoodmakerId(foodmakerId);
+        List<Order> orderListbys_id = orderRepository.getAllByOrderStatus(3);
+        if(orderListbyf_id.size() > 0)
+        {
+            orderListbyf_id.retainAll(orderListbys_id);
+            return orderListbyf_id;
+        }
+
+        return null;
     }
 
 }

@@ -63,9 +63,9 @@ public class ViewController {
 
     @RequestMapping(value = "/login")
     public String login(HttpSession session) {
-        if(session.getAttribute("loggedinAdmin") != null){
+      /*  if(session.getAttribute("loggedinAdmin") != null){
             return "index";
-        }
+        }*/
         return "login";
     }
 
