@@ -28,7 +28,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/foodmaker/foodmaker-listing").addPathPatterns("/customer/customer-listing").addPathPatterns("/rider/rider-listing")
                 .addPathPatterns("/dishes/dishes-listing").addPathPatterns("/admin/add-admin").addPathPatterns("/order/order-view")
                 .addPathPatterns("/customer/add-customer").addPathPatterns("/foodmaker/add-foodmaker").addPathPatterns("/dishes/add-dishes").addPathPatterns("/rider/add-rider")
-                .addPathPatterns("/add-customer?add=new").addPathPatterns("/add-foodmaker?add=new").addPathPatterns("/add-dishes?add=new").addPathPatterns("/login");
+                .addPathPatterns("/add-customer?add=new").addPathPatterns("/add-foodmaker?add=new").addPathPatterns("/add-dishes?add=new").addPathPatterns("/login")
+                .addPathPatterns("/changePassword");
     }
 
 

@@ -515,7 +515,7 @@
                 var contextPath='<%=pageContext.getServletContext().getContextPath()%>'.concat(uploadPath);
                 html = '<tr data-row-id="'+admin.adminId+'" id="row-id-'+admin.adminId+'">'+
                   //  '<td><a href="javascript:void(0)" class="open-img-modal">'+((admin.adminImage == null) ? 'Upload Image' : '<img src="${pageContext.request.contextPath}/images/260px-Shahid-afridi-left-pic.jpg" alt="img" width="40px" height="40px"/>' )+'</a></td>'+
-                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((admin.adminImage == null) ? 'Upload Image' : '<img src="'+uploadPath+'" alt="img" width="40px" height="40px"/>' )+'</a></td>'+
+                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((admin.adminImage == null) ? 'Upload Image' : '<img src="'+uploadPath+'" alt="img" width="60px" height="60px"/>' )+'</a></td>'+
                     '<td>'+admin.adminName+'</td>'+
                     '<td>'+((admin.adminAddressId != null)? admin.adminAddressId.address+' '+admin.adminAddressId.city: 'not avaible' )+'</td>'+
                     '<td>'+admin.adminEmail+'</td>'+
@@ -532,6 +532,7 @@
 
             });
             viewOrderDetail();
+            deleteBtnFunc();
             openImageModal();
             dataTableInit();
 
@@ -546,6 +547,34 @@
             $('#actions-form').submit();
         });
     }
+
+    function deleteBtnFunc(){
+        $('.btn-delete').on('click',function(){
+            var rowId = $(this).attr('data-id');
+            dataString="delete="+rowId;
+            $.ajax({
+                url:'http://localhost:8080/admin/upload-img?id='+userId,
+                type:'post',
+                data:data,
+                dataType:'json',
+                contentType: false,
+                cache:false,
+                processData: false,
+                success:function(response){
+                   //$('[data-id='+rowId+']').parents(":eq(2)").remove();
+
+
+                    /* if(response.uploadedPath != null){
+                        var uploadPath = response.uploadedPath;
+                        var html = '<img src="'+uploadPath+'" alt="img"/>';
+                        $('#row-id-'+userId).children('td').first().html(html);
+                    }
+                    $('#image-upload-modal').modal('hide');*/
+                }
+            })
+        });
+    }
+
 
     function openImageModal() {
         $('.open-img-modal').on('click',function(){

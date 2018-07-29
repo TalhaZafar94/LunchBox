@@ -7,7 +7,7 @@
         <!--- Profile -->
         <div class="profile-info">
             <div class="col-xs-4">
-                <a href="profile.html" class="rounded-image profile-image"><img src="images/users/user-100.jpg"></a>
+                <a href="http://localhost:8080" class="rounded-image profile-image"><img src="<%= pageContext.getSession().getAttribute("adminImage")%>" /></a>
             </div>
 
             <div class="col-xs-8">

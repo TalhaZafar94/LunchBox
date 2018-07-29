@@ -400,6 +400,7 @@
                             <table  data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
+                                    <th>Image</th>
                                     <th>Full Name</th>
                                     <th style="width: 4px">Address</th>
                                     <th>Email Address</th>
@@ -446,6 +447,7 @@
 
         </div>
 
+        <%@include file="includes/upload-image-model.jsp" %>
         <!--end :: admin listing -->
 
         <div id="myModal" class="modal fade" role="dialog">
@@ -580,8 +582,10 @@
                   classes ="label label-warning";
               }
 
+                var uploadPath = foodmaker.foodmakerImagePath;
 
-         html = '<tr>'+
+                html = '<tr data-row-id="'+foodmaker.foodmakerId+'" id="row-id-'+foodmaker.foodmakerId+'">'+
+                '<td><a href="javascript:void(0)" class="open-img-modal">'+((foodmaker.foodmakerImagePath == null) ? 'Upload Image' : '<img src="'+uploadPath+'" alt="img" width="60px" height="60px"/>' )+'</a></td>'+
                 '<td>'+foodmaker.foodmakerName+'</td>'+
                 '<td>'+((foodmaker.foodmakerAddresId != null)? foodmaker.foodmakerAddresId.address+' '+foodmaker.foodmakerAddresId.city: 'not avaible' )+'</td>'+
                 '<td>'+foodmaker.foodmakerEmail+'</td>'+
@@ -601,7 +605,7 @@
             viewFoodmakerDishes();
             viewOrderDetail();
             dataTableInit();
-
+            openImageModal();
         }
 
 
@@ -651,6 +655,45 @@
             }
         });
     }
+
+
+    function openImageModal() {
+        $('.open-img-modal').on('click',function(){
+            var rowId = $(this).parents(':eq(1)').attr('data-row-id');
+            $('#hd-img-user-id').val(rowId);
+            $('#image-upload-modal').modal('show');
+
+        });
+    }
+    $('#btn-upload-img').on('click',function(){
+        var thisElem = $(this);
+        var file = $('#file-img')[0].files[0];
+        //     if(file.length > 0){
+        var userId = $('#hd-img-user-id').val();
+        data = new FormData();
+        data.append('file',file);
+        $.ajax({
+            url:'http://localhost:8080/foodmaker/upload-img?id='+userId,
+            type:'post',
+            data:data,
+            dataType:'json',
+            contentType: false,
+            cache:false,
+            processData: false,
+            success:function(response){
+                if(response.uploadedPath != null){
+                    var uploadPath = response.uploadedPath;
+                    var html = '<img src="'+uploadPath+'" alt="img"/>';
+                    $('#row-id-'+userId).children('td').first().html(html);
+                }
+                $('#image-upload-modal').modal('hide');
+            }
+        })
+
+        //      }
+
+    });
+
 
 
 </script>

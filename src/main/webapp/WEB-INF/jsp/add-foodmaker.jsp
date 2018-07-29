@@ -354,18 +354,21 @@
                                 <label for="inp-foodmaker-name" class="col-sm-2 control-label">Full Name</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inp-foodmaker-name" placeholder="Name" value="<%= (data != null ?data.getFoodmakerName():"") %>" required>
+                                    <div id="errorName" style="color:#ff3351;display:none">*Please enter name</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-foodmaker-email" class="col-sm-2 control-label">Email Address</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inp-foodmaker-email" placeholder="Email Address" value="<%= (data != null ?data.getFoodmakerEmail():"") %>" required>
+                                    <div id="errorEmail" style="color:#ff3351;display:none">*Please enter valid Email</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-foodmaker-pass" class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" id="inp-foodmaker-pass" placeholder="Password" value="<%= (data != null ?data.getFoodmakerpassword():"") %>" required>
+                                    <div id="errorpassword" style="color:#ff3351;display:none;display:none">*Please enter password</div>
                                 </div>
                             </div>
 
@@ -373,12 +376,14 @@
                                 <label for="inp-foodmaker-cnic" class="col-sm-2 control-label">Cnic</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inp-foodmaker-cnic" placeholder="cnic" value="<%= (data != null ?data.getFoodmakerNic():"") %>" required>
+                                    <div id="errorcnic" style="color:#ff3351;display:none;display:none">*Please enter valid cnic</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-foodmaker-phoneNum" class="col-sm-2 control-label">Phone Number</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inp-foodmaker-phoneNum" placeholder="phone number" value="<%= (data != null ?data.getFoodmakerPhoneNumber():"") %>" required>
+                                    <div id="errorphnum" style="color:#ff3351;display:none;display:none">*Please enter contact number</div>
                                 </div>
                             </div>
 
@@ -386,6 +391,7 @@
                                 <label for="inp-foodmaker-address" class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-6">
                                     <textarea id="inp-foodmaker-address" col="12" row="5" class="form-control" placeholder="Enter Address" required><%= (data != null ?data.getFoodmakerAddresId().getAddress() :"") %></textarea>
+                                    <div id="erroraddress" style="color:#ff3351;display:none;display:none">*Please specify Address</div>
                                 </div>
                             </div>
 
@@ -398,6 +404,7 @@
                                         <option value="2" >DeActive</option>
                                         <option value="3">Suspended</option>
                                     </select>
+                                    <div id="errorrole" style="color:#ff3351;display:none;display:none">*Please select Access Type</div>
                                 </div>
                             </div>
 
@@ -411,11 +418,10 @@
 
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <%--<button type="button" id="btn-add-foomaker" class="btn btn-success" Value="submit" >Submit</button>--%>
-                                    <button type="button" id="btn-add-detail" class="form-control"  style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px">Add</button>
+                                    <input type="button" class="form-control" id="btn-add-detail" value="submit" style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"/>
+                                    <div id="error" style="color:#ff3351;display:none;display:none">Not added error occured</div>
                                 </div>
                             </div>
-                            <div id="Message" style="color:green;display:none">Please enter a valid password</div>
 
                         </form>
                     </div>
@@ -507,7 +513,94 @@
 
 <script>
 
+    $('input').focus(function(){ $(this).next('div').css('display','none')});
+    function formValidation(){
+        var isVlaid = true;
+        if($('input#inp-foodmaker-name').val() == ''){
+            $('input#inp-foodmaker-name').next('div').html("*This field is required can't be empty");
+            $('input#inp-foodmaker-name').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#inp-foodmaker-name').val().length > 16){
+                $('input#inp-foodmaker-name').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-foodmaker-name').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#inp-foodmaker-email').val() == ''){
+            $('input#inp-foodmaker-email').next('div').html("*This field is required can't be empty");
+            $('input#inp-foodmaker-email').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if( $('input#inp-foodmaker-email').val().length > 16){
+                $('input#inp-foodmaker-email').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-foodmaker-email').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#inp-foodmaker-pass').val() == ''){
+            $('input#inp-foodmaker-pass').next('div').html("*This field is required can't be empty");
+            $('input#inp-foodmaker-pass').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#inp-foodmaker-pass').val().length > 16){
+                $('input#inp-foodmaker-pass').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-foodmaker-pass').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#inp-foodmaker-phoneNum').val() == ''){
+            $('input#inp-foodmaker-phoneNum').next('div').html("*This field is required can't be empty");
+            $('input#inp-foodmaker-phoneNum').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#inp-foodmaker-phoneNum').val().length > 16){
+                $('input#inp-foodmaker-phoneNum').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-foodmaker-phoneNum').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+        if($('input#inp-foodmaker-cnic').val() == ''){
+            $('input#inp-foodmaker-cnic').next('div').html("*This field is required can't be empty");
+            $('input#inp-foodmaker-cnic').next('div').css('display','block');
+            isVlaid = false;
+        }else{
+            if($('input#inp-foodmaker-cnic').val().length > 16){
+                $('input#inp-foodmaker-cnic').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-foodmaker-cnic').next('div').css('display','block');
+                isVlaid = false;
+            }
+
+        }
+
+        return isVlaid;
+    }
+
+
+    $('input#inp-foodmaker-phoneNum').keypress(function(key) {
+        if(key.charCode < 48 || key.charCode > 57){
+            $(this).next('div').html('*Input Field only accept number');
+            $(this).next('div').css('display','block');
+            return false;
+        }
+    });
+    $('input#inp-foodmaker-cnic').keypress(function(key) {
+        if(key.charCode < 48 || key.charCode > 57){
+            $(this).next('div').html('*Input Field only accept number');
+            $(this).next('div').css('display','block');
+            return false;
+        }
+    });
+
     $('#btn-add-detail').on('click',function () {
+        if(!formValidation()){
+            return;
+        }
+
         if($('#rowId').val() == ""){
             var dataString = generateDataString("new");
         }else{
@@ -516,7 +609,7 @@
 
 
 
-        console.log(dataString);
+        //console.log(dataString);
         // dataString = JSON.parse(dataString);
 
         if($('#inp-foodmaker-name').val() != '' && $('#inp-foodmaker-email').val() != '' && $('#inp-foodmaker-pass').val() != '' && $('#inp-foodmaker-cnic').val() != ''
@@ -534,7 +627,7 @@
                     $("#Message").show();
                 }
             });
-            window.location = 'foodmaker-listing.html';
+        //    window.location = 'foodmaker-listing.html';
 
         }
         });

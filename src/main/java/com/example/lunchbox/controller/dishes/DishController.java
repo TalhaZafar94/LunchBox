@@ -3,9 +3,15 @@ package com.example.lunchbox.controller.dishes;
 import com.example.lunchbox.model.entity.Dishes;
 import com.example.lunchbox.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -13,6 +19,8 @@ import java.util.List;
 public class DishController  {
 
     private DishService dishService;
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
     public DishController(DishService dishService)
@@ -25,6 +33,33 @@ public class DishController  {
         dishService.addDish(dish);
 
     }
+
+    @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
+    public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
+        String uploadedPath = null;
+        String final_Path = "http://localhost:8080/images/";
+        dishService.findAllDishes();
+        Dishes dishes = dishService.getDishesById(id);
+        String UPLOADED_FOLDER = uploadPath;
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            final_Path +=  file.getOriginalFilename();
+
+            dishes.setDishImagePath(final_Path);
+            uploadedPath = path.toString();
+            dishService.addDish(dishes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "{ \"uploadedPath\" : \""+final_Path+"\"}";
+    }
+
 
     @RequestMapping(value = "/get-dish" , method = RequestMethod.POST)
     public Dishes getDishById(@RequestParam Integer id){

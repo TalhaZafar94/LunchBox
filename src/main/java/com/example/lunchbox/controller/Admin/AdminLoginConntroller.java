@@ -44,6 +44,8 @@ public class AdminLoginConntroller {
 
         session.setAttribute("loggedinAdmin", admin);
         session.setAttribute("adminName",admin.getAdminName());
+        session.setAttribute("adminEmail",admin.getAdminEmail());
+        session.setAttribute("adminImage",admin.getAdminImage());
         return "index";
     }
 
@@ -83,7 +85,7 @@ public class AdminLoginConntroller {
 @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
 public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
     String uploadedPath = null;
-    String final_Path = "localhost:8080/images/";
+    String final_Path = "http://localhost:8080/images/";
     adminService.findAllAdmin();
     Admin admin = adminService.getAdminById(id);
     String UPLOADED_FOLDER = uploadPath;

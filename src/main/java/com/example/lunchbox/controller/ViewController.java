@@ -51,12 +51,13 @@ public class ViewController {
       //  return "login";
     }
 
+/*
     @RequestMapping(value = "/signup")
     public String signup() {
-        return "register";
+        return "changePassword";
     }
+*/
 
-    @RequestMapping(value = "/index")
     public String index() {
         return "index";
     }
@@ -69,9 +70,9 @@ public class ViewController {
         return "login";
     }
 
-    @RequestMapping(value = "/register")
+    @RequestMapping(value = "/changePassword")
     public String register() {
-        return "register";
+        return "changePassword";
     }
 
     // for admin

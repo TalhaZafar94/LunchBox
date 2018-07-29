@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Register</title>
+        <title>Change Password</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="description" content="">
@@ -104,23 +104,25 @@
 			<p class="text-center"><a href="#"><img src="assets/img/login-logo.png" alt="Logo"></a></p>
 			<div class="login-wrap">
 				<div class="login-block">
-					<form role="form" action="index.html">
+					<form role="form" action="http://localhost:8080">
+                        <input type="hidden" id="session-email" name="session-email" value="<%= pageContext.getSession().getAttribute("adminEmail")%>">
 						<div class="form-group login-input">
-						<i class="fa fa-envelope overlay"></i>
-						<input type="text" class="form-control text-input" placeholder="E-mail">
+							<i class="fa fa-key overlay"></i>
+						<input type="password" class="form-control text-input" placeholder="old password" id="old" required>
 						</div>
 						<div class="form-group login-input">
-						<i class="fa fa-user overlay"></i>
-						<input type="text" class="form-control text-input" placeholder="Username">
+							<i class="fa fa-key overlay"></i>
+						<input type="password" class="form-control text-input" placeholder="new password" id="new" required>
 						</div>
 						<div class="form-group login-input">
 						<i class="fa fa-key overlay"></i>
-						<input type="password" class="form-control text-input" placeholder="********">
+						<input type="password" class="form-control text-input" placeholder="confirm password" id="confirm" required>
 						</div>
-						<div class="checkbox"><label><input type="checkbox" class="form-control"> I accept <strong><a href='#'>Terms and Conditions</a></strong></label></div>
+						<%--<div class="checkbox"><label><input type="checkbox" class="form-control"> I accept <strong><a href='#'>Terms and Conditions</a></strong></label></div>--%>
 						<div class="row">
 							<div class="col-sm-12">
-							<button type="submit" class="btn btn-default btn-block">Register</button>
+							<button type="button" class="btn btn-default btn-block" id="submit">Submit</button>
+                                <div id="errorMessage" style="color:#ff3351;display:none">Please dosen't match</div>
 							</div>
 						</div>
 					</form>
@@ -163,5 +165,46 @@
 	<script src="assets/libs/prettify/prettify.js"></script>
 
 	<script src="assets/js/init.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#submit').click(function(){
+                var old=$('#old').val();
+                var newP=$('#new').val();
+                var confrm = $('#confirm').val();
+                var adminEmail = $('#session-email').val();
+
+                if(newP == confrm){
+                    $.ajax({
+                        type: "POST",
+                        url:"http://localhost:8080/admin/update-password",
+                        data:"oldpassword="+old+"&newpassword="+newP+"&adminEmail="+adminEmail,
+                        success: function (response) {
+
+                            if(response == 'password updated'){
+                                window.location = '/';
+                            }
+                            else {
+                                alert('failed');
+                            }
+                            console.log(data);
+                        }
+                    });
+                }
+                else {
+                    $("#errorMessage").show();
+                }
+
+            });
+
+            $(document).keypress(function(e) {
+                $("#errorMessage").hide();
+                if(e.which == 13){
+                    $('#submit').click();
+                }
+            });
+        });
+    </script>
+
 	</body>
 </html>

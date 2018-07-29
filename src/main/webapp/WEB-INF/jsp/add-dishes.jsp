@@ -354,12 +354,14 @@
                                 <label for="inp-dish-name" class="col-sm-2 control-label">Dish Name</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inp-dish-name" placeholder="Name" value="<%= (data != null ?data.getDishName():"") %>" required>
+                                    <div id="errorName" style="color:#ff3351;display:none">*Please enter name</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-selling-price" class="col-sm-2 control-label">Initial Selling Price</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inp-selling-price" placeholder="Name" value="<%= (data != null ?data.getDishSellingPrice():"") %>"required>
+                                    <div id="errorPrice" style="color:#ff3351;display:none">*Please specify price</div>
                                 </div>
                             </div>
                             
@@ -368,10 +370,11 @@
 
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <button type="button" class="form-control" id="btn-add-detail" style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"> Add </button>
+                                    <input type="button" class="form-control" id="btn-add-detail" value="submit" style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"/>
+                                    <div id="error" style="color:#ff3351;display:none;display:none">Not added error occured</div>
                                 </div>
                             </div>
-                            <div id="Message" style="color:green;display:none">Please enter a valid password</div>
+
 
                         </form>
                     </div>
@@ -463,7 +466,40 @@
 
 <script>
 
+    $('input').focus(function(){ $(this).next('div').css('display','none')});
+    function formValidation() {
+        var isVlaid = true;
+        if ($('input#inp-dish-name').val() == '') {
+            $('input#inp-dish-name').next('div').html("*This field is required can't be empty");
+            $('input#inp-dish-name').next('div').css('display', 'block');
+            isVlaid = false;
+        } else {
+            if ($('input#inp-dish-name').val().length > 16) {
+                $('input#inp-dish-name').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-dish-name').next('div').css('display', 'block');
+                isVlaid = false;
+            }
+
+        }
+        if ($('input#inp-selling-price').val() == '') {
+            $('input#inp-selling-price').next('div').html("*This field is required can't be empty");
+            $('input#inp-selling-price').next('div').css('display', 'block');
+            isVlaid = false;
+        } else {
+            if ($('input#inp-selling-price').val().length > 16) {
+                $('input#inp-selling-price').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-selling-price').next('div').css('display', 'block');
+                isVlaid = false;
+            }
+        }
+        return isVlaid;
+    }
+
     $('#btn-add-detail').on('click',function () {
+        if(!formValidation()){
+            return;
+        }
+
         if($('#rowId').val() == ""){
             var dataString = generateDataString("new");
         }else{
@@ -472,7 +508,7 @@
 
 
 
-        console.log(dataString);
+        //console.log(dataString);
         // dataString = JSON.parse(dataString);
 
         if($('#inp-dish-name').val() != '' && $('#inp-selling-price').val() != '') {
@@ -490,7 +526,7 @@
 
                 }
             });
-            window.href.location = '/dishes-listing';
+            //window.href.location = '/dishes-listing';
         }
     });
 

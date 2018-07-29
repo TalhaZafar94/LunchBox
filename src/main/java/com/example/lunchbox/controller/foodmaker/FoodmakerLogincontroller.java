@@ -5,11 +5,17 @@ import com.example.lunchbox.model.entity.Order;
 import com.example.lunchbox.model.entity.Ratings;
 import com.example.lunchbox.service.FoodmakerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -17,6 +23,8 @@ import java.util.List;
 public class FoodmakerLogincontroller {
 
     private FoodmakerService foodmakerService;
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
     public FoodmakerLogincontroller(FoodmakerService foodmakerService) {
@@ -53,6 +61,34 @@ public class FoodmakerLogincontroller {
      //   }
        // return "please specify the fields";
     }
+
+    @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
+    public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
+        String uploadedPath = null;
+        String final_Path = "http://localhost:8080/images/";
+        foodmakerService.findAllFoodmakers();
+        Foodmaker foodmaker = foodmakerService.getFoodmakerById(id);
+        String UPLOADED_FOLDER = uploadPath;
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            final_Path +=  file.getOriginalFilename();
+
+            foodmaker.setFoodmakerImagePath(final_Path);
+            uploadedPath = path.toString();
+            foodmakerService.foodmakerSignup(foodmaker);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "{ \"uploadedPath\" : \""+final_Path+"\"}";
+    }
+
+
 
     @RequestMapping(value = "/update-password" ,method = RequestMethod.POST)
     public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword , @RequestParam String foodmakerEmail){

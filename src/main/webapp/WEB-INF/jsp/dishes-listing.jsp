@@ -373,6 +373,7 @@
                             <table data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
+                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Selling Price</th>
 
@@ -408,7 +409,7 @@
 
         </div>
 
-
+        <%@include file="includes/upload-image-model.jsp" %>
 
         <!--end :: admin listing -->
 
@@ -529,8 +530,10 @@
             var classes;
             response.forEach(function(dish) {
 
+                var uploadPath = dish.dishImagePath;
 
-                html = '<tr>'+
+                html = '<tr data-row-id="'+dish.dishId+'" id="row-id-'+dish.dishId+'">'+
+                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((dish.dishImagePath == null) ? 'Upload Image' : '<img src="'+uploadPath+'" alt="img" width="60px" height="60px"/>' )+'</a></td>'+
                     '<td>'+dish.dishName+'</td>'+
                     '<td>'+dish.dishSellingPrice+'</td>'+
                     '<td>'+
@@ -544,6 +547,7 @@
 
             });
             viewOrderDetail();dataTableInit();
+            openImageModal();
         }
 
     });
@@ -555,6 +559,47 @@
             $('#actions-form').submit();
         });
     }
+
+
+    function openImageModal() {
+        $('.open-img-modal').on('click',function(){
+            var rowId = $(this).parents(':eq(1)').attr('data-row-id');
+            $('#hd-img-user-id').val(rowId);
+            $('#image-upload-modal').modal('show');
+
+        });
+    }
+    $('#btn-upload-img').on('click',function(){
+        var thisElem = $(this);
+        var file = $('#file-img')[0].files[0];
+        //     if(file.length > 0){
+        var userId = $('#hd-img-user-id').val();
+        data = new FormData();
+        data.append('file',file);
+        $.ajax({
+            url:'http://localhost:8080/dishes/upload-img?id='+userId,
+            type:'post',
+            data:data,
+            dataType:'json',
+            contentType: false,
+            cache:false,
+            processData: false,
+            success:function(response){
+                if(response.uploadedPath != null){
+                    var uploadPath = response.uploadedPath;
+                    var html = '<img src="'+uploadPath+'" alt="img"/>';
+                    $('#row-id-'+userId).children('td').first().html(html);
+                }
+                $('#image-upload-modal').modal('hide');
+            }
+        })
+
+        //      }
+
+    });
+
+
+
 </script>
 
 
