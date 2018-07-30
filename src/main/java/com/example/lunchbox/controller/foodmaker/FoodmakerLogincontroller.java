@@ -120,6 +120,13 @@ public class FoodmakerLogincontroller {
         return "foodmaker deleted";
     }
 
+    @RequestMapping(value = "/delete-foodmaker-id", method = RequestMethod.POST)
+    public String deletefoodmakerById(@RequestParam Integer foodmakerId){
+        foodmakerService.deletefoodmakerById(foodmakerId);
+        return "foodmaker deleted";
+    }
+
+
     @RequestMapping(value = "/search-foodmaker", method = RequestMethod.POST)
     public List<Foodmaker> searchFoodmakers(@RequestParam String foodmakerName) {
         return foodmakerService.getFoodmakerByname(foodmakerName);

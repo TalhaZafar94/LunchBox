@@ -2,10 +2,7 @@ package com.example.lunchbox.service.Impl;
 
 
 import com.example.lunchbox.model.entity.*;
-import com.example.lunchbox.repository.FoodmakerRepository;
-import com.example.lunchbox.repository.LocationRepository;
-import com.example.lunchbox.repository.OrderRepository;
-import com.example.lunchbox.repository.RatingRepository;
+import com.example.lunchbox.repository.*;
 import com.example.lunchbox.service.FoodmakerService;
 
 import org.json.JSONArray;
@@ -32,17 +29,19 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     private LocationRepository locationRepository;
     private RatingRepository ratingRepository;
     private OrderRepository orderRepository;
+    private DeleteUserRepository deleteUserRepository;
     private static final String key = "AIzaSyD6zBHiASrQgjYjoEyRJphf8uOpVbPtQCg";
     @Value("${upload.path}")
     private String uploadPath;
 
     @Autowired
     public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository,LocationRepository locationRepository
-                                ,RatingRepository ratingRepository,OrderRepository orderRepository) {
+                                ,RatingRepository ratingRepository,OrderRepository orderRepository,DeleteUserRepository deleteUserRepository) {
         this.foodmakerRepository = foodmakerRepository;
         this.locationRepository = locationRepository;
         this.ratingRepository = ratingRepository;
         this.orderRepository = orderRepository;
+        this.deleteUserRepository = deleteUserRepository;
     }
 
     @Override
@@ -100,7 +99,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
         for(Foodmaker foodmaker:foodmakerRepository.findAll())
         {
-            if(foodmaker.getFoodmakerActive() == 0)
+            if(foodmaker.getFoodmakerActive() == 2)
             {
                 continue;
             }
@@ -224,7 +223,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
                            // inlocations.add(locations.get(i));
                            //inlocations.add(this.getFoodmakerById(locations.get(i).getFoodmakerId()));
                            Foodmaker foodmaker = this.getFoodmakerById(locations.get(i).getFoodmakerId());
-                           if(foodmaker.getFoodmakerActive() == 0)
+                           if(foodmaker.getFoodmakerActive() == 2)
                            {
                                continue;
                            }
@@ -267,7 +266,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
                            // inlocations.add(locations.get(i));
                            //inlocations.add(this.getFoodmakerById(locations.get(i).getFoodmakerId()));
                            Foodmaker foodmaker = this.getFoodmakerById(locations.get(i).getFoodmakerId());
-                           if(foodmaker.getFoodmakerActive() == 0)
+                           if(foodmaker.getFoodmakerActive() == 2)
                            {
                                continue;
                            }
@@ -365,6 +364,16 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         }
 
         return null;
+    }
+
+    @Override
+    public void deletefoodmakerById(Integer foodmakerId){
+        Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
+        DeleteUsers deleteUser = new DeleteUsers(foodmaker.getFoodmakerName(),foodmaker.getFoodmakerEmail(),foodmaker.getFoodmakerNic(),foodmaker.getFoodmakerAccessType(),
+                foodmaker.getFoodmakerpassword(),foodmaker.getFoodmakerAddresId().getAddressId(),foodmaker.getFoodmakerImagePath(),foodmaker.getFoodmakerPhoneNumber());
+
+        deleteUserRepository.save(deleteUser);
+        foodmakerRepository.delete(foodmakerId);
     }
 
 }

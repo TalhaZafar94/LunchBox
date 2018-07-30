@@ -77,7 +77,6 @@ public class DishController  {
     @RequestMapping(value = "/delete-dish" , method = RequestMethod.POST)
     public void deleteDish(@RequestBody Dishes dish){
         dishService.deleteDishes(dish);
-
     }
 
     @RequestMapping(value = "/get-dish-list" , method = RequestMethod.GET)

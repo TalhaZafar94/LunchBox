@@ -1,12 +1,18 @@
 package com.example.lunchbox.service.Impl;
 
 import com.example.lunchbox.model.entity.Customer;
+import com.example.lunchbox.model.entity.DeleteUsers;
 import com.example.lunchbox.repository.CustomerRepository;
+import com.example.lunchbox.repository.DeleteUserRepository;
 import com.example.lunchbox.service.CustomerService;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,14 +26,16 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     private CustomerRepository customerRepository;
+    private DeleteUserRepository deleteUserRepository;
     @Value("${upload.path}")
     private String uploadPath;
     @Value("${customerKey}")
     private String customerServerKey;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository,DeleteUserRepository deleteUserRepository) {
         this.customerRepository = customerRepository;
+        this.deleteUserRepository = deleteUserRepository;
     }
 
     @Override
@@ -152,4 +160,17 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
+    @Cascade(CascadeType.DELETE)
+    @Transactional
+    @Override
+    public void deleteCustomerById(Integer customerId) {
+        Customer customer = customerRepository.findOne(customerId);
+        DeleteUsers deleteUsers = new DeleteUsers(customer.getCustomerName(),customer.getCustomerEmail(),customer.getCustomerNic(),customer.getCustomerAccessType(),
+                customer.getCustomerPassword(),customer.getCustomerAddressId().getAddressId(),customer.getCustomerImagePath(),customer.getCustomerPhoneNumber());
+
+    deleteUserRepository.save(deleteUsers);
+    customerRepository.deleteCustomer(customerId);
+
+      //customerRepository.delete(customerId);
+    }
 }

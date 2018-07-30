@@ -594,7 +594,7 @@
                 '<td><a href="#" class="view-link-dishes" data-id="'+foodmaker.foodmakerId+'">view dishes</a></td>'+
                 '<td>'+
                 '<div class="btn-group btn-group-xs">'+
-                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+foodmaker.foodmakerId+'" ><i class="fa fa-power-off"  ></i></a>'+
+                 //   '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+foodmaker.foodmakerId+'" ><i class="fa fa-power-off"  ></i></a>'+
                     '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="'+foodmaker.foodmakerId+'" ><i class="fa fa-edit"></i></a>'+
                 '</div>'+
                 '</td>'+
@@ -604,6 +604,7 @@
             });
             viewFoodmakerDishes();
             viewOrderDetail();
+            deleteBtnFunc();
             dataTableInit();
             openImageModal();
         }
@@ -693,6 +694,31 @@
         //      }
 
     });
+
+    function deleteBtnFunc(){
+        $('.btn-delete').on('click',function(){
+            var rowId = $(this).attr('data-id');
+            // dataString="adminId="+rowId;
+            $.ajax({
+                type:"POST",
+                url:"http://localhost:8080/foodmaker/delete-foodmaker-id",
+                data:"foodmakerId="+rowId,
+                success:function(response){
+
+                    if(response == 'foodmaker deleted'){
+                        $('[data-id='+rowId+']').parents(":eq(2)").remove();
+                        /*  var uploadPath = response.uploadedPath;
+                      var html = '<img src="'+uploadPath+'" alt="img"/>';
+                      $('#row-id-'+userId).children('td').first().html(html);*/
+                    }
+                    else {
+                        alert('not deleted');
+                    }
+                    window.location = '/foodmaker-listing';
+                }
+            })
+        });
+    }
 
 
 

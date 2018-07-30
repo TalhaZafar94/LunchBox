@@ -538,7 +538,7 @@
                     '<td>'+dish.dishSellingPrice+'</td>'+
                     '<td>'+
                     '<div class="btn-group btn-group-xs">'+
-                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+dish.dishId+'"><i class="fa fa-power-off"  ></i></a>'+
+                 //   '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+dish.dishId+'"><i class="fa fa-power-off"  ></i></a>'+
                     '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="'+dish.dishId+'" ><i class="fa fa-edit"></i></a>'+
                     '</div>'+
                     '</td>'+

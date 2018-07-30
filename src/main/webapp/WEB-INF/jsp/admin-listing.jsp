@@ -523,7 +523,7 @@
                     '<td><span class="'+classes+'">'+status+'</span></td>'+
                     '<td>'+
                     '<div class="btn-group btn-group-xs">'+
-                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+admin.adminId+'" ><i class="fa fa-power-off"  ></i></a>'+
+                   // '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+admin.adminId+'" ><i class="fa fa-power-off"  ></i></a>'+
                     '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="'+admin.adminId+'" ><i class="fa fa-edit"></i></a>'+
                     '</div>'+
                     '</td>'+
@@ -551,25 +551,23 @@
     function deleteBtnFunc(){
         $('.btn-delete').on('click',function(){
             var rowId = $(this).attr('data-id');
-            dataString="delete="+rowId;
+           // dataString="adminId="+rowId;
             $.ajax({
-                url:'http://localhost:8080/admin/upload-img?id='+userId,
-                type:'post',
-                data:data,
-                dataType:'json',
-                contentType: false,
-                cache:false,
-                processData: false,
+                type:"POST",
+                url:"http://localhost:8080/admin/delete-admin-id",
+                data:"adminId="+rowId,
                 success:function(response){
-                   //$('[data-id='+rowId+']').parents(":eq(2)").remove();
 
-
-                    /* if(response.uploadedPath != null){
-                        var uploadPath = response.uploadedPath;
+                        if(response == 'admin deleted'){
+                            $('[data-id='+rowId+']').parents(":eq(2)").remove();
+                          /*  var uploadPath = response.uploadedPath;
                         var html = '<img src="'+uploadPath+'" alt="img"/>';
-                        $('#row-id-'+userId).children('td').first().html(html);
+                        $('#row-id-'+userId).children('td').first().html(html);*/
                     }
-                    $('#image-upload-modal').modal('hide');*/
+                    else {
+                            alert('not deleted');
+                        }
+                    window.location = '/admin-listing';
                 }
             })
         });

@@ -1,8 +1,12 @@
 package com.example.lunchbox.service.Impl;
 
 import com.example.lunchbox.model.entity.Admin;
+import com.example.lunchbox.model.entity.DeleteUsers;
+import com.example.lunchbox.repository.AddressRepository;
 import com.example.lunchbox.repository.AdminRepository;
+import com.example.lunchbox.repository.DeleteUserRepository;
 import com.example.lunchbox.service.AdminService;
+import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,13 +30,15 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
 
     private AdminRepository adminRepository;
+    private DeleteUserRepository deleteUserRepository;
     @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
-    public AdminServiceImpl(AdminRepository adminRepository,EntityManager entityManager) {
+    public AdminServiceImpl(AdminRepository adminRepository,EntityManager entityManager,DeleteUserRepository deleteUserRepository) {
         this.adminRepository = adminRepository;
         this.entityManager = entityManager;
+        this.deleteUserRepository = deleteUserRepository;
     }
 
     @Override
@@ -54,10 +60,8 @@ public class AdminServiceImpl implements AdminService {
 /*
     @Override
     public void adminSignup(Admin admin) {
-
         if (admin.getAdminPassword() != null)
         {
-
             adminRepository.saveAndFlush(admin);
         }
     }
@@ -130,8 +134,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-   public Admin findByAdminEmail(String adminEmail) {
-       return adminRepository.findByAdminEmail(adminEmail);
+    public Admin findByAdminEmail(String adminEmail) {
+        return adminRepository.findByAdminEmail(adminEmail);
     }
 
     @Override
@@ -189,6 +193,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteAdminById(Integer adminId){
+        Admin admin = adminRepository.findOne(adminId);
+        DeleteUsers deleteUser = new DeleteUsers(admin.getAdminName(),admin.getAdminEmail(),admin.getAdminNic(),admin.getAdminAccessType(),
+                                        admin.getAdminPassword(),admin.getAdminAddressId().getAddressId(),admin.getAdminImage(),admin.getAdminPhoneNumber());
+
+        deleteUserRepository.save(deleteUser);
         adminRepository.delete(adminId);
     }
 

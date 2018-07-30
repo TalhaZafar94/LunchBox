@@ -21,6 +21,6 @@ public interface CustomerService {
     Customer getCustomersByCustomerCreatedAt(Date date);
     Customer getCustomersByCustomerLastUpdated(Date date);
     Customer findByCustomerId(Integer customerId);
-
     void saveImage(byte[] image,Customer customer);
+    void deleteCustomerById(Integer customerId);
 }

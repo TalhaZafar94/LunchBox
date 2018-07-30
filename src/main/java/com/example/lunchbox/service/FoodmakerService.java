@@ -32,4 +32,5 @@ public interface FoodmakerService {
     List<Order> getOrdersByfoodmakerId(Integer foodmakerId);
     List<Order> getAckOrdersByfoodmakerId(Integer foodmakerId);
     List<Order> getDoneOrdersByfoodmakerId(Integer foodmakerId);
+    void deletefoodmakerById(Integer foodmakerId);
 }

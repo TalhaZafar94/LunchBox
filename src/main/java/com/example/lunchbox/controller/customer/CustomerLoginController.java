@@ -98,6 +98,12 @@ public class CustomerLoginController{
         return "customer deleted";
     }
 
+    @RequestMapping(value = "/delete-customer-id", method = RequestMethod.POST)
+    public String deleteCustomerById(@RequestParam Integer customerId) {
+        customerService.deleteCustomerById(customerId);
+        return "customer deleted";
+    }
+
     @RequestMapping(value = "/search-customer",method = RequestMethod.POST)
     public List <Customer> searchCustomers(@RequestParam String customerName){
         return customerService.getCustomerByname(customerName);

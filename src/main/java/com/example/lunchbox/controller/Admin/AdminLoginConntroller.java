@@ -157,8 +157,9 @@ public String uploadImage(@RequestParam Integer id,@RequestParam("file") Multipa
     }
 
     @RequestMapping(value = "/delete-admin-id", method = RequestMethod.POST)
-    public void deleteAdminThroughId(@RequestParam Integer adminId){
+    public String deleteAdminThroughId(@RequestParam Integer adminId){
         adminService.deleteAdminById(adminId);
+        return "admin deleted";
     }
 
 

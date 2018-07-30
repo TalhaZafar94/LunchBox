@@ -36,7 +36,6 @@ public class Admin {
     @JoinColumn(name = "address_id", nullable = false)
     private Address adminAddressId;
 
-    @Lob
     @Column(name = "admin_imagepath")
     private String adminImage;
 
