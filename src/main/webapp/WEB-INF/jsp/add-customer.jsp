@@ -364,7 +364,7 @@
                                     <div id="errorEmail" style="color:#ff3351;display:none">*Please enter valid Email</div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" <%= (data != null ?"style='display:none'":"") %>>
                                 <label for="inp-customer-pass" class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" id="inp-customer-pass" placeholder="Password"  value="<%= (data != null ?data.getCustomerPassword():"") %>" required>
@@ -622,10 +622,10 @@
             $.ajax({
                 url:"http://localhost:8080/customer/signup",
                 type:"POST",
-                data:dataString,
-                contentType:'json',
-                dataType:"json",
-                contentType:"application/json",
+                data: dataString,
+                contentType: 'json',
+                dataType: "json",
+                contentType: "application/json",
                 success:function(response){
                     console.log("Response => ");
                     console.log(response);

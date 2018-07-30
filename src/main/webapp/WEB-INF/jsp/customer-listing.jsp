@@ -520,7 +520,7 @@
 
 
                 html = '<tr data-row-id="'+customer.customerId+'" id="row-id-'+customer.customerId+'">'+
-                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((customer.customerImagePath == null) ? 'Upload Image' : '<img src="'+customer.customerImagePath+'" alt="img" width="60px" height="60px"/>' )+'</a></td>'+
+                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((customer.customerImagePath == null) ? 'Upload Image' : '<img src="'+customer.customerImagePath+'" alt="img"/>' )+'</a></td>'+
                     '<td>'+customer.customerName+'</td>'+
                     '<td>'+((customer.adminAddressId != null)? customer.adminAddressId.address+' '+customer.adminAddressId.city: 'not avaible' )+'</td>'+
                      '<td>'+customer.customerEmail+'</td>'+
@@ -528,8 +528,8 @@
                     '<td><span class="'+classes+'">'+status+'</span></td>'+
                     '<td>'+
                     '<div class="btn-group btn-group-xs">'+
-                   // '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+customer.customerId+'"><i class="fa fa-power-off"  ></i></a>'+
-                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="'+customer.customerId+'" ><i class="fa fa-edit"></i></a>'+
+                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default" data-id="'+customer.customerId+'"><i class="fa fa-power-off"  ></i></a>'+
+                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default" data-id="'+customer.customerId+'" ><i class="fa fa-edit"></i></a>'+
                     '</div>'+
                     '</td>'+
                     '</tr>';
@@ -537,7 +537,6 @@
 
             });
             viewOrderDetail();
-            deleteBtnFunc();
             openImageModal();
             dataTableInit();
         }
@@ -589,31 +588,6 @@
         //      }
 
     });
-
-    function deleteBtnFunc(){
-        $('.btn-delete').on('click',function(){
-            var rowId = $(this).attr('data-id');
-            // dataString="adminId="+rowId;
-            $.ajax({
-                type:"POST",
-                url:"http://localhost:8080/customer/delete-customer-id",
-                data:"customerId="+rowId,
-                success:function(response){
-
-                    if(response == 'customer deleted'){
-                        $('[data-id='+rowId+']').parents(":eq(2)").remove();
-                        /*  var uploadPath = response.uploadedPath;
-                      var html = '<img src="'+uploadPath+'" alt="img"/>';
-                      $('#row-id-'+userId).children('td').first().html(html);*/
-                    }
-                    else {
-                        alert('not deleted');
-                    }
-                    window.location = '/customer-listing';
-                }
-            })
-        });
-    }
 
 
 </script>

@@ -364,7 +364,7 @@
                                     <div id="errorEmail" style="color:#ff3351;display:none">*Please enter valid Email</div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" <%= (data != null ?"style='display:none'":"") %> >
                                 <label for="inp-foodmaker-pass" class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" id="inp-foodmaker-pass" placeholder="Password" value="<%= (data != null ?data.getFoodmakerpassword():"") %>" required>

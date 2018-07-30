@@ -433,9 +433,9 @@
                         <tr>
                             <td><%= orderdishes.getDishes().getDishName() %>,</td>
                             <td><%= orderdishes.getQuantity() %>,</td>
-                            <td><%= orderdishes.getDishes().getDishSellingPrice() %>,</td>
-                            <td><%= (orderdishes.getDishes().getDishSellingPrice() * orderdishes.getQuantity()) %>,</td>
-                            <%  total += (orderdishes.getDishes().getDishSellingPrice() * orderdishes.getQuantity()); %>
+                            <td><%= orderdishes.getDishes().getPrice() %>,</td>
+                            <td><%= (orderdishes.getDishes().getPrice() * orderdishes.getQuantity()) %>,</td>
+                            <%  total += (orderdishes.getDishes().getPrice() * orderdishes.getQuantity()); %>
                         </tr>
                         <%}%>
 

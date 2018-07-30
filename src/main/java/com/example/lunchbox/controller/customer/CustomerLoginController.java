@@ -53,7 +53,7 @@ public class CustomerLoginController{
             session.setAttribute("loggedInUser", customer);
             return customer;
         }
-       return null;
+       return customer;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class CustomerLoginController{
         return "login";
     }
 
-    @RequestMapping(value = "/signup" ,method = RequestMethod.POST,produces = "application/json")
+  /*  @RequestMapping(value = "/signup" ,method = RequestMethod.POST,produces = "application/json")
     public String  signup(@RequestBody Customer customer,@RequestParam byte[] image){
         if(customer.getCustomerPassword() != null && customer.getCustomerEmail() != null && customer.getCustomerName() != null &&
                 customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null)
@@ -72,7 +72,18 @@ public class CustomerLoginController{
             return "{\"status\":\"true\"}";
         }
         return "{\"status\":\"false\"}";
-    }
+    }*/
+  @RequestMapping(value = "/signup" ,method = RequestMethod.POST,produces = "application/json")
+  public String  signup(@RequestBody Customer customer){
+      if(customer.getCustomerPassword() != null && customer.getCustomerEmail() != null && customer.getCustomerName() != null &&
+              customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null)
+      {
+          customerService.customerSignup(customer);
+
+          return "{\"status\":\"true\"}";
+      }
+      return "{\"status\":\"false\"}";
+  }
 
     @RequestMapping(value = "/update-password" ,method = RequestMethod.POST)
     public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword , @RequestParam String customerEmail){
