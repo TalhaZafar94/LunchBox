@@ -13,6 +13,7 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,6 +42,8 @@ public class OrderServiceImpl implements OrderService {
     private Order order;
     @Value("${foodmakerKey}")
     private String foodmakerServerKey;
+    @Value("${customerKey}")
+    private String customerServerKey;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository,CustomerRepository customerRepository,FoodmakerRepository foodmakerRepository,DishRepository dishRepository,FoodmakerDishesRepository foodmakerDishesRepository) {
@@ -64,8 +67,14 @@ public class OrderServiceImpl implements OrderService {
                 orderDishesRepository.save(orderdishe);
             }
             orderRepository.save(order);
-            Foodmaker foodmaker =  foodmakerRepository.findOne(order.getFoodmakerId());
-            sendNotification(foodmaker.getFoodmakerRegToken());
+
+            //sending notifcation to foodmaker for an order
+            sendNottificationToFoodmaker(order);
+
+            //sending notification to customer for order placed
+            sendNottificationToCustomer(order);
+
+
         }catch (Exception e){
 
         }
@@ -142,9 +151,10 @@ public class OrderServiceImpl implements OrderService {
         //    return orderRepository.findAll();
     }
 
-    public ResponseEntity<String> sendNotification(String token)
+    @Async
+    public ResponseEntity<String> sendNotification(String token,String androidFirebaseKey,String msg)
     {
-        AndroidPushNotificationsService androidPushNotificationsService = new AndroidPushNotificationsService(foodmakerServerKey);
+        AndroidPushNotificationsService androidPushNotificationsService = new AndroidPushNotificationsService(androidFirebaseKey);
 
         JSONObject body = new JSONObject();
         body.put("to", token);
@@ -152,7 +162,7 @@ public class OrderServiceImpl implements OrderService {
 
         JSONObject notification = new JSONObject();
         notification.put("title", "lunchbox Notification");
-        notification.put("body", "you have an order!");
+        notification.put("body", msg);
 
         JSONObject data = new JSONObject();
         data.put("Key-1", "order Data 1");
@@ -178,6 +188,24 @@ public class OrderServiceImpl implements OrderService {
 
         return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
     }
+
+    @Async
+    public void sendNottificationToCustomer(Order order)
+    {
+        if(order.getOrderStatus() == 2)
+        {
+            Customer customer = customerRepository.findOne(order.getOrderCustomerId());
+            sendNotification(customer.getCustomerRegToken(),customerServerKey,"your order is place");
+        }
+    }
+
+    @Async
+    public void sendNottificationToFoodmaker(Order order)
+    {
+        Foodmaker foodmaker =  foodmakerRepository.findOne(order.getFoodmakerId());
+        sendNotification(foodmaker.getFoodmakerRegToken(),foodmakerServerKey,"you have an order!");
+    }
+
     @Override
     public void updateOrderStatus(Integer statusValue,Integer orderId){
         if(orderId != 0){

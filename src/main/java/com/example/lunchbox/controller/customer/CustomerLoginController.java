@@ -150,6 +150,8 @@ public class CustomerLoginController{
     public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
         String uploadedPath = null;
         //  adminService.findAllAdmin();
+        String final_Path = "http://localhost:8080/images/";
+        customerService.findAllCustomers();
         Customer customer = customerService.getCustomerById(id);
         String UPLOADED_FOLDER = uploadPath;
         try {
@@ -159,7 +161,8 @@ public class CustomerLoginController{
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
 
-            customer.setCustomerImagePath(path.toString());
+            final_Path +=  file.getOriginalFilename();
+            customer.setCustomerImagePath(final_Path);
 
             uploadedPath = path.toString();
                         customerService.customerSignup(customer);

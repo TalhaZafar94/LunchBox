@@ -531,7 +531,7 @@
                     '<td>'+data.orderTotalAmount+'</td>'+
                     '<td>'+
                     '<div class="btn-group btn-group-xs">'+
-                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+data.orderId+'"><i class="fa fa-power-off"></i></a>'+
+                  //  '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+data.orderId+'"><i class="fa fa-power-off"></i></a>'+
                     '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-view" data-id="'+data.orderId+'" ><i class="fa fa-edit"></i></a>'+
                     '</div>'+
                     '</td>'+
