@@ -428,14 +428,15 @@
                         double total = 0;
                         %>
                         <%
-                             for (Orderdishes orderdishes : data.getOrderdishes()) {
+                        //     for (Orderdishes orderdishes : data.getOrderdishes()) {
+                        for(int i= 0;i<data.getOrderdishes().size();i++){
                         %>
                         <tr>
-                            <td><%= orderdishes.getDishes().getDishName() %>,</td>
-                            <td><%= orderdishes.getQuantity() %>,</td>
-                            <td><%= orderdishes.getDishes().getPrice() %>,</td>
-                            <td><%= (orderdishes.getDishes().getPrice() * orderdishes.getQuantity()) %>,</td>
-                            <%  total += (orderdishes.getDishes().getPrice() * orderdishes.getQuantity()); %>
+                            <td><%= data.getOrderdishes().get(i).getDishes().getName() %>,</td>
+                            <td><%= data.getOrderdishes().get(i).getQuantity() %>,</td>
+                            <td><%= data.getOrderdishes().get(i).getDishes().getPrice() %>,</td>
+                            <td><%= (data.getOrderdishes().get(i).getDishes().getPrice() * data.getOrderdishes().get(i).getQuantity()) %>,</td>
+                            <%  total += (data.getOrderdishes().get(i).getDishes().getPrice() * data.getOrderdishes().get(i).getQuantity()); %>
                         </tr>
                         <%}%>
 
