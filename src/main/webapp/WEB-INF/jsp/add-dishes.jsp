@@ -526,7 +526,7 @@
 
                 }
             });
-            //window.href.location = '/dishes-listing';
+            window.href.location = '/dishes-listing';
         }
     });
 

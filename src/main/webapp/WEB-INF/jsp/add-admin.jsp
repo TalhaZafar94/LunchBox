@@ -617,7 +617,7 @@
 
                 }
             });
-       //     window.location = 'http://localhost:8080/admin/admin-listing';
+            window.location = 'http://localhost:8080/admin/admin-listing';
         }
 
     });

@@ -627,7 +627,7 @@
                     $("#Message").show();
                 }
             });
-        //    window.location = 'foodmaker-listing.html';
+           window.location = 'foodmaker-listing.html';
 
         }
         });

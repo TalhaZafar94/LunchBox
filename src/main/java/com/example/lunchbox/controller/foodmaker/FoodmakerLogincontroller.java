@@ -157,6 +157,7 @@ public class FoodmakerLogincontroller {
     public String setRatings(@RequestParam Integer customerId, @RequestParam Integer foodmakerId, @RequestParam Integer stars)
     {
         foodmakerService.setRatings(customerId,foodmakerId,stars);
+
         return "{\"status\":\"true\"}";
     }
 

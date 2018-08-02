@@ -1,6 +1,7 @@
 package com.example.lunchbox.controller.order;
 
 import com.example.lunchbox.model.entity.Order;
+import com.example.lunchbox.service.Impl.OrderServiceImpl;
 import com.example.lunchbox.service.OrderService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,10 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/save-order" , method = RequestMethod.POST)
-    public void addOrder(@RequestBody Order order){
+    public String addOrder(@RequestBody Order order){
         orderService.saveOrder(order);
+        OrderServiceImpl orderService = new OrderServiceImpl();
+        return "{\"status\":\"true\"}";
     }
 
     @RequestMapping(value = "/get-order" , method = RequestMethod.GET)

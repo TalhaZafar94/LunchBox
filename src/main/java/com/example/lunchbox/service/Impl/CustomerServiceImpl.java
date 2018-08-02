@@ -2,9 +2,12 @@ package com.example.lunchbox.service.Impl;
 
 import com.example.lunchbox.model.entity.Customer;
 import com.example.lunchbox.model.entity.DeleteUsers;
+import com.example.lunchbox.model.entity.Order;
 import com.example.lunchbox.repository.CustomerRepository;
 import com.example.lunchbox.repository.DeleteUserRepository;
+import com.example.lunchbox.repository.OrderRepository;
 import com.example.lunchbox.service.CustomerService;
+import com.example.lunchbox.service.OrderService;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,15 +31,19 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CustomerRepository customerRepository;
     private DeleteUserRepository deleteUserRepository;
+    private OrderRepository orderRepository;
+    private OrderService orderService;
     @Value("${upload.path}")
     private String uploadPath;
     @Value("${customerKey}")
     private String customerServerKey;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository,DeleteUserRepository deleteUserRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository,DeleteUserRepository deleteUserRepository,OrderRepository orderRepository,OrderService orderService) {
         this.customerRepository = customerRepository;
         this.deleteUserRepository = deleteUserRepository;
+        this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
 
     @Override
@@ -172,5 +180,66 @@ public class CustomerServiceImpl implements CustomerService {
     customerRepository.deleteCustomer(customerId);
 
       //customerRepository.delete(customerId);
+    }
+
+    @Override
+    public List<Order> getOrdersByCustomerId(Integer customerId) {
+
+        List<Order> allOrders = orderService.findAllOrders();
+        List<Order> orderListbyCustomer_id = orderRepository.getAllByOrderCustomerId(customerId);
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(1);
+
+        if(orderListbyCustomer_id.size() > 0)
+            allOrders.retainAll(orderListbyCustomer_id);
+
+        if(orderListbystatus_id.size() > 0)
+            allOrders.retainAll(orderListbystatus_id);
+
+        if(allOrders.size() > 0)
+        {
+            return allOrders;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Order> getAckOrdersByCustomerId(Integer customerId) {
+        List<Order> allOrders = orderService.findAllOrders();
+        List<Order> orderListbyCustomer_id = orderRepository.getAllByOrderCustomerId(customerId);
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(2);
+
+        if(orderListbyCustomer_id.size() > 0)
+            allOrders.retainAll(orderListbyCustomer_id);
+
+        if(orderListbystatus_id.size() > 0)
+            allOrders.retainAll(orderListbystatus_id);
+
+        if(allOrders.size() > 0)
+        {
+            return allOrders;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Order> getDoneOrdersByCustomerId(Integer customerId) {
+        List<Order> allOrders = orderService.findAllOrders();
+        List<Order> orderListbyCustomer_id = orderRepository.getAllByOrderCustomerId(customerId);
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(3);
+
+        if(orderListbyCustomer_id.size() > 0)
+            allOrders.retainAll(orderListbyCustomer_id);
+
+        if(orderListbystatus_id.size() > 0)
+            allOrders.retainAll(orderListbystatus_id);
+
+        if(allOrders.size() > 0)
+        {
+            return allOrders;
+        }
+
+        return null;
     }
 }

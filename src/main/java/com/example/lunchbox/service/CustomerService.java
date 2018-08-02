@@ -1,6 +1,7 @@
 package com.example.lunchbox.service;
 
 import com.example.lunchbox.model.entity.Customer;
+import com.example.lunchbox.model.entity.Order;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -23,4 +24,7 @@ public interface CustomerService {
     Customer findByCustomerId(Integer customerId);
     void saveImage(byte[] image,Customer customer);
     void deleteCustomerById(Integer customerId);
+    List<Order> getOrdersByCustomerId(Integer customerId);
+    List<Order> getAckOrdersByCustomerId(Integer customerId);
+    List<Order> getDoneOrdersByCustomerId(Integer customerId);
 }

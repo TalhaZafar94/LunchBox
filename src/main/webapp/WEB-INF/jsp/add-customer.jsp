@@ -630,9 +630,10 @@
                     console.log("Response => ");
                     console.log(response);
                     $("#Message").show();
-                   // window.href.location = 'customer-listing.html';
+
                 }
             });
+            window.href.location = 'customer-listing.html';
         }
 
 

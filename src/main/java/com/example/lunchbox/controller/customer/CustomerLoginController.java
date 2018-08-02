@@ -1,6 +1,7 @@
 package com.example.lunchbox.controller.customer;
 
 import com.example.lunchbox.model.entity.Customer;
+import com.example.lunchbox.model.entity.Order;
 import com.example.lunchbox.service.CustomerService;
 import com.example.lunchbox.service.Impl.AndroidPushNotificationsService;
 import com.example.lunchbox.service.Impl.SendPushNotification;
@@ -210,4 +211,24 @@ public class CustomerLoginController{
 
         return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
     }*/
+
+
+    @RequestMapping(value = "/get-orderByCustomerId",method = RequestMethod.GET)
+    public List<Order> getOrderBycustomerId(@RequestParam Integer customerId)
+    {
+        return customerService.getOrdersByCustomerId(customerId);
+    }
+
+    @RequestMapping(value = "/get-ack-orderByCustomerId",method = RequestMethod.GET)
+    public List<Order> getAckOrderBycustomerId(@RequestParam Integer customerId)
+    {
+        return customerService.getAckOrdersByCustomerId(customerId);
+    }
+
+    @RequestMapping(value = "/get-done-orderByCustomerId",method = RequestMethod.GET)
+    public List<Order> getDoneOrderBycustomerId(@RequestParam Integer customerId)
+    {
+        return customerService.getDoneOrdersByCustomerId(customerId);
+    }
+
 }

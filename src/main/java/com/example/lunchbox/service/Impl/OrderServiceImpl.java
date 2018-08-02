@@ -71,8 +71,10 @@ public class OrderServiceImpl implements OrderService {
             //sending notifcation to foodmaker for an order
             sendNottificationToFoodmaker(order);
 
+/*
             //sending notification to customer for order placed
             sendNottificationToCustomer(order);
+*/
 
 
         }catch (Exception e){
@@ -197,6 +199,12 @@ public class OrderServiceImpl implements OrderService {
             Customer customer = customerRepository.findOne(order.getOrderCustomerId());
             sendNotification(customer.getCustomerRegToken(),customerServerKey,"your order is place");
         }
+
+        else if(order.getOrderStatus() == 3)
+        {
+            Customer customer = customerRepository.findOne(order.getOrderCustomerId());
+            sendNotification(customer.getCustomerRegToken(),customerServerKey,"your order has delivered");
+        }
     }
 
     @Async
@@ -210,7 +218,13 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrderStatus(Integer statusValue,Integer orderId){
         if(orderId != 0){
              orderRepository.updateOrderStatus(statusValue,orderId);
+
+            Order order = orderRepository.findOne(orderId);
+
+                sendNottificationToCustomer(order);
         }
+
+
     }
 
 }

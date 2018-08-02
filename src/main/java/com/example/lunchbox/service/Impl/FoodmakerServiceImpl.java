@@ -5,6 +5,7 @@ import com.example.lunchbox.model.entity.*;
 import com.example.lunchbox.repository.*;
 import com.example.lunchbox.service.FoodmakerService;
 
+import com.example.lunchbox.service.OrderService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,20 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     private RatingRepository ratingRepository;
     private OrderRepository orderRepository;
     private DeleteUserRepository deleteUserRepository;
+    private OrderService orderService;
     private static final String key = "AIzaSyD6zBHiASrQgjYjoEyRJphf8uOpVbPtQCg";
     @Value("${upload.path}")
     private String uploadPath;
 
     @Autowired
-    public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository,LocationRepository locationRepository
+    public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository,LocationRepository locationRepository,OrderService orderService
                                 ,RatingRepository ratingRepository,OrderRepository orderRepository,DeleteUserRepository deleteUserRepository) {
         this.foodmakerRepository = foodmakerRepository;
         this.locationRepository = locationRepository;
         this.ratingRepository = ratingRepository;
         this.orderRepository = orderRepository;
         this.deleteUserRepository = deleteUserRepository;
+        this.orderService = orderService;
     }
 
     @Override
@@ -298,6 +301,8 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
         foodmaker.setFoodmakerActive(status);
         foodmakerRepository.save(foodmaker);
+
+
     }
 
     @Override
@@ -329,12 +334,20 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     @Override
     public List<Order> getOrdersByfoodmakerId(Integer foodmakerId)
     {
-        List<Order> orderListbyf_id = orderRepository.getAllByFoodmakerId(foodmakerId);
-        List<Order> orderListbys_id = orderRepository.getAllByOrderStatus(1);
-        if(orderListbyf_id.size() > 0)
+        List<Order> allOrders = orderService.findAllOrders();
+        List<Order> orderListbyFoodmaker_id = orderRepository.getAllByFoodmakerId(foodmakerId);
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(1);
+
+        if(orderListbyFoodmaker_id.size() > 0)
+            allOrders.retainAll(orderListbyFoodmaker_id);
+
+        if(orderListbystatus_id.size() > 0)
+            allOrders.retainAll(orderListbystatus_id);
+
+
+        if(allOrders.size() > 0)
         {
-            orderListbyf_id.retainAll(orderListbys_id);
-            return orderListbyf_id;
+            return allOrders;
         }
 
         return null;
@@ -342,12 +355,20 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
     @Override
     public List<Order> getAckOrdersByfoodmakerId(Integer foodmakerId) {
-        List<Order> orderListbyf_id = orderRepository.getAllByFoodmakerId(foodmakerId);
-        List<Order> orderListbys_id = orderRepository.getAllByOrderStatus(2);
-        if(orderListbyf_id.size() > 0)
+        List<Order> allOrders = orderService.findAllOrders();
+        List<Order> orderListbyFoodmaker_id = orderRepository.getAllByFoodmakerId(foodmakerId);
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(2);
+
+        if(orderListbyFoodmaker_id.size() > 0)
+            allOrders.retainAll(orderListbyFoodmaker_id);
+
+        if(orderListbystatus_id.size() > 0)
+            allOrders.retainAll(orderListbystatus_id);
+
+
+        if(allOrders.size() > 0)
         {
-            orderListbyf_id.retainAll(orderListbys_id);
-            return orderListbyf_id;
+            return allOrders;
         }
 
         return null;
@@ -355,16 +376,26 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
     @Override
     public List<Order> getDoneOrdersByfoodmakerId(Integer foodmakerId) {
-        List<Order> orderListbyf_id = orderRepository.getAllByFoodmakerId(foodmakerId);
-        List<Order> orderListbys_id = orderRepository.getAllByOrderStatus(3);
-        if(orderListbyf_id.size() > 0)
+        List<Order> allOrders = orderService.findAllOrders();
+        List<Order> orderListbyFoodmaker_id = orderRepository.getAllByFoodmakerId(foodmakerId);
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(3);
+
+        if(orderListbyFoodmaker_id.size() > 0)
+            allOrders.retainAll(orderListbyFoodmaker_id);
+
+        if(orderListbystatus_id.size() > 0)
+            allOrders.retainAll(orderListbystatus_id);
+
+
+        if(allOrders.size() > 0)
         {
-            orderListbyf_id.retainAll(orderListbys_id);
-            return orderListbyf_id;
+            return allOrders;
         }
 
         return null;
     }
+
+
 
     @Override
     public void deletefoodmakerById(Integer foodmakerId){
