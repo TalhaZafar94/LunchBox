@@ -259,4 +259,25 @@ public class OrderServiceImpl implements OrderService {
         return null;
 
     }
+
+    @Override
+    public List<Order> getorderByStatus(Integer status)
+    {
+        if(status == 1)
+        {
+            return getPendingOrders();
+        }
+
+        else if(status == 2)
+        {
+            return getAckOrders();
+        }
+
+        else if(status == 3)
+        {
+            return getDoneOrders();
+        }
+
+        return null;
+    }
 }

@@ -48,6 +48,11 @@ public class OrderController {
         return orderService.getDoneOrders();
     }
 
+    @RequestMapping(value = "/get-orderByStatus", method = RequestMethod.GET)
+    public List<Order> getOrdersbyStatus(@RequestParam Integer status){
+        return orderService.getorderByStatus(status);
+    }
+
     @RequestMapping(value = "/get-order-count" , method = RequestMethod.POST)
     public long countAllOrders(){
         return orderService.countAllOrders();

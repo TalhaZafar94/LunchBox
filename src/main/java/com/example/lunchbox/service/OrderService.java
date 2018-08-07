@@ -16,6 +16,7 @@ public interface OrderService {
     List<Order> getPendingOrders();
     List<Order> getAckOrders();
     List<Order> getDoneOrders();
+    List<Order> getorderByStatus(Integer status);
 
 
 
