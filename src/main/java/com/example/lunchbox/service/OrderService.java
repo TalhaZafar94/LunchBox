@@ -13,6 +13,10 @@ public interface OrderService {
     void deleteOrder(Order order);
     List<Order> findAllOrders();
     void updateOrderStatus(Integer statusValue,Integer orderId);
+    List<Order> getPendingOrders();
+    List<Order> getAckOrders();
+    List<Order> getDoneOrders();
+
 
 
 }

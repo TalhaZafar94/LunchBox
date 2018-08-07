@@ -28,11 +28,25 @@ public class OrderController {
         return "{\"status\":\"true\"}";
     }
 
-    @RequestMapping(value = "/get-order" , method = RequestMethod.GET)
+    @RequestMapping(value = "/get-order", method = RequestMethod.GET)
     public Order getOrderById(@RequestParam Integer id){
         return orderService.getOrderById(id);
     }
 
+    @RequestMapping(value = "/get-pending-order", method = RequestMethod.GET)
+    public List<Order> getPendingOrders(){
+        return orderService.getPendingOrders();
+    }
+
+    @RequestMapping(value = "/get-ack-order", method = RequestMethod.GET)
+    public List<Order> getAcknowOrders(){
+        return orderService.getAckOrders();
+    }
+
+    @RequestMapping(value = "/get-done-order", method = RequestMethod.GET)
+    public List<Order> getDoneOrders(){
+        return orderService.getDoneOrders();
+    }
 
     @RequestMapping(value = "/get-order-count" , method = RequestMethod.POST)
     public long countAllOrders(){

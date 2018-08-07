@@ -12,6 +12,7 @@ public interface FoodmakerRepository extends JpaRepository<Foodmaker , Integer> 
 
     Foodmaker findByFoodmakerEmail(String email);
     List<Foodmaker> findByFoodmakerName(String foodmakerName);
+    List<Foodmaker> findByFoodmakerNameContaining(String foodmakername);
     Foodmaker getFoodmakerByFoodmakerCreatedAt(Date date);
     Foodmaker getFoodmakerByFoodmakerLastUpdated(Date date);
 

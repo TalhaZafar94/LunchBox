@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     private String customerServerKey;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository,CustomerRepository customerRepository,FoodmakerRepository foodmakerRepository,DishRepository dishRepository,FoodmakerDishesRepository foodmakerDishesRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository) {
         this.orderRepository = orderRepository;
         this.orderDishesRepository = orderDishesRepository;
         this.customerRepository = customerRepository;
@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
     public void saveOrder(Order order) {
         try {
             Order response = orderRepository.save(order);
-            for(Orderdishes orderdishe: order.getOrderdishes()){
+            for (Orderdishes orderdishe : order.getOrderdishes()) {
                 orderdishe.setOrder(response);
                 orderDishesRepository.save(orderdishe);
             }
@@ -77,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
 */
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -90,10 +90,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(Integer id) {
-        Order order  = orderRepository.findOne(id);
+        Order order = orderRepository.findOne(id);
         Integer customerId = order.getOrderCustomerId();
         Integer foodmakerId = order.getFoodmakerId();
-        for (Orderdishes orderdishes : order.getOrderdishes()){
+        for (Orderdishes orderdishes : order.getOrderdishes()) {
             Integer foodmakerdishId = orderdishes.getDishId();
             FoodmakerDishes foodmakerDishes = foodmakerDishesRepository.findOne(foodmakerdishId);
             orderdishes.setDishes(foodmakerDishes);
@@ -122,19 +122,19 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findAllOrders() {
         List<Order> returnList = new ArrayList<>();
         try {
-            List<Order> orders  = orderRepository.findAll();
+            List<Order> orders = orderRepository.findAll();
 
             /***
              * retrive customer through for customer order id
              * retrive foodmaker through for foodmaker id
              * retrive orderdishes through for order id
              * */
-            for(Order order: orders){
+            for (Order order : orders) {
                 Integer customerId = order.getOrderCustomerId();
                 Integer foodmakerId = order.getFoodmakerId();
                 //List<Dishes> orderDishesList = new ArrayList<>();
 
-                for (Orderdishes orderdishes : order.getOrderdishes()){
+                for (Orderdishes orderdishes : order.getOrderdishes()) {
                     Integer foodmakerdishId = orderdishes.getDishId();
                     FoodmakerDishes foodmakerDishes = foodmakerDishesRepository.findOne(foodmakerdishId);
                     orderdishes.setDishes(foodmakerDishes);
@@ -146,7 +146,7 @@ public class OrderServiceImpl implements OrderService {
                 returnList.add(order);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return returnList;
@@ -154,8 +154,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Async
-    public ResponseEntity<String> sendNotification(String token,String androidFirebaseKey,String msg)
-    {
+    public ResponseEntity<String> sendNotification(String token, String androidFirebaseKey, String msg) {
         AndroidPushNotificationsService androidPushNotificationsService = new AndroidPushNotificationsService(androidFirebaseKey);
 
         JSONObject body = new JSONObject();
@@ -192,39 +191,72 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Async
-    public void sendNottificationToCustomer(Order order)
-    {
-        if(order.getOrderStatus() == 2)
-        {
+    public void sendNottificationToCustomer(Order order) {
+        if (order.getOrderStatus() == 2) {
             Customer customer = customerRepository.findOne(order.getOrderCustomerId());
-            sendNotification(customer.getCustomerRegToken(),customerServerKey,"your order is place");
-        }
-
-        else if(order.getOrderStatus() == 3)
-        {
+            sendNotification(customer.getCustomerRegToken(), customerServerKey, "your order is place");
+        } else if (order.getOrderStatus() == 3) {
             Customer customer = customerRepository.findOne(order.getOrderCustomerId());
-            sendNotification(customer.getCustomerRegToken(),customerServerKey,"your order has delivered");
+            sendNotification(customer.getCustomerRegToken(), customerServerKey, "your order has delivered");
         }
     }
 
     @Async
-    public void sendNottificationToFoodmaker(Order order)
-    {
-        Foodmaker foodmaker =  foodmakerRepository.findOne(order.getFoodmakerId());
-        sendNotification(foodmaker.getFoodmakerRegToken(),foodmakerServerKey,"you have an order!");
+    public void sendNottificationToFoodmaker(Order order) {
+        Foodmaker foodmaker = foodmakerRepository.findOne(order.getFoodmakerId());
+        sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "you have an order!");
     }
 
     @Override
-    public void updateOrderStatus(Integer statusValue,Integer orderId){
-        if(orderId != 0){
-             orderRepository.updateOrderStatus(statusValue,orderId);
+    public void updateOrderStatus(Integer statusValue, Integer orderId) {
+        if (orderId != 0) {
+            orderRepository.updateOrderStatus(statusValue, orderId);
 
             Order order = orderRepository.findOne(orderId);
 
-                sendNottificationToCustomer(order);
+            sendNottificationToCustomer(order);
         }
 
 
     }
 
+    @Override
+    public List<Order> getPendingOrders() {
+        List<Order> allOrders = this.findAllOrders();
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(1);
+
+        if (orderListbystatus_id.size() > 0) {
+            allOrders.retainAll(orderListbystatus_id);
+            return allOrders;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Order> getAckOrders() {
+        List<Order> allOrders = this.findAllOrders();
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(2);
+
+        if (orderListbystatus_id.size() > 0) {
+            allOrders.retainAll(orderListbystatus_id);
+            return allOrders;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Order> getDoneOrders() {
+        List<Order> allOrders = this.findAllOrders();
+        List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(3);
+
+        if (orderListbystatus_id.size() > 0) {
+            allOrders.retainAll(orderListbystatus_id);
+            return allOrders;
+        }
+
+        return null;
+
+    }
 }

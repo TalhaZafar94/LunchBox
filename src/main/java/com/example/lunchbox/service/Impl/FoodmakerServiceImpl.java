@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -92,7 +93,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
     @Override
     public List <Foodmaker> getFoodmakerByname(String foodmakerName) {
-        return foodmakerRepository.findByFoodmakerName(foodmakerName);
+        return foodmakerRepository.findByFoodmakerNameContaining(foodmakerName);
     }
 
     @Override
@@ -197,9 +198,35 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     public List<Foodmaker> getFoodmakersNearBy(Double lat, Double longt){
 
         List<Foodmaker> inlocations = new ArrayList<>();
+        List<Location> locations = locationRepository.findAll();
+        Double count = 6.0;
+
+        try
+        {
+            for(Location location:locations)
+            {
+                if(getDistance(lat,longt,location.getLocationLatitude(),location.getLocationLongitude()) <= count)
+                {
+                    Foodmaker foodmaker = foodmakerRepository.findOne(location.getFoodmakerId());
+                    if(foodmaker.getFoodmakerActive() == 2)
+                    {
+                        continue;
+                    }
+                    foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
+                    inlocations.add(foodmaker);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return inlocations;
+/*
         try {
            int count = 6;
-           List<Location> locations = locationRepository.findAll();
+
            String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=";
            url = String.format("%s%s,%s%s", url, String.valueOf(lat), String.valueOf(longt),"&destinations=");
 
@@ -292,7 +319,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
            e.printStackTrace();
        }
 
-        return inlocations;
+*/
     }
 
     @Override
@@ -407,4 +434,13 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         foodmakerRepository.delete(foodmakerId);
     }
 
+   private Double getDistance(double lat1,double long1,double lat2,double long2)
+    {
+        return 6371 * (Math.acos(
+                ((Math.cos(Math.toRadians(lat2))
+                        * (Math.cos(Math.toRadians(lat1)))
+                        * (Math.cos(Math.toRadians(long1) - Math.toRadians(long2))))
+                        + ((Math.sin(Math.toRadians(lat2)))
+                        * (Math.sin(Math.toRadians(lat1)))))));
+    }
 }
