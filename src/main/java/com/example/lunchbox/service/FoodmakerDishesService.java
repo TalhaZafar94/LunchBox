@@ -1,5 +1,6 @@
 package com.example.lunchbox.service;
 
+import com.example.lunchbox.model.entity.Dishes;
 import com.example.lunchbox.model.entity.FoodmakerDishes;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface FoodmakerDishesService {
     List<FoodmakerDishes> getFoodmakerDishbyFoodmakerId(int foodmakerId);
     List<FoodmakerDishes> getFoodmakerDishbyDishesId(int dishId);
     List<FoodmakerDishes> findAll();
+    List<Dishes> getDishbyorderId(int orderId);
 }

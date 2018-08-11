@@ -17,7 +17,5 @@ public interface OrderService {
     List<Order> getAckOrders();
     List<Order> getDoneOrders();
     List<Order> getorderByStatus(Integer status);
-
-
-
+    void updateOrderRating(Integer orderRating,Integer orderId);
 }

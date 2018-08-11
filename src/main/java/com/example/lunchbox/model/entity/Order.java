@@ -42,6 +42,9 @@ public class Order {
     @Column(name = "order_status")
     private Integer orderStatus;
 
+    @Column(name = "rating")
+    private Integer orderRating;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<Orderdishes> orderdishes;
 
@@ -54,7 +57,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer orderCustomerId, Integer orderReservationId, String orderShipmentAddress, Date orderDate, Date orderDeliverDate, Float orderTotalAmount, Integer orderStatus, List<Orderdishes> orderdishes,Integer foodmakerId) {
+    public Order(Integer orderCustomerId, Integer orderReservationId, String orderShipmentAddress, Date orderDate, Date orderDeliverDate, Float orderTotalAmount, Integer orderStatus, List<Orderdishes> orderdishes,Integer foodmakerId,Integer orderRating) {
         this.orderCustomerId = orderCustomerId;
         this.orderReservationId = orderReservationId;
         this.orderShipmentAddress = orderShipmentAddress;
@@ -64,6 +67,7 @@ public class Order {
         this.orderStatus = orderStatus;
         this.orderdishes = orderdishes;
         this.foodmakerId = foodmakerId;
+        this.orderRating = orderRating;
     }
 
     public Integer getOrderCustomerId() {
@@ -73,7 +77,6 @@ public class Order {
     public void setOrderCustomerId(Integer orderCustomerId) {
         this.orderCustomerId = orderCustomerId;
     }
-
 
     public List<Orderdishes> getOrderdishes() {
         return orderdishes;
@@ -169,5 +172,13 @@ public class Order {
         Order order = (Order) o;
 
         return Objects.equals(orderId,order.orderId);
+    }
+
+    public Integer getOrderRating() {
+        return orderRating;
+    }
+
+    public void setOrderRating(Integer orderRating) {
+        this.orderRating = orderRating;
     }
 }
