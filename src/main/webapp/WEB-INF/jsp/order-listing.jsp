@@ -353,7 +353,13 @@
                         <div class="data-table-toolbar">
                             <div class="row">
                                 <div class="col-md-4">
+                                        <select class="form-control" id="order-status">
+                                            <option value="1">Requested Orders</option>
+                                            <option value="2">Ackownledged Orders</option>
+                                            <option value="3">Done Orders</option>
+                                            <option value="4">Canceled Orders</option>
 
+                                        </select>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="toolbar-btn-action">
@@ -549,6 +555,55 @@
             $('#actions-form').submit();
         });
     }
+
+
+
+
+    $("#order-status").on("change",function () {
+        var statusId = $(this).val();
+        $.ajax({
+            url:'http://localhost:8080/order/get-orderByStatus?status='+statusId,
+            type:'get',
+            dataType:'json',
+            data:'',
+            success:function(response){
+
+                console.log(response);
+                var status;
+                var classes;
+                var html = "";
+                response.forEach(function(data) {
+                    if(data.orderDate == 1){
+                        status = "Complete";
+                        classes="label label-success"
+                    }else{
+                        status = "In Process";
+                        classes ="label label-warning";
+                    }
+                    html += '<tr>'+
+                        '<td>'+data.customer.customerName+'</td>'+
+                        '<td>'+data.foodmaker.foodmakerName+'</td>'+
+                        '<td>'+data.orderDate+'</td>'+
+                        '<td>'+data.orderDeliverDate+'</td>'+
+                        '<td><span class="'+classes+'">'+status+'</span></td>'+
+                        '<td>'+data.orderShipmentAddress+'</td>'+
+                        '<td>'+data.orderTotalAmount+'</td>'+
+                        '<td>'+
+                        '<div class="btn-group btn-group-xs">'+
+                        //  '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+data.orderId+'"><i class="fa fa-power-off"></i></a>'+
+                        '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-view" data-id="'+data.orderId+'" ><i class="fa fa-edit"></i></a>'+
+                        '</div>'+
+                        '</td>'+
+                        '</tr>';
+
+                });
+                $('#foodermaker-listing-tbl').html(html);
+                viewOrderDetail();
+                dataTableInit();
+            }
+        });
+
+    });
 </script>
 </body>
 </html>

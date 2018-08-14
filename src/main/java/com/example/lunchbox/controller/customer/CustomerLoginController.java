@@ -174,6 +174,38 @@ public class CustomerLoginController{
         return "{ \"uploadedPath\" : \"+uploadedPath+\"}";
     }
 
+    /***
+     * Test upload image
+     */
+
+    @RequestMapping(value = "/upload-img-test", method = RequestMethod.POST)
+    public String uploadImage(@RequestParam("file") MultipartFile file) {
+        String uploadedPath = null;
+        //  adminService.findAllAdmin();
+        String final_Path = "http://localhost:8080/images/";
+        customerService.findAllCustomers();
+        Customer customer = customerService.getCustomerById(1);
+        String UPLOADED_FOLDER = uploadPath;
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            final_Path +=  file.getOriginalFilename();
+            customer.setCustomerImagePath(final_Path);
+
+            uploadedPath = path.toString();
+            customerService.customerSignup(customer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "{ \"uploadedPath\" : \"+uploadedPath+\"}";
+    }
+
+
 /*    @RequestMapping(value = "/send",method = RequestMethod.POST)
     public ResponseEntity<String> send(@RequestParam String token)
     {
