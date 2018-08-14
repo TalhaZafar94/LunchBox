@@ -40,19 +40,21 @@ public class OrderServiceImpl implements OrderService {
     private EntityManager entityManager;
     private CustomerService customerService;
     private Order order;
+    private RatingRepository ratingRepository;
     @Value("${foodmakerKey}")
     private String foodmakerServerKey;
     @Value("${customerKey}")
     private String customerServerKey;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository,RatingRepository ratingRepository) {
         this.orderRepository = orderRepository;
         this.orderDishesRepository = orderDishesRepository;
         this.customerRepository = customerRepository;
         this.foodmakerRepository = foodmakerRepository;
         this.dishRepository = dishRepository;
         this.foodmakerDishesRepository = foodmakerDishesRepository;
+        this.ratingRepository = ratingRepository;
     }
 
     public OrderServiceImpl() {
@@ -102,6 +104,7 @@ public class OrderServiceImpl implements OrderService {
         }
         Customer customer = customerRepository.findByCustomerId(customerId);
         Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
+        foodmaker.setAverageRatings(ratingRepository.getAverage(foodmakerId));
         order.setCustomer(customer);
         order.setFoodmaker(foodmaker);
         return order;
@@ -141,6 +144,7 @@ public class OrderServiceImpl implements OrderService {
                 }
                 Customer customer = customerRepository.findByCustomerId(customerId);
                 Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
+                foodmaker.setAverageRatings(ratingRepository.getAverage(foodmakerId));
                 order.setCustomer(customer);
                 order.setFoodmaker(foodmaker);
                 returnList.add(order);
@@ -213,11 +217,8 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.updateOrderStatus(statusValue, orderId);
 
             Order order = orderRepository.findOne(orderId);
-
             sendNottificationToCustomer(order);
         }
-
-
     }
 
     @Override
@@ -279,5 +280,12 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return null;
+    }
+
+    @Override
+    public void updateOrderRating(Integer orderRating, Integer orderId) {
+        if (orderId != 0) {
+            orderRepository.updateOrderRating(orderRating,orderId);
+        }
     }
 }

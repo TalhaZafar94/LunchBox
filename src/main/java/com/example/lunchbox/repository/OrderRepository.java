@@ -18,13 +18,15 @@ public interface OrderRepository extends JpaRepository<Order , Integer> {
     List<Order> getAllByOrderCustomerId(Integer customerId);
     List<Order> getAllByOrderStatus(Integer status);
 
-
     @Transactional
     @Modifying
     @Query("Update Order orde SET orde.orderStatus=:orderStatus WHERE orde.orderId=:orderId")
     public void updateOrderStatus(@Param("orderStatus") Integer orderStatus, @Param("orderId") Integer orderId);
 
-
+    @Transactional
+    @Modifying
+    @Query("Update Order orde SET orde.orderRating=:orderRating WHERE orde.orderId=:orderId")
+    public void updateOrderRating(@Param("orderRating") Integer orderRating, @Param("orderId") Integer orderId);
 
 }
 

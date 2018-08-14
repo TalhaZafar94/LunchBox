@@ -1,6 +1,7 @@
 package com.example.lunchbox.controller.foodmaker;
 
 
+import com.example.lunchbox.model.entity.Dishes;
 import com.example.lunchbox.model.entity.FoodmakerDishes;
 import com.example.lunchbox.service.FoodmakerDishesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,11 @@ public class FoodmakerDishesController {
     @RequestMapping(value = "/foodmakersdishes-list-byfoodmakerid", method = RequestMethod.GET)
     public List<FoodmakerDishes> getFoodmakerDishbyFoodmakerId(@RequestParam Integer foodmakerId) {
         return foodmakerDishesService.getFoodmakerDishbyFoodmakerId(foodmakerId);
+    }
+
+    @RequestMapping(value = "/dishes-by-order-id", method = RequestMethod.GET)
+    public List<Dishes> getDishbyorderId(@RequestParam int orderId) {
+        return foodmakerDishesService.getDishbyorderId(orderId);
     }
 /*
     @RequestMapping(value = "/foodmakersdishes-list-bydishid", method = RequestMethod.GET)

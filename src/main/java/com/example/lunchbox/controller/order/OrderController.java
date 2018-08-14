@@ -80,6 +80,10 @@ public class OrderController {
     @RequestMapping(value = "/update-order-status" ,method = RequestMethod.GET)
     public void updateOrderStatus(@RequestParam Integer orderStatus,@RequestParam Integer orderId){
         orderService.updateOrderStatus(orderStatus,orderId);
+    }
 
+    @RequestMapping(value = "/update-order-rating" ,method = RequestMethod.GET)
+    public void updateOrderRating(@RequestParam Integer orderRating,@RequestParam Integer orderId){
+        orderService.updateOrderRating(orderRating,orderId);
     }
 }
