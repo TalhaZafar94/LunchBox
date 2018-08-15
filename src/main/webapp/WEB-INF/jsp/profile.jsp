@@ -1,16 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Khizar
-  Date: 2/17/2018
-  Time: 11:47 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.lunchbox.model.entity.Customer" %>
+<%@ page import="com.example.lunchbox.model.entity.Order" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Dashboard </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="">
@@ -42,11 +37,6 @@
     <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
-
-    <link href="${pageContext.request.contextPath}/${pageContext.request.contextPath}/assets/libs/jquery-datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/${pageContext.request.contextPath}/assets/libs/jquery-datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet" type="text/css" />
-
-
     <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" />
     <!-- Extra CSS Libraries End -->
     <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet" />
@@ -106,7 +96,7 @@
     </div>
 </div>
 
-<!-- Modal Logout
+<!-- Modal Logout -->
 <div class="md-modal md-just-me" id="logout-modal">
     <div class="md-content">
         <h3><strong>Logout</strong> Confirmation</h3>
@@ -114,20 +104,23 @@
             <p class="text-center">Are you sure want to logout from this awesome system?</p>
             <p class="text-center">
                 <button class="btn btn-danger md-close">Nope!</button>
-                <a href="localhost:8080" class="btn btn-success md-close">Yeah, I'm sure</a>
+                <a href="login.html" class="btn btn-success md-close">Yeah, I'm sure</a>
             </p>
         </div>
     </div>
-</div>      Modal End --><%@include file="includes/logout-modal.jsp" %>
+</div>        <!-- Modal End --><%@include file="includes/logout-modal.jsp" %>
 <!-- Begin page -->
 <div id="wrapper">
-
     <!-- Top Bar Start -->
     <%@include file="includes/right-panel.jsp" %>
     <!-- Top Bar End -->
     <!-- include  Left Sidebar Start -->
     <%@include file="includes/left-panel.jsp" %>
     <!--include Left Sidebar End -->
+
+
+    <% Customer data = (Customer) request.getAttribute("userDetail"); %>
+
 
     <!-- Right Sidebar Start -->
     <div class="right side-menu">
@@ -335,106 +328,234 @@
         <!-- ============================================================== -->
         <!-- Start Content here -->
         <!-- ============================================================== -->
+        <div class="profile-banner" style="background-image: url(images/stock/1epgUO0.jpg);">
+            <div class="col-sm-3 avatar-container">
+                <img src="images/users/user-256.jpg" class="img-circle profile-avatar" alt="User avatar">
+            </div>
+            <div class="col-sm-12 profile-actions text-right">
+                <button type="button" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Friends</button>
+                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-envelope"></i> Send Message</button>
+                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-ellipsis-v"></i></button>
+            </div>
+        </div>
+        <div class="content">
 
-        <!--Start :: admin listing -->
+            <div class="row">
+                <div class="col-sm-3">
+                    <!-- Begin user profile -->
+                    <div class="text-center user-profile-2">
+                        <h4><b><%= data.getCustomerName() %></b></h4>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="widget">
-                    <div class="widget-header transparent">
-                        <h2><strong>Customer</strong> listing</h2>
-                        <div class="additional-btn">
-                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
-                            <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
-                            <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
-                        </div>
-                    </div>
-                    <div class="widget-content">
-                        <div class="data-table-toolbar">
-                            <div class="row">
-                                <div class="col-md-4">
+                        <h5>Customer</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge">1,245</span>
+                                Orders
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">245</span>
+                                Canceled Order
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">245</span>
+                                Status
+                            </li>
 
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="toolbar-btn-action">
-                                        <a href="/add-customer?add=new" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add new</a>
-                                      <%--  <a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
-                                        <a class="btn btn-primary"><i class="fa fa-refresh"></i> Update</a>--%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <form action="/customer/add-customer" id="actions-form" method="post">
-                            <input type="hidden" name="rowId" />
-                        </form>
-                        <form action="/customer/profile" id="view-profile-form" method="post">
-                            <input type="hidden" name="userId" />
-                        </form>
-
-                        <div class="table-responsive">
-                            <table data-sortable class="table table-hover table-striped" id="datatables-table-act">
-                                <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Email Address</th>
-                                    <th data-sortable="false">Date of Joining</th>
-                                    <th>Status</th>
-                                    <th data-sortable="false">Option</th>
-                                </tr>
-                                </thead>
-
-                                <tbody id="foodermaker-listing-tbl">
-                                <%-- <tr>
-                                     <td>Yogyakarta, Indonesia</td>
-                                     <td>Defence view</td>
-                                     <td><a href="mailto:#">name@domain.com</a></td>
-                                     <td>January 01, 1985</td>
-                                     <td><span class="label label-success">Active</span></td>
-                                     <td>
-                                         <div class="btn-group btn-group-xs">
-                                             <a data-toggle="tooltip" title="Delete" class="btn btn-default"><i class="fa fa-power-off"></i></a>
-                                             <a data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-edit"></i></a>
-                                         </div>
-                                     </td>
-                                 </tr>--%>
+                        </ul>
 
 
-                                </tbody>
-                            </table>
-                        </div>
+                    </div><!-- End div .box-info -->
+                    <!-- Begin user profile -->
+                </div><!-- End div .col-sm-4 -->
+
+                <div class="col-sm-9">
+                    <div class="widget widget-tabbed">
+                        <!-- Nav tab -->
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="active"><a href="#about" data-toggle="tab"><i class="fa fa-user"></i> About</a></li>
+                            <li><a href="#user-activities" data-toggle="tab"><i class="fa fa-laptop"></i> Orders Detail</a></li>
+                           <%-- <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Message</a></li>--%>
+                        </ul>
+                        <!-- End nav tab -->
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
 
 
-                    </div>
+
+                            <!-- Tab about -->
+                            <div class="tab-pane animated active  fadeInRight" id="about">
+                                <div class="user-profile-content">
+                                    <h5><strong>ABOUT</strong></h5>
+
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h5><strong>CONTACT</strong> </h5>
+                                            <address>
+                                                <strong>Phone</strong><br>
+                                                <abbr title="Phone">+<%= data.getCustomerPhoneNumber() %></abbr>
+                                            </address>
+                                            <address>
+                                                <strong>Email</strong><br>
+                                                <a href="mailto:#"><%= data.getCustomerEmail() %></a>
+                                            </address>
+                                            <address>
+                                                <strong>CNIC</strong><br>
+                                                <a href="javascript:void(0)"><%= data.getCustomerNic() %></a>
+                                            </address>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h5><strong>Status</strong></h5>
+                                            <p><%= data.getCustomerAccessType() %></p>
+                                            <h5><strong>Address</strong></h5>
+                                            <p><%= data.getCustomerAddressId().getAddress() %></p>
+                                            <h5><strong>Registeration Date</strong></h5>
+                                            <p><%= data.getCustomerCreatedAt() %></p>
+
+                                        </div>
+                                    </div><!-- End div .row -->
+                                </div><!-- End div .user-profile-content -->
+                            </div><!-- End div .tab-pane -->
+                            <!-- End Tab about -->
+
+
+                            <!-- Tab user activities -->
+                            <div class="tab-pane animated fadeInRight" id="user-activities">
+                                <div class="scroll-user-widget">
+                                    <ul class="media-list">
+                                        <%
+                                         List<Order> orderDetail = (List<Order>) request.getAttribute("userOrderDetail");
+                                            for(int i= 0;i<orderDetail.size();i++){
+                                        %>
+                                        <li class="media">
+                                            <a href="#fakelink">
+                                                <p><strong><%= orderDetail.get(i).getCustomer().getCustomerName() %></strong> Placed an Order to  <strong><%= orderDetail.get(i).getFoodmaker().getFoodmakerName() %></strong>
+                                                    <br /><i>on minutes <%= orderDetail.get(i).getOrderDate()  %></i></p>
+                                            </a>
+                                        </li>
+                                        <% } %>
+
+                                    </ul>
+                                </div><!-- End div .scroll-user-widget -->
+                            </div><!-- End div .tab-pane -->
+                            <!-- End Tab user activities -->
+
+                            <!-- Tab user messages -->
+                            <div class="tab-pane animated fadeInRight" id="mymessage">
+                                <div class="scroll-user-widget">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/2.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">John Doe</a> <small>Just now</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/1.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Annisa</a> <small>Yesterday at 04:00 AM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/5.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Rusmanovski</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/4.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Ari Rusmanto</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/3.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Jenny Doe</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/2.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">John Doe</a> <small>Just now</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/1.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Annisa</a> <small>Yesterday at 04:00 AM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/5.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Rusmanovski</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/4.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Ari Rusmanto</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a class="pull-left" href="#fakelink">
+                                                <img class="media-object" src="assets/img/avatar/3.jpg" alt="Avatar">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#fakelink">Jenny Doe</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div><!-- End div .scroll-user-widget -->
+                            </div><!-- End div .tab-pane -->
+                            <!-- End Tab user messages -->
+                        </div><!-- End div .tab-content -->
+                    </div><!-- End div .box-info -->
                 </div>
             </div>
 
+
+            <!-- Footer Start -->
+            <%@include file="includes/footer.jsp" %>
+            <!-- Footer End -->
         </div>
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
 
-
-        <%@include file="includes/upload-image-model.jsp" %>
-        <!--end :: admin listing -->
-
-        <!-- Footer Start -->
-       <%@include file="includes/footer.jsp" %>
-        <!-- Footer End -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End content here -->
-    <!-- ============================================================== -->
+    <!-- End right content -->
 
-</div>
-<!-- End right content -->
-
-</div>
-<div id="contextMenu" class="dropdown clearfix">
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
-        <li><a tabindex="-1" href="javascript:;" data-priority="high"><i class="fa fa-circle-o text-red-1"></i> High Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="medium"><i class="fa fa-circle-o text-orange-3"></i> Medium Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i> Low Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="none"><i class="fa fa-circle-o text-lightblue-1"></i> None</a></li>
-    </ul>
 </div>
 <!-- End of page -->
 <!-- the overlay modal element -->
@@ -488,126 +609,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/apps/todo.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/apps/notes.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/pages/index.js"></script>
-
-
-
-<script src="${pageContext.request.contextPath}/assets/libs/jquery-datatables/js/jquery.dataTables.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/libs/jquery-datatables/js/dataTables.bootstrap.js"></script>
-<script src="${pageContext.request.contextPath}/assets/libs/jquery-datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/pages/datatables.js"></script>
-<script>
-    function dataTableInit(){
-        $('#datatables-table-act').DataTable( {
-            responsive: true,"paging": true
-        } );
-    }
-
-
-    $.ajax({
-        url:'http://localhost:8080/customer/customers-list',
-        type:'get',
-        dataType:'json',
-        data:'',
-        success:function(response){
-            var html;
-            console.log(response);
-            var status;
-            var classes;
-            response.forEach(function(customer) {
-                if(customer.customerAccessType == 1){
-                    status = "Active";
-                    classes="label label-success"
-                }else{
-                    status = "UnActive";
-                    classes ="label label-warning";
-                }
-
-
-                html = '<tr data-row-id="'+customer.customerId+'" id="row-id-'+customer.customerId+'">'+
-                    '<td><a href="javascript:void(0)" class="open-img-modal">'+((customer.customerImagePath == null) ? 'Upload Image' : '<img src="'+customer.customerImagePath+'" alt="img" style="width: 80px;height: 80px" />' )+'</a></td>'+
-                    '<td>'+customer.customerName+'</td>'+
-                    '<td>'+((customer.adminAddressId != null)? customer.adminAddressId.address+' '+customer.adminAddressId.city: 'not avaible' )+'</td>'+
-                     '<td>'+customer.customerEmail+'</td>'+
-                    '<td>'+customer.customerCreatedAt+'</td>'+
-                    '<td><span class="'+classes+'">'+status+'</span></td>'+
-                    '<td>'+
-                    '<div class="btn-group btn-group-xs">'+
-                    '<a data-toggle="tooltip" title="view profile" class="btn btn-default btn-view" data-id="'+customer.customerId+'"><i class="fa fa-eye"  ></i></a>'+
-                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="'+customer.customerId+'" ><i class="fa fa-edit"></i></a>'+
-                    '</div>'+
-                    '</td>'+
-                    '</tr>';
-                $('#foodermaker-listing-tbl').append(html);
-
-            });
-            viewOrderDetail();
-            viewProfile();
-            openImageModal();
-            dataTableInit();
-        }
-
-    });
-
-    function viewOrderDetail(){
-        $('.btn-edit').on('click',function(){
-            var rowId = $(this).attr('data-id');
-            $('input[type=hidden][name=rowId]').val(rowId);
-            $('#actions-form').submit();
-        });
-    }
-
-    function viewProfile(){
-        $('.btn-view').on('click',function(){
-            var rowId = $(this).attr('data-id');
-            $('input[type=hidden][name=userId]').val(rowId);
-            $('#view-profile-form').submit();
-        });
-    }
-
-    function openImageModal() {
-        $('.open-img-modal').on('click',function(){
-            var rowId = $(this).parents(':eq(1)').attr('data-row-id');
-            $('#hd-img-user-id').val(rowId);
-            $('#image-upload-modal').modal('show');
-
-        });
-    }
-    $('#btn-upload-img').on('click',function(){
-        var thisElem = $(this);
-        var file = $('#file-img')[0].files[0];
-        //     if(file.length > 0){
-        var userId = $('#hd-img-user-id').val();
-        data = new FormData();
-        data.append('file',file);
-        $.ajax({
-            url:'http://localhost:8080/customer/upload-img?id='+userId,
-            type:'post',
-            data:data,
-            dataType:'json',
-            contentType: false,
-            cache:false,
-            processData: false,
-            success:function(response){
-                if(response.uploadedPath != null){
-                    var html = '<img src="'+response.uploadedPath+'" alt="img"/>';
-                    $('#row-id-'+userId).children('td').first().html(html);
-                }
-                $('#image-upload-modal').modal('hide');
-            }
-
-        })
-
-
-
-        //      }
-
-    });
-
-
-</script>
-
-
-
 
 </body>
 </html>

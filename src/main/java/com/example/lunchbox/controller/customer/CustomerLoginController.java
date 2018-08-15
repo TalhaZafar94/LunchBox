@@ -257,10 +257,18 @@ public class CustomerLoginController{
         return customerService.getAckOrdersByCustomerId(customerId);
     }
 
-    @RequestMapping(value = "/get-done-orderByCustomerId",method = RequestMethod.GET)
-    public List<Order> getDoneOrderBycustomerId(@RequestParam Integer customerId)
+
+
+    @RequestMapping(value = "/profile",method = RequestMethod.POST)
+    public ModelAndView  getUserProfile(@RequestParam Integer userId)
     {
-        return customerService.getDoneOrdersByCustomerId(customerId);
+        ModelAndView modelAndView = new ModelAndView("profile");
+        Customer customer = customerService.getCustomerById(userId);
+        List<Order> customerOrder = customerService.getOrdersByCustomerId(userId);
+        modelAndView.addObject("userDetail", customer);
+        modelAndView.addObject("userOrderDetail", customerOrder);
+
+        return modelAndView;
     }
 
 }
