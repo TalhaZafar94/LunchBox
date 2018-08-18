@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Add Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="">
@@ -356,8 +356,8 @@
                                     <div id="errorEmail" style="color:#ff3351;display:none">*Please enter valid Email</div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                            <div class="form-group" <%= (data != null ?"style='display:none'":"") %> >
+                                <label for="inputPassword" class="col-sm-2 control-label"  >Password</label>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" id="inputPassword" placeholder="Password" value="<%= (data != null ?data.getAdminPassword():"") %>" required>
                                     <div id="errorpassword" style="color:#ff3351;display:none;display:none">*Please enter password</div>
@@ -393,16 +393,16 @@
                                 <label class="col-sm-2 control-label">Roles / Access Type</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="sel-role" required>
-                                        <option value="1" >Super Admin</option>
-                                        <option value="2" >admin</option>
-                                        <option value="3" >Operation</option>
+                                        <option value="1" <%= (data != null && data.getAdminAccessType() == 1?"selected":"") %> >Super Admin</option>
+                                        <option value="2" <%= (data != null && data.getAdminAccessType() == 2?"selected":"") %>>admin</option>
+                                        <option value="3" <%= (data != null && data.getAdminAccessType() == 3?"selected":"") %>>Operation</option>
                                     </select>
                                     <div id="errorrole" style="color:#ff3351;display:none;display:none">*Please select Access Type</div>
                                 </div>
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label class="col-sm-2 control-label">Upload Image</label>
                                 <div class="col-sm-10">
                                     <input type="file" class="btn btn-default" title="Select file">
@@ -523,25 +523,29 @@
             $('input#input-email').next('div').css('display','block');
             isVlaid = false;
         }else{
-            if( $('input#input-email').val().length > 16){
+            if( $('input#input-email').val().length > 10)
                 $('input#input-email').next('div').html('*Input value must be less then equal to 16 character');
                 $('input#input-email').next('div').css('display','block');
                 isVlaid = false;
             }
 
         }
-        if($('input#inputPassword').val() == ''){
-            $('input#inputPassword').next('div').html("*This field is required can't be empty");
-            $('input#inputPassword').next('div').css('display','block');
-            isVlaid = false;
-        }else{
-            if($('input#inputPassword').val().length > 16){
-                $('input#inputPassword').next('div').html('*Input value must be less then equal to 16 character');
+
+        if($('#rowId').val() == ""){
+            if($('input#inputPassword').val() == ''){
+                $('input#inputPassword').next('div').html("*This field is required can't be empty");
                 $('input#inputPassword').next('div').css('display','block');
                 isVlaid = false;
-            }
+            }else{
+                if($('input#inputPassword').val().length > 16){
+                    $('input#inputPassword').next('div').html('*Input value must be less then equal to 16 character');
+                    $('input#inputPassword').next('div').css('display','block');
+                    isVlaid = false;
+                }
 
+            }
         }
+
         if($('input#inp-phoneNum').val() == ''){
             $('input#inp-phoneNum').next('div').html("*This field is required can't be empty");
             $('input#inp-phoneNum').next('div').css('display','block');
@@ -566,6 +570,9 @@
             }
 
         }
+
+
+
 
         return isVlaid;
     }

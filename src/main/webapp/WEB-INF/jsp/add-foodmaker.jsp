@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard </title>
+    <title>Add Foodmaker </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="">
@@ -400,16 +400,16 @@
                                 <label class="col-sm-2 control-label" for="inp-foodmaker-status">Status</label>
                                 <div class="col-sm-5">
                                     <select id="inp-foodmaker-status" class="form-control" required>
-                                        <option value="1" >Active</option>
-                                        <option value="2" >DeActive</option>
-                                        <option value="3">Suspended</option>
+                                        <option value="1" <%= (data != null && data.getFoodmakerAccessType() == 1?"selected":"") %>  >Active</option>
+                                        <option value="2" <%= (data != null && data.getFoodmakerAccessType() == 2?"selected":"") %> >DeActive</option>
+                                        <option value="3" <%= (data != null && data.getFoodmakerAccessType() == 3?"selected":"") %> >Suspended</option>
                                     </select>
                                     <div id="errorrole" style="color:#ff3351;display:none;display:none">*Please select Access Type</div>
                                 </div>
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" style="display: none">
                                 <label class="col-sm-2 control-label">Upload Image</label>
                                 <div class="col-sm-10">
                                     <input type="file" class="btn btn-default" title="Select file">
@@ -532,25 +532,20 @@
             $('input#inp-foodmaker-email').next('div').html("*This field is required can't be empty");
             $('input#inp-foodmaker-email').next('div').css('display','block');
             isVlaid = false;
-        }else{
-            if( $('input#inp-foodmaker-email').val().length > 16){
-                $('input#inp-foodmaker-email').next('div').html('*Input value must be less then equal to 16 character');
-                $('input#inp-foodmaker-email').next('div').css('display','block');
-                isVlaid = false;
-            }
-
         }
-        if($('input#inp-foodmaker-pass').val() == ''){
-            $('input#inp-foodmaker-pass').next('div').html("*This field is required can't be empty");
-            $('input#inp-foodmaker-pass').next('div').css('display','block');
-            isVlaid = false;
-        }else{
-            if($('input#inp-foodmaker-pass').val().length > 16){
-                $('input#inp-foodmaker-pass').next('div').html('*Input value must be less then equal to 16 character');
-                $('input#inp-foodmaker-pass').next('div').css('display','block');
+        if($('#rowId').val() == "") {
+            if ($('input#inp-foodmaker-pass').val() == '') {
+                $('input#inp-foodmaker-pass').next('div').html("*This field is required can't be empty");
+                $('input#inp-foodmaker-pass').next('div').css('display', 'block');
                 isVlaid = false;
-            }
+            } else {
+                if ($('input#inp-foodmaker-pass').val().length > 16) {
+                    $('input#inp-foodmaker-pass').next('div').html('*Input value must be less then equal to 16 character');
+                    $('input#inp-foodmaker-pass').next('div').css('display', 'block');
+                    isVlaid = false;
+                }
 
+            }
         }
         if($('input#inp-foodmaker-phoneNum').val() == ''){
             $('input#inp-foodmaker-phoneNum').next('div').html("*This field is required can't be empty");

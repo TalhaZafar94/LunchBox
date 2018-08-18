@@ -71,8 +71,8 @@
                 <li class='has_sub'>
                     <a href='javascript:void(0);'><i class="fa fa-shopping-cart"></i><span>Dishes</span> <span class="pull-right"><i class="fa fa-angle-down"></i></span></a>
                     <ul>
-                        <li><a href='/dishes/add-dishes'><i class="fa fa-plus"></i><span>Add Dish</span></a></li>
-                        <li><a href='/dishes/dishes-listing'><i class="fa fa-desktop"></i><span>Dishes Listing</span></a></li>
+                        <li><a href='/dishes/add-dishes'><i class="fa fa-plus"></i><span>Add Dish Category</span></a></li>
+                        <li><a href='/dishes/dishes-listing'><i class="fa fa-desktop"></i><span>Dishes Category Listing</span></a></li>
                     </ul>
                 </li>
                 <li class='has_sub'>

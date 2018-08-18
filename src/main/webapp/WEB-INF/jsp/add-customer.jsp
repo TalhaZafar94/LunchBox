@@ -400,16 +400,16 @@
                                 <label class="col-sm-2 control-label" for="inp-customer-status">Status</label>
                                 <div class="col-sm-5">
                                     <select id="inp-customer-status" class="form-control" required>
-                                        <option value="1" >Active</option>
-                                        <option value="2" >DeActive</option>
-                                        <option value="3">Suspended</option>
+                                        <option value="1" <%= (data != null && data.getCustomerAccessType() == 1?"selected":"") %> >Active</option>
+                                        <option value="2" <%= (data != null && data.getCustomerAccessType() == 2?"selected":"") %>>DeActive</option>
+                                        <option value="3" <%= (data != null && data.getCustomerAccessType() == 3?"selected":"") %>>Suspended</option>
                                     </select>
                                     <div id="errorrole" style="color:#ff3351;display:none;display:none">*Please select Access Type</div>
                                 </div>
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" style='display:none'>
                                 <label class="col-sm-2 control-label">Upload Image</label>
                                 <div class="col-sm-10">
                                     <input type="file" class="btn btn-default" title="Select file">
@@ -522,62 +522,64 @@
             $('input#inp-customer-name').next('div').html("*This field is required can't be empty");
             $('input#inp-customer-name').next('div').css('display','block');
             isVlaid = false;
-        }else{
+        }/*else{
             if($('input#inp-customer-name').val().length > 16){
                 $('input#inp-customer-name').next('div').html('*Input value must be less then equal to 16 character');
                 $('input#inp-customer-name').next('div').css('display','block');
                 isVlaid = false;
             }
 
-        }
+        }*/
         if($('input#inp-customer-email').val() == ''){
             $('input#inp-customer-email').next('div').html("*This field is required can't be empty");
             $('input#inp-customer-email').next('div').css('display','block');
             isVlaid = false;
-        }else{
+        }/*else{
             if( $('input#inp-customer-email').val().length > 16){
                 $('input#inp-customer-email').next('div').html('*Input value must be less then equal to 16 character');
                 $('input#inp-customer-email').next('div').css('display','block');
                 isVlaid = false;
             }
 
-        }
-        if($('input#inp-customer-pass').val() == ''){
-            $('input#inp-customer-pass').next('div').html("*This field is required can't be empty");
-            $('input#inp-customer-pass').next('div').css('display','block');
-            isVlaid = false;
-        }else{
-            if($('input#inp-customer-pass').val().length > 16){
-                $('input#inp-customer-pass').next('div').html('*Input value must be less then equal to 16 character');
-                $('input#inp-customer-pass').next('div').css('display','block');
+        }*/
+        if($('#rowId').val() == "") {
+            if ($('input#inp-customer-pass').val() == '') {
+                $('input#inp-customer-pass').next('div').html("*This field is required can't be empty");
+                $('input#inp-customer-pass').next('div').css('display', 'block');
                 isVlaid = false;
-            }
+            } else {
+                if ($('input#inp-customer-pass').val().length > 16) {
+                    $('input#inp-customer-pass').next('div').html('*Input value must be less then equal to 16 character');
+                    $('input#inp-customer-pass').next('div').css('display', 'block');
+                    isVlaid = false;
+                }
 
+            }
         }
         if($('input#inp-customer-phoneNum').val() == ''){
             $('input#inp-customer-phoneNum').next('div').html("*This field is required can't be empty");
             $('input#inp-customer-phoneNum').next('div').css('display','block');
             isVlaid = false;
-        }else{
+        }/*else{
             if($('input#inp-customer-phoneNum').val().length > 16){
                 $('input#inp-customer-phoneNum').next('div').html('*Input value must be less then equal to 16 character');
                 $('input#inp-customer-phoneNum').next('div').css('display','block');
                 isVlaid = false;
             }
 
-        }
+        }*/
         if($('input#inp-customer-cnic').val() == ''){
             $('input#inp-customer-cnic').next('div').html("*This field is required can't be empty");
             $('input#inp-customer-cnic').next('div').css('display','block');
             isVlaid = false;
-        }else{
+        }/*else{
             if($('input#inp-customer-cnic').val().length > 16){
                 $('input#inp-customer-cnic').next('div').html('*Input value must be less then equal to 16 character');
                 $('input#inp-customer-cnic').next('div').css('display','block');
                 isVlaid = false;
             }
 
-        }
+        }*/
 
         return isVlaid;
     }
@@ -633,7 +635,7 @@
 
                 }
             });
-            window.href.location = 'customer-listing.html';
+            window.location = 'customer-listing.html';
         }
 
 

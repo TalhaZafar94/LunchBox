@@ -338,7 +338,7 @@
 
                 <div class="widget">
                     <div class="widget-header transparent">
-                        <h2><strong>Add</strong> Dish</h2>
+                        <h2><strong>Add</strong> Dish Category</h2>
                         <div class="additional-btn">
                             <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
                             <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
@@ -351,7 +351,7 @@
                     <div class="widget-content padding">
                         <form class="form-horizontal" role="form" action="dishes-listing.html" id="form">
                             <div class="form-group">
-                                <label for="inp-dish-name" class="col-sm-2 control-label">Dish Name</label>
+                                <label for="inp-dish-name" class="col-sm-2 control-label">Category Name</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inp-dish-name" placeholder="Name" value="<%= (data != null ?data.getDishName():"") %>" required>
                                     <div id="errorName" style="color:#ff3351;display:none">*Please enter name</div>
@@ -526,7 +526,7 @@
 
                 }
             });
-            window.href.location = '/dishes-listing';
+            window.location = '/dishes-listing';
         }
     });
 

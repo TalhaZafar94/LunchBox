@@ -431,12 +431,18 @@
                                         <li class="media">
                                             <a href="#fakelink">
                                                 <p><strong><%= orderDetail.get(i).getCustomer().getCustomerName() %></strong> Placed an Order to  <strong><%= orderDetail.get(i).getFoodmaker().getFoodmakerName() %></strong>
-                                                    <br /><i>on minutes <%= orderDetail.get(i).getOrderDate()  %></i></p>
+                                                    <br /><i>on  <%= orderDetail.get(i).getOrderDate()  %></i></p>
+                                                <p><strong>Status : </strong><%= orderDetail.get(i).getOrderStatus()  %>
+                                                    <br /><a href="javascript:void(0)" data-id="<%= orderDetail.get(i).getOrderId() %>" onclick="redirectFormToOrder(this);" ><i>view full detail</i></a>
+                                                </p>
                                             </a>
                                         </li>
                                         <% } %>
 
                                     </ul>
+                                    <form action="/order/order-view" id="order-detail-form" method="post">
+                                        <input type="hidden" id="orderId" name="orderId" value="">
+                                    </form>
                                 </div><!-- End div .scroll-user-widget -->
                             </div><!-- End div .tab-pane -->
                             <!-- End Tab user activities -->
@@ -609,6 +615,18 @@
 <script src="${pageContext.request.contextPath}/assets/js/apps/todo.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/apps/notes.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/pages/index.js"></script>
+<script>
+    $(document).ready(function(){
+
+    });
+
+    function redirectFormToOrder(thisElem){
+        var orderId = $(thisElem).attr('data-id');
+        $("#orderId").val(orderId);
+        $("#order-detail-form").submit();
+
+    }
+</script>
 
 </body>
 </html>
