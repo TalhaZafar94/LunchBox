@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
     private FoodmakerDishesRepository foodmakerDishesRepository;
 
+    private  RiderRepository riderRepository;
 
     private Orderdishes orderdishes;
     private EntityManager entityManager;
@@ -47,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     private String customerServerKey;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository,RatingRepository ratingRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository,RatingRepository ratingRepository,RiderRepository riderRepository) {
         this.orderRepository = orderRepository;
         this.orderDishesRepository = orderDishesRepository;
         this.customerRepository = customerRepository;
@@ -55,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
         this.dishRepository = dishRepository;
         this.foodmakerDishesRepository = foodmakerDishesRepository;
         this.ratingRepository = ratingRepository;
+        this.riderRepository = riderRepository;
     }
 
     public OrderServiceImpl() {
@@ -288,4 +290,23 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.updateOrderRating(orderRating,orderId);
         }
     }
+
+    @Override
+    public String assignRiderToOrder(Integer riderId,Integer orderId){
+        Order order = orderRepository.findOne(orderId);
+        if(order != null){
+            if(order.getRiderId() == null || order.getRiderId() == 0){
+                order.setRiderId(riderId);
+                return "{\"status\":\"true\"}";
+
+            }
+            return "{\"status\":\"false\"}";
+
+        }
+        return "{\"status\":\"false\"}";
+
+
+    }
+
+
 }

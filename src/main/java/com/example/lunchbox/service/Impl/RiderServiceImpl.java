@@ -74,10 +74,15 @@ public class RiderServiceImpl implements RiderService {
 
 
     @Override
-    public Rider login(String riderEmail, String riderPassword) {
+    public Rider login(String riderEmail, String riderPassword,String token) {
         Rider rider = this.findByRiderEmail(riderEmail);
         try {
             if (rider != null && getSHA256(riderPassword).equals(rider.getRiderPassword())) {
+                if(rider.getRiderRegToken() == null || !rider.getRiderRegToken().equals(token))
+                {
+                    rider.setRiderRegToken(token);
+                    riderRepository.save(rider);
+                }
                 return rider;
             }
         } catch (NoSuchAlgorithmException e) {
@@ -85,6 +90,8 @@ public class RiderServiceImpl implements RiderService {
         }
         return null;
     }
+
+
 
     @Override
     public boolean updatePassword(String oldpassword, String newpassword , String riderEmail) {
@@ -115,5 +122,13 @@ public class RiderServiceImpl implements RiderService {
         }
         return sb.toString();
     }
+    @Override
+    public void setStatus(int riderId,int status)
+    {
+        Rider rider = riderRepository.findOne(riderId);
+        rider.setRiderActive(status);
+        riderRepository.save(rider);
 
+
+    }
 }

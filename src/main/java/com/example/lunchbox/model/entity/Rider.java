@@ -48,19 +48,34 @@ public class Rider {
     @Column(name = "admin_id")
     private Integer riderAdminId;
 
-    @Column(name = "rider_createdat")
+    @Column(name = "rider_createdat",columnDefinition = "DATETIME")
     private Date riderCreatedAt;
 
-    @Column(name = "rider_lastupdated")
+    @Column(name = "rider_lastupdated",columnDefinition = "DATETIME")
     private Date riderLastUpdated;
 
     @Column(name = "location_id" ,unique = true)
     private Integer riderLocationId;
 
+
+    @Column(name = "rider_reg_token")
+    private String riderRegToken;
+
+
+
+
+
+
+
+
+
+
+
+
     public Rider() {
     }
 
-    public Rider(String riderName, String riderEmail , Vehicles riderVehicleId, String riderNic, String riderPassword, Address riderAddresId, Integer riderAccessType, String riderImagePath, Integer riderActive, String riderPhoneNumber, Integer riderAdminId, Date riderCreatedAt, Date riderLastUpdated, Integer riderLocationId) {
+    public Rider(String riderName, String riderEmail , Vehicles riderVehicleId, String riderNic, String riderPassword, Address riderAddresId, Integer riderAccessType, String riderImagePath, Integer riderActive, String riderPhoneNumber, Integer riderAdminId, Date riderCreatedAt, Date riderLastUpdated, Integer riderLocationId,String riderRegToken) {
         this.riderName = riderName;
         this.riderVehicleId = riderVehicleId;
         this.riderNic = riderNic;
@@ -75,6 +90,7 @@ public class Rider {
         this.riderLastUpdated = riderLastUpdated;
         this.riderLocationId = riderLocationId;
         this.riderEmail = riderEmail;
+        this.riderRegToken = riderRegToken;
     }
 
     public Integer getRiderId() {
@@ -195,5 +211,13 @@ public class Rider {
 
     public void setRiderLocationId(Integer riderLocationId) {
         this.riderLocationId = riderLocationId;
+    }
+
+    public String getRiderRegToken() {
+        return riderRegToken;
+    }
+
+    public void setRiderRegToken(String riderRegToken) {
+        this.riderRegToken = riderRegToken;
     }
 }

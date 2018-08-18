@@ -16,8 +16,9 @@ public interface RiderService {
     Rider getRiderByRiderLastUpdated(Date date);
     Rider getRiderByRiderCreatedAt(Date date);
     List<Rider> findAllRiders();
-    Rider login(String riderEmail, String riderPassword);
+    Rider login(String riderEmail, String riderPassword,String token);
     Rider findByRiderEmail(String riderEmail);
     boolean updatePassword(String oldpassword, String newpassword , String riderEmail);
     String getSHA256(String password) throws NoSuchAlgorithmException;
+    void setStatus(int riderId,int status);
 }

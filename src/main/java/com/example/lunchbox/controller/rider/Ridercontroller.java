@@ -22,9 +22,9 @@ public class Ridercontroller {
 
     @RequestMapping(value = "/login" , method = RequestMethod.POST)
     public String verifyLogin(@RequestParam String riderEmail, @RequestParam String riderPassword,
-                              HttpSession session, Model model){
+                              HttpSession session, Model model,@RequestParam String token){
 
-        Rider rider = riderService.login(riderEmail, riderPassword);
+        Rider rider = riderService.login(riderEmail, riderPassword,token);
         if (rider == null) {
             model.addAttribute("loginError", "Error logging in. Please try again");
             return "login";
@@ -78,6 +78,14 @@ public class Ridercontroller {
     @RequestMapping(value = "/search-rider", method = RequestMethod.POST)
     public List<Rider> searchRiders(@RequestParam String riderName) {
         return riderService.getRiderByname(riderName);
+    }
+
+
+    @RequestMapping(value = "/set-status",method = RequestMethod.POST) //1 : active, 2: unactive,3: assigned a job
+    public String setStatus(@RequestParam Integer riderId, @RequestParam Integer status)
+    {
+        riderService.setStatus(riderId,status);
+        return "{ \"status\" : \""+status+"\"}";
     }
 
 

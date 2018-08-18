@@ -13,4 +13,5 @@ public interface RiderRepository extends JpaRepository<Rider , Integer>{
     List<Rider> findByRiderName(String riderName);
     Rider getRiderByRiderLastUpdated(Date date);
     Rider getRiderByRiderCreatedAt(Date date);
+
 }

@@ -18,4 +18,6 @@ public interface OrderService {
     List<Order> getDoneOrders();
     List<Order> getorderByStatus(Integer status);
     void updateOrderRating(Integer orderRating,Integer orderId);
+    String assignRiderToOrder(Integer riderId,Integer orderId);
+
 }
