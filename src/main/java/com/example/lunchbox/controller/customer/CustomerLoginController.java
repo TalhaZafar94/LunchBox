@@ -33,7 +33,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RestController
 @RequestMapping(value = "/customer")
-public class CustomerLoginController{
+public class CustomerLoginController {
 
     private CustomerService customerService;
     @Value("${upload.path}")
@@ -41,20 +41,20 @@ public class CustomerLoginController{
 
     @Autowired
     public CustomerLoginController(CustomerService customerService) {
-    this.customerService = customerService;
+        this.customerService = customerService;
 
     }
 
-    @RequestMapping(value = "/login" , method = RequestMethod.POST ,produces = "application/json")
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
     public Customer verifyLogin(@RequestParam String customerEmail, @RequestParam String customerPassword,
-                              HttpSession session,@RequestParam String token){
+                                HttpSession session, @RequestParam String token) {
 
-        Customer customer = customerService.login(customerEmail, customerPassword,token);
+        Customer customer = customerService.login(customerEmail, customerPassword, token);
         if (customer != null) {
             session.setAttribute("loggedInUser", customer);
             return customer;
         }
-       return customer;
+        return customer;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -63,35 +63,34 @@ public class CustomerLoginController{
         return "login";
     }
 
-  /*  @RequestMapping(value = "/signup" ,method = RequestMethod.POST,produces = "application/json")
-    public String  signup(@RequestBody Customer customer,@RequestParam byte[] image){
-        if(customer.getCustomerPassword() != null && customer.getCustomerEmail() != null && customer.getCustomerName() != null &&
-                customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null)
-        {
+    /*  @RequestMapping(value = "/signup" ,method = RequestMethod.POST,produces = "application/json")
+      public String  signup(@RequestBody Customer customer,@RequestParam byte[] image){
+          if(customer.getCustomerPassword() != null && customer.getCustomerEmail() != null && customer.getCustomerName() != null &&
+                  customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null)
+          {
+              customerService.customerSignup(customer);
+              customerService.saveImage(image,customer);
+              return "{\"status\":\"true\"}";
+          }
+          return "{\"status\":\"false\"}";
+      }*/
+    @RequestMapping(value = "/signup", method = RequestMethod.POST, produces = "application/json")
+    public String signup(@RequestBody Customer customer) {
+        if (customer.getCustomerPassword() != null && customer.getCustomerEmail() != null && customer.getCustomerName() != null &&
+                customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null) {
             customerService.customerSignup(customer);
-            customerService.saveImage(image,customer);
+
             return "{\"status\":\"true\"}";
         }
         return "{\"status\":\"false\"}";
-    }*/
-  @RequestMapping(value = "/signup" ,method = RequestMethod.POST,produces = "application/json")
-  public String  signup(@RequestBody Customer customer){
-      if(customer.getCustomerPassword() != null && customer.getCustomerEmail() != null && customer.getCustomerName() != null &&
-              customer.getCustomerNic() != null && customer.getCustomerPhoneNumber() != null)
-      {
-          customerService.customerSignup(customer);
+    }
 
-          return "{\"status\":\"true\"}";
-      }
-      return "{\"status\":\"false\"}";
-  }
-
-    @RequestMapping(value = "/update-password" ,method = RequestMethod.POST)
-    public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword , @RequestParam String customerEmail){
-        if(customerService.updatePassword(oldpassword,newpassword,customerEmail)){
+    @RequestMapping(value = "/update-password", method = RequestMethod.POST)
+    public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword, @RequestParam String customerEmail) {
+        if (customerService.updatePassword(oldpassword, newpassword, customerEmail)) {
             return "password updated";
         }
-    return "error";
+        return "error";
     }
 
     @RequestMapping(value = "/count-customers", method = RequestMethod.GET)
@@ -99,8 +98,8 @@ public class CustomerLoginController{
         return customerService.countAllCustomers();
     }
 
-    @RequestMapping(value = "/customers-list",method = RequestMethod.GET)
-    public List<Customer> findAllCustomers(){
+    @RequestMapping(value = "/customers-list", method = RequestMethod.GET)
+    public List<Customer> findAllCustomers() {
         return customerService.findAllCustomers();
     }
 
@@ -116,30 +115,30 @@ public class CustomerLoginController{
         return "customer deleted";
     }
 
-    @RequestMapping(value = "/search-customer",method = RequestMethod.POST)
-    public List <Customer> searchCustomers(@RequestParam String customerName){
+    @RequestMapping(value = "/search-customer", method = RequestMethod.POST)
+    public List<Customer> searchCustomers(@RequestParam String customerName) {
         return customerService.getCustomerByname(customerName);
     }
 
-    @RequestMapping(value = "/findId",method = RequestMethod.GET)
-    public Customer findId(@RequestParam Integer id){
+    @RequestMapping(value = "/findId", method = RequestMethod.GET)
+    public Customer findId(@RequestParam Integer id) {
         return customerService.findByCustomerId(id);
     }
 
-    @RequestMapping(value = "/customer-listing" , method = RequestMethod.GET)
+    @RequestMapping(value = "/customer-listing", method = RequestMethod.GET)
     public ModelAndView adminDetail() {
         ModelAndView modelAndView = new ModelAndView("customer-listing");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add-customer" ,method = RequestMethod.GET)
-    public ModelAndView getAddAdminView(){
+    @RequestMapping(value = "/add-customer", method = RequestMethod.GET)
+    public ModelAndView getAddAdminView() {
         ModelAndView modelAndView = new ModelAndView("add-customer");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add-customer" ,method = RequestMethod.POST)
-    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+    @RequestMapping(value = "/add-customer", method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId) {
         Customer customer = customerService.getCustomerById(rowId);
         ModelAndView modelAndView = new ModelAndView("add-customer");
         modelAndView.addObject("customerDetail", customer);
@@ -148,7 +147,7 @@ public class CustomerLoginController{
     }
 
     @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
-    public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
+    public String uploadImage(@RequestParam Integer id, @RequestParam("file") MultipartFile file) {
         String uploadedPath = null;
         //  adminService.findAllAdmin();
         String final_Path = "http://localhost:8080/images/";
@@ -162,11 +161,11 @@ public class CustomerLoginController{
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
 
-            final_Path +=  file.getOriginalFilename();
+            final_Path += file.getOriginalFilename();
             customer.setCustomerImagePath(final_Path);
 
             uploadedPath = path.toString();
-                        customerService.customerSignup(customer);
+            customerService.customerSignup(customer);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -193,7 +192,7 @@ public class CustomerLoginController{
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
 
-            final_Path +=  file.getOriginalFilename();
+            final_Path += file.getOriginalFilename();
             customer.setCustomerImagePath(final_Path);
 
             uploadedPath = path.toString();
@@ -245,23 +244,19 @@ public class CustomerLoginController{
     }*/
 
 
-    @RequestMapping(value = "/get-orderByCustomerId",method = RequestMethod.GET)
-    public List<Order> getOrderBycustomerId(@RequestParam Integer customerId)
-    {
+    @RequestMapping(value = "/get-orderByCustomerId", method = RequestMethod.GET)
+    public List<Order> getOrderBycustomerId(@RequestParam Integer customerId) {
         return customerService.getOrdersByCustomerId(customerId);
     }
 
-    @RequestMapping(value = "/get-ack-orderByCustomerId",method = RequestMethod.GET)
-    public List<Order> getAckOrderBycustomerId(@RequestParam Integer customerId)
-    {
+    @RequestMapping(value = "/get-ack-orderByCustomerId", method = RequestMethod.GET)
+    public List<Order> getAckOrderBycustomerId(@RequestParam Integer customerId) {
         return customerService.getAckOrdersByCustomerId(customerId);
     }
 
 
-
-    @RequestMapping(value = "/profile",method = RequestMethod.POST)
-    public ModelAndView  getUserProfile(@RequestParam Integer userId)
-    {
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    public ModelAndView getUserProfile(@RequestParam Integer userId) {
         ModelAndView modelAndView = new ModelAndView("profile");
         Customer customer = customerService.getCustomerById(userId);
         List<Order> customerOrder = customerService.getOrdersByCustomerId(userId);

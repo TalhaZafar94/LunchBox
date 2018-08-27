@@ -24,7 +24,7 @@ public class Orderdishes {
 
     //    @OneToOne(fetch = FetchType.LAZY , mappedBy = "orderDishes", cascade = {CascadeType.ALL})
 //    private Dishes dishes;
-    @OneToOne(fetch = FetchType.LAZY , mappedBy = "orderDishes", cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "orderDishes", cascade = {CascadeType.ALL})
     private FoodmakerDishes foodmakerDishes;
 
 

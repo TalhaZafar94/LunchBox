@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Time;
 
 @Entity
-@Table(name = "dishes" , indexes = {@Index(name = "DISH_INDEX",columnList = "dish_name" )})
+@Table(name = "dishes", indexes = {@Index(name = "DISH_INDEX", columnList = "dish_name")})
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Dishes {
 

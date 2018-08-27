@@ -11,43 +11,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard | Coco - Responsive Bootstrap Admin Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="description" content="">
     <meta name="keywords" content="coco bootstrap template, coco admin, bootstrap,admin template, bootstrap admin,">
     <meta name="author" content="Huban Creative">
 
     <!-- Base Css Files -->
-    <link href="${pageContext.request.contextPath}/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/fontello/css/fontello.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/animate-css/animate.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/pace/pace.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/fontello/css/fontello.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/animate-css/animate.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/nifty-modal/css/component.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/pace/pace.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/css/datepicker.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet"/>
     <!-- Code Highlighter for Demo -->
-    <link href="${pageContext.request.contextPath}/assets/libs/prettify/github.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/prettify/github.css" rel="stylesheet"/>
 
     <!-- Extra CSS Libraries Start -->
-    <link href="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/morrischart/morris.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-datatables/css/dataTables.bootstrap.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-datatables/extensions/TableTools/css/dataTables.tableTools.css"
+          rel="stylesheet" type="text/css"/>
 
-    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css"/>
     <!-- Extra CSS Libraries End -->
-    <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,42 +69,53 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-152x152.png" />
-<style>
-    .dishes-div-wrapper{
-        border-bottom: 2px solid #eeeaea;
-    }
-    .dishes-img-area{
+    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="57x57"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="72x72"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="76x76"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-76x76.png"/>
+    <link rel="apple-touch-icon" sizes="114x114"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-114x114.png"/>
+    <link rel="apple-touch-icon" sizes="120x120"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon" sizes="144x144"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="152x152"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-152x152.png"/>
+    <style>
+        .dishes-div-wrapper {
+            border-bottom: 2px solid #eeeaea;
+        }
 
-        display: inline-block;
-        width: 30%;
-        float: left;
-        /*height: 500px;*/
-    }
-    .dishes-head-area{
-        font-weight: bolder;
-        text-transform: capitalize;
-        font-size: 20px;
-    }
-    .dishes-desc-area{
-        display: inline-block;
-        /* float: left; */
-        width: 70%;
-    }
-    .dishes-price-area{
-        float: right;
-        margin-right: 50px;
-    }
+        .dishes-img-area {
+
+            display: inline-block;
+            width: 30%;
+            float: left;
+            /*height: 500px;*/
+        }
+
+        .dishes-head-area {
+            font-weight: bolder;
+            text-transform: capitalize;
+            font-size: 20px;
+        }
+
+        .dishes-desc-area {
+            display: inline-block;
+            /* float: left; */
+            width: 70%;
+        }
+
+        .dishes-price-area {
+            float: right;
+            margin-right: 50px;
+        }
 
 
-</style>
+    </style>
 
 
 </head>
@@ -105,25 +128,29 @@
         <div>
             <p>CLEANING BUGS</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 80%">
                     <span class="sr-only">80&#37; Complete</span>
                 </div>
             </div>
             <p>POSTING SOME STUFF</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 65%">
                     <span class="sr-only">65&#37; Complete</span>
                 </div>
             </div>
             <p>BACKUP DATA FROM SERVER</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 95%">
                     <span class="sr-only">95&#37; Complete</span>
                 </div>
             </div>
             <p>RE-DESIGNING WEB APPLICATION</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 100%">
                     <span class="sr-only">100&#37; Complete</span>
                 </div>
             </div>
@@ -146,7 +173,8 @@
             </p>
         </div>
     </div>
-</div>        Modal End --><%@include file="includes/logout-modal.jsp" %>
+</div>        Modal End -->
+<%@include file="includes/logout-modal.jsp" %>
 <!-- Begin page -->
 <div id="wrapper">
 
@@ -189,10 +217,17 @@
                             <div id="rnotifications" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="notification-list">
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-video"></i></span> 1 Video Uploaded <span class="muted">12 minutes ago</span></a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-users-1"></i></span> 3 Users signed up <span class="muted">16 minutes ago</span></a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-picture-1"></i></span> 1 Video Uploaded <span class="muted">12 minutes ago</span></a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-hourglass-1"></i></span> Deadline for 1 project <span class="muted">12 minutes ago</span></a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-video"></i></span>
+                                            1 Video Uploaded <span class="muted">12 minutes ago</span></a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i
+                                                class="icon-users-1"></i></span> 3 Users signed up <span class="muted">16 minutes ago</span></a>
+                                        </li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i
+                                                class="icon-picture-1"></i></span> 1 Video Uploaded <span class="muted">12 minutes ago</span></a>
+                                        </li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i
+                                                class="icon-hourglass-1"></i></span> Deadline for 1 project <span
+                                                class="muted">12 minutes ago</span></a></li>
                                     </ul>
                                     <a class="btn btn-block btn-sm btn-warning">See all notifications</a>
                                 </div>
@@ -210,15 +245,19 @@
                             <div id="remails" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="inbox-list">
-                                        <li><a href="javascript:;"><span class="sender"><i class="icon-star text-yellow-2"></i> Kim Wilde</span> <span class="datetime">6 mins ago</span>
+                                        <li><a href="javascript:;"><span class="sender"><i
+                                                class="icon-star text-yellow-2"></i> Kim Wilde</span> <span
+                                                class="datetime">6 mins ago</span>
                                             <span class="title">You keep me hangin on</span>
                                             <span class="content">Where are you? I am waiting for 3 hours in the restaurant. I ate 3 hamburgers.</span>
                                         </a></li>
-                                        <li><a href="javascript:;"><span class="sender">Tyler Durden</span> <span class="datetime">13 hours ago</span>
+                                        <li><a href="javascript:;"><span class="sender">Tyler Durden</span> <span
+                                                class="datetime">13 hours ago</span>
                                             <span class="title">Buy some soap from market before</span>
                                             <span class="content">We are crowded here. We need some more soap at home. Buy some before you come home.</span>
                                         </a></li>
-                                        <li><a href="javascript:;"><span class="sender">John Bonomo</span> <span class="datetime">Yesterday</span>
+                                        <li><a href="javascript:;"><span class="sender">John Bonomo</span> <span
+                                                class="datetime">Yesterday</span>
                                             <span class="title">Late delivery</span>
                                             <span class="content">Hello, I ordered 15 box of viagra for a friend of mine but he still hasn't receive them.</span>
                                         </a></li>
@@ -239,11 +278,21 @@
                             <div id="rupdates" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="updates-list">
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-green-1"><i class="icon-comment-1"></i></span> <b>David Guetta</b> came online <abbr title="15 seconds ago">just now</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-red-1"><i class="icon-user-3"></i></span> <b>Katy Perry</b> updated her profile <abbr title="4 mins ago">4 mins ago</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-blue-1"><i class="icon-twitter-2"></i></span> <b>4 tweets posted</b> with cronjob <abbr title="22 mins ago">22 mins ago</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-orange-3"><i class="icon-water"></i></span> <b>Adele</b> set fire to the rain <abbr title="43 mins ago">43 mins ago</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-pink-2"><i class="icon-heart-broken"></i></span> <b>Taylor Swift</b> learned that you are trouble <abbr title="3 hours ago">3 days ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-green-1"><i
+                                                class="icon-comment-1"></i></span> <b>David Guetta</b> came online <abbr
+                                                title="15 seconds ago">just now</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-red-1"><i
+                                                class="icon-user-3"></i></span> <b>Katy Perry</b> updated her profile
+                                            <abbr title="4 mins ago">4 mins ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-blue-1"><i
+                                                class="icon-twitter-2"></i></span> <b>4 tweets posted</b> with cronjob
+                                            <abbr title="22 mins ago">22 mins ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-orange-3"><i
+                                                class="icon-water"></i></span> <b>Adele</b> set fire to the rain <abbr
+                                                title="43 mins ago">43 mins ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-pink-2"><i
+                                                class="icon-heart-broken"></i></span> <b>Taylor Swift</b> learned that
+                                            you are trouble <abbr title="3 hours ago">3 days ago</abbr>.</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -269,12 +318,25 @@
                             <div id="chat-coll" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="chat-list">
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span class="chat-user-msg">You were the traitor</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span class="chat-user-msg">Where is my mind</span></a></li>
-                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span class="chat-user-msg">Away since 13:32</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span class="chat-user-msg">Yes he definitely is!</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span
+                                                class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span
+                                                class="chat-user-msg">You were the traitor</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span
+                                                class="chat-user-msg">Where is my mind</span></a></li>
+                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span
+                                                class="chat-user-msg">Away since 13:32</span></a></li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span
+                                                class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a>
+                                        </li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span
+                                                class="chat-user-msg">Yes he definitely is!</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -291,12 +353,26 @@
                             <div id="collapseTwo" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="chat-list">
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span class="chat-user-msg">You were the traitor</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span class="chat-user-msg" title="Eminem - The Monster ft. Rihanna"><i class="icon-play"></i> Eminem - The Monster ft. Rihanna</span></a></li>
-                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span class="chat-user-msg">Away since 13:32</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span class="chat-user-msg">Yes he definitely is!</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span
+                                                class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span
+                                                class="chat-user-msg">You were the traitor</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span
+                                                class="chat-user-msg" title="Eminem - The Monster ft. Rihanna"><i
+                                                class="icon-play"></i> Eminem - The Monster ft. Rihanna</span></a></li>
+                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span
+                                                class="chat-user-msg">Away since 13:32</span></a></li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span
+                                                class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a>
+                                        </li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span
+                                                class="chat-user-msg">Yes he definitely is!</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -314,7 +390,7 @@
                                 Live data updates
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked/>
                             </div>
                         </div>
                         <div class="row">
@@ -322,7 +398,7 @@
                                 Live feeds
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked/>
                             </div>
                         </div>
                         <div class="row">
@@ -330,7 +406,7 @@
                                 Sync data to cloud
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked/>
                             </div>
                         </div>
                         <div class="row">
@@ -338,7 +414,7 @@
                                 Keep activity record
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-danger ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-danger ios-switch-sm" checked/>
                             </div>
                         </div>
                         <h4>Other Settings</h4>
@@ -385,7 +461,8 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="toolbar-btn-action">
-                                        <a href="/add-foodmaker?add=new" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add new</a>
+                                        <a href="/add-foodmaker?add=new" class="btn btn-success"><i
+                                                class="fa fa-plus-circle"></i> Add new</a>
                                         <%--<a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
                                         <a class="btn btn-primary"><i class="fa fa-refresh"></i> Update</a>--%>
                                     </div>
@@ -393,11 +470,11 @@
                             </div>
                         </div>
                         <form action="/foodmaker/add-foodmaker" id="actions-form" method="post">
-                            <input type="hidden" name="rowId" />
+                            <input type="hidden" name="rowId"/>
                         </form>
 
                         <div class="table-responsive">
-                            <table  data-sortable class="table table-hover table-striped" id="datatables-table-act">
+                            <table data-sortable class="table table-hover table-striped" id="datatables-table-act">
                                 <thead>
                                 <tr>
                                     <th>Image</th>
@@ -412,34 +489,34 @@
                                 </thead>
 
                                 <tbody id="foodermaker-listing-tbl">
-                               <%-- <tr>
-                                    <td>Yogyakarta, Indonesia</td>
-                                    <td>Defence view</td>
-                                    <td><a href="mailto:#">name@domain.com</a></td>
-                                    <td>January 01, 1985</td>
-                                    <td><span class="label label-success">Active</span></td>
-                                    <td>
-                                        <div class="btn-group btn-group-xs">
-                                            <a data-toggle="tooltip" title="Delete" class="btn btn-default"><i class="fa fa-power-off"></i></a>
-                                            <a data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>--%>
+                                <%-- <tr>
+                                     <td>Yogyakarta, Indonesia</td>
+                                     <td>Defence view</td>
+                                     <td><a href="mailto:#">name@domain.com</a></td>
+                                     <td>January 01, 1985</td>
+                                     <td><span class="label label-success">Active</span></td>
+                                     <td>
+                                         <div class="btn-group btn-group-xs">
+                                             <a data-toggle="tooltip" title="Delete" class="btn btn-default"><i class="fa fa-power-off"></i></a>
+                                             <a data-toggle="tooltip" title="Edit" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                                         </div>
+                                     </td>
+                                 </tr>--%>
 
 
                                 </tbody>
                             </table>
                         </div>
 
-<%--                        <c:if test="${not empty lists}">
+                        <%--                        <c:if test="${not empty lists}">
 
-                        <ul>
-                            <c:forEach var="listValue" items="${lists}">
-                                <li>${listValue}</li>
-                            </c:forEach>
-                        </ul>
+                                                <ul>
+                                                    <c:forEach var="listValue" items="${lists}">
+                                                        <li>${listValue}</li>
+                                                    </c:forEach>
+                                                </ul>
 
-                    </c:if>--%>
+                                            </c:if>--%>
 
                     </div>
                 </div>
@@ -473,12 +550,8 @@
         <!--end :: modal -->
 
 
-
-
-
-
         <!-- Footer Start -->
-       <%@include file="includes/footer.jsp" %>
+        <%@include file="includes/footer.jsp" %>
         <!-- Footer End -->
     </div>
     <!-- ============================================================== -->
@@ -490,11 +563,16 @@
 
 </div>
 <div id="contextMenu" class="dropdown clearfix">
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
-        <li><a tabindex="-1" href="javascript:;" data-priority="high"><i class="fa fa-circle-o text-red-1"></i> High Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="medium"><i class="fa fa-circle-o text-orange-3"></i> Medium Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i> Low Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="none"><i class="fa fa-circle-o text-lightblue-1"></i> None</a></li>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+        style="display:block;position:static;margin-bottom:5px;">
+        <li><a tabindex="-1" href="javascript:;" data-priority="high"><i class="fa fa-circle-o text-red-1"></i> High
+            Priority</a></li>
+        <li><a tabindex="-1" href="javascript:;" data-priority="medium"><i class="fa fa-circle-o text-orange-3"></i>
+            Medium Priority</a></li>
+        <li><a tabindex="-1" href="javascript:;" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i> Low
+            Priority</a></li>
+        <li><a tabindex="-1" href="javascript:;" data-priority="none"><i class="fa fa-circle-o text-lightblue-1"></i>
+            None</a></li>
     </ul>
 </div>
 <!-- End of page -->
@@ -557,48 +635,48 @@
 <script src="${pageContext.request.contextPath}/assets/js/pages/datatables.js"></script>
 
 <script>
-    function dataTableInit(){
-        $('#datatables-table-act').DataTable( {
-            responsive: true,"paging": true
-        } );
+    function dataTableInit() {
+        $('#datatables-table-act').DataTable({
+            responsive: true, "paging": true
+        });
     }
 
     $.ajax({
-        url:'http://localhost:8080/foodmaker/foodmakers-list',
-        type:'get',
-        dataType:'json',
-        data:'',
-        success:function(response){
+        url: 'http://localhost:8080/foodmaker/foodmakers-list',
+        type: 'get',
+        dataType: 'json',
+        data: '',
+        success: function (response) {
             var html;
             console.log(response);
             var status;
             var classes;
-            response.forEach(function(foodmaker) {
-              if(foodmaker.foodmakerActive == 1){
-                  status = "Active";
-                  classes="label label-success"
-              }else{
-                  status = "UnActive";
-                  classes ="label label-warning";
-              }
+            response.forEach(function (foodmaker) {
+                if (foodmaker.foodmakerActive == 1) {
+                    status = "Active";
+                    classes = "label label-success"
+                } else {
+                    status = "UnActive";
+                    classes = "label label-warning";
+                }
 
 
-         html = '<tr data-row-id="'+foodmaker.foodmakerId+'" id="row-id-'+foodmaker.foodmakerId+'">'+
-             '<td><a href="javascript:void(0)" class="open-img-modal">'+((foodmaker.foodmakerImagePath == null) ? 'Upload Image' : '<img src="'+foodmaker.foodmakerImagePath+'" alt="img" style="width: 80px;height: 80px" />' )+'</a></td>'+
-                '<td>'+foodmaker.foodmakerName+'</td>'+
-                '<td>'+((foodmaker.foodmakerAddresId != null)? foodmaker.foodmakerAddresId.address+' '+foodmaker.foodmakerAddresId.city: 'not avaible' )+'</td>'+
-                '<td>'+foodmaker.foodmakerEmail+'</td>'+
-                '<td>'+foodmaker.foodmakerCreatedAt+'</td>'+
-                '<td><span class="'+classes+'">'+status+'</span></td>'+
-                '<td><a href="#" class="view-link-dishes" data-id="'+foodmaker.foodmakerId+'">view dishes</a></td>'+
-                '<td>'+
-                '<div class="btn-group btn-group-xs">'+
-                   // '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+foodmaker.foodmakerId+'" ><i class="fa fa-power-off"  ></i></a>'+
-                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="'+foodmaker.foodmakerId+'" ><i class="fa fa-edit"></i></a>'+
-                '</div>'+
-                '</td>'+
-            '</tr>';
-            $('#foodermaker-listing-tbl').append(html);
+                html = '<tr data-row-id="' + foodmaker.foodmakerId + '" id="row-id-' + foodmaker.foodmakerId + '">' +
+                    '<td><a href="javascript:void(0)" class="open-img-modal">' + ((foodmaker.foodmakerImagePath == null) ? 'Upload Image' : '<img src="' + foodmaker.foodmakerImagePath + '" alt="img" style="width: 80px;height: 80px" />') + '</a></td>' +
+                    '<td>' + foodmaker.foodmakerName + '</td>' +
+                    '<td>' + ((foodmaker.foodmakerAddresId != null) ? foodmaker.foodmakerAddresId.address + ' ' + foodmaker.foodmakerAddresId.city : 'not avaible') + '</td>' +
+                    '<td>' + foodmaker.foodmakerEmail + '</td>' +
+                    '<td>' + foodmaker.foodmakerCreatedAt + '</td>' +
+                    '<td><span class="' + classes + '">' + status + '</span></td>' +
+                    '<td><a href="#" class="view-link-dishes" data-id="' + foodmaker.foodmakerId + '">view dishes</a></td>' +
+                    '<td>' +
+                    '<div class="btn-group btn-group-xs">' +
+                    // '<a data-toggle="tooltip" title="Delete" class="btn btn-default btn-delete" data-id="'+foodmaker.foodmakerId+'" ><i class="fa fa-power-off"  ></i></a>'+
+                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="' + foodmaker.foodmakerId + '" ><i class="fa fa-edit"></i></a>' +
+                    '</div>' +
+                    '</td>' +
+                    '</tr>';
+                $('#foodermaker-listing-tbl').append(html);
 
             });
             viewFoodmakerDishes();
@@ -610,11 +688,10 @@
         }
 
 
-
     });
 
-    function viewOrderDetail(){
-        $('.btn-edit').on('click',function(){
+    function viewOrderDetail() {
+        $('.btn-edit').on('click', function () {
             var rowId = $(this).attr('data-id');
             $('input[type=hidden][name=rowId]').val(rowId);
             $('#actions-form').submit();
@@ -622,32 +699,33 @@
     }
 
     function openImageModal() {
-        $('.open-img-modal').on('click',function(){
+        $('.open-img-modal').on('click', function () {
             var rowId = $(this).parents(':eq(1)').attr('data-row-id');
             $('#hd-img-user-id').val(rowId);
             $('#image-upload-modal').modal('show');
 
         });
     }
-    $('#btn-upload-img').on('click',function(){
+
+    $('#btn-upload-img').on('click', function () {
         var thisElem = $(this);
         var file = $('#file-img')[0].files[0];
         //     if(file.length > 0){
         var userId = $('#hd-img-user-id').val();
         data = new FormData();
-        data.append('file',file);
+        data.append('file', file);
         $.ajax({
-            url:'http://localhost:8080/foodmaker/upload-img?id='+userId,
-            type:'post',
-            data:data,
-            dataType:'json',
+            url: 'http://localhost:8080/foodmaker/upload-img?id=' + userId,
+            type: 'post',
+            data: data,
+            dataType: 'json',
             contentType: false,
-            cache:false,
+            cache: false,
             processData: false,
-            success:function(response){
-                if(response.uploadedPath != null){
-                    var html = '<img src="'+response.uploadedPath+'" alt="img"/>';
-                    $('#row-id-'+userId).children('td').first().html(html);
+            success: function (response) {
+                if (response.uploadedPath != null) {
+                    var html = '<img src="' + response.uploadedPath + '" alt="img"/>';
+                    $('#row-id-' + userId).children('td').first().html(html);
                 }
                 $('#image-upload-modal').modal('hide');
             }
@@ -655,40 +733,37 @@
         })
 
 
-
         //      }
 
     });
 
 
-
-
-
     function viewFoodmakerDishes() {
         $('.view-link-dishes').unbind();
-        $('.view-link-dishes').on('click',function(){
+        $('.view-link-dishes').on('click', function () {
             var rowId = $(this).attr('data-id');
             var thisElem = $(this);
             $('#fm-dishes-modal-title').html($(this).parents(':eq(1)').children().first('td').html());
 
-            modalajax(rowId,thisElem);
+            modalajax(rowId, thisElem);
             $('#myModal').modal('show');
         });
     }
-    function modalajax(id,element) {
+
+    function modalajax(id, element) {
         $.ajax({
-            url:'http://localhost:8080/foodmaker_dishes/foodmakersdishes-list-byfoodmakerid?foodmakerId='+id,
-            type:'get',
-            dataType:'json',
-            data:'',
-            success:function(response){
+            url: 'http://localhost:8080/foodmaker_dishes/foodmakersdishes-list-byfoodmakerid?foodmakerId=' + id,
+            type: 'get',
+            dataType: 'json',
+            data: '',
+            success: function (response) {
                 var html = '';
                 console.log(response);
-                response.forEach(function(data){
-                    html +='<div class="dishes-div-wrapper" xmlns="http://www.w3.org/1999/html">'+
-                        '</br>'+'<div class="dishes-img-area"><image src="'+data.imagepath+'" target="dish image not avaible" style="width: 80px;height: 80px"></div>'+'</br>'+
-                                '<div class="dishes-desc-area"><span class="dishes-head-area">'+data.dishes.dishName+'</span><span class="dishes-price-area">Price :<span>'+((data.price == null)?"not Set":data.price )+' </span></span><p>'+data.description+'</p></div>'+
-                            ' </div>';
+                response.forEach(function (data) {
+                    html += '<div class="dishes-div-wrapper" xmlns="http://www.w3.org/1999/html">' +
+                        '</br>' + '<div class="dishes-img-area"><image src="' + data.imagepath + '" target="dish image not avaible" style="width: 80px;height: 80px"></div>' + '</br>' +
+                        '<div class="dishes-desc-area"><span class="dishes-head-area">' + data.dishes.dishName + '</span><span class="dishes-price-area">Price :<span>' + ((data.price == null) ? "not Set" : data.price) + ' </span></span><p>' + data.description + '</p></div>' +
+                        ' </div>';
                 });
                 $('#fm-dishes-modal-body').html(html);
 
@@ -698,8 +773,6 @@
 
 
 </script>
-
-
 
 
 </body>

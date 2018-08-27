@@ -1,8 +1,7 @@
 var output;
-$(document).ready(function(){
-	var updateOutput = function(e)
-    {
-        var list   = e.length ? e : $(e.target),
+$(document).ready(function () {
+    var updateOutput = function (e) {
+        var list = e.length ? e : $(e.target),
             output = list.data('output');
         if (window.JSON) {
             output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));

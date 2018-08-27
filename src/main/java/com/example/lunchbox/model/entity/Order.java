@@ -30,10 +30,10 @@ public class Order {
     @Column(name = "shipment_address")
     private String orderShipmentAddress;
 
-    @Column(name = "order_date",columnDefinition = "DATETIME")
+    @Column(name = "order_date", columnDefinition = "DATETIME")
     private Date orderDate;
 
-    @Column(name = "order_deliver_date",columnDefinition = "DATETIME")
+    @Column(name = "order_deliver_date", columnDefinition = "DATETIME")
     private Date orderDeliverDate;
 
     @Column(name = "order_totalamount")
@@ -51,16 +51,16 @@ public class Order {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<Orderdishes> orderdishes;
 
-    @OneToOne(fetch = FetchType.LAZY , mappedBy = "order", cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = {CascadeType.ALL})
     private Customer customer;
 
-    @OneToOne(fetch = FetchType.LAZY , mappedBy = "order", cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = {CascadeType.ALL})
     private Foodmaker foodmaker;
 
     public Order() {
     }
 
-    public Order(Integer orderCustomerId, Integer orderReservationId, String orderShipmentAddress, Date orderDate, Date orderDeliverDate, Float orderTotalAmount, Integer orderStatus, List<Orderdishes> orderdishes,Integer foodmakerId,Integer orderRating,Integer riderId) {
+    public Order(Integer orderCustomerId, Integer orderReservationId, String orderShipmentAddress, Date orderDate, Date orderDeliverDate, Float orderTotalAmount, Integer orderStatus, List<Orderdishes> orderdishes, Integer foodmakerId, Integer orderRating, Integer riderId) {
         this.orderCustomerId = orderCustomerId;
         this.orderReservationId = orderReservationId;
         this.orderShipmentAddress = orderShipmentAddress;
@@ -175,7 +175,7 @@ public class Order {
 
         Order order = (Order) o;
 
-        return Objects.equals(orderId,order.orderId);
+        return Objects.equals(orderId, order.orderId);
     }
 
     public Integer getOrderRating() {

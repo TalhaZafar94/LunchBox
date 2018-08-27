@@ -17,38 +17,37 @@ public class ViewController {
     private OrderService orderService;
     private FoodmakerService foodmakerService;
     private DishService dishService;
+
     @Autowired
-    public ViewController(CustomerService customerService,OrderService orderService,FoodmakerService foodmakerService,DishService dishService) {
+    public ViewController(CustomerService customerService, OrderService orderService, FoodmakerService foodmakerService, DishService dishService) {
         this.customerService = customerService;
-        this.orderService =  orderService;
+        this.orderService = orderService;
         this.foodmakerService = foodmakerService;
         this.dishService = dishService;
     }
-
 
 
     @RequestMapping(path = "/")
     public ModelAndView welcome(HttpSession session) {
         ModelAndView modelAndView;
 
-        if(session.getAttribute("loggedinAdmin") != null)
-        {
+        if (session.getAttribute("loggedinAdmin") != null) {
             modelAndView = new ModelAndView("index");
             long totalCustomer = customerService.countAllCustomers();
             long totalOrder = orderService.countAllOrders();
             long totalFoodmaker = foodmakerService.countAllFoodMmkers();
             long totalDishes = dishService.countAllDishes();
 
-            modelAndView.addObject("totalCustomer",totalCustomer);
-            modelAndView.addObject("totalOrder",totalOrder);
-            modelAndView.addObject("totalFoodmaker",totalFoodmaker);
-            modelAndView.addObject("totalDishes",totalDishes);
+            modelAndView.addObject("totalCustomer", totalCustomer);
+            modelAndView.addObject("totalOrder", totalOrder);
+            modelAndView.addObject("totalFoodmaker", totalFoodmaker);
+            modelAndView.addObject("totalDishes", totalDishes);
             return modelAndView;
             //return "index";
         }
         modelAndView = new ModelAndView("login");
         return modelAndView;
-      //  return "login";
+        //  return "login";
     }
 
 /*
@@ -77,7 +76,7 @@ public class ViewController {
 
     // for admin
 
-    @RequestMapping(value = "/admin-listing" , method = RequestMethod.GET)
+    @RequestMapping(value = "/admin-listing", method = RequestMethod.GET)
     public String adminDetail() {
         return "admin-listing";
     }
@@ -87,7 +86,7 @@ public class ViewController {
         return "add-admin";
     }
 
-    @RequestMapping(value = "/foodmaker-listing" , method = RequestMethod.GET)
+    @RequestMapping(value = "/foodmaker-listing", method = RequestMethod.GET)
     public String foodmakerListing() {
         return "foodmaker-listing";
     }
@@ -98,45 +97,47 @@ public class ViewController {
     }
 
 
-    @RequestMapping(value = "/customer-listing" ,method = RequestMethod.GET)
-    public String  getCustomerListingView(){
+    @RequestMapping(value = "/customer-listing", method = RequestMethod.GET)
+    public String getCustomerListingView() {
 
         return "customer-listing";
     }
 
-    @RequestMapping(value = "/add-customer" ,method = RequestMethod.GET)
-    public String  addCustomerView(){
+    @RequestMapping(value = "/add-customer", method = RequestMethod.GET)
+    public String addCustomerView() {
 
         return "add-customer";
     }
 
-    @RequestMapping(value = "/rider-listing" ,method = RequestMethod.GET)
-    public String  getRiderListingView(){
+    @RequestMapping(value = "/rider-listing", method = RequestMethod.GET)
+    public String getRiderListingView() {
 
         return "rider-listing";
     }
-    @RequestMapping(value = "/add-rider" ,method = RequestMethod.GET)
-    public String  addRiderView(){
+
+    @RequestMapping(value = "/add-rider", method = RequestMethod.GET)
+    public String addRiderView() {
 
         return "add-rider";
     }
-    @RequestMapping(value = "/dishes-listing" ,method = RequestMethod.GET)
-    public String  getDishesListingView(){
+
+    @RequestMapping(value = "/dishes-listing", method = RequestMethod.GET)
+    public String getDishesListingView() {
         return "dishes-listing";
     }
 
-    @RequestMapping(value = "/add-dishes" ,method = RequestMethod.GET)
-    public String  getAddDishesView(){
+    @RequestMapping(value = "/add-dishes", method = RequestMethod.GET)
+    public String getAddDishesView() {
         return "add-dishes";
     }
 
-    @RequestMapping(value = "/order-listing" ,method = RequestMethod.GET)
-    public String  getOrderListing(){
+    @RequestMapping(value = "/order-listing", method = RequestMethod.GET)
+    public String getOrderListing() {
         return "order-listing";
     }
 
-    @RequestMapping(value = "/order-detail" ,method = RequestMethod.GET)
-    public String  getOrderDetail(){
+    @RequestMapping(value = "/order-detail", method = RequestMethod.GET)
+    public String getOrderDetail() {
         return "order-detail";
     }
 

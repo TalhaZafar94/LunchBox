@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
     private String customerServerKey;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository,DeleteUserRepository deleteUserRepository,OrderRepository orderRepository,OrderService orderService) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, DeleteUserRepository deleteUserRepository, OrderRepository orderRepository, OrderService orderService) {
         this.customerRepository = customerRepository;
         this.deleteUserRepository = deleteUserRepository;
         this.orderRepository = orderRepository;
@@ -48,19 +48,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void customerSignup(Customer customer) {
-    if(customer.getCustomerId() == null){
-        try {
-            customer.setCustomerPassword(getSHA256(customer.getCustomerPassword()));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        if (customer.getCustomerId() == null) {
+            try {
+                customer.setCustomerPassword(getSHA256(customer.getCustomerPassword()));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         }
-    }
 
         customerRepository.saveAndFlush(customer);
     }
 
     @Override
-    public Customer getCustomerById(Integer id) { return customerRepository.findOne(id); }
+    public Customer getCustomerById(Integer id) {
+        return customerRepository.findOne(id);
+    }
 
     @Override
     public long countAllCustomers() {
@@ -74,15 +76,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> getCustomerByname(String customerName)
-    {
-        return  customerRepository.findByCustomerName(customerName);
+    public List<Customer> getCustomerByname(String customerName) {
+        return customerRepository.findByCustomerName(customerName);
     }
 
     @Override
     public List<Customer> findAllCustomers() {
 
-       return customerRepository.findAll();
+        return customerRepository.findAll();
     }
 
     @Override
@@ -91,12 +92,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer login(String customerEmail, String customerPassword,String token) {
+    public Customer login(String customerEmail, String customerPassword, String token) {
         Customer customer = this.findByCustomerEmail(customerEmail);
         try {
             if (customer != null && getSHA256(customerPassword).equals(customer.getCustomerPassword())) {
-                if(customer.getCustomerRegToken() == null || !customer.getCustomerRegToken().equals(token))
-                {
+                if (customer.getCustomerRegToken() == null || !customer.getCustomerRegToken().equals(token)) {
                     customer.setCustomerRegToken(token);
                     customerRepository.save(customer);
                 }
@@ -109,11 +109,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean updatePassword(String oldpassword, String newpassword , String customerEmail) {
+    public boolean updatePassword(String oldpassword, String newpassword, String customerEmail) {
         Customer customer = this.findByCustomerEmail(customerEmail);
         try {
-            if(customer != null && getSHA256(oldpassword).equals(customer.getCustomerPassword()))
-            {
+            if (customer != null && getSHA256(oldpassword).equals(customer.getCustomerPassword())) {
                 customer.setCustomerPassword(getSHA256(newpassword));
                 customerRepository.saveAndFlush(customer);
                 return true;
@@ -125,12 +124,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String getSHA256(String password) throws NoSuchAlgorithmException
-    {
-        MessageDigest messageDigest=MessageDigest.getInstance("SHA-512");
+    public String getSHA256(String password) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
 
         messageDigest.update(password.getBytes());
-        byte[] digest=messageDigest.digest();
+        byte[] digest = messageDigest.digest();
         StringBuilder sb = new StringBuilder();
         for (byte b : digest) {
             sb.append(Integer.toHexString((int) (b & 0xff)));
@@ -154,7 +152,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void saveImage(byte[] image,Customer customer) {
+    public void saveImage(byte[] image, Customer customer) {
 
         String final_Path = "localhost:8080/images/";
         Path path = Paths.get(uploadPath + customer.getCustomerName());
@@ -173,13 +171,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomerById(Integer customerId) {
         Customer customer = customerRepository.findOne(customerId);
-        DeleteUsers deleteUsers = new DeleteUsers(customer.getCustomerName(),customer.getCustomerEmail(),customer.getCustomerNic(),customer.getCustomerAccessType(),
-                customer.getCustomerPassword(),customer.getCustomerAddressId().getAddressId(),customer.getCustomerImagePath(),customer.getCustomerPhoneNumber());
+        DeleteUsers deleteUsers = new DeleteUsers(customer.getCustomerName(), customer.getCustomerEmail(), customer.getCustomerNic(), customer.getCustomerAccessType(),
+                customer.getCustomerPassword(), customer.getCustomerAddressId().getAddressId(), customer.getCustomerImagePath(), customer.getCustomerPhoneNumber());
 
-    deleteUserRepository.save(deleteUsers);
-    customerRepository.deleteCustomer(customerId);
+        deleteUserRepository.save(deleteUsers);
+        customerRepository.deleteCustomer(customerId);
 
-      //customerRepository.delete(customerId);
+        //customerRepository.delete(customerId);
     }
 
     @Override
@@ -189,14 +187,13 @@ public class CustomerServiceImpl implements CustomerService {
         List<Order> orderListbyCustomer_id = orderRepository.getAllByOrderCustomerId(customerId);
         List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(1);
 
-        if(orderListbyCustomer_id.size() > 0)
+        if (orderListbyCustomer_id.size() > 0)
             allOrders.retainAll(orderListbyCustomer_id);
 
-        if(orderListbystatus_id.size() > 0)
+        if (orderListbystatus_id.size() > 0)
             allOrders.retainAll(orderListbystatus_id);
 
-        if(allOrders.size() > 0)
-        {
+        if (allOrders.size() > 0) {
             return allOrders;
         }
 
@@ -209,14 +206,13 @@ public class CustomerServiceImpl implements CustomerService {
         List<Order> orderListbyCustomer_id = orderRepository.getAllByOrderCustomerId(customerId);
         List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(2);
 
-        if(orderListbyCustomer_id.size() > 0)
+        if (orderListbyCustomer_id.size() > 0)
             allOrders.retainAll(orderListbyCustomer_id);
 
-        if(orderListbystatus_id.size() > 0)
+        if (orderListbystatus_id.size() > 0)
             allOrders.retainAll(orderListbystatus_id);
 
-        if(allOrders.size() > 0)
-        {
+        if (allOrders.size() > 0) {
             return allOrders;
         }
 
@@ -229,14 +225,13 @@ public class CustomerServiceImpl implements CustomerService {
         List<Order> orderListbyCustomer_id = orderRepository.getAllByOrderCustomerId(customerId);
         List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(3);
 
-        if(orderListbyCustomer_id.size() > 0)
+        if (orderListbyCustomer_id.size() > 0)
             allOrders.retainAll(orderListbyCustomer_id);
 
-        if(orderListbystatus_id.size() > 0)
+        if (orderListbystatus_id.size() > 0)
             allOrders.retainAll(orderListbystatus_id);
 
-        if(allOrders.size() > 0)
-        {
+        if (allOrders.size() > 0) {
             return allOrders;
         }
 

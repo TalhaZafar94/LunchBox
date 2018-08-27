@@ -1,6 +1,6 @@
 package com.example.lunchbox.configuration;
 
-public class SecurityConfiguration{
+public class SecurityConfiguration {
 
 }
 

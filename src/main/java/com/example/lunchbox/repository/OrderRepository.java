@@ -12,10 +12,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order , Integer> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> getAllByFoodmakerId(Integer foodmakerId);
+
     List<Order> getAllByOrderCustomerId(Integer customerId);
+
     List<Order> getAllByOrderStatus(Integer status);
 
     @Transactional

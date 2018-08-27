@@ -7,9 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "customers" , indexes = {@Index(name = "EMAIL_INDEX",columnList = "customer_email,customer_nic" )})
+@Table(name = "customers", indexes = {@Index(name = "EMAIL_INDEX", columnList = "customer_email,customer_nic")})
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Customer{
+public class Customer {
 
     @Id
     @Column(name = "customer_id")
@@ -19,10 +19,10 @@ public class Customer{
     @Column(name = "customer_name")
     private String customerName;
 
-    @Column(name = "customer_nic",unique = true)
+    @Column(name = "customer_nic", unique = true)
     private String customerNic;
 
-    @Column(name = "customer_email",unique = true)
+    @Column(name = "customer_email", unique = true)
     private String customerEmail;
 
     @Column(name = "customer_accesstype")
@@ -31,7 +31,7 @@ public class Customer{
     @Column(name = "customer_password")
     private String customerPassword;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address customerAddressId;
 
@@ -41,13 +41,13 @@ public class Customer{
     @Column(name = "customer_phonenumber")
     private String customerPhoneNumber;
 
-    @Column(name = "customer_createdat",columnDefinition = "DATETIME")
+    @Column(name = "customer_createdat", columnDefinition = "DATETIME")
     private Date customerCreatedAt;
 
-    @Column(name = "customer_lastupdated",columnDefinition = "DATETIME")
+    @Column(name = "customer_lastupdated", columnDefinition = "DATETIME")
     private Date customerLastUpdated;
 
-    @Column(name = "location_id" ,unique = true)
+    @Column(name = "location_id", unique = true)
     private Integer customerLocationId;
 
     @Column(name = "customer_reg_token")
@@ -60,7 +60,7 @@ public class Customer{
     public Customer() {
     }
 
-    public Customer(Integer customerId, String customerName, String customerNic,String customerEmail,Integer customerAccessType, String customerPassword,Address customerAddressId,String customerImagePath,String customerPhoneNumber, Date customerCreatedAt,Date customerLastUpdated,Integer customerLocationId,String customerRegToken) {
+    public Customer(Integer customerId, String customerName, String customerNic, String customerEmail, Integer customerAccessType, String customerPassword, Address customerAddressId, String customerImagePath, String customerPhoneNumber, Date customerCreatedAt, Date customerLastUpdated, Integer customerLocationId, String customerRegToken) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerNic = customerNic;

@@ -1,12 +1,12 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // Generate a simple captcha
     function randomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     };
     $('#captchaOperation').html([randomNumber(1, 20), '+', randomNumber(1, 30), '='].join(' '));
-	
-	
-	//EXAMPLE REGISTER FORM
+
+
+    //EXAMPLE REGISTER FORM
     $('#registerForm').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
@@ -89,8 +89,9 @@ $(document).ready(function() {
                 validators: {
                     callback: {
                         message: 'Wrong answer',
-                        callback: function(value, validator) {
-                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                        callback: function (value, validator) {
+                            var items = $('#captchaOperation').html().split(' '),
+                                sum = parseInt(items[0]) + parseInt(items[2]);
                             return value == sum;
                         }
                     }
@@ -98,9 +99,9 @@ $(document).ready(function() {
             }
         }
     });
-	
-	
-	//EXAMPLE CONTACT FORM
+
+
+    //EXAMPLE CONTACT FORM
     $('#contactForm').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
@@ -148,8 +149,9 @@ $(document).ready(function() {
                 validators: {
                     callback: {
                         message: 'Wrong answer',
-                        callback: function(value, validator) {
-                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                        callback: function (value, validator) {
+                            var items = $('#captchaOperation').html().split(' '),
+                                sum = parseInt(items[0]) + parseInt(items[2]);
                             return value == sum;
                         }
                     }
@@ -157,13 +159,13 @@ $(document).ready(function() {
             }
         }
     });
-	
-	
-	//Regular expression based validators
+
+
+    //Regular expression based validators
     $('#ExpressionValidator').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
-             email: {
+            email: {
                 validators: {
                     notEmpty: {
                         message: 'The email address is required and can\'t be empty'
@@ -203,9 +205,9 @@ $(document).ready(function() {
             }
         }
     });
-	
-	
-	//Regular expression based validators
+
+
+    //Regular expression based validators
     $('#NotEmptyValidator').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
@@ -235,9 +237,9 @@ $(document).ready(function() {
             }
         }
     });
-	
-	
-	//Regular expression based validators
+
+
+    //Regular expression based validators
     $('#IdenticalValidator').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
@@ -265,8 +267,8 @@ $(document).ready(function() {
             }
         }
     });
-	
-	//Regular expression based validators
+
+    //Regular expression based validators
     $('#OtherValidator').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
@@ -286,5 +288,5 @@ $(document).ready(function() {
             }
         }
     });
-	
+
 });

@@ -6,14 +6,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class LunchboxApplication extends SpringBootServletInitializer{
+public class LunchboxApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(LunchboxApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(LunchboxApplication.class);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(LunchboxApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LunchboxApplication.class, args);
+    }
 }

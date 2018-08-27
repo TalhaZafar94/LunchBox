@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
     private EntityManager entityManager;
 
     @Autowired
-    public AdminServiceImpl(AdminRepository adminRepository,EntityManager entityManager,DeleteUserRepository deleteUserRepository) {
+    public AdminServiceImpl(AdminRepository adminRepository, EntityManager entityManager, DeleteUserRepository deleteUserRepository) {
         this.adminRepository = adminRepository;
         this.entityManager = entityManager;
         this.deleteUserRepository = deleteUserRepository;
@@ -44,8 +44,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void adminSignup(Admin admin) {
 
-        if (admin.getAdminPassword() != null)
-        {
+        if (admin.getAdminPassword() != null) {
             try {
                 admin.setAdminPassword(getSHA256(admin.getAdminPassword()));
             } catch (NoSuchAlgorithmException e) {
@@ -67,8 +66,7 @@ public class AdminServiceImpl implements AdminService {
     }
 */
 
-    public byte[] readImageOldWay(File file) throws IOException
-    {
+    public byte[] readImageOldWay(File file) throws IOException {
         InputStream is = new FileInputStream(file);
         // Get the size of the file
         long length = file.length();
@@ -76,8 +74,7 @@ public class AdminServiceImpl implements AdminService {
         // It needs to be an int type.
         // Before converting to an int type, check
         // to ensure that file is not larger than Integer.MAX_VALUE.
-        if (length > Integer.MAX_VALUE)
-        {
+        if (length > Integer.MAX_VALUE) {
             // File is too large
             throw new IOException("Could not completely read file " + file.getName());
         }
@@ -86,13 +83,11 @@ public class AdminServiceImpl implements AdminService {
         // Read in the bytes
         int offset = 0;
         int numRead = 0;
-        while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)
-        {
+        while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
             offset += numRead;
         }
         // Ensure all the bytes have been read in
-        if (offset < bytes.length)
-        {
+        if (offset < bytes.length) {
             throw new IOException("Could not completely read file " + file.getName());
         }
         // Close the input stream and return bytes
@@ -101,9 +96,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void updateAdmin(Admin admin)
-    {
-        Admin admin1 = entityManager.find(admin.getClass(),admin);
+    public void updateAdmin(Admin admin) {
+        Admin admin1 = entityManager.find(admin.getClass(), admin);
         entityManager.merge(admin1);
     }
 
@@ -152,11 +146,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public boolean updatePassword(String oldpassword, String newpassword , String adminEmail) {
+    public boolean updatePassword(String oldpassword, String newpassword, String adminEmail) {
         Admin admin = this.findByAdminEmail(adminEmail);
         try {
-            if(admin != null && getSHA256(oldpassword).equals(admin.getAdminPassword()))
-            {
+            if (admin != null && getSHA256(oldpassword).equals(admin.getAdminPassword())) {
                 admin.setAdminPassword(getSHA256(newpassword));
                 adminRepository.saveAndFlush(admin);
                 return true;
@@ -168,12 +161,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public String getSHA256(String password) throws NoSuchAlgorithmException
-    {
-        MessageDigest messageDigest=MessageDigest.getInstance("SHA-512");
+    public String getSHA256(String password) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
 
         messageDigest.update(password.getBytes());
-        byte[] digest=messageDigest.digest();
+        byte[] digest = messageDigest.digest();
         StringBuilder sb = new StringBuilder();
         for (byte b : digest) {
             sb.append(Integer.toHexString((int) (b & 0xff)));
@@ -192,10 +184,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteAdminById(Integer adminId){
+    public void deleteAdminById(Integer adminId) {
         Admin admin = adminRepository.findOne(adminId);
-        DeleteUsers deleteUser = new DeleteUsers(admin.getAdminName(),admin.getAdminEmail(),admin.getAdminNic(),admin.getAdminAccessType(),
-                                        admin.getAdminPassword(),admin.getAdminAddressId().getAddressId(),admin.getAdminImage(),admin.getAdminPhoneNumber());
+        DeleteUsers deleteUser = new DeleteUsers(admin.getAdminName(), admin.getAdminEmail(), admin.getAdminNic(), admin.getAdminAccessType(),
+                admin.getAdminPassword(), admin.getAdminAddressId().getAddressId(), admin.getAdminImage(), admin.getAdminPhoneNumber());
 
         deleteUserRepository.save(deleteUser);
         adminRepository.delete(adminId);

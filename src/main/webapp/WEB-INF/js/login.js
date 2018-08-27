@@ -1,16 +1,16 @@
-$(document).ready(function(){
-$('#login').click(function(){
-        var user=$('#userid').val();
-        var pwd=$('#pswrd').val();
+$(document).ready(function () {
+    $('#login').click(function () {
+        var user = $('#userid').val();
+        var pwd = $('#pswrd').val();
 
-        if(user != '' && pwd != ''){
+        if (user != '' && pwd != '') {
             $.ajax({
                 type: "POST",
-                url:"http://localhost:8080/admin/login",
-                data:"adminEmail="+user+"&adminPassword="+pwd,
+                url: "http://localhost:8080/admin/login",
+                data: "adminEmail=" + user + "&adminPassword=" + pwd,
                 success: function (response) {
 
-                    if(response == 'index'){
+                    if (response == 'index') {
                         window.location = 'index.html';
                     }
                     else {
@@ -23,11 +23,11 @@ $('#login').click(function(){
                 }
             });
         }
-        else if(user == '' && pwd != ''){
+        else if (user == '' && pwd != '') {
             $("#errorMessage").show();
             $("#errorMessage1").hide();
         }
-        else if(pwd == '' && user != ''){
+        else if (pwd == '' && user != '') {
             $("#errorMessage1").show();
             $("#errorMessage").show();
             $('#pswrd').val('');

@@ -6,7 +6,7 @@ public class CustomerLoginDTO {
     private String customerPassword;
     private Integer customerAccessType;
 
-    public CustomerLoginDTO(String customerEmail, String customerPassword , Integer customerAccessType) {
+    public CustomerLoginDTO(String customerEmail, String customerPassword, Integer customerAccessType) {
         this.customerEmail = customerEmail;
         this.customerPassword = customerPassword;
         this.customerAccessType = customerAccessType;

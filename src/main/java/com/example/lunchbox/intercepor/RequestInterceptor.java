@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 public class RequestInterceptor extends HandlerInterceptorAdapter {
 
-// httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getServerPort() + httpServletRequest.getContextPath() + httpServletRequest.getRequestURI();
+    // httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getServerPort() + httpServletRequest.getContextPath() + httpServletRequest.getRequestURI();
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String loginUrl = httpServletRequest.getContextPath() + "/";

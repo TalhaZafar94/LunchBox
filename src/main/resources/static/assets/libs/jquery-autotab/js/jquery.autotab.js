@@ -1,9 +1,9 @@
 /**
  * Autotab - jQuery plugin 1.5.1
  * https://github.com/Mathachew/jquery-autotab
- * 
+ *
  * Copyright (c) 2013 Matthew Miller
- * 
+ *
  * Licensed under the MIT licensing:
  *   http://www.opensource.org/licenses/mit-license.php
  */
@@ -87,7 +87,7 @@
         // Apply filter options
         if (method == 'filter') {
             if (typeof options === 'string' || typeof options === 'function') {
-                options = { format: options };
+                options = {format: options};
             }
 
             for (var i = 0, length = this.length; i < length; i++) {
@@ -127,7 +127,7 @@
                 options = {};
             }
             else if (typeof method === 'string' || typeof method === 'function') {
-                options = { format: method };
+                options = {format: method};
             }
             else if (typeof method === 'object') {
                 options = method;

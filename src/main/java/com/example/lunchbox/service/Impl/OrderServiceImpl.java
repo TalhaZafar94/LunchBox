@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
     private FoodmakerDishesRepository foodmakerDishesRepository;
 
-    private  RiderRepository riderRepository;
+    private RiderRepository riderRepository;
 
     private Orderdishes orderdishes;
     private EntityManager entityManager;
@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     private String customerServerKey;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository,RatingRepository ratingRepository,RiderRepository riderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository, RatingRepository ratingRepository, RiderRepository riderRepository) {
         this.orderRepository = orderRepository;
         this.orderDishesRepository = orderDishesRepository;
         this.customerRepository = customerRepository;
@@ -210,7 +210,13 @@ public class OrderServiceImpl implements OrderService {
     @Async
     public void sendNottificationToFoodmaker(Order order) {
         Foodmaker foodmaker = foodmakerRepository.findOne(order.getFoodmakerId());
-        sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "you have an order!");
+
+        if (order.getRiderId() == null || order.getRiderId() == 0) {
+            sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "you have an order!");
+        } else {
+            sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "order is assigned to rider!");
+        }
+
     }
 
     @Override
@@ -264,20 +270,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getorderByStatus(Integer status)
-    {
-        if(status == 1)
-        {
+    public List<Order> getorderByStatus(Integer status) {
+        if (status == 1) {
             return getPendingOrders();
-        }
-
-        else if(status == 2)
-        {
+        } else if (status == 2) {
             return getAckOrders();
-        }
-
-        else if(status == 3)
-        {
+        } else if (status == 3) {
             return getDoneOrders();
         }
 
@@ -287,16 +285,17 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void updateOrderRating(Integer orderRating, Integer orderId) {
         if (orderId != 0) {
-            orderRepository.updateOrderRating(orderRating,orderId);
+            orderRepository.updateOrderRating(orderRating, orderId);
         }
     }
 
     @Override
-    public String assignRiderToOrder(Integer riderId,Integer orderId){
+    public String assignRiderToOrder(Integer riderId, Integer orderId) {
         Order order = orderRepository.findOne(orderId);
-        if(order != null){
-            if(order.getRiderId() == null || order.getRiderId() == 0){
-                order.setRiderId(riderId);
+        if (order != null) {
+            if (order.getRiderId() == null || order.getRiderId() == 0) {
+                orderRepository.assignRiderToOrder(riderId, orderId);
+                sendNottificationToFoodmaker(order);
                 return "{\"status\":\"true\"}";
 
             }

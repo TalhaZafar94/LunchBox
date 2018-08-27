@@ -110,12 +110,12 @@ function ResponsiveDatatablesHelper(tableSelector, breakpoints) {
  */
 ResponsiveDatatablesHelper.prototype.init = function (breakpoints) {
     /** Generate breakpoints in the format we need. ***************************/
-    // First, we need to create a sorted array of the breakpoints given.
+        // First, we need to create a sorted array of the breakpoints given.
     var breakpointsSorted = [];
     _.each(breakpoints, function (value, key) {
         breakpointsSorted.push({
-            name         : key,
-            upperLimit   : value,
+            name: key,
+            upperLimit: value,
             columnsToHide: []
         });
     });
@@ -130,9 +130,9 @@ ResponsiveDatatablesHelper.prototype.init = function (breakpoints) {
 
     // Add the default breakpoint which shows all (has no upper limit).
     breakpointsSorted.push({
-        name         : 'default',
-        lowerLimit   : lowerLimit,
-        upperLimit   : undefined,
+        name: 'default',
+        lowerLimit: lowerLimit,
+        upperLimit: undefined,
         columnsToHide: []
     });
 
@@ -143,7 +143,7 @@ ResponsiveDatatablesHelper.prototype.init = function (breakpoints) {
     }
 
     /** Create range of possible column indexes *******************************/
-    // Get all visible column indexes
+        // Get all visible column indexes
     var columns = this.tableElement.fnSettings().aoColumns;
     for (var i = 0; i < columns.length; i++) {
         if (columns[i].bVisible) {
@@ -157,7 +157,7 @@ ResponsiveDatatablesHelper.prototype.init = function (breakpoints) {
     var headerElements = $('thead th', this.tableElement);
 
     /** Add columns into breakpoints respectively *****************************/
-        // Read column headers' attributes and get needed info
+    // Read column headers' attributes and get needed info
     _.each(headerElements, function (element, index) {
         // Get the column with the attribute data-class="expand" so we know
         // where to display the expand icon.

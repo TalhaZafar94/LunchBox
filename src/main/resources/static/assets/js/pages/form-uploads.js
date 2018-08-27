@@ -1,3 +1,3 @@
-$(function(){
-	$("#dropzone").dropzone()
+$(function () {
+    $("#dropzone").dropzone()
 });

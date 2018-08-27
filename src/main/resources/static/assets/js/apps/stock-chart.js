@@ -3,7 +3,7 @@ var stockelement = "#stock-chart";
 var width = $(stockelement).parent().width();
 var height = 400;
 var xticks = 15;
-String.prototype.format = function() {
+String.prototype.format = function () {
     var formatted = this;
     for (var i = 0; i < arguments.length; i++) {
         var regexp = new RegExp('\\{' + i + '\\}', 'gi');
@@ -30,26 +30,26 @@ function buildChart(data) {
     $(stockelement).html("");
     var margin = 60;
     var width = $(stockelement).parent().width();
-    var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var chart = d3.select("#stock-chart")
         .append("svg:svg")
         .attr("class", "chart")
         .attr("preserveAspectRatio", "xMidYMid meet")
-        .attr("viewBox", "0 0 "+width+" "+height)
+        .attr("viewBox", "0 0 " + width + " " + height)
         .attr("width", width)
         .attr("height", height);
     var y = d3.scale.linear()
-        .domain([d3.min(data.map(function(x) {
+        .domain([d3.min(data.map(function (x) {
             return x["Low"];
-        })), d3.max(data.map(function(x) {
+        })), d3.max(data.map(function (x) {
             return x["High"];
         }))])
         .range([height - margin, margin]);
     var x = d3.scale.linear()
-        .domain([d3.min(data.map(function(d) {
-                return dateFormat.parse(d.Date).getTime();
-            })),
-            d3.max(data.map(function(d) {
+        .domain([d3.min(data.map(function (d) {
+            return dateFormat.parse(d.Date).getTime();
+        })),
+            d3.max(data.map(function (d) {
                 return dateFormat.parse(d.Date).getTime();
             }))
         ])
@@ -76,7 +76,7 @@ function buildChart(data) {
         .attr("font-family", "Helvetica")
         .attr("font-size", "11px")
         .attr("text-anchor", "middle")
-        .text(function(d) {
+        .text(function (d) {
             var date = new Date(d);
             return monthNames[(date.getMonth())] + " " + date.getDate();
         });
@@ -98,19 +98,19 @@ function buildChart(data) {
     chart.selectAll("rect")
         .data(data)
         .enter().append("svg:rect")
-        .attr("x", function(d) {
+        .attr("x", function (d) {
             return x(dateFormat.parse(d.Date).getTime());
         })
-        .attr("y", function(d) {
+        .attr("y", function (d) {
             return y(max(d.Open, d.Close));
         })
-        .attr("height", function(d) {
+        .attr("height", function (d) {
             return y(min(d.Open, d.Close)) - y(max(d.Open, d.Close));
         })
-        .attr("width", function(d) {
+        .attr("width", function (d) {
             return 0.5 * (width - 2 * margin) / data.length;
         })
-        .attr("fill", function(d) {
+        .attr("fill", function (d) {
             return d.Open > d.Close ? "#eb5055" : "#68c39f";
         });
 
@@ -118,19 +118,19 @@ function buildChart(data) {
         .data(data)
         .enter().append("svg:line")
         .attr("class", "stem")
-        .attr("x1", function(d) {
+        .attr("x1", function (d) {
             return x(dateFormat.parse(d.Date).getTime()) + 0.25 * (width - 2 * margin) / data.length;
         })
-        .attr("x2", function(d) {
+        .attr("x2", function (d) {
             return x(dateFormat.parse(d.Date).getTime()) + 0.25 * (width - 2 * margin) / data.length;
         })
-        .attr("y1", function(d) {
+        .attr("y1", function (d) {
             return y(d.High);
         })
-        .attr("y2", function(d) {
+        .attr("y2", function (d) {
             return y(d.Low);
         })
-        .attr("stroke", function(d) {
+        .attr("stroke", function (d) {
             return d.Open > d.Close ? "#eb5055" : "#68c39f";
         })
 
@@ -143,7 +143,7 @@ function appendToData(x) {
     for (var i = 0; i < data.length; i++) {
         data[i].timestamp = (new Date(data[i].date).getTime() / 1000);
     }
-    data = data.sort(function(x, y) {
+    data = data.sort(function (x, y) {
         return x.timestamp - y.timestamp;
     });
     //alert(data);
@@ -154,11 +154,11 @@ function buildQuery() {
     var symbol = $(".stock-options a.active").data("stock");
     if (symbol == "GOOG") {
         $("#stock-title strong").text("Google Inc");
-    }else if (symbol == "AMZN") {
+    } else if (symbol == "AMZN") {
         $("#stock-title strong").text("Amazon");
-    }else if (symbol == "^IXIC") {
+    } else if (symbol == "^IXIC") {
         $("#stock-title strong").text("NASDAQ");
-    }else if (symbol == "^GSPC") {
+    } else if (symbol == "^GSPC") {
         $("#stock-title strong").text("S&P");
     }
 
@@ -172,29 +172,29 @@ function buildQuery() {
 
 function fetchData() {
     var width = $(stockelement).parent().width();
-    if(width < 400){
+    if (width < 400) {
         xticks = 4;
         start = new Date(end.getTime() - 1000 * 60 * 60 * 24 * 15);
-    }else if(width < 600){
+    } else if (width < 600) {
         xticks = 5;
         start = new Date(end.getTime() - 1000 * 60 * 60 * 24 * 30);
-    }else{
+    } else {
         xticks = 15;
         start = new Date(end.getTime() - 1000 * 60 * 60 * 24 * 60);
     }
     url = buildQuery();
-    $.get(url,function(data){
-      appendToData(data);
+    $.get(url, function (data) {
+        appendToData(data);
     });
 
 }
 
-$(document).ready(function(){
-  $(".stock-options a").click(function(){
-      $(".stock-options a").removeClass("active");
-      $(this).addClass("active");
-      fetchData();
-      return false;
-  })
-  resizefunc.push("fetchData");
+$(document).ready(function () {
+    $(".stock-options a").click(function () {
+        $(".stock-options a").removeClass("active");
+        $(this).addClass("active");
+        fetchData();
+        return false;
+    })
+    resizefunc.push("fetchData");
 });

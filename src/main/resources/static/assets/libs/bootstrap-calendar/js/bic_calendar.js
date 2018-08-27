@@ -6,19 +6,18 @@
  *  Made by bichotll
  *  Under Apache License
  */
-$.fn.bic_calendar = function(options) {
+$.fn.bic_calendar = function (options) {
 
     var opts = $.extend({}, $.fn.bic_calendar.defaults, options);
 
 
-
-    this.each(function() {
+    this.each(function () {
 
 
         /*** vars ***/
 
 
-        //element called
+            //element called
         var elem = $(this);
 
         var calendar;
@@ -93,9 +92,6 @@ $.fn.bic_calendar = function(options) {
         /*** --vars-- ***/
 
 
-
-
-
         /*** functions ***/
 
         /**
@@ -121,7 +117,7 @@ $.fn.bic_calendar = function(options) {
             //next-previous month controllers
             var nextMonthButton = $('<td><a href="#" class="button-month-next"><i class="glyphicon glyphicon-arrow-right" ></i></a></td>');
             //event
-            nextMonthButton.click(function(e) {
+            nextMonthButton.click(function (e) {
                 e.preventDefault();
                 month = (month + 1) % 12;
                 if (month == 0)
@@ -130,7 +126,7 @@ $.fn.bic_calendar = function(options) {
             })
             var previousMonthButton = $('<td><a href="#" class="button-month-previous"><i class="glyphicon glyphicon-arrow-left" ></i></a></td>');
             //event
-            previousMonthButton.click(function(e) {
+            previousMonthButton.click(function (e) {
                 e.preventDefault();
                 month = (month - 1);
                 if (month == -1) {
@@ -143,14 +139,14 @@ $.fn.bic_calendar = function(options) {
             //next-previous year controllers
             var nextYearButton = $('<td><a href="#" class="button-year-next"><i class="glyphicon glyphicon-arrow-right" ></i></a></td>');
             //event
-            nextYearButton.click(function(e) {
+            nextYearButton.click(function (e) {
                 e.preventDefault();
                 year++;
                 changeDate(month, year);
             })
             var previousYearButton = $('<td><a href="#" class="button-year-previous"><i class="glyphicon glyphicon-arrow-left" ></i></a></td>');
             //event
-            previousYearButton.click(function(e) {
+            previousYearButton.click(function (e) {
                 e.preventDefault();
                 year--;
                 changeDate(month, year);
@@ -216,7 +212,7 @@ $.fn.bic_calendar = function(options) {
             if (showDays != false) {
                 var capaDiasSemana = $('<tr class="days-month" >');
                 var codigoInsertar = '';
-                $(dayNames).each(function(indice, valor) {
+                $(dayNames).each(function (indice, valor) {
                     codigoInsertar += '<td';
                     if (indice == 0) {
                         codigoInsertar += ' class="first"';
@@ -331,7 +327,7 @@ $.fn.bic_calendar = function(options) {
 
         /**
          * check if a date is correct
-         * 
+         *
          * @thanks http://kevin.vanzonneveld.net
          * @thanks http://www.desarrolloweb.com/manuales/manual-librerias-phpjs.html
          */
@@ -368,12 +364,12 @@ $.fn.bic_calendar = function(options) {
                     url: reqAjax.url,
                     data: {mes: month + 1, ano: year},
                     dataType: 'json'
-                }).done(function(data) {
+                }).done(function (data) {
 
                     if (typeof events == 'undefined')
                         events = [];
 
-                    $.each(data, function(k, v) {
+                    $.each(data, function (k, v) {
                         events.push(data[k]);
                     });
 
@@ -433,7 +429,7 @@ $.fn.bic_calendar = function(options) {
             $('#' + calendarId + ' ' + '.event_tooltip a').tooltip(tooltipOptions);
             $('#' + calendarId + ' ' + '.event_popover a').popover(popoverOptions);
 
-            $('.manual_popover').click(function() {
+            $('.manual_popover').click(function () {
                 $(this).popover('toggle');
             });
         }
@@ -446,7 +442,7 @@ $.fn.bic_calendar = function(options) {
 
                 var eventBicCalendarSelect;
 
-                elem.on('click', 'td.day', function() {
+                elem.on('click', 'td.day', function () {
                     //if multiSelect
                     if (multiSelect == true) {
                         if (daySelected == '') {

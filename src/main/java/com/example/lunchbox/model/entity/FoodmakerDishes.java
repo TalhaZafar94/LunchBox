@@ -30,10 +30,10 @@ public class FoodmakerDishes {
     @Column(name = "price")
     private Double price;
 
-    @OneToOne(fetch = FetchType.LAZY , mappedBy = "foodmakerDishes", cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "foodmakerDishes", cascade = {CascadeType.ALL})
     private Foodmaker foodmaker;
 
-    @OneToOne(fetch = FetchType.LAZY , mappedBy = "fDishes", cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "fDishes", cascade = {CascadeType.ALL})
     private Dishes dishes;
 
 
@@ -44,7 +44,7 @@ public class FoodmakerDishes {
     public FoodmakerDishes() {
     }
 
-    public FoodmakerDishes(Integer dishId, Integer foodmakerid,String name, String imagepath, String description, Double price) {
+    public FoodmakerDishes(Integer dishId, Integer foodmakerid, String name, String imagepath, String description, Double price) {
         this.dishId = dishId;
         this.foodmakerid = foodmakerid;
         this.name = name;

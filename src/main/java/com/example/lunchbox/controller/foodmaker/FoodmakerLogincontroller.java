@@ -29,14 +29,14 @@ public class FoodmakerLogincontroller {
 
     @Autowired
     public FoodmakerLogincontroller(FoodmakerService foodmakerService) {
-    this.foodmakerService = foodmakerService;
+        this.foodmakerService = foodmakerService;
     }
 
-    @RequestMapping(value = "/login" , method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Foodmaker verifyLogin(@RequestParam String userName, @RequestParam String password,
-                              HttpSession session, Model model,@RequestParam String token){
+                                 HttpSession session, Model model, @RequestParam String token) {
 
-        Foodmaker foodmaker = foodmakerService.login(userName, password,token);
+        Foodmaker foodmaker = foodmakerService.login(userName, password, token);
         if (foodmaker == null) {
             model.addAttribute("loginError", "Error logging in. Please try again");
             return null;
@@ -47,24 +47,24 @@ public class FoodmakerLogincontroller {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {
-        session.removeAttribute("loggedInUser"); 
+        session.removeAttribute("loggedInUser");
         return "login";
     }
 
-    @RequestMapping(value = "/signup" ,method = RequestMethod.POST)
-    public String  signup(@RequestBody Foodmaker foodmaker){
-     //   if(foodmaker.getFoodmakerpassword() != null && foodmaker.getFoodmakerEmail() != null && foodmaker.getFoodmakerName() != null &&
-     //           foodmaker.getFoodmakerNic() != null && foodmaker.getFoodmakerPhoneNumber() != null)
-     //   {
-            foodmakerService.foodmakerSignup(foodmaker);
-            //foodmakerService.saveImage(image,foodmaker);
-            return "foodmaker added";
-     //   }
-       // return "please specify the fields";
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signup(@RequestBody Foodmaker foodmaker) {
+        //   if(foodmaker.getFoodmakerpassword() != null && foodmaker.getFoodmakerEmail() != null && foodmaker.getFoodmakerName() != null &&
+        //           foodmaker.getFoodmakerNic() != null && foodmaker.getFoodmakerPhoneNumber() != null)
+        //   {
+        foodmakerService.foodmakerSignup(foodmaker);
+        //foodmakerService.saveImage(image,foodmaker);
+        return "foodmaker added";
+        //   }
+        // return "please specify the fields";
     }
 
     @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
-    public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
+    public String uploadImage(@RequestParam Integer id, @RequestParam("file") MultipartFile file) {
         String uploadedPath = null;
         String final_Path = "http://localhost:8080/images/";
         foodmakerService.findAllFoodmakers();
@@ -77,7 +77,7 @@ public class FoodmakerLogincontroller {
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
 
-            final_Path +=  file.getOriginalFilename();
+            final_Path += file.getOriginalFilename();
 
             foodmaker.setFoodmakerImagePath(final_Path);
             uploadedPath = path.toString();
@@ -86,13 +86,13 @@ public class FoodmakerLogincontroller {
             e.printStackTrace();
         }
 
-        return "{ \"uploadedPath\" : \""+final_Path+"\"}";
+        return "{ \"uploadedPath\" : \"" + final_Path + "\"}";
     }
 
 
-    @RequestMapping(value = "/update-password" ,method = RequestMethod.POST)
-    public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword , @RequestParam String foodmakerEmail){
-        if(foodmakerService.updatePassword(oldpassword,newpassword,foodmakerEmail)){
+    @RequestMapping(value = "/update-password", method = RequestMethod.POST)
+    public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword, @RequestParam String foodmakerEmail) {
+        if (foodmakerService.updatePassword(oldpassword, newpassword, foodmakerEmail)) {
             return "password updated";
         }
         return "error";
@@ -104,8 +104,8 @@ public class FoodmakerLogincontroller {
     }
 
     @RequestMapping(value = "/foodmakers-nearBy-list", method = RequestMethod.GET)
-    public List<Foodmaker> findNearByFoodmakers(@RequestParam Double lat,@RequestParam Double longt ) {
-        return foodmakerService.getFoodmakersNearBy(lat,longt);
+    public List<Foodmaker> findNearByFoodmakers(@RequestParam Double lat, @RequestParam Double longt) {
+        return foodmakerService.getFoodmakersNearBy(lat, longt);
     }
 
 
@@ -125,20 +125,20 @@ public class FoodmakerLogincontroller {
         return foodmakerService.getFoodmakerByname(foodmakerName);
     }
 
-    @RequestMapping(value = "/foodmaker-listing" , method = RequestMethod.GET)
+    @RequestMapping(value = "/foodmaker-listing", method = RequestMethod.GET)
     public ModelAndView adminDetail() {
         ModelAndView modelAndView = new ModelAndView("foodmaker-listing");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add-foodmaker" ,method = RequestMethod.GET)
-    public ModelAndView getAddAdminView(){
+    @RequestMapping(value = "/add-foodmaker", method = RequestMethod.GET)
+    public ModelAndView getAddAdminView() {
         ModelAndView modelAndView = new ModelAndView("add-foodmaker");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add-foodmaker" ,method = RequestMethod.POST)
-    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+    @RequestMapping(value = "/add-foodmaker", method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId) {
         Foodmaker foodmaker = foodmakerService.getFoodmakerById(rowId);
         ModelAndView modelAndView = new ModelAndView("add-foodmaker");
         modelAndView.addObject("foodmakerDetail", foodmaker);
@@ -146,43 +146,37 @@ public class FoodmakerLogincontroller {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/set-status",method = RequestMethod.POST)
-    public String setStatus(@RequestParam Integer foodmakerId, @RequestParam Integer status)
-    {
-        foodmakerService.setStatus(foodmakerId,status);
-        return "{ \"status\" : \""+status+"\"}";
+    @RequestMapping(value = "/set-status", method = RequestMethod.POST)
+    public String setStatus(@RequestParam Integer foodmakerId, @RequestParam Integer status) {
+        foodmakerService.setStatus(foodmakerId, status);
+        return "{ \"status\" : \"" + status + "\"}";
     }
 
-    @RequestMapping(value = "/set-ratings",method = RequestMethod.POST)
-    public String setRatings(@RequestParam Integer customerId, @RequestParam Integer foodmakerId, @RequestParam Integer stars)
-    {
-        foodmakerService.setRatings(customerId,foodmakerId,stars);
+    @RequestMapping(value = "/set-ratings", method = RequestMethod.POST)
+    public String setRatings(@RequestParam Integer customerId, @RequestParam Integer foodmakerId, @RequestParam Integer stars) {
+        foodmakerService.setRatings(customerId, foodmakerId, stars);
 
         return "{\"status\":\"true\"}";
     }
 
-    @RequestMapping(value = "/get-ratings",method = RequestMethod.GET)
-    public List<Ratings> getRatings(@RequestParam Integer foodmakerId)
-    {
+    @RequestMapping(value = "/get-ratings", method = RequestMethod.GET)
+    public List<Ratings> getRatings(@RequestParam Integer foodmakerId) {
         return foodmakerService.getRatingsByFoodmakerId(foodmakerId);
     }
 
-    @RequestMapping(value = "/get-orderByFoodmakerId",method = RequestMethod.GET)
-    public List<Order> getOrderByFoodmakerId(@RequestParam Integer foodmakerId)
-    {
+    @RequestMapping(value = "/get-orderByFoodmakerId", method = RequestMethod.GET)
+    public List<Order> getOrderByFoodmakerId(@RequestParam Integer foodmakerId) {
         return foodmakerService.getOrdersByfoodmakerId(foodmakerId);
     }
 
-    @RequestMapping(value = "/get-ack-orderByFoodmakerId",method = RequestMethod.GET)
-    public List<Order> getAckOrderByFoodmakerId(@RequestParam Integer foodmakerId)
-    {
+    @RequestMapping(value = "/get-ack-orderByFoodmakerId", method = RequestMethod.GET)
+    public List<Order> getAckOrderByFoodmakerId(@RequestParam Integer foodmakerId) {
         return foodmakerService.getAckOrdersByfoodmakerId(foodmakerId);
     }
 
 
-    @RequestMapping(value = "/get-done-orderByFoodmakerId",method = RequestMethod.GET)
-    public List<Order> getDoneOrderByFoodmakerId(@RequestParam Integer foodmakerId)
-    {
+    @RequestMapping(value = "/get-done-orderByFoodmakerId", method = RequestMethod.GET)
+    public List<Order> getDoneOrderByFoodmakerId(@RequestParam Integer foodmakerId) {
         return foodmakerService.getDoneOrdersByfoodmakerId(foodmakerId);
     }
 

@@ -25,8 +25,8 @@ public class FoodmakerDishesServiceServiceImpl implements FoodmakerDishesService
     private OrderRepository orderRepository;
 
     @Autowired
-    public FoodmakerDishesServiceServiceImpl(FoodmakerDishesRepository foodmakerDishesRepository,DishRepository dishRepository,
-                                             FoodmakerRepository foodmakerRepository,OrderRepository orderRepository) {
+    public FoodmakerDishesServiceServiceImpl(FoodmakerDishesRepository foodmakerDishesRepository, DishRepository dishRepository,
+                                             FoodmakerRepository foodmakerRepository, OrderRepository orderRepository) {
         this.foodmakerDishesRepository = foodmakerDishesRepository;
         this.foodmakerRepository = foodmakerRepository;
         this.dishRepository = dishRepository;
@@ -57,10 +57,9 @@ public class FoodmakerDishesServiceServiceImpl implements FoodmakerDishesService
     public List<FoodmakerDishes> getFoodmakerDishbyFoodmakerId(int foodmakerId) {
 
         List<FoodmakerDishes> getAll = new ArrayList<>();
-        List<FoodmakerDishes> foodmakerDishes  = foodmakerDishesRepository.getAllByFoodmakerid(foodmakerId);
+        List<FoodmakerDishes> foodmakerDishes = foodmakerDishesRepository.getAllByFoodmakerid(foodmakerId);
 
-        for(FoodmakerDishes foodmakerDishes1: foodmakerDishes)
-        {
+        for (FoodmakerDishes foodmakerDishes1 : foodmakerDishes) {
             foodmakerDishes1.setDishes(dishRepository.findOne(foodmakerDishes1.getDishId()));
             foodmakerDishes1.setFoodmaker(foodmakerRepository.findOne(foodmakerId));
             getAll.add(foodmakerDishes1);
@@ -70,21 +69,18 @@ public class FoodmakerDishesServiceServiceImpl implements FoodmakerDishesService
 
 
     @Override
-    public List<Dishes> getDishbyorderId(int orderId)
-    {
+    public List<Dishes> getDishbyorderId(int orderId) {
         List<Dishes> dishesList = new ArrayList<>();
 
-            Order order  =  orderRepository.getOne(orderId);
+        Order order = orderRepository.getOne(orderId);
 
-            for(int i=0;i<=order.getOrderdishes().size();i++)
-            {
-                dishesList.add(dishRepository.findOne(i));
-            }
+        for (int i = 0; i <= order.getOrderdishes().size(); i++) {
+            dishesList.add(dishRepository.findOne(i));
+        }
 
-            if(dishesList.size() > 0)
-            {
-                return dishesList;
-            }
+        if (dishesList.size() > 0) {
+            return dishesList;
+        }
 
         return null;
     }
@@ -94,10 +90,9 @@ public class FoodmakerDishesServiceServiceImpl implements FoodmakerDishesService
     public List<FoodmakerDishes> getFoodmakerDishbyDishesId(int dishId) {
 
         List<FoodmakerDishes> getAll = new ArrayList<>();
-        List<FoodmakerDishes> foodmakerDishes  = foodmakerDishesRepository.getAllByDishId(dishId);
+        List<FoodmakerDishes> foodmakerDishes = foodmakerDishesRepository.getAllByDishId(dishId);
 
-        for(FoodmakerDishes foodmakerDishes1: foodmakerDishes)
-        {
+        for (FoodmakerDishes foodmakerDishes1 : foodmakerDishes) {
             foodmakerDishes1.setDishes(dishRepository.findOne(dishId));
             foodmakerDishes1.setFoodmaker(foodmakerRepository.findOne(foodmakerDishes1.getFoodmakerid()));
             getAll.add(foodmakerDishes1);
@@ -110,10 +105,9 @@ public class FoodmakerDishesServiceServiceImpl implements FoodmakerDishesService
     public List<FoodmakerDishes> findAll() {
 
         List<FoodmakerDishes> getAll = new ArrayList<>();
-        List<FoodmakerDishes> foodmakerDishes  = foodmakerDishesRepository.findAll();
+        List<FoodmakerDishes> foodmakerDishes = foodmakerDishesRepository.findAll();
 
-        for(FoodmakerDishes foodmakerDishes1: foodmakerDishes)
-        {
+        for (FoodmakerDishes foodmakerDishes1 : foodmakerDishes) {
             foodmakerDishes1.setDishes(dishRepository.findOne(foodmakerDishes1.getDishId()));
             foodmakerDishes1.setFoodmaker(foodmakerRepository.findOne(foodmakerDishes1.getFoodmakerid()));
             getAll.add(foodmakerDishes1);

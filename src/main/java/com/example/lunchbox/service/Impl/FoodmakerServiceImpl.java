@@ -38,8 +38,8 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     private String uploadPath;
 
     @Autowired
-    public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository,LocationRepository locationRepository,OrderService orderService
-                                ,RatingRepository ratingRepository,OrderRepository orderRepository,DeleteUserRepository deleteUserRepository) {
+    public FoodmakerServiceImpl(FoodmakerRepository foodmakerRepository, LocationRepository locationRepository, OrderService orderService
+            , RatingRepository ratingRepository, OrderRepository orderRepository, DeleteUserRepository deleteUserRepository) {
         this.foodmakerRepository = foodmakerRepository;
         this.locationRepository = locationRepository;
         this.ratingRepository = ratingRepository;
@@ -63,7 +63,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         Address address = foodmaker.getFoodmakerAddresId();
         JSONObject object = getLatLng(address.getAddress());
 
-        if(object != null && object.length() > 0) {
+        if (object != null && object.length() > 0) {
 
             Foodmaker foodmakr = this.findByFoodmakerEmail(foodmaker.getFoodmakerEmail());
 
@@ -92,7 +92,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public List <Foodmaker> getFoodmakerByname(String foodmakerName) {
+    public List<Foodmaker> getFoodmakerByname(String foodmakerName) {
         return foodmakerRepository.findByFoodmakerNameContaining(foodmakerName);
     }
 
@@ -101,10 +101,8 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
         List<Foodmaker> getAll = new ArrayList<>();
 
-        for(Foodmaker foodmaker:foodmakerRepository.findAll())
-        {
-            if(foodmaker.getFoodmakerActive() == 2)
-            {
+        for (Foodmaker foodmaker : foodmakerRepository.findAll()) {
+            if (foodmaker.getFoodmakerActive() == 2) {
                 continue;
             }
             foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
@@ -120,12 +118,11 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public Foodmaker login(String foodmakerEmail, String foodmakerPassword,String token) {
+    public Foodmaker login(String foodmakerEmail, String foodmakerPassword, String token) {
         Foodmaker foodmaker = this.findByFoodmakerEmail(foodmakerEmail);
         try {
             if (foodmaker != null && getSHA256(foodmakerPassword).equals(foodmaker.getFoodmakerpassword())) {
-                if(foodmaker.getFoodmakerRegToken() == null ||  !foodmaker.getFoodmakerRegToken().equals(token))
-                {
+                if (foodmaker.getFoodmakerRegToken() == null || !foodmaker.getFoodmakerRegToken().equals(token)) {
                     foodmaker.setFoodmakerRegToken(token);
                     foodmakerRepository.save(foodmaker);
                 }
@@ -138,11 +135,10 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public boolean updatePassword(String oldpassword, String newpassword , String foodmakerEmail) {
+    public boolean updatePassword(String oldpassword, String newpassword, String foodmakerEmail) {
         Foodmaker foodmaker = this.findByFoodmakerEmail(foodmakerEmail);
         try {
-            if(foodmaker != null && getSHA256(oldpassword).equals(foodmaker.getFoodmakerpassword()))
-            {
+            if (foodmaker != null && getSHA256(oldpassword).equals(foodmaker.getFoodmakerpassword())) {
                 foodmaker.setFoodmakerpassword(getSHA256(newpassword));
                 foodmakerRepository.saveAndFlush(foodmaker);
                 return true;
@@ -154,12 +150,11 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public String getSHA256(String password) throws NoSuchAlgorithmException
-    {
-        MessageDigest messageDigest=MessageDigest.getInstance("SHA-512");
+    public String getSHA256(String password) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
 
         messageDigest.update(password.getBytes());
-        byte[] digest=messageDigest.digest();
+        byte[] digest = messageDigest.digest();
         StringBuilder sb = new StringBuilder();
         for (byte b : digest) {
             sb.append(Integer.toHexString((int) (b & 0xff)));
@@ -177,10 +172,9 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         return foodmakerRepository.getFoodmakerByFoodmakerLastUpdated(date);
     }
 
-    private static JSONObject getLatLng(String address)
-    {
-        address = address.replace(" ","+");
-        String uri = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key="+key;
+    private static JSONObject getLatLng(String address) {
+        address = address.replace(" ", "+");
+        String uri = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=" + key;
 
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
@@ -195,30 +189,26 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public List<Foodmaker> getFoodmakersNearBy(Double lat, Double longt){
+    public List<Foodmaker> getFoodmakersNearBy(Double lat, Double longt) {
 
         List<Foodmaker> inlocations = new ArrayList<>();
         List<Location> locations = locationRepository.findAll();
         Double count = 6.0;
 
-        try
-        {
-            for(Location location:locations)
-            {
-                if(getDistance(lat,longt,location.getLocationLatitude(),location.getLocationLongitude()) <= count)
-                {
-                    Foodmaker foodmaker = foodmakerRepository.findOne(location.getFoodmakerId());
-                    if(foodmaker.getFoodmakerActive() == 2)
-                    {
-                        continue;
+        try {
+            for (Location location : locations) {
+                if (location.getFoodmakerId() != null) {
+                    if (getDistance(lat, longt, location.getLocationLatitude(), location.getLocationLongitude()) <= count) {
+                        Foodmaker foodmaker = foodmakerRepository.findOne(location.getFoodmakerId());
+                        if (foodmaker.getFoodmakerActive() == 2) {
+                            continue;
+                        }
+                        foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
+                        inlocations.add(foodmaker);
                     }
-                    foodmaker.setAverageRatings(ratingRepository.getAverage(foodmaker.getFoodmakerId()));
-                    inlocations.add(foodmaker);
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -323,8 +313,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public void setStatus(int foodmakerId,int status)
-    {
+    public void setStatus(int foodmakerId, int status) {
         Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
         foodmaker.setFoodmakerActive(status);
         foodmakerRepository.save(foodmaker);
@@ -334,7 +323,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
 
     @Override
     public void setRatings(int customerId, int foodmakerId, int stars) {
-        Ratings ratings = new Ratings(customerId,foodmakerId,stars);
+        Ratings ratings = new Ratings(customerId, foodmakerId, stars);
         ratingRepository.save(ratings);
     }
 
@@ -344,7 +333,7 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public void saveImage(byte[] image,Foodmaker foodmaker) {
+    public void saveImage(byte[] image, Foodmaker foodmaker) {
 
         String final_Path = "localhost:8080/images/";
         Path path = Paths.get(uploadPath + foodmaker.getFoodmakerName());
@@ -359,21 +348,19 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
     @Override
-    public List<Order> getOrdersByfoodmakerId(Integer foodmakerId)
-    {
+    public List<Order> getOrdersByfoodmakerId(Integer foodmakerId) {
         List<Order> allOrders = orderService.findAllOrders();
         List<Order> orderListbyFoodmaker_id = orderRepository.getAllByFoodmakerId(foodmakerId);
         List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(1);
 
-        if(orderListbyFoodmaker_id.size() > 0)
+        if (orderListbyFoodmaker_id.size() > 0)
             allOrders.retainAll(orderListbyFoodmaker_id);
 
-        if(orderListbystatus_id.size() > 0)
+        if (orderListbystatus_id.size() > 0)
             allOrders.retainAll(orderListbystatus_id);
 
 
-        if(allOrders.size() > 0)
-        {
+        if (allOrders.size() > 0) {
             return allOrders;
         }
 
@@ -386,15 +373,14 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         List<Order> orderListbyFoodmaker_id = orderRepository.getAllByFoodmakerId(foodmakerId);
         List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(2);
 
-        if(orderListbyFoodmaker_id.size() > 0)
+        if (orderListbyFoodmaker_id.size() > 0)
             allOrders.retainAll(orderListbyFoodmaker_id);
 
-        if(orderListbystatus_id.size() > 0)
+        if (orderListbystatus_id.size() > 0)
             allOrders.retainAll(orderListbystatus_id);
 
 
-        if(allOrders.size() > 0)
-        {
+        if (allOrders.size() > 0) {
             return allOrders;
         }
 
@@ -407,15 +393,14 @@ public class FoodmakerServiceImpl implements FoodmakerService {
         List<Order> orderListbyFoodmaker_id = orderRepository.getAllByFoodmakerId(foodmakerId);
         List<Order> orderListbystatus_id = orderRepository.getAllByOrderStatus(3);
 
-        if(orderListbyFoodmaker_id.size() > 0)
+        if (orderListbyFoodmaker_id.size() > 0)
             allOrders.retainAll(orderListbyFoodmaker_id);
 
-        if(orderListbystatus_id.size() > 0)
+        if (orderListbystatus_id.size() > 0)
             allOrders.retainAll(orderListbystatus_id);
 
 
-        if(allOrders.size() > 0)
-        {
+        if (allOrders.size() > 0) {
             return allOrders;
         }
 
@@ -423,19 +408,17 @@ public class FoodmakerServiceImpl implements FoodmakerService {
     }
 
 
-
     @Override
-    public void deletefoodmakerById(Integer foodmakerId){
+    public void deletefoodmakerById(Integer foodmakerId) {
         Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
-        DeleteUsers deleteUser = new DeleteUsers(foodmaker.getFoodmakerName(),foodmaker.getFoodmakerEmail(),foodmaker.getFoodmakerNic(),foodmaker.getFoodmakerAccessType(),
-                foodmaker.getFoodmakerpassword(),foodmaker.getFoodmakerAddresId().getAddressId(),foodmaker.getFoodmakerImagePath(),foodmaker.getFoodmakerPhoneNumber());
+        DeleteUsers deleteUser = new DeleteUsers(foodmaker.getFoodmakerName(), foodmaker.getFoodmakerEmail(), foodmaker.getFoodmakerNic(), foodmaker.getFoodmakerAccessType(),
+                foodmaker.getFoodmakerpassword(), foodmaker.getFoodmakerAddresId().getAddressId(), foodmaker.getFoodmakerImagePath(), foodmaker.getFoodmakerPhoneNumber());
 
         deleteUserRepository.save(deleteUser);
         foodmakerRepository.delete(foodmakerId);
     }
 
-   private Double getDistance(double lat1,double long1,double lat2,double long2)
-    {
+    private Double getDistance(double lat1, double long1, double lat2, double long2) {
         return 6371 * (Math.acos(
                 ((Math.cos(Math.toRadians(lat2))
                         * (Math.cos(Math.toRadians(lat1)))

@@ -10,6 +10,7 @@ import java.util.List;
 public interface FoodmakerDishesRepository extends JpaRepository<FoodmakerDishes, Integer> {
 
     List<FoodmakerDishes> getAllByFoodmakerid(Integer foodmakerId);
+
     List<FoodmakerDishes> getAllByDishId(Integer dishId);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,15 +38,15 @@ public class AdminLoginConntroller {
 
         Admin admin = adminService.login(adminEmail, adminPassword);
 
-        if(admin == null) {
+        if (admin == null) {
             model.addAttribute("loginError", "Error logging in. Please try again");
             return "login";
         }
 
         session.setAttribute("loggedinAdmin", admin);
-        session.setAttribute("adminName",admin.getAdminName());
-        session.setAttribute("adminEmail",admin.getAdminEmail());
-        session.setAttribute("adminImage",admin.getAdminImage());
+        session.setAttribute("adminName", admin.getAdminName());
+        session.setAttribute("adminEmail", admin.getAdminEmail());
+        session.setAttribute("adminImage", admin.getAdminImage());
         return "index";
     }
 
@@ -67,59 +68,56 @@ public class AdminLoginConntroller {
 //    }
 
 
-
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(@RequestBody Admin admin) {
-        if(admin.getAdminPassword() != null && admin.getAdminEmail() != null && admin.getAdminName() != null &&
-                admin.getAdminNic() != null &&admin.getAdminPhoneNumber() != null)
-        {
+        if (admin.getAdminPassword() != null && admin.getAdminEmail() != null && admin.getAdminName() != null &&
+                admin.getAdminNic() != null && admin.getAdminPhoneNumber() != null) {
             adminService.adminSignup(admin);
             return "admin added";
         }
         return "please specify the fields";
     }
-/**
- * test add
- * */
 
-@RequestMapping(value = "/upload-img", method = RequestMethod.POST)
-public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
-    String uploadedPath = null;
-    String final_Path = "http://localhost:8080/images/";
-    adminService.findAllAdmin();
-    Admin admin = adminService.getAdminById(id);
-    String UPLOADED_FOLDER = uploadPath;
-    try {
+    /**
+     * test add
+     */
 
-        // Get the file and save it somewhere
-        byte[] bytes = file.getBytes();
-        Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-        Files.write(path, bytes);
+    @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
+    public String uploadImage(@RequestParam Integer id, @RequestParam("file") MultipartFile file) {
+        String uploadedPath = null;
+        String final_Path = "http://localhost:8080/images/";
+        adminService.findAllAdmin();
+        Admin admin = adminService.getAdminById(id);
+        String UPLOADED_FOLDER = uploadPath;
+        try {
 
-        final_Path +=  file.getOriginalFilename();
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
 
-        admin.setAdminImage(final_Path);
-        uploadedPath = path.toString();
-        adminService.adminSignup(admin);
-    } catch (IOException e) {
-        e.printStackTrace();
+            final_Path += file.getOriginalFilename();
+
+            admin.setAdminImage(final_Path);
+            uploadedPath = path.toString();
+            adminService.adminSignup(admin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "{ \"uploadedPath\" : \"" + final_Path + "\"}";
     }
 
-    return "{ \"uploadedPath\" : \""+final_Path+"\"}";
-}
 
-
-
-/**
-* test add
-* */
+    /**
+     * test add
+     */
 
 
     @RequestMapping(value = "/update-admin", method = RequestMethod.POST)
     public String updateAdmin(@RequestBody Admin admin) {
-        if(admin.getAdminPassword() != null && admin.getAdminEmail() != null && admin.getAdminName() != null &&
-                admin.getAdminNic() != null &&admin.getAdminPhoneNumber() != null)
-        {
+        if (admin.getAdminPassword() != null && admin.getAdminEmail() != null && admin.getAdminName() != null &&
+                admin.getAdminNic() != null && admin.getAdminPhoneNumber() != null) {
             adminService.updateAdmin(admin);
             return "admin updated";
         }
@@ -157,26 +155,26 @@ public String uploadImage(@RequestParam Integer id,@RequestParam("file") Multipa
     }
 
     @RequestMapping(value = "/delete-admin-id", method = RequestMethod.POST)
-    public String deleteAdminThroughId(@RequestParam Integer adminId){
+    public String deleteAdminThroughId(@RequestParam Integer adminId) {
         adminService.deleteAdminById(adminId);
         return "admin deleted";
     }
 
 
-    @RequestMapping(value = "/admin-listing" , method = RequestMethod.GET)
+    @RequestMapping(value = "/admin-listing", method = RequestMethod.GET)
     public ModelAndView adminDetail() {
         ModelAndView modelAndView = new ModelAndView("admin-listing");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add-admin" ,method = RequestMethod.GET)
-    public ModelAndView getAddAdminView(){
+    @RequestMapping(value = "/add-admin", method = RequestMethod.GET)
+    public ModelAndView getAddAdminView() {
         ModelAndView modelAndView = new ModelAndView("add-admin");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add-admin" ,method = RequestMethod.POST)
-    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+    @RequestMapping(value = "/add-admin", method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId) {
         Admin admin = adminService.getAdminById(rowId);
         ModelAndView modelAndView = new ModelAndView("add-admin");
         modelAndView.addObject("foodmakerDetail", admin);

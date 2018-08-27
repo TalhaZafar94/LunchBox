@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "foodmakers" , indexes = {@Index(name = "EMAIL_INDEX",columnList = "foodmaker_email,foodmaker_nic" )})
+@Table(name = "foodmakers", indexes = {@Index(name = "EMAIL_INDEX", columnList = "foodmaker_email,foodmaker_nic")})
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Foodmaker {
 
@@ -20,16 +20,16 @@ public class Foodmaker {
     @Column(name = "foodmaker_name")
     private String foodmakerName;
 
-    @Column(name = "foodmaker_email",unique = true)
+    @Column(name = "foodmaker_email", unique = true)
     private String foodmakerEmail;
 
-    @Column(name = "foodmaker_nic",unique = true)
+    @Column(name = "foodmaker_nic", unique = true)
     private String foodmakerNic;
 
     @Column(name = "foodmaker_password")
     private String foodmakerpassword;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address foodmakerAddresId;
 
@@ -71,7 +71,7 @@ public class Foodmaker {
     public Foodmaker() {
     }
 
-    public Foodmaker(String foodmakerName, String foodmakerEmail, String foodmakerNic, String foodmakerpassword, Address foodmakerAddresId, Integer foodmakerAccessType, String foodmakerImagePath, Integer foodmakerActive, String foodmakerPhoneNumber, Integer foodmakerAdminId, Date foodmakerCreatedAt, Date foodmakerLastUpdated,String foodmakerRegToken) {
+    public Foodmaker(String foodmakerName, String foodmakerEmail, String foodmakerNic, String foodmakerpassword, Address foodmakerAddresId, Integer foodmakerAccessType, String foodmakerImagePath, Integer foodmakerActive, String foodmakerPhoneNumber, Integer foodmakerAdminId, Date foodmakerCreatedAt, Date foodmakerLastUpdated, String foodmakerRegToken) {
         this.foodmakerName = foodmakerName;
         this.foodmakerEmail = foodmakerEmail;
         this.foodmakerNic = foodmakerNic;

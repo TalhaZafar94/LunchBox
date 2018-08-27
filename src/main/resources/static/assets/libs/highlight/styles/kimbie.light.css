@@ -8,7 +8,7 @@
 /* Kimbie Comment */
 .hljs-comment,
 .hljs-title {
-  color: #a57a4c;
+    color: #a57a4c;
 }
 
 /* Kimbie Red */
@@ -24,7 +24,7 @@
 .css .hljs-id,
 .css .hljs-class,
 .css .hljs-pseudo {
-  color: #dc3958;
+    color: #dc3958;
 }
 
 /* Kimbie Orange */
@@ -34,13 +34,13 @@
 .hljs-literal,
 .hljs-params,
 .hljs-constant {
-  color: #f79a32;
+    color: #f79a32;
 }
 
 /* Kimbie Yellow */
 .ruby .hljs-class .hljs-title,
 .css .hljs-rules .hljs-attribute {
-  color: #f06431;
+    color: #f06431;
 }
 
 /* Kimbie Green */
@@ -50,12 +50,12 @@
 .hljs-header,
 .ruby .hljs-symbol,
 .xml .hljs-cdata {
-  color: #889b4a;
+    color: #889b4a;
 }
 
 /* Kimbie Aqua */
 .css .hljs-hexcolor {
-  color: #088649;
+    color: #088649;
 }
 
 /* Kimbie Blue */
@@ -67,21 +67,21 @@
 .perl .hljs-sub,
 .javascript .hljs-title,
 .coffeescript .hljs-title {
-  color: #8ab1b0;
+    color: #8ab1b0;
 }
 
 /* Kimbie Purple */
 .hljs-keyword,
 .javascript .hljs-function {
-  color: #98676a;
+    color: #98676a;
 }
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  background: #fbebd4;
-  color: #84613d;
-  padding: 0.5em;
+    display: block;
+    overflow-x: auto;
+    background: #fbebd4;
+    color: #84613d;
+    padding: 0.5em;
 }
 
 .coffeescript .javascript,
@@ -91,5 +91,5 @@
 .xml .vbscript,
 .xml .css,
 .xml .hljs-cdata {
-  opacity: 0.5;
+    opacity: 0.5;
 }

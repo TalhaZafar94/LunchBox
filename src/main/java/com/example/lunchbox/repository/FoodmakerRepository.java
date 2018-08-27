@@ -8,12 +8,16 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface FoodmakerRepository extends JpaRepository<Foodmaker , Integer> {
+public interface FoodmakerRepository extends JpaRepository<Foodmaker, Integer> {
 
     Foodmaker findByFoodmakerEmail(String email);
+
     List<Foodmaker> findByFoodmakerName(String foodmakerName);
+
     List<Foodmaker> findByFoodmakerNameContaining(String foodmakername);
+
     Foodmaker getFoodmakerByFoodmakerCreatedAt(Date date);
+
     Foodmaker getFoodmakerByFoodmakerLastUpdated(Date date);
 
 }

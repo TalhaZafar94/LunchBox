@@ -12,40 +12,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="description" content="">
     <meta name="keywords" content="coco bootstrap template, coco admin, bootstrap,admin template, bootstrap admin,">
     <meta name="author" content="Huban Creative">
 
     <!-- Base Css Files -->
-    <link href="${pageContext.request.contextPath}/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/fontello/css/fontello.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/animate-css/animate.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/pace/pace.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/fontello/css/fontello.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/animate-css/animate.min.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/nifty-modal/css/component.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/pace/pace.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-datepicker/css/datepicker.css"
+          rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-icheck/skins/all.css" rel="stylesheet"/>
     <!-- Code Highlighter for Demo -->
-    <link href="${pageContext.request.contextPath}/assets/libs/prettify/github.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/prettify/github.css" rel="stylesheet"/>
 
     <!-- Extra CSS Libraries Start -->
-    <link href="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/assets/libs/rickshaw/rickshaw.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/morrischart/morris.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-clock/clock.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-calendar/css/bic_calendar.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/jquery-weather/simpleweather.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/libs/bootstrap-xeditable/css/bootstrap-editable.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css"/>
     <!-- Extra CSS Libraries End -->
-    <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/css/style-responsive.css" rel="stylesheet"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,14 +65,21 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
-    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="57x57"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="72x72"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="76x76"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-76x76.png"/>
+    <link rel="apple-touch-icon" sizes="114x114"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-114x114.png"/>
+    <link rel="apple-touch-icon" sizes="120x120"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon" sizes="144x144"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="152x152"
+          href="${pageContext.request.contextPath}/assets/img/apple-touch-icon-152x152.png"/>
 </head>
 <body class="fixed-left">
 <!-- Modal Start -->
@@ -73,25 +90,29 @@
         <div>
             <p>CLEANING BUGS</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 80%">
                     <span class="sr-only">80&#37; Complete</span>
                 </div>
             </div>
             <p>POSTING SOME STUFF</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 65%">
                     <span class="sr-only">65&#37; Complete</span>
                 </div>
             </div>
             <p>BACKUP DATA FROM SERVER</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 95%">
                     <span class="sr-only">95&#37; Complete</span>
                 </div>
             </div>
             <p>RE-DESIGNING WEB APPLICATION</p>
             <div class="progress progress-xs for-modal">
-                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                     aria-valuemax="100" style="width: 100%">
                     <span class="sr-only">100&#37; Complete</span>
                 </div>
             </div>
@@ -102,7 +123,7 @@
     </div>
 </div>
 <!-- Modal Logout -->
-    <%@include file="includes/logout-modal.jsp" %> <!-- Modal End -->
+<%@include file="includes/logout-modal.jsp" %> <!-- Modal End -->
 <!-- Begin page -->
 <div id="wrapper">
 
@@ -146,10 +167,17 @@
                             <div id="rnotifications" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="notification-list">
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-video"></i></span> 1 Video Uploaded <span class="muted">12 minutes ago</span></a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-users-1"></i></span> 3 Users signed up <span class="muted">16 minutes ago</span></a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-picture-1"></i></span> 1 Video Uploaded <span class="muted">12 minutes ago</span></a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-hourglass-1"></i></span> Deadline for 1 project <span class="muted">12 minutes ago</span></a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i class="icon-video"></i></span>
+                                            1 Video Uploaded <span class="muted">12 minutes ago</span></a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i
+                                                class="icon-users-1"></i></span> 3 Users signed up <span class="muted">16 minutes ago</span></a>
+                                        </li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i
+                                                class="icon-picture-1"></i></span> 1 Video Uploaded <span class="muted">12 minutes ago</span></a>
+                                        </li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper"><i
+                                                class="icon-hourglass-1"></i></span> Deadline for 1 project <span
+                                                class="muted">12 minutes ago</span></a></li>
                                     </ul>
                                     <a class="btn btn-block btn-sm btn-warning">See all notifications</a>
                                 </div>
@@ -167,15 +195,19 @@
                             <div id="remails" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="inbox-list">
-                                        <li><a href="javascript:;"><span class="sender"><i class="icon-star text-yellow-2"></i> Kim Wilde</span> <span class="datetime">6 mins ago</span>
+                                        <li><a href="javascript:;"><span class="sender"><i
+                                                class="icon-star text-yellow-2"></i> Kim Wilde</span> <span
+                                                class="datetime">6 mins ago</span>
                                             <span class="title">You keep me hangin on</span>
                                             <span class="content">Where are you? I am waiting for 3 hours in the restaurant. I ate 3 hamburgers.</span>
                                         </a></li>
-                                        <li><a href="javascript:;"><span class="sender">Tyler Durden</span> <span class="datetime">13 hours ago</span>
+                                        <li><a href="javascript:;"><span class="sender">Tyler Durden</span> <span
+                                                class="datetime">13 hours ago</span>
                                             <span class="title">Buy some soap from market before</span>
                                             <span class="content">We are crowded here. We need some more soap at home. Buy some before you come home.</span>
                                         </a></li>
-                                        <li><a href="javascript:;"><span class="sender">John Bonomo</span> <span class="datetime">Yesterday</span>
+                                        <li><a href="javascript:;"><span class="sender">John Bonomo</span> <span
+                                                class="datetime">Yesterday</span>
                                             <span class="title">Late delivery</span>
                                             <span class="content">Hello, I ordered 15 box of viagra for a friend of mine but he still hasn't receive them.</span>
                                         </a></li>
@@ -196,11 +228,21 @@
                             <div id="rupdates" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="updates-list">
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-green-1"><i class="icon-comment-1"></i></span> <b>David Guetta</b> came online <abbr title="15 seconds ago">just now</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-red-1"><i class="icon-user-3"></i></span> <b>Katy Perry</b> updated her profile <abbr title="4 mins ago">4 mins ago</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-blue-1"><i class="icon-twitter-2"></i></span> <b>4 tweets posted</b> with cronjob <abbr title="22 mins ago">22 mins ago</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-orange-3"><i class="icon-water"></i></span> <b>Adele</b> set fire to the rain <abbr title="43 mins ago">43 mins ago</abbr>.</a></li>
-                                        <li><a href="javascript:;"><span class="icon-wrapper bg-pink-2"><i class="icon-heart-broken"></i></span> <b>Taylor Swift</b> learned that you are trouble <abbr title="3 hours ago">3 days ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-green-1"><i
+                                                class="icon-comment-1"></i></span> <b>David Guetta</b> came online <abbr
+                                                title="15 seconds ago">just now</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-red-1"><i
+                                                class="icon-user-3"></i></span> <b>Katy Perry</b> updated her profile
+                                            <abbr title="4 mins ago">4 mins ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-blue-1"><i
+                                                class="icon-twitter-2"></i></span> <b>4 tweets posted</b> with cronjob
+                                            <abbr title="22 mins ago">22 mins ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-orange-3"><i
+                                                class="icon-water"></i></span> <b>Adele</b> set fire to the rain <abbr
+                                                title="43 mins ago">43 mins ago</abbr>.</a></li>
+                                        <li><a href="javascript:;"><span class="icon-wrapper bg-pink-2"><i
+                                                class="icon-heart-broken"></i></span> <b>Taylor Swift</b> learned that
+                                            you are trouble <abbr title="3 hours ago">3 days ago</abbr>.</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -226,12 +268,25 @@
                             <div id="chat-coll" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="chat-list">
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span class="chat-user-msg">You were the traitor</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span class="chat-user-msg">Where is my mind</span></a></li>
-                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span class="chat-user-msg">Away since 13:32</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span class="chat-user-msg">Yes he definitely is!</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span
+                                                class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span
+                                                class="chat-user-msg">You were the traitor</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span
+                                                class="chat-user-msg">Where is my mind</span></a></li>
+                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span
+                                                class="chat-user-msg">Away since 13:32</span></a></li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span
+                                                class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a>
+                                        </li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span
+                                                class="chat-user-msg">Yes he definitely is!</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -248,12 +303,26 @@
                             <div id="collapseTwo" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <ul class="list-unstyled" id="chat-list">
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span class="chat-user-msg">You were the traitor</span></a></li>
-                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span class="chat-user-msg" title="Eminem - The Monster ft. Rihanna"><i class="icon-play"></i> Eminem - The Monster ft. Rihanna</span></a></li>
-                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span class="chat-user-msg">Away since 13:32</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a></li>
-                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span class="chat-user-msg">Yes he definitely is!</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/1.jpg"></span> <span class="chat-user-name">Dorothy Simons</span><span
+                                                class="chat-user-msg">I wish I was a bird in the sky</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/2.jpg"></span> <span class="chat-user-name">John Malkovich</span><span
+                                                class="chat-user-msg">You were the traitor</span></a></li>
+                                        <li><a href="javascript:;" class="online"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/3.jpg"></span> <span class="chat-user-name">Jessica Simons</span><span
+                                                class="chat-user-msg" title="Eminem - The Monster ft. Rihanna"><i
+                                                class="icon-play"></i> Eminem - The Monster ft. Rihanna</span></a></li>
+                                        <li><a href="javascript:;" class="away"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/4.jpg"></span> <span class="chat-user-name">Jack Stallman</span><span
+                                                class="chat-user-msg">Away since 13:32</span></a></li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/5.jpg"></span> <span class="chat-user-name">Neil Armstrong</span><span
+                                                class="chat-user-msg" title="I am flying to the moon and back">I am flying to the moon and back</span></a>
+                                        </li>
+                                        <li><a href="javascript:;" class="offline"><span class="chat-user-avatar"><img
+                                                src="images/users/chat/6.jpg"></span> <span class="chat-user-name">Hollywood Studios</span><span
+                                                class="chat-user-msg">Yes he definitely is!</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -271,7 +340,7 @@
                                 Live data updates
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked/>
                             </div>
                         </div>
                         <div class="row">
@@ -279,7 +348,7 @@
                                 Live feeds
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked/>
                             </div>
                         </div>
                         <div class="row">
@@ -287,7 +356,7 @@
                                 Sync data to cloud
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-success ios-switch-sm" checked/>
                             </div>
                         </div>
                         <div class="row">
@@ -295,7 +364,7 @@
                                 Keep activity record
                             </div>
                             <div class="col-xs-4">
-                                <input type="checkbox" class="ios-switch ios-switch-danger ios-switch-sm" checked />
+                                <input type="checkbox" class="ios-switch ios-switch-danger ios-switch-sm" checked/>
                             </div>
                         </div>
                         <h4>Other Settings</h4>
@@ -338,29 +407,35 @@
                     <% Admin data = (Admin) request.getAttribute("foodmakerDetail"); %>
 
 
-
-                    <input type="hidden" id="rowId" name="rowId" value="<%= (data != null ?data.getAdminId():"") %>" >
+                    <input type="hidden" id="rowId" name="rowId" value="<%= (data != null ?data.getAdminId():"") %>">
                     <div class="widget-content padding">
                         <form class="form-horizontal" role="form" action="admin-listing.html" id="form">
                             <div class="form-group">
                                 <label for="input-text" class="col-sm-2 control-label">Full Name</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="input-text" placeholder="Name" value="<%= (data != null ?data.getAdminName():"") %>" required>
+                                    <input type="text" class="form-control" id="input-text" placeholder="Name"
+                                           value="<%= (data != null ?data.getAdminName():"") %>" required>
                                     <div id="errorName" style="color:#ff3351;display:none">*Please enter name</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="input-email" class="col-sm-2 control-label">Email Address</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="input-email" placeholder="Email" value="<%= (data != null ?data.getAdminEmail():"") %>" required>
-                                    <div id="errorEmail" style="color:#ff3351;display:none">*Please enter valid Email</div>
+                                    <input type="text" class="form-control" id="input-email" placeholder="Email"
+                                           value="<%= (data != null ?data.getAdminEmail():"") %>" required>
+                                    <div id="errorEmail" style="color:#ff3351;display:none">*Please enter valid Email
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" <%= (data != null ?"style='display:none'":"") %> >
-                                <label for="inputPassword" class="col-sm-2 control-label"  >Password</label>
+                            <div class="form-group" <%= (data != null ? "style='display:none'" : "") %> >
+                                <label for="inputPassword" class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" value="<%= (data != null ?data.getAdminPassword():"") %>" required>
-                                    <div id="errorpassword" style="color:#ff3351;display:none;display:none">*Please enter password</div>
+                                    <input type="password" class="form-control" id="inputPassword"
+                                           placeholder="Password"
+                                           value="<%= (data != null ?data.getAdminPassword():"") %>" required>
+                                    <div id="errorpassword" style="color:#ff3351;display:none;display:none">*Please
+                                        enter password
+                                    </div>
                                 </div>
                             </div>
 
@@ -368,36 +443,53 @@
                             <div class="form-group">
                                 <label for="inp-cnic" class="col-sm-2 control-label">Cnic</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inp-cnic" placeholder="cnic" value="<%= (data != null ?data.getAdminNic():"") %>" required>
-                                    <div id="errorcnic" style="color:#ff3351;display:none;display:none">*Please enter valid cnic</div>
+                                    <input type="text" class="form-control" id="inp-cnic" placeholder="cnic"
+                                           value="<%= (data != null ?data.getAdminNic():"") %>" required>
+                                    <div id="errorcnic" style="color:#ff3351;display:none;display:none">*Please enter
+                                        valid cnic
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inp-phoneNum" class="col-sm-2 control-label">Phone Number</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inp-phoneNum" placeholder="phone number" value="<%= (data != null ?data.getAdminPhoneNumber():"") %>" required>
-                                    <div id="errorphnum" style="color:#ff3351;display:none;display:none">*Please enter contact number</div>
+                                    <input type="text" class="form-control" id="inp-phoneNum" placeholder="phone number"
+                                           value="<%= (data != null ?data.getAdminPhoneNumber():"") %>" required>
+                                    <div id="errorphnum" style="color:#ff3351;display:none;display:none">*Please enter
+                                        contact number
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword" class="col-sm-2 control-label">Address</label>
                                 <div class="col-sm-6">
-                                    <textarea col="12" row="5" class="form-control"  id="txt-address" placeholder="Enter Address" required><%= (data != null ?data.getAdminAddressId().getAddress() :"") %></textarea>
-                                    <div id="erroraddress" style="color:#ff3351;display:none;display:none">*Please specify Address</div>
+                                    <textarea col="12" row="5" class="form-control" id="txt-address"
+                                              placeholder="Enter Address"
+                                              required><%= (data != null ? data.getAdminAddressId().getAddress() : "") %></textarea>
+                                    <div id="erroraddress" style="color:#ff3351;display:none;display:none">*Please
+                                        specify Address
+                                    </div>
                                 </div>
                             </div>
-
 
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Roles / Access Type</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="sel-role" required>
-                                        <option value="1" <%= (data != null && data.getAdminAccessType() == 1?"selected":"") %> >Super Admin</option>
-                                        <option value="2" <%= (data != null && data.getAdminAccessType() == 2?"selected":"") %>>admin</option>
-                                        <option value="3" <%= (data != null && data.getAdminAccessType() == 3?"selected":"") %>>Operation</option>
+                                        <option value="1" <%= (data != null && data.getAdminAccessType() == 1 ? "selected" : "") %> >
+                                            Super Admin
+                                        </option>
+                                        <option value="2" <%= (data != null && data.getAdminAccessType() == 2 ? "selected" : "") %>>
+                                            admin
+                                        </option>
+                                        <option value="3" <%= (data != null && data.getAdminAccessType() == 3 ? "selected" : "") %>>
+                                            Operation
+                                        </option>
                                     </select>
-                                    <div id="errorrole" style="color:#ff3351;display:none;display:none">*Please select Access Type</div>
+                                    <div id="errorrole" style="color:#ff3351;display:none;display:none">*Please select
+                                        Access Type
+                                    </div>
                                 </div>
                             </div>
 
@@ -411,8 +503,11 @@
 
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <input type="button" class="form-control" id="btn-add-detail" value="submit" style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"/>
-                                    <div id="error" style="color:#ff3351;display:none;display:none">Not added error occured</div>
+                                    <input type="button" class="form-control" id="btn-add-detail" value="submit"
+                                           style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"/>
+                                    <div id="error" style="color:#ff3351;display:none;display:none">Not added error
+                                        occured
+                                    </div>
                                 </div>
                             </div>
 
@@ -427,7 +522,7 @@
         <!--end :: add admin form -->
 
         <!-- Footer Start -->
-       <%@include file="includes/footer.jsp" %>
+        <%@include file="includes/footer.jsp" %>
         <!-- Footer End -->
     </div>
     <!-- ============================================================== -->
@@ -439,11 +534,16 @@
 
 </div>
 <div id="contextMenu" class="dropdown clearfix">
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
-        <li><a tabindex="-1" href="javascript:;" data-priority="high"><i class="fa fa-circle-o text-red-1"></i> High Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="medium"><i class="fa fa-circle-o text-orange-3"></i> Medium Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i> Low Priority</a></li>
-        <li><a tabindex="-1" href="javascript:;" data-priority="none"><i class="fa fa-circle-o text-lightblue-1"></i> None</a></li>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu"
+        style="display:block;position:static;margin-bottom:5px;">
+        <li><a tabindex="-1" href="javascript:;" data-priority="high"><i class="fa fa-circle-o text-red-1"></i> High
+            Priority</a></li>
+        <li><a tabindex="-1" href="javascript:;" data-priority="medium"><i class="fa fa-circle-o text-orange-3"></i>
+            Medium Priority</a></li>
+        <li><a tabindex="-1" href="javascript:;" data-priority="low"><i class="fa fa-circle-o text-yellow-1"></i> Low
+            Priority</a></li>
+        <li><a tabindex="-1" href="javascript:;" data-priority="none"><i class="fa fa-circle-o text-lightblue-1"></i>
+            None</a></li>
     </ul>
 </div>
 <!-- End of page -->
@@ -500,124 +600,122 @@
 <script src="${pageContext.request.contextPath}/assets/js/pages/index.js"></script>
 
 
-
-
 <script>
-    $('input').focus(function(){ $(this).next('div').css('display','none')});
-    function formValidation(){
+    $('input').focus(function () {
+        $(this).next('div').css('display', 'none')
+    });
+
+    function formValidation() {
         var isVlaid = true;
-        if($('input#input-text').val() == ''){
+        if ($('input#input-text').val() == '') {
             $('input#input-text').next('div').html("*This field is required can't be empty");
-            $('input#input-text').next('div').css('display','block');
+            $('input#input-text').next('div').css('display', 'block');
             isVlaid = false;
-        }else{
-            if($('input#input-text').val().length > 16){
+        } else {
+            if ($('input#input-text').val().length > 16) {
                 $('input#input-text').next('div').html('*Input value must be less then equal to 16 character');
-                $('input#input-text').next('div').css('display','block');
+                $('input#input-text').next('div').css('display', 'block');
                 isVlaid = false;
             }
 
         }
-        if($('input#input-email').val() == ''){
+        if ($('input#input-email').val() == '') {
             $('input#input-email').next('div').html("*This field is required can't be empty");
-            $('input#input-email').next('div').css('display','block');
+            $('input#input-email').next('div').css('display', 'block');
             isVlaid = false;
-        }else{
-            if( $('input#input-email').val().length > 10)
+        } else {
+            if ($('input#input-email').val().length > 10)
                 $('input#input-email').next('div').html('*Input value must be less then equal to 16 character');
-                $('input#input-email').next('div').css('display','block');
-                isVlaid = false;
-            }
-
-        }
-
-        if($('#rowId').val() == ""){
-            if($('input#inputPassword').val() == ''){
-                $('input#inputPassword').next('div').html("*This field is required can't be empty");
-                $('input#inputPassword').next('div').css('display','block');
-                isVlaid = false;
-            }else{
-                if($('input#inputPassword').val().length > 16){
-                    $('input#inputPassword').next('div').html('*Input value must be less then equal to 16 character');
-                    $('input#inputPassword').next('div').css('display','block');
-                    isVlaid = false;
-                }
-
-            }
-        }
-
-        if($('input#inp-phoneNum').val() == ''){
-            $('input#inp-phoneNum').next('div').html("*This field is required can't be empty");
-            $('input#inp-phoneNum').next('div').css('display','block');
+            $('input#input-email').next('div').css('display', 'block');
             isVlaid = false;
-        }else{
-            if($('input#inp-phoneNum').val().length > 16){
-                $('input#inp-phoneNum').next('div').html('*Input value must be less then equal to 16 character');
-                $('input#inp-phoneNum').next('div').css('display','block');
-                isVlaid = false;
-            }
-
         }
-        if($('input#inp-cnic').val() == ''){
-            $('input#inp-cnic').next('div').html("*This field is required can't be empty");
-            $('input#inp-cnic').next('div').css('display','block');
+
+    }
+
+    if ($('#rowId').val() == "") {
+        if ($('input#inputPassword').val() == '') {
+            $('input#inputPassword').next('div').html("*This field is required can't be empty");
+            $('input#inputPassword').next('div').css('display', 'block');
             isVlaid = false;
-        }else{
-            if($('input#inp-cnic').val().length > 16){
-                $('input#inp-cnic').next('div').html('*Input value must be less then equal to 16 character');
-                $('input#inp-cnic').next('div').css('display','block');
+        } else {
+            if ($('input#inputPassword').val().length > 16) {
+                $('input#inputPassword').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inputPassword').next('div').css('display', 'block');
                 isVlaid = false;
             }
 
         }
+    }
 
+    if ($('input#inp-phoneNum').val() == '') {
+        $('input#inp-phoneNum').next('div').html("*This field is required can't be empty");
+        $('input#inp-phoneNum').next('div').css('display', 'block');
+        isVlaid = false;
+    } else {
+        if ($('input#inp-phoneNum').val().length > 16) {
+            $('input#inp-phoneNum').next('div').html('*Input value must be less then equal to 16 character');
+            $('input#inp-phoneNum').next('div').css('display', 'block');
+            isVlaid = false;
+        }
 
+    }
+    if ($('input#inp-cnic').val() == '') {
+        $('input#inp-cnic').next('div').html("*This field is required can't be empty");
+        $('input#inp-cnic').next('div').css('display', 'block');
+        isVlaid = false;
+    } else {
+        if ($('input#inp-cnic').val().length > 16) {
+            $('input#inp-cnic').next('div').html('*Input value must be less then equal to 16 character');
+            $('input#inp-cnic').next('div').css('display', 'block');
+            isVlaid = false;
+        }
 
-
-        return isVlaid;
     }
 
 
-    $('input#inp-phoneNum').keypress(function(key) {
-        if(key.charCode < 48 || key.charCode > 57){
+    return isVlaid;
+    }
+
+
+    $('input#inp-phoneNum').keypress(function (key) {
+        if (key.charCode < 48 || key.charCode > 57) {
             $(this).next('div').html('*Input Field only accept number');
-            $(this).next('div').css('display','block');
+            $(this).next('div').css('display', 'block');
             return false;
         }
     });
-    $('input#inp-cnic').keypress(function(key) {
-        if(key.charCode < 48 || key.charCode > 57){
+    $('input#inp-cnic').keypress(function (key) {
+        if (key.charCode < 48 || key.charCode > 57) {
             $(this).next('div').html('*Input Field only accept number');
-            $(this).next('div').css('display','block');
+            $(this).next('div').css('display', 'block');
             return false;
         }
     });
 
 
-    $('#btn-add-detail').on('click',function () {
-        if(!formValidation()){
+    $('#btn-add-detail').on('click', function () {
+        if (!formValidation()) {
             return;
         }
 
 
-        if($('#rowId').val() == ""){
-           var dataString = generateDataString("new");
-        }else{
-            var dataString =generateDataString("update");
+        if ($('#rowId').val() == "") {
+            var dataString = generateDataString("new");
+        } else {
+            var dataString = generateDataString("update");
         }
 
 
-        if($('#input-text').val() != '' && $('#input-email').val() != '' && $('#inputPassword').val() != '' && $('#inp-cnic').val() != ''
-            && $('#inp-phoneNum').val() != ''&& $('#sel-role').val() != '' && $('#txt-address').val() != '')
-        {
+        if ($('#input-text').val() != '' && $('#input-email').val() != '' && $('#inputPassword').val() != '' && $('#inp-cnic').val() != ''
+            && $('#inp-phoneNum').val() != '' && $('#sel-role').val() != '' && $('#txt-address').val() != '') {
             $.ajax({
-                url:"http://localhost:8080/admin/signup",
-                type:"POST",
-                data:dataString,
-                contentType:'json',
-                dataType:"json",
-                contentType:"application/json",
-                success:function(response){
+                url: "http://localhost:8080/admin/signup",
+                type: "POST",
+                data: dataString,
+                contentType: 'json',
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
 
                     console.log("Response => ");
                     console.log(response);
@@ -630,38 +728,37 @@
     });
 
 
+    function generateDataString(action) {
+        if (action == "update") {
+            var dataString = '{ "adminId" :"' + $('#rowId').val() + '","adminName" :"' + $('#input-text').val() + '",' +
+                '"adminEmail" :"' + $('#input-email').val() + '",' +
+                '"adminPassword" :"' + $('#inputPassword').val() + '",' +
+                '"adminNic" :"' + $('#inp-cnic').val() + '", ' +
+                '"adminPhoneNumber" :"' + $('#inp-phoneNum').val() + '", ' +
+                '"adminAccessType" :"' + $('#sel-role').val() + '" ,' +
+                '"adminAddressId" : {' +
+                '"address": "' + $('#txt-address').val() + '",' +
+                '"city":"karachi"' +
+                '}' +
 
-function generateDataString(action){
-    if(action == "update"){
-        var dataString = '{ "adminId" :"'+$('#rowId').val()+'","adminName" :"'+$('#input-text').val()+'",' +
-            '"adminEmail" :"'+$('#input-email').val()+'",' +
-            '"adminPassword" :"'+$('#inputPassword').val()+'",' +
-            '"adminNic" :"'+$('#inp-cnic').val()+'", ' +
-            '"adminPhoneNumber" :"'+$('#inp-phoneNum').val()+'", ' +
-            '"adminAccessType" :"'+$('#sel-role').val()+'" ,' +
-            '"adminAddressId" : {' +
-            '"address": "'+$('#txt-address').val()+'",'+
-            '"city":"karachi"'+
-            '}'+
+                '}';
+            return dataString;
+        } else {
+            var dataString = '{ "adminName" :"' + $('#input-text').val() + '",' +
+                '"adminEmail" :"' + $('#input-email').val() + '",' +
+                '"adminPassword" :"' + $('#inputPassword').val() + '",' +
+                '"adminNic" :"' + $('#inp-cnic').val() + '", ' +
+                '"adminPhoneNumber" :"' + $('#inp-phoneNum').val() + '", ' +
+                '"adminAccessType" :"' + $('#sel-role').val() + '" ,' +
+                '"adminAddressId" : {' +
+                '"address": "' + $('#txt-address').val() + '",' +
+                '"city":"karachi"' +
+                '}' +
 
-            '}';
-        return dataString;
-    }else{
-        var dataString = '{ "adminName" :"'+$('#input-text').val()+'",' +
-            '"adminEmail" :"'+$('#input-email').val()+'",' +
-            '"adminPassword" :"'+$('#inputPassword').val()+'",' +
-            '"adminNic" :"'+$('#inp-cnic').val()+'", ' +
-            '"adminPhoneNumber" :"'+$('#inp-phoneNum').val()+'", ' +
-            '"adminAccessType" :"'+$('#sel-role').val()+'" ,' +
-            '"adminAddressId" : {' +
-            '"address": "'+$('#txt-address').val()+'",'+
-            '"city":"karachi"'+
-            '}'+
-
-            '}';
-        return dataString;
+                '}';
+            return dataString;
+        }
     }
-}
 
 
 </script>

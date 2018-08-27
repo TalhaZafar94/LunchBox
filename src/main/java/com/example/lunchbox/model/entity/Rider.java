@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "riders" , indexes = {@Index(name = "EMAIL_INDEX",columnList = "rider_email,rider_nic" )})
+@Table(name = "riders", indexes = {@Index(name = "EMAIL_INDEX", columnList = "rider_email,rider_nic")})
 public class Rider {
 
     @Id
@@ -15,22 +15,21 @@ public class Rider {
     @Column(name = "rider_name")
     private String riderName;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicles riderVehicleId;
 
-    @Column(name = "rider_nic",unique = true)
+    @Column(name = "rider_nic", unique = true)
     private String riderNic;
 
     @Column(name = "rider_password")
-    @Transient
     private String riderPassword;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address riderAddresId;
 
-    @Column(name = "rider_email",unique = true)
+    @Column(name = "rider_email", unique = true)
     private String riderEmail;
 
     @Column(name = "rider_accesstype")
@@ -48,34 +47,22 @@ public class Rider {
     @Column(name = "admin_id")
     private Integer riderAdminId;
 
-    @Column(name = "rider_createdat",columnDefinition = "DATETIME")
+    @Column(name = "rider_createdat", columnDefinition = "DATETIME")
     private Date riderCreatedAt;
 
-    @Column(name = "rider_lastupdated",columnDefinition = "DATETIME")
+    @Column(name = "rider_lastupdated", columnDefinition = "DATETIME")
     private Date riderLastUpdated;
 
-    @Column(name = "location_id" ,unique = true)
+    @Column(name = "location_id", unique = true)
     private Integer riderLocationId;
-
 
     @Column(name = "rider_reg_token")
     private String riderRegToken;
 
-
-
-
-
-
-
-
-
-
-
-
     public Rider() {
     }
 
-    public Rider(String riderName, String riderEmail , Vehicles riderVehicleId, String riderNic, String riderPassword, Address riderAddresId, Integer riderAccessType, String riderImagePath, Integer riderActive, String riderPhoneNumber, Integer riderAdminId, Date riderCreatedAt, Date riderLastUpdated, Integer riderLocationId,String riderRegToken) {
+    public Rider(String riderName, String riderEmail, Vehicles riderVehicleId, String riderNic, String riderPassword, Address riderAddresId, Integer riderAccessType, String riderImagePath, Integer riderActive, String riderPhoneNumber, Integer riderAdminId, Date riderCreatedAt, Date riderLastUpdated, Integer riderLocationId, String riderRegToken) {
         this.riderName = riderName;
         this.riderVehicleId = riderVehicleId;
         this.riderNic = riderNic;

@@ -14,7 +14,8 @@
                     <div class="">
                         <label class="">Upload Image</label>
                         <div class="">
-                            <input type="file" name="file-img" id="file-img" class="btn btn-default" title="Select file">
+                            <input type="file" name="file-img" id="file-img" class="btn btn-default"
+                                   title="Select file">
                         </div>
                     </div>
                 </form>

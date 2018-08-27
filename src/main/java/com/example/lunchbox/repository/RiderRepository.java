@@ -8,10 +8,13 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface RiderRepository extends JpaRepository<Rider , Integer>{
+public interface RiderRepository extends JpaRepository<Rider, Integer> {
     Rider findByRiderEmail(String riderEmail);
+
     List<Rider> findByRiderName(String riderName);
+
     Rider getRiderByRiderLastUpdated(Date date);
+
     Rider getRiderByRiderCreatedAt(Date date);
 
 }

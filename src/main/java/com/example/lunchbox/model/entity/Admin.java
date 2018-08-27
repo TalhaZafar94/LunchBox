@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "admins" , indexes = {@Index(name = "EMAIL_INDEX",columnList = "admin_email,admin_nic" )})
+@Table(name = "admins", indexes = {@Index(name = "EMAIL_INDEX", columnList = "admin_email,admin_nic")})
 public class Admin {
 
     @Id
@@ -20,10 +20,10 @@ public class Admin {
     @Column(name = "admin_name")
     private String adminName;
 
-    @Column(name = "admin_email" ,unique = true)
+    @Column(name = "admin_email", unique = true)
     private String adminEmail;
 
-    @Column(name = "admin_nic",unique = true)
+    @Column(name = "admin_nic", unique = true)
     private String adminNic;
 
     @Column(name = "admin_accesstype")
@@ -32,7 +32,7 @@ public class Admin {
     @Column(name = "admin_password")
     private String adminPassword;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
     private Address adminAddressId;
 

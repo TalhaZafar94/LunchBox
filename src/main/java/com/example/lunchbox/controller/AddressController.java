@@ -18,18 +18,18 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @RequestMapping(value = "/save-address" , method = RequestMethod.POST)
-    public void addAddress(@RequestBody Address address){
+    @RequestMapping(value = "/save-address", method = RequestMethod.POST)
+    public void addAddress(@RequestBody Address address) {
         addressService.addAddress(address);
     }
 
-    @RequestMapping(value = "/delete-address" , method = RequestMethod.POST)
-    public void deleteAddress(@RequestBody Address address){
+    @RequestMapping(value = "/delete-address", method = RequestMethod.POST)
+    public void deleteAddress(@RequestBody Address address) {
         addressService.deleteAddress(address);
     }
 
-    @RequestMapping(value = "/get-address" , method = RequestMethod.POST)
-    public Address getAddress(@RequestBody Integer id){
+    @RequestMapping(value = "/get-address", method = RequestMethod.POST)
+    public Address getAddress(@RequestBody Integer id) {
         return addressService.getAddressById(id);
     }
 

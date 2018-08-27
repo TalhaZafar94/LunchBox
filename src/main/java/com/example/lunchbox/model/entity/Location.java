@@ -20,13 +20,21 @@ public class Location {
     @Column(name = "foodmaker_id")
     private Integer foodmakerId;
 
+    @Column(name = "rider_id")
+    private Integer riderId;
+
+    @Column(name = "customer_id")
+    private Integer customerId;
+
     public Location() {
     }
 
-    public Location(Double locationLongitude, Double locationLatitude,Integer foodmakerId) {
+    public Location(Double locationLongitude, Double locationLatitude, Integer foodmakerId, Integer riderId, Integer customerId) {
         this.locationLongitude = locationLongitude;
         this.locationLatitude = locationLatitude;
         this.foodmakerId = foodmakerId;
+        this.riderId = riderId;
+        this.customerId = customerId;
     }
 
     public Integer getLocationId() {
@@ -59,5 +67,21 @@ public class Location {
 
     public void setFoodmakerId(Integer foodmakerId) {
         this.foodmakerId = foodmakerId;
+    }
+
+    public Integer getRiderId() {
+        return riderId;
+    }
+
+    public void setRiderId(Integer riderId) {
+        this.riderId = riderId;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 }

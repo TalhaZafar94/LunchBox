@@ -16,26 +16,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/dishes")
-public class DishController  {
+public class DishController {
 
     private DishService dishService;
     @Value("${upload.path}")
     private String uploadPath;
 
     @Autowired
-    public DishController(DishService dishService)
-    {
+    public DishController(DishService dishService) {
         this.dishService = dishService;
     }
 
-    @RequestMapping(value = "/save-dishes" , method = RequestMethod.POST)
-    public void addDishes(@RequestBody Dishes dish){
+    @RequestMapping(value = "/save-dishes", method = RequestMethod.POST)
+    public void addDishes(@RequestBody Dishes dish) {
         dishService.addDish(dish);
 
     }
 
     @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
-    public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
+    public String uploadImage(@RequestParam Integer id, @RequestParam("file") MultipartFile file) {
         String uploadedPath = null;
         String final_Path = "http://localhost:8080/images/";
         dishService.findAllDishes();
@@ -48,7 +47,7 @@ public class DishController  {
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
 
-            final_Path +=  file.getOriginalFilename();
+            final_Path += file.getOriginalFilename();
 
             dishes.setDishImagePath(final_Path);
             uploadedPath = path.toString();
@@ -57,49 +56,49 @@ public class DishController  {
             e.printStackTrace();
         }
 
-        return "{ \"uploadedPath\" : \""+final_Path+"\"}";
+        return "{ \"uploadedPath\" : \"" + final_Path + "\"}";
     }
 
 
-    @RequestMapping(value = "/get-dish" , method = RequestMethod.POST)
-    public Dishes getDishById(@RequestParam Integer id){
+    @RequestMapping(value = "/get-dish", method = RequestMethod.POST)
+    public Dishes getDishById(@RequestParam Integer id) {
         return dishService.getDishesById(id);
 
     }
 
 
-    @RequestMapping(value = "/get-dish-count" , method = RequestMethod.POST)
-    public long getDishById(){
+    @RequestMapping(value = "/get-dish-count", method = RequestMethod.POST)
+    public long getDishById() {
         return dishService.countAllDishes();
 
     }
 
-    @RequestMapping(value = "/delete-dish" , method = RequestMethod.POST)
-    public void deleteDish(@RequestBody Dishes dish){
+    @RequestMapping(value = "/delete-dish", method = RequestMethod.POST)
+    public void deleteDish(@RequestBody Dishes dish) {
         dishService.deleteDishes(dish);
     }
 
-    @RequestMapping(value = "/get-dish-list" , method = RequestMethod.GET)
-    public List<Dishes> getDishesList(){
+    @RequestMapping(value = "/get-dish-list", method = RequestMethod.GET)
+    public List<Dishes> getDishesList() {
         return dishService.findAllDishes();
 
     }
 
-    @RequestMapping(value = "/dishes-listing" , method = RequestMethod.GET)
+    @RequestMapping(value = "/dishes-listing", method = RequestMethod.GET)
     public ModelAndView adminDetail() {
         ModelAndView modelAndView = new ModelAndView("dishes-listing");
         return modelAndView;
     }
 
 
-    @RequestMapping(value = "/add-dishes" ,method = RequestMethod.GET)
-    public ModelAndView getAddAdminView(){
+    @RequestMapping(value = "/add-dishes", method = RequestMethod.GET)
+    public ModelAndView getAddAdminView() {
         ModelAndView modelAndView = new ModelAndView("add-dishes");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add-dishes" ,method = RequestMethod.POST)
-    public ModelAndView getOrderDetail(@RequestParam Integer rowId){
+    @RequestMapping(value = "/add-dishes", method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer rowId) {
         Dishes dishes = dishService.getDishesById(rowId);
         ModelAndView modelAndView = new ModelAndView("add-dishes");
         modelAndView.addObject("dishDetail", dishes);

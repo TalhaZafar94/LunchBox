@@ -12,13 +12,13 @@ public class Blockedusers {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer blokedId;
 
-    @Column(name = "customer_id" ,unique = true)
+    @Column(name = "customer_id", unique = true)
     private Integer blockedCustomerId;
 
-    @Column(name = "foodmaker_id" ,unique = true)
+    @Column(name = "foodmaker_id", unique = true)
     private Integer blockedFoodmakerId;
 
-    @Column(name = "rider_id" ,unique = true)
+    @Column(name = "rider_id", unique = true)
     private Integer blockedRiderId;
 
     @Column(name = "admin_id")

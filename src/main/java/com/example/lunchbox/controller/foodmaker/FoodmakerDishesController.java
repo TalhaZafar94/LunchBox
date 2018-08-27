@@ -28,11 +28,10 @@ public class FoodmakerDishesController {
         this.foodmakerDishesService = foodmakerDishesService;
     }
 
-    @RequestMapping(value = "/add-dish" ,method = RequestMethod.POST)
-    public String  addDish(@RequestBody FoodmakerDishes foodmakerDish){
+    @RequestMapping(value = "/add-dish", method = RequestMethod.POST)
+    public String addDish(@RequestBody FoodmakerDishes foodmakerDish) {
 
-        if (foodmakerDish != null)
-        {
+        if (foodmakerDish != null) {
             foodmakerDishesService.addDish(foodmakerDish);
             return "foodmaker added";
         }
@@ -78,9 +77,9 @@ public class FoodmakerDishesController {
     }
 
     @RequestMapping(value = "/upload-img", method = RequestMethod.POST)
-    public String uploadImage(@RequestParam Integer id,@RequestParam("file") MultipartFile file) {
+    public String uploadImage(@RequestParam Integer id, @RequestParam("file") MultipartFile file) {
         String uploadedPath = null;
-      //  adminService.findAllAdmin();
+        //  adminService.findAllAdmin();
         FoodmakerDishes foodmakerDishes = foodmakerDishesService.getFoodmakerDishById(id);
         String UPLOADED_FOLDER = uploadPath;
         try {

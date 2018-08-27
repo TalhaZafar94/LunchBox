@@ -5,6 +5,7 @@ import com.example.lunchbox.repository.DishRepository;
 import com.example.lunchbox.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -17,8 +18,7 @@ public class DishServiceImpl implements DishService {
         this.dishRepository = dishRepository;
     }
 
-    public void addDish(Dishes dish)
-    {
+    public void addDish(Dishes dish) {
         dishRepository.saveAndFlush(dish);
     }
 

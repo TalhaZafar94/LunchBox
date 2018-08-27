@@ -8,11 +8,18 @@ import java.util.List;
 public interface FoodmakerDishesService {
 
     void addDish(FoodmakerDishes foodmakerDishes);
+
     FoodmakerDishes getFoodmakerDishById(Integer id);
+
     long countAllFoodMmkerDishes();
+
     void deleteFoodmakerDish(Integer foodmakerDisheId);
+
     List<FoodmakerDishes> getFoodmakerDishbyFoodmakerId(int foodmakerId);
+
     List<FoodmakerDishes> getFoodmakerDishbyDishesId(int dishId);
+
     List<FoodmakerDishes> findAll();
+
     List<Dishes> getDishbyorderId(int orderId);
 }

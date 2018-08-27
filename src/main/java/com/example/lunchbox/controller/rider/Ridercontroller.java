@@ -20,17 +20,17 @@ public class Ridercontroller {
         this.riderService = riderService;
     }
 
-    @RequestMapping(value = "/login" , method = RequestMethod.POST)
-    public String verifyLogin(@RequestParam String riderEmail, @RequestParam String riderPassword,
-                              HttpSession session, Model model,@RequestParam String token){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Rider verifyLogin(@RequestParam String riderEmail, @RequestParam String riderPassword,
+                             HttpSession session, Model model, @RequestParam String token) {
 
-        Rider rider = riderService.login(riderEmail, riderPassword,token);
+        Rider rider = riderService.login(riderEmail, riderPassword, token);
         if (rider == null) {
             model.addAttribute("loginError", "Error logging in. Please try again");
-            return "login";
+            return null;
         }
         session.setAttribute("loggedInUser", rider);
-        return "index";
+        return rider;
 
     }
 
@@ -40,20 +40,19 @@ public class Ridercontroller {
         return "login";
     }
 
-    @RequestMapping(value = "/signup" ,method = RequestMethod.POST)
-    public String  signup(@RequestBody Rider rider){
-        if(rider.getRiderPassword() != null && rider.getRiderEmail() != null && rider.getRiderName() != null &&
-                rider.getRiderNic() != null && rider.getRiderPhoneNumber() != null)
-        {
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signup(@RequestBody Rider rider) {
+        if (rider.getRiderPassword() != null && rider.getRiderEmail() != null && rider.getRiderName() != null &&
+                rider.getRiderNic() != null && rider.getRiderPhoneNumber() != null) {
             riderService.riderSignup(rider);
             return "rider added";
         }
         return "please specify the fields";
     }
 
-    @RequestMapping(value = "/update-password" ,method = RequestMethod.POST)
-    public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword , @RequestParam String riderEmail){
-        if(riderService.updatePassword(oldpassword,newpassword,riderEmail)){
+    @RequestMapping(value = "/update-password", method = RequestMethod.POST)
+    public String updatePassword(@RequestParam String oldpassword, @RequestParam String newpassword, @RequestParam String riderEmail) {
+        if (riderService.updatePassword(oldpassword, newpassword, riderEmail)) {
             return "password updated";
         }
         return "error";
@@ -80,13 +79,14 @@ public class Ridercontroller {
         return riderService.getRiderByname(riderName);
     }
 
-
-    @RequestMapping(value = "/set-status",method = RequestMethod.POST) //1 : active, 2: unactive,3: assigned a job
-    public String setStatus(@RequestParam Integer riderId, @RequestParam Integer status)
-    {
-        riderService.setStatus(riderId,status);
-        return "{ \"status\" : \""+status+"\"}";
+    @RequestMapping(value = "/set-status", method = RequestMethod.POST) //1 : active, 2: unactive,3: assigned a job
+    public String setStatus(@RequestParam Integer riderId, @RequestParam Integer status) {
+        riderService.setStatus(riderId, status);
+        return "{ \"status\" : \"" + status + "\"}";
     }
 
-
+    @RequestMapping(value = "/send-notification-near-by-riders", method = RequestMethod.GET)
+    public List<Rider> findNearByFoodmakers(@RequestParam Double lat, @RequestParam Double longt, @RequestParam Integer orderId) {
+        return riderService.getRidersNearBy(lat, longt, orderId);
+    }
 }

@@ -21,69 +21,74 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @RequestMapping(value = "/save-order" , method = RequestMethod.POST)
-    public String addOrder(@RequestBody Order order){
+    @RequestMapping(value = "/save-order", method = RequestMethod.POST)
+    public String addOrder(@RequestBody Order order) {
         orderService.saveOrder(order);
         OrderServiceImpl orderService = new OrderServiceImpl();
         return "{\"status\":\"true\"}";
     }
 
+    @RequestMapping(value = "/assign-order", method = RequestMethod.POST)
+    public String assignOrderToRider(@RequestParam Integer riderId, @RequestParam Integer orderId) {
+        return orderService.assignRiderToOrder(riderId, orderId);
+    }
+
     @RequestMapping(value = "/get-order", method = RequestMethod.GET)
-    public Order getOrderById(@RequestParam Integer id){
+    public Order getOrderById(@RequestParam Integer id) {
         return orderService.getOrderById(id);
     }
 
     @RequestMapping(value = "/get-pending-order", method = RequestMethod.GET)
-    public List<Order> getPendingOrders(){
+    public List<Order> getPendingOrders() {
         return orderService.getPendingOrders();
     }
 
     @RequestMapping(value = "/get-ack-order", method = RequestMethod.GET)
-    public List<Order> getAcknowOrders(){
+    public List<Order> getAcknowOrders() {
         return orderService.getAckOrders();
     }
 
     @RequestMapping(value = "/get-done-order", method = RequestMethod.GET)
-    public List<Order> getDoneOrders(){
+    public List<Order> getDoneOrders() {
         return orderService.getDoneOrders();
     }
 
     @RequestMapping(value = "/get-orderByStatus", method = RequestMethod.GET)
-    public List<Order> getOrdersbyStatus(@RequestParam Integer status){
+    public List<Order> getOrdersbyStatus(@RequestParam Integer status) {
         return orderService.getorderByStatus(status);
     }
 
-    @RequestMapping(value = "/get-order-count" , method = RequestMethod.POST)
-    public long countAllOrders(){
+    @RequestMapping(value = "/get-order-count", method = RequestMethod.POST)
+    public long countAllOrders() {
         return orderService.countAllOrders();
     }
 
-    @RequestMapping(value = "/delete-dish" , method = RequestMethod.POST)
-    public void deleteOrder(@RequestBody Order order){
+    @RequestMapping(value = "/delete-dish", method = RequestMethod.POST)
+    public void deleteOrder(@RequestBody Order order) {
         orderService.deleteOrder(order);
     }
 
-    @RequestMapping(value = "/get-order-list" , method = RequestMethod.GET)
-    public List<Order> getOrderList(){
+    @RequestMapping(value = "/get-order-list", method = RequestMethod.GET)
+    public List<Order> getOrderList() {
         return orderService.findAllOrders();
     }
 
 
-    @RequestMapping(value = "/order-view" ,method = RequestMethod.POST)
-    public ModelAndView getOrderDetail(@RequestParam Integer orderId){
+    @RequestMapping(value = "/order-view", method = RequestMethod.POST)
+    public ModelAndView getOrderDetail(@RequestParam Integer orderId) {
         Order order = orderService.getOrderById(orderId);
         ModelAndView modelAndView = new ModelAndView("order-detail");
         modelAndView.addObject("orderDetail", order);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/update-order-status" ,method = RequestMethod.GET)
-    public void updateOrderStatus(@RequestParam Integer orderStatus,@RequestParam Integer orderId){
-        orderService.updateOrderStatus(orderStatus,orderId);
+    @RequestMapping(value = "/update-order-status", method = RequestMethod.GET)
+    public void updateOrderStatus(@RequestParam Integer orderStatus, @RequestParam Integer orderId) {
+        orderService.updateOrderStatus(orderStatus, orderId);
     }
 
-    @RequestMapping(value = "/update-order-rating" ,method = RequestMethod.GET)
-    public void updateOrderRating(@RequestParam Integer orderRating,@RequestParam Integer orderId){
-        orderService.updateOrderRating(orderRating,orderId);
+    @RequestMapping(value = "/update-order-rating", method = RequestMethod.GET)
+    public void updateOrderRating(@RequestParam Integer orderRating, @RequestParam Integer orderId) {
+        orderService.updateOrderRating(orderRating, orderId);
     }
 }
