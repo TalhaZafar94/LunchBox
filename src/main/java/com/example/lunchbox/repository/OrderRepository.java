@@ -35,6 +35,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("Update Order orde SET orde.riderId=:riderId WHERE orde.orderId=:orderId")
     public void assignRiderToOrder(@Param("riderId") Integer riderId, @Param("orderId") Integer orderId);
 
+    List<Order> getAllByRiderId(Integer riderId);
 
 }
 

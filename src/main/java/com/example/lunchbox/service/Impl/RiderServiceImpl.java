@@ -1,11 +1,7 @@
 package com.example.lunchbox.service.Impl;
 
-import com.example.lunchbox.model.entity.Location;
-import com.example.lunchbox.model.entity.Rider;
-import com.example.lunchbox.model.entity.RiderRequest;
-import com.example.lunchbox.repository.LocationRepository;
-import com.example.lunchbox.repository.RiderRepository;
-import com.example.lunchbox.repository.RiderRequestRepository;
+import com.example.lunchbox.model.entity.*;
+import com.example.lunchbox.repository.*;
 import com.example.lunchbox.service.RiderService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +26,21 @@ public class RiderServiceImpl implements RiderService {
     private RiderRepository riderRepository;
     private LocationRepository locationRepository;
     private RiderRequestRepository riderRequestRepository;
+    private OrderRepository orderRepository;
+    private FoodmakerRepository foodmakerRepository;
+    private CustomerRepository customerRepository;
     @Value("${riderKey}")
     private String riderServerKey;
 
     @Autowired
-    public RiderServiceImpl(RiderRepository riderRepository, LocationRepository locationRepository, RiderRequestRepository riderRequestRepository) {
+    public RiderServiceImpl(RiderRepository riderRepository, LocationRepository locationRepository, RiderRequestRepository riderRequestRepository
+                            ,OrderRepository orderRepository,FoodmakerRepository foodmakerRepository,CustomerRepository customerRepository) {
         this.riderRepository = riderRepository;
         this.locationRepository = locationRepository;
         this.riderRequestRepository = riderRequestRepository;
+        this.orderRepository = orderRepository;
+        this.foodmakerRepository = foodmakerRepository;
+        this.customerRepository = customerRepository;
     }
 
 
@@ -147,9 +150,8 @@ public class RiderServiceImpl implements RiderService {
     }
 
     @Override
-    public List<Rider> getRidersNearBy(Double lat, Double longt, Integer orderId) {
+    public void getRidersNearBy(Double lat, Double longt, Integer orderId) {
 
-        List<Rider> inlocations = new ArrayList<>();
         List<Location> locations = locationRepository.findAll();
         Double count = 6.0;
 
@@ -158,12 +160,11 @@ public class RiderServiceImpl implements RiderService {
 
                 if (location.getRiderId() != null) {
                     if (getDistance(lat, longt, location.getLocationLatitude(), location.getLocationLongitude()) <= count) {
-                        Rider rider = riderRepository.findOne(location.getFoodmakerId());
+                        Rider rider = riderRepository.getOne(location.getRiderId());
                         if (rider.getRiderActive() == 1) {
-                            inlocations.add(rider);
 
                             RiderRequest request = new RiderRequest(orderId, location.getRiderId(), 1);
-                            riderRequestRepository.saveAndFlush(request);
+                            riderRequestRepository.save(request);
 
                             Rider rider1 = riderRepository.findOne(location.getRiderId());
                             sendNotification(rider1.getRiderRegToken(), riderServerKey, "you have an order");
@@ -175,7 +176,34 @@ public class RiderServiceImpl implements RiderService {
             e.printStackTrace();
         }
 
-        return inlocations;
+    }
+
+    @Override
+    public List<Order> getOrderByRiderId(Integer riderid) {
+
+        List<RiderRequest> riderRequests = riderRequestRepository.getAllByRiderId(riderid);
+        List<Order> allOrder = new ArrayList<>();
+
+        for (RiderRequest riderRequest : riderRequests) {
+            if(riderRequest.getStatus() == 1)
+            {
+                Order order = orderRepository.findOne(riderRequest.getOrderId());
+
+                Foodmaker foodmaker = foodmakerRepository.findOne(order.getFoodmakerId());
+                Customer customer = customerRepository.findOne(order.getOrderCustomerId());
+
+                order.setFoodmaker(foodmaker);
+                order.setCustomer(customer);
+
+                allOrder.add(order);
+            }
+
+        }
+
+        if(allOrder.size() != 0)
+            return allOrder;
+
+        return null;
     }
 
 
@@ -224,5 +252,12 @@ public class RiderServiceImpl implements RiderService {
         }
 
         return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public void updateRiderRequestStatus(Integer status, Integer riderId) {
+        if (riderId != 0) {
+            riderRequestRepository.updateRiderRequestStatus(status,riderId);
+        }
     }
 }

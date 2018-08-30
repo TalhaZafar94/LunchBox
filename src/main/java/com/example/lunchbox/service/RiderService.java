@@ -1,5 +1,6 @@
 package com.example.lunchbox.service;
 
+import com.example.lunchbox.model.entity.Order;
 import com.example.lunchbox.model.entity.Rider;
 
 import java.security.NoSuchAlgorithmException;
@@ -34,5 +35,7 @@ public interface RiderService {
 
     void setStatus(int riderId, int status);
 
-    List<Rider> getRidersNearBy(Double lat, Double longt, Integer orderId);
+    void getRidersNearBy(Double lat, Double longt, Integer orderId);
+    List<Order> getOrderByRiderId(Integer riderid);
+    void updateRiderRequestStatus(Integer status, Integer riderId);
 }

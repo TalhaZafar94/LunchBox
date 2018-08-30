@@ -15,9 +15,8 @@ public class Rider {
     @Column(name = "rider_name")
     private String riderName;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicles riderVehicleId;
+    @Column(name = "vehicle_id")
+    private Integer riderVehicleId;
 
     @Column(name = "rider_nic", unique = true)
     private String riderNic;
@@ -25,9 +24,8 @@ public class Rider {
     @Column(name = "rider_password")
     private String riderPassword;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address riderAddresId;
+    @Column(name = "address_id")
+    private Integer riderAddresId;
 
     @Column(name = "rider_email", unique = true)
     private String riderEmail;
@@ -62,7 +60,7 @@ public class Rider {
     public Rider() {
     }
 
-    public Rider(String riderName, String riderEmail, Vehicles riderVehicleId, String riderNic, String riderPassword, Address riderAddresId, Integer riderAccessType, String riderImagePath, Integer riderActive, String riderPhoneNumber, Integer riderAdminId, Date riderCreatedAt, Date riderLastUpdated, Integer riderLocationId, String riderRegToken) {
+    public Rider(String riderName, String riderEmail, Integer riderVehicleId, String riderNic, String riderPassword, Integer riderAddresId, Integer riderAccessType, String riderImagePath, Integer riderActive, String riderPhoneNumber, Integer riderAdminId, Date riderCreatedAt, Date riderLastUpdated, Integer riderLocationId, String riderRegToken) {
         this.riderName = riderName;
         this.riderVehicleId = riderVehicleId;
         this.riderNic = riderNic;
@@ -104,11 +102,11 @@ public class Rider {
         this.riderName = riderName;
     }
 
-    public Vehicles getRiderVehicleId() {
+    public Integer getRiderVehicleId() {
         return riderVehicleId;
     }
 
-    public void setRiderVehicleId(Vehicles riderVehicleId) {
+    public void setRiderVehicleId(Integer riderVehicleId) {
         this.riderVehicleId = riderVehicleId;
     }
 
@@ -128,11 +126,11 @@ public class Rider {
         this.riderPassword = riderPassword;
     }
 
-    public Address getRiderAddresId() {
+    public Integer getRiderAddresId() {
         return riderAddresId;
     }
 
-    public void setRiderAddresId(Address riderAddresId) {
+    public void setRiderAddresId(Integer riderAddresId) {
         this.riderAddresId = riderAddresId;
     }
 

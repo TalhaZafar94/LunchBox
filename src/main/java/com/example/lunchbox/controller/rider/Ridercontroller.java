@@ -1,5 +1,6 @@
 package com.example.lunchbox.controller.rider;
 
+import com.example.lunchbox.model.entity.Order;
 import com.example.lunchbox.model.entity.Rider;
 import com.example.lunchbox.service.RiderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,18 @@ public class Ridercontroller {
     }
 
     @RequestMapping(value = "/send-notification-near-by-riders", method = RequestMethod.GET)
-    public List<Rider> findNearByFoodmakers(@RequestParam Double lat, @RequestParam Double longt, @RequestParam Integer orderId) {
-        return riderService.getRidersNearBy(lat, longt, orderId);
+    public void findNearByFoodmakers(@RequestParam Double lat, @RequestParam Double longt, @RequestParam Integer orderId) {
+        riderService.getRidersNearBy(lat, longt, orderId);
+    }
+
+    @RequestMapping(value = "/get-rider-orders", method = RequestMethod.GET)
+    public List<Order> findNearByFoodmakers(@RequestParam Integer riderId) {
+        return riderService.getOrderByRiderId(riderId);
+    }
+
+    @RequestMapping(value = "/set-rider-request-status", method = RequestMethod.POST)
+    public String setRiderRequestStatus(@RequestParam Integer riderId, @RequestParam Integer status) {
+        riderService.updateRiderRequestStatus(status,riderId);
+        return "{ \"status\" : \"" + status + "\"}";
     }
 }

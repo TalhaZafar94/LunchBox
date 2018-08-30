@@ -48,6 +48,12 @@ public class Order {
     @Column(name = "rider_id")
     private Integer riderId;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<Orderdishes> orderdishes;
 
@@ -60,7 +66,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer orderCustomerId, Integer orderReservationId, String orderShipmentAddress, Date orderDate, Date orderDeliverDate, Float orderTotalAmount, Integer orderStatus, List<Orderdishes> orderdishes, Integer foodmakerId, Integer orderRating, Integer riderId) {
+    public Order(Integer orderCustomerId, Integer orderReservationId, String orderShipmentAddress, Date orderDate, Date orderDeliverDate, Float orderTotalAmount, Integer orderStatus, List<Orderdishes> orderdishes,
+                 Integer foodmakerId, Integer orderRating, Integer riderId,Double latitude,Double longitude) {
         this.orderCustomerId = orderCustomerId;
         this.orderReservationId = orderReservationId;
         this.orderShipmentAddress = orderShipmentAddress;
@@ -72,6 +79,8 @@ public class Order {
         this.foodmakerId = foodmakerId;
         this.orderRating = orderRating;
         this.riderId = riderId;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Integer getOrderCustomerId() {
@@ -196,5 +205,21 @@ public class Order {
 
     public void setRiderId(Integer riderId) {
         this.riderId = riderId;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

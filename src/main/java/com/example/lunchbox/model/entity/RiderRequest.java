@@ -26,6 +26,9 @@ public class RiderRequest {
         this.status = status;
     }
 
+    public RiderRequest() {
+    }
+
     public Integer getOrderId() {
         return orderId;
     }
