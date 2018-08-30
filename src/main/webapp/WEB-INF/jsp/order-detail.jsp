@@ -646,7 +646,7 @@
 
         if ($('#inp-dish-name').val() != '' && $('#inp-selling-price').val() != '') {
             $.ajax({
-                url: "http://localhost:8080/dishes/save-dishes",
+                url: "/dishes/save-dishes",
                 type: "POST",
                 data: dataString,
                 contentType: 'json',

@@ -642,7 +642,7 @@
     }
 
     $.ajax({
-        url: 'http://localhost:8080/foodmaker/foodmakers-list',
+        url: '/foodmaker/foodmakers-list',
         type: 'get',
         dataType: 'json',
         data: '',

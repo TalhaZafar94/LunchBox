@@ -716,7 +716,7 @@
         if ($('#inp-foodmaker-name').val() != '' && $('#inp-foodmaker-email').val() != '' && $('#inp-foodmaker-pass').val() != '' && $('#inp-foodmaker-cnic').val() != ''
             && $('#inp-foodmaker-phoneNum').val() != '' && $('#inp-foodmaker-status').val() != '' && $('#inp-foodmaker-address').val() != '') {
             $.ajax({
-                url: "http://localhost:8080/foodmaker/signup",
+                url: "/foodmaker/signup",
                 type: "POST",
                 data: dataString,
                 contentType: 'json',

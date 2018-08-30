@@ -728,7 +728,7 @@
         if ($('#inp-customer-name').val() != '' && $('#inp-customer-email').val() != '' && $('#inp-customer-pass').val() != '' && $('#inp-customer-cnic').val() != ''
             && $('#inp-customer-phoneNum').val() != '' && $('#inp-customer-status').val() != '' && $('#inp-customer-address').val() != '') {
             $.ajax({
-                url: "http://localhost:8080/customer/signup",
+                url: "/customer/signup",
                 type: "POST",
                 data: dataString,
                 contentType: 'json',

@@ -581,7 +581,7 @@
 
 
     $.ajax({
-        url: 'http://localhost:8080/customer/customers-list',
+        url: '/customer/customers-list',
         type: 'get',
         dataType: 'json',
         data: '',
@@ -658,7 +658,7 @@
         data = new FormData();
         data.append('file', file);
         $.ajax({
-            url: 'http://localhost:8080/customer/upload-img?id=' + userId,
+            url: '/customer/upload-img?id=' + userId,
             type: 'post',
             data: data,
             dataType: 'json',

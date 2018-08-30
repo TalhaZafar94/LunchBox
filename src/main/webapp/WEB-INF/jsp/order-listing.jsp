@@ -640,7 +640,7 @@
     $("#order-status").on("change", function () {
         var statusId = $(this).val();
         $.ajax({
-            url: 'http://localhost:8080/order/get-orderByStatus?status=' + statusId,
+            url: '/order/get-orderByStatus?status=' + statusId,
             type: 'get',
             dataType: 'json',
             data: '',

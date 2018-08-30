@@ -569,7 +569,7 @@
 
 
     $.ajax({
-        url: 'http://localhost:8080/admin/admins-list',
+        url: '/admin/admins-list',
         type: 'get',
         dataType: 'json',
         data: '',
@@ -633,7 +633,7 @@
             // dataString="adminId="+rowId;
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/admin/delete-admin-id",
+                url: "/admin/delete-admin-id",
                 data: "adminId=" + rowId,
                 success: function (response) {
 
@@ -670,7 +670,7 @@
         data = new FormData();
         data.append('file', file);
         $.ajax({
-            url: 'http://localhost:8080/admin/upload-img?id=' + userId,
+            url: '/admin/upload-img?id=' + userId,
             type: 'post',
             data: data,
             dataType: 'json',

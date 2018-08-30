@@ -572,7 +572,7 @@
     }
 
     $.ajax({
-        url: 'http://localhost:8080/rider/riders-list',
+        url: '/rider/riders-list',
         type: 'get',
         dataType: 'json',
         data: '',

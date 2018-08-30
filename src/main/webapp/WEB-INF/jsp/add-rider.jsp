@@ -606,7 +606,7 @@
             && $('#inp-rider-phoneNum').val() != '' && $('#inp-rider-status').val() != '' && $('#inp-rider-address').val() != '' && $('#vichle-num').val() != ''
             && $('#vichle-name').val() != '') {
             $.ajax({
-                url: "http://localhost:8080/rider/signup",
+                url: "/rider/signup",
                 type: "POST",
                 data: dataString,
                 contentType: 'json',

@@ -579,7 +579,7 @@
     }
 
     $.ajax({
-        url: 'http://localhost:8080/dishes/get-dish-list',
+        url: '/dishes/get-dish-list',
         type: 'get',
         dataType: 'json',
         data: '',
@@ -639,7 +639,7 @@
         data = new FormData();
         data.append('file', file);
         $.ajax({
-            url: 'http://localhost:8080/dishes/upload-img?id=' + userId,
+            url: '/dishes/upload-img?id=' + userId,
             type: 'post',
             data: data,
             dataType: 'json',

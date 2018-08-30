@@ -186,7 +186,7 @@
             if (newP == confrm) {
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/admin/update-password",
+                    url: "/admin/update-password",
                     data: "oldpassword=" + old + "&newpassword=" + newP + "&adminEmail=" + adminEmail,
                     success: function (response) {
 
