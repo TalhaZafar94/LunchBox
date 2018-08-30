@@ -36,6 +36,6 @@ public interface RiderService {
     void setStatus(int riderId, int status);
 
     void getRidersNearBy(Double lat, Double longt, Integer orderId);
-    List<Order> getOrderByRiderId(Integer riderid);
-    void updateRiderRequestStatus(Integer status, Integer riderId);
+    List<Order> getOrderByRiderId(Integer riderid,Integer statusId);
+    void updateRiderRequestStatus(Integer status, Integer riderId,Integer orderId);
 }

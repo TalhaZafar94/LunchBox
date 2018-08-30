@@ -31,6 +31,10 @@ public class RiderServiceImpl implements RiderService {
     private CustomerRepository customerRepository;
     @Value("${riderKey}")
     private String riderServerKey;
+    @Value("${foodmakerKey}")
+    private String foodmakerServerKey;
+    @Value("${customerKey}")
+    private String customerServerKey;
 
     @Autowired
     public RiderServiceImpl(RiderRepository riderRepository, LocationRepository locationRepository, RiderRequestRepository riderRequestRepository
@@ -167,7 +171,7 @@ public class RiderServiceImpl implements RiderService {
                             riderRequestRepository.save(request);
 
                             Rider rider1 = riderRepository.findOne(location.getRiderId());
-                            sendNotification(rider1.getRiderRegToken(), riderServerKey, "you have an order");
+                            sendNotification(rider1.getRiderRegToken(), riderServerKey, "you have job to deliver an order");
                         }
                     }
                 }
@@ -179,13 +183,13 @@ public class RiderServiceImpl implements RiderService {
     }
 
     @Override
-    public List<Order> getOrderByRiderId(Integer riderid) {
+    public List<Order> getOrderByRiderId(Integer riderid,Integer statusId) {
 
         List<RiderRequest> riderRequests = riderRequestRepository.getAllByRiderId(riderid);
         List<Order> allOrder = new ArrayList<>();
 
         for (RiderRequest riderRequest : riderRequests) {
-            if(riderRequest.getStatus() == 1)
+            if(riderRequest.getStatus() == statusId)
             {
                 Order order = orderRepository.findOne(riderRequest.getOrderId());
 
@@ -255,9 +259,24 @@ public class RiderServiceImpl implements RiderService {
     }
 
     @Override
-    public void updateRiderRequestStatus(Integer status, Integer riderId) {
+    public void updateRiderRequestStatus(Integer status, Integer riderId,Integer orderId) {
         if (riderId != 0) {
-            riderRequestRepository.updateRiderRequestStatus(status,riderId);
+            riderRequestRepository.updateRiderRequestStatus(status,riderId,orderId);
+
+            Order order = orderRepository.findOne(orderId);
+            Customer customer = customerRepository.findOne(order.getOrderCustomerId());
+            Foodmaker foodmaker = foodmakerRepository.findOne(order.getFoodmakerId());
+
+            if(status == 3)
+            {
+                sendNotification(foodmaker.getFoodmakerRegToken(),foodmakerServerKey,"your rider is reached");
+            }
+
+            else if(status == 4)
+
+            {
+                sendNotification(customer.getCustomerRegToken(),customerServerKey,"your order is delivered");
+            }
         }
     }
 }

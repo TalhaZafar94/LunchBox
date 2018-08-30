@@ -92,13 +92,13 @@ public class Ridercontroller {
     }
 
     @RequestMapping(value = "/get-rider-orders", method = RequestMethod.GET)
-    public List<Order> findNearByFoodmakers(@RequestParam Integer riderId) {
-        return riderService.getOrderByRiderId(riderId);
+    public List<Order> findNearByFoodmakers(@RequestParam Integer riderId,@RequestParam Integer statusId) {
+        return riderService.getOrderByRiderId(riderId,statusId);
     }
 
-    @RequestMapping(value = "/set-rider-request-status", method = RequestMethod.POST)
-    public String setRiderRequestStatus(@RequestParam Integer riderId, @RequestParam Integer status) {
-        riderService.updateRiderRequestStatus(status,riderId);
+    @RequestMapping(value = "/set-rider-request-status", method = RequestMethod.GET)
+    public String setRiderRequestStatus(@RequestParam Integer riderId, @RequestParam Integer status,@RequestParam Integer orderId) {
+        riderService.updateRiderRequestStatus(status,riderId,orderId);
         return "{ \"status\" : \"" + status + "\"}";
     }
 }

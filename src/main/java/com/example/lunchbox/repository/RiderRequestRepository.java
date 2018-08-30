@@ -14,6 +14,6 @@ public interface RiderRequestRepository extends JpaRepository<RiderRequest, Inte
 
     @Transactional
     @Modifying
-    @Query("Update RiderRequest s SET s.status=:status WHERE s.riderId=:riderId")
-    public void updateRiderRequestStatus(@Param("status") Integer status, @Param("riderId") Integer riderId);
+    @Query("Update RiderRequest s SET s.status=:status WHERE s.riderId=:riderId AND s.orderId=:orderId")
+    public void updateRiderRequestStatus(@Param("status") Integer status, @Param("riderId") Integer riderId,@Param("orderId") Integer orderId);
 }

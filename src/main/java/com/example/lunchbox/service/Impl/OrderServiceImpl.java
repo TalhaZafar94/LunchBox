@@ -32,6 +32,7 @@ public class OrderServiceImpl implements OrderService {
     private FoodmakerRepository foodmakerRepository;
     private OrderDishesRepository orderDishesRepository;
     private DishRepository dishRepository;
+    private RiderRequestRepository riderRequestRepository;
 
     private FoodmakerDishesRepository foodmakerDishesRepository;
 
@@ -46,9 +47,11 @@ public class OrderServiceImpl implements OrderService {
     private String foodmakerServerKey;
     @Value("${customerKey}")
     private String customerServerKey;
+    @Value("${riderKey}")
+    private String riderServerKey;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository, RatingRepository ratingRepository, RiderRepository riderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDishesRepository orderDishesRepository, CustomerRepository customerRepository, FoodmakerRepository foodmakerRepository, DishRepository dishRepository, FoodmakerDishesRepository foodmakerDishesRepository, RatingRepository ratingRepository, RiderRepository riderRepository,RiderRequestRepository riderRequestRepository) {
         this.orderRepository = orderRepository;
         this.orderDishesRepository = orderDishesRepository;
         this.customerRepository = customerRepository;
@@ -57,6 +60,7 @@ public class OrderServiceImpl implements OrderService {
         this.foodmakerDishesRepository = foodmakerDishesRepository;
         this.ratingRepository = ratingRepository;
         this.riderRepository = riderRepository;
+        this.riderRequestRepository = riderRequestRepository;
     }
 
     public OrderServiceImpl() {
@@ -74,12 +78,6 @@ public class OrderServiceImpl implements OrderService {
 
             //sending notifcation to foodmaker for an order
             sendNottificationToFoodmaker(order);
-
-/*
-            //sending notification to customer for order placed
-            sendNottificationToCustomer(order);
-*/
-
 
         } catch (Exception e) {
 
@@ -198,25 +196,23 @@ public class OrderServiceImpl implements OrderService {
 
     @Async
     public void sendNottificationToCustomer(Order order) {
-        if (order.getOrderStatus() == 2) {
             Customer customer = customerRepository.findOne(order.getOrderCustomerId());
             sendNotification(customer.getCustomerRegToken(), customerServerKey, "your order is place");
-        } else if (order.getOrderStatus() == 3) {
-            Customer customer = customerRepository.findOne(order.getOrderCustomerId());
-            sendNotification(customer.getCustomerRegToken(), customerServerKey, "your order has delivered");
-        }
     }
 
     @Async
     public void sendNottificationToFoodmaker(Order order) {
         Foodmaker foodmaker = foodmakerRepository.findOne(order.getFoodmakerId());
+        sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "you have an order!");
+    }
 
-        if (order.getRiderId() == null || order.getRiderId() == 0) {
-            sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "you have an order!");
-        } else {
-            sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "order is assigned to rider!");
-        }
+    @Async
+    public void sendNottificationToRider(Integer riderId,Integer foodmakerId) {
 
+        Rider rider = riderRepository.findOne(riderId);
+        Foodmaker foodmaker = foodmakerRepository.findOne(foodmakerId);
+        sendNotification(rider.getRiderRegToken(),riderServerKey, "you have assigned a job to deliver an order!");
+        sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "your requested rider is assigned a job!");
     }
 
     @Override
@@ -292,20 +288,25 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String assignRiderToOrder(Integer riderId, Integer orderId) {
         Order order = orderRepository.findOne(orderId);
-        if (order != null) {
+
             if (order.getRiderId() == null || order.getRiderId() == 0) {
                 orderRepository.assignRiderToOrder(riderId, orderId);
-                sendNottificationToFoodmaker(order);
-                return "{\"status\":\"true\"}";
+                Order order1 = orderRepository.findOne(orderId);
+                sendNottificationToRider(riderId,order.getFoodmakerId());
 
+    //            Rider rider = riderRepository.findOne(riderId);
+      //          Foodmaker foodmaker = foodmakerRepository.findOne(1);
+
+             /*   sendNotification(rider.getRiderRegToken(),riderServerKey, "you have assigned a job to deliver an order!");
+                sendNotification(foodmaker.getFoodmakerRegToken(), foodmakerServerKey, "your requested rider is assigned a job!");*/
+                riderRequestRepository.updateRiderRequestStatus(2,riderId,orderId);
+                return "{\"status\":\"true\"}";
+            } else
+            {
+                Rider rider = riderRepository.findOne(riderId);
+                sendNotification(rider.getRiderRegToken(),riderServerKey,"this job is already assigned");
             }
             return "{\"status\":\"false\"}";
 
-        }
-        return "{\"status\":\"false\"}";
-
-
     }
-
-
 }

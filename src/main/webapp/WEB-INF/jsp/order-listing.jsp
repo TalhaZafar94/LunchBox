@@ -589,7 +589,7 @@
     }
 
     $.ajax({
-        url: 'http://localhost:8080/order/get-order-list',
+        url: '/order/get-order-list',
         type: 'get',
         dataType: 'json',
         data: '',

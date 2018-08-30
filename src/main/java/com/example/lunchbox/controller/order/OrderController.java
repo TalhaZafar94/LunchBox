@@ -28,7 +28,7 @@ public class OrderController {
         return "{\"status\":\"true\"}";
     }
 
-    @RequestMapping(value = "/assign-order", method = RequestMethod.POST)
+    @RequestMapping(value = "/assign-order", method = RequestMethod.GET)
     public String assignOrderToRider(@RequestParam Integer riderId, @RequestParam Integer orderId) {
         return orderService.assignRiderToOrder(riderId, orderId);
     }
