@@ -125,7 +125,7 @@
     <div class="full-content-center">
         <div class="login-wrap animated flipInX">
             <p class="text-center"><a href="#"><img src="${pageContext.request.contextPath}/assets/img/login-logo.png"
-                                                    alt="Logo"></a></p>
+                                                    alt="Logo" style="width: 149px;"></a></p>
             <div class="login-block">
                 <form role="form" action="#">
                     <div class="form-group login-input">
