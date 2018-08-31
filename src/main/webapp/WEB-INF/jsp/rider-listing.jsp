@@ -599,8 +599,8 @@
                     '<td><span class="' + classes + '">' + status + '</span></td>' +
                     '<td>' +
                     '<div class="btn-group btn-group-xs">' +
-                    '<a data-toggle="tooltip" title="Delete" class="btn btn-default"><i class="fa fa-power-off" value="' + rider.riderId + '" ></i></a>' +
-                    '<a data-toggle="tooltip" title="Edit" class="btn btn-default" value="' + rider.riderId + '" ><i class="fa fa-edit"></i></a>' +
+            //        '<a data-toggle="tooltip" title="Delete" class="btn btn-default"><i class="fa fa-power-off" value="' + rider.riderId + '" ></i></a>' +
+        //            '<a data-toggle="tooltip" title="Edit" class="btn btn-default" value="' + rider.riderId + '" ><i class="fa fa-edit"></i></a>' +
                     '</div>' +
                     '</td>' +
                     '</tr>';

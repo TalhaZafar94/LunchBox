@@ -1,6 +1,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.example.lunchbox.model.entity.Order" %>
 <%@ page import="com.example.lunchbox.model.entity.Orderdishes" %>
+<%@ page import="com.example.lunchbox.model.entity.Rider" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -489,8 +490,33 @@
                 </div>
 
                 <br><br>
+                <% if(data.getRiderId() !=  null){ %>
+                <% Rider riderData = (Rider) request.getAttribute("riderDetail"); %>
+                <br><br>
 
+                <div class="bill-to">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4><strong>Rider </strong> Details</h4>
+                            <p><%= riderData.getRiderName() %>
+                            </p>
+                            <address>
+                                <%= riderData.getRiderEmail() %>
+                                <abbr title="Phone">P:</abbr> <%= riderData.getRiderPhoneNumber() %>
+                            </address>
+                        </div>
+                        <div class="col-sm-6"><br>
+                            <small class="text-right">
+                                <p><strong>ORDER DATE : </strong>  <%= data.getOrderDate() %></p>
+                                <p><strong>ORDER STATUS : </strong> <span class="label label-warning"><%=orderStatusTxt%></span></p>
+                                <p><strong>ORDER ID : </strong> #${orderDetail.orderId}</p>
+                            </small>
+                        </div>
+                    </div>
+                </div>
 
+                <br><br>
+                <% } %>
                 <div class="table-responsive">
 
                     <table class="table table-condensed table-striped">
@@ -548,8 +574,12 @@
 
 
                     <br><br>
-                    <h4 class="text-center">Thank you for your payment!</h4><br><br>
-                    <p class="text-right payment-methods"><i class="fa fa-cc-visa"></i> <i
+                    <h4 class="text-center" style="
+    display: none;
+">Thank you for your payment!</h4><br><br>
+                    <p class="text-right payment-methods" style="
+    display: none;
+"><i class="fa fa-cc-visa"></i> <i
                             class="fa fa-cc-mastercard"></i> <i class="fa fa-cc-discover"></i> <i
                             class="fa fa-cc-amex"></i> <i class="fa fa-cc-paypal"></i> <i class="fa fa-cc-stripe"></i>
                     </p>

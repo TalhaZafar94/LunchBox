@@ -434,7 +434,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="toolbar-btn-action">
+                                    <div class="toolbar-btn-action" style="
+    display: none;
+">
                                         <a href="/add-foodmaker?add=new" class="btn btn-success"><i
                                                 class="fa fa-plus-circle"></i> Add new</a>
                                         <%--                 <a class="btn btn-danger"><i class="fa fa-trash-o"></i> Delete</a>
@@ -606,12 +608,21 @@
                     status = "In Process";
                     classes = "label label-warning";
                 }
+                var orderStatus =  data.orderStatus;
+                var orderStatusTxt = "";
+                if(orderStatus == 1){
+                    orderStatusTxt = "Requested By Customer";
+                } else if (orderStatus == 2){
+                    orderStatusTxt = "Acknownledge By Foodmaker";
+                }else if (orderStatus == 3){
+                    orderStatusTxt = "Deliever to Customer";
+                }
                 html = '<tr>' +
                     '<td>' + data.customer.customerName + '</td>' +
                     '<td>' + data.foodmaker.foodmakerName + '</td>' +
                     '<td>' + data.orderDate + '</td>' +
                     '<td>' + data.orderDeliverDate + '</td>' +
-                    '<td><span class="' + classes + '">' + status + '</span></td>' +
+                    '<td><span class="' + classes + '">' + orderStatusTxt + '</span></td>' +
                     '<td>' + data.orderShipmentAddress + '</td>' +
                     '<td>' + data.orderTotalAmount + '</td>' +
                     '<td>' +
@@ -652,18 +663,28 @@
                 var html = "";
                 response.forEach(function (data) {
                     if (data.orderDate == 1) {
-                        status = "Complete";
+                        //status = "Complete";
                         classes = "label label-success"
                     } else {
-                        status = "In Process";
+                        //status = "In Process";
                         classes = "label label-warning";
                     }
+                    var orderStatus =  data.orderStatus;
+                    var orderStatusTxt = "";
+                    if(orderStatus == 1){
+                        orderStatusTxt = "Requested By Customer";
+                    } else if (orderStatus == 2){
+                        orderStatusTxt = "Acknownledge By Foodmaker";
+                    }else if (orderStatus == 3){
+                        orderStatusTxt = "Deliever to Customer";
+                    }
+
                     html += '<tr>' +
                         '<td>' + data.customer.customerName + '</td>' +
                         '<td>' + data.foodmaker.foodmakerName + '</td>' +
                         '<td>' + data.orderDate + '</td>' +
                         '<td>' + data.orderDeliverDate + '</td>' +
-                        '<td><span class="' + classes + '">' + status + '</span></td>' +
+                        '<td><span class="' + classes + '">' + orderStatusTxt + '</span></td>' +
                         '<td>' + data.orderShipmentAddress + '</td>' +
                         '<td>' + data.orderTotalAmount + '</td>' +
                         '<td>' +

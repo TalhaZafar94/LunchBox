@@ -43,12 +43,10 @@ public class Ridercontroller {
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(@RequestBody Rider rider) {
-        if (rider.getRiderPassword() != null && rider.getRiderEmail() != null && rider.getRiderName() != null &&
-                rider.getRiderNic() != null && rider.getRiderPhoneNumber() != null) {
-            riderService.riderSignup(rider);
+         riderService.riderSignup(rider);
             return "rider added";
-        }
-        return "please specify the fields";
+
+
     }
 
     @RequestMapping(value = "/update-password", method = RequestMethod.POST)

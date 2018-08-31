@@ -1,8 +1,10 @@
 package com.example.lunchbox.controller.order;
 
 import com.example.lunchbox.model.entity.Order;
+import com.example.lunchbox.model.entity.Rider;
 import com.example.lunchbox.service.Impl.OrderServiceImpl;
 import com.example.lunchbox.service.OrderService;
+import com.example.lunchbox.service.RiderService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,13 @@ import java.util.List;
 public class OrderController {
 
     private OrderService orderService;
+    private RiderService riderService;
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService,RiderService riderService)
+    {
         this.orderService = orderService;
+        this.riderService = riderService;
     }
 
     @RequestMapping(value = "/save-order", method = RequestMethod.POST)
@@ -79,6 +84,11 @@ public class OrderController {
         Order order = orderService.getOrderById(orderId);
         ModelAndView modelAndView = new ModelAndView("order-detail");
         modelAndView.addObject("orderDetail", order);
+        if(order.getRiderId() != null)
+        {
+            Rider rider = riderService.getRiderById(order.getRiderId());
+            modelAndView.addObject("riderDetail",rider);
+        }
         return modelAndView;
     }
 

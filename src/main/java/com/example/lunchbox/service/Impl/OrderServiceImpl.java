@@ -221,7 +221,9 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.updateOrderStatus(statusValue, orderId);
 
             Order order = orderRepository.findOne(orderId);
-            sendNottificationToCustomer(order);
+            if(statusValue != 4 ||statusValue != 3 ){
+                sendNottificationToCustomer(order);
+            }
         }
     }
 

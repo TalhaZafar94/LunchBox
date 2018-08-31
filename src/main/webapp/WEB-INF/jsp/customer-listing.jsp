@@ -609,7 +609,7 @@
                     '<td><span class="' + classes + '">' + status + '</span></td>' +
                     '<td>' +
                     '<div class="btn-group btn-group-xs">' +
-                    '<a data-toggle="tooltip" title="view profile" class="btn btn-default btn-view" data-id="' + customer.customerId + '"><i class="fa fa-eye"  ></i></a>' +
+                    //'<a data-toggle="tooltip" title="view profile" class="btn btn-default btn-view" data-id="' + customer.customerId + '"><i class="fa fa-eye"  ></i></a>' +
                     '<a data-toggle="tooltip" title="Edit" class="btn btn-default btn-edit" data-id="' + customer.customerId + '" ><i class="fa fa-edit"></i></a>' +
                     '</div>' +
                     '</td>' +

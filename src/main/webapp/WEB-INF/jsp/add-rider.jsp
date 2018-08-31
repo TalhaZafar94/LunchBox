@@ -644,8 +644,7 @@
         console.log(dataString);
         // dataString = JSON.parse(dataString);
         if ($('#inp-rider-name').val() != '' && $('#inp-rider-email').val() != '' && $('#inp-rider-pass').val() != '' && $('#inp-rider-cnic').val() != ''
-            && $('#inp-rider-phoneNum').val() != '' && $('#inp-rider-status').val() != '' && $('#inp-rider-address').val() != '' && $('#vichle-num').val() != ''
-            && $('#vichle-name').val() != '') {
+            && $('#inp-rider-phoneNum').val() != '' && $('#inp-rider-status').val() != '') {
             $.ajax({
                 url: "/rider/signup",
                 type: "POST",
@@ -660,6 +659,8 @@
                 }
             });
             window.location = 'rider-listing.html';
+        }else{
+            alert("All Fields are required");
         }
     });
 </script>
