@@ -558,7 +558,7 @@
 
 
                 <!-- START -->
-                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12" style="display: none;">
                     <div class="dashboard-stat yellow">
                         <div class="visual">
                             <i class="fa fa-shopping-cart"></i>
@@ -572,7 +572,7 @@
                 <!-- END -->
 
                 <!-- START -->
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="display: none;">
                     <div class="dashboard-stat yellow">
                         <div class="visual">
                             <i class="fa fa-shopping-cart"></i>
@@ -587,7 +587,7 @@
 
                 <!-- START -->
                 <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat green">
+                    <div class="dashboard-stat yellow">
                         <div class="visual">
                             <i class="fa fa-shopping-cart"></i>
                         </div>

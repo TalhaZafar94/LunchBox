@@ -456,32 +456,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="inp-rider-status">Vichle name</label>
-                                <div class="col-sm-5">
-                                    <input type="text" id="vichle-name" name="vichle-name" class="form-control"
-                                           required/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="inp-rider-status">Vichle Number</label>
-                                <div class="col-sm-5">
-                                    <input type="text" id="vichle-num" name="vichle-num" class="form-control" required/>
-                                </div>
-                            </div>
+
+
 
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Upload Image</label>
-                                <div class="col-sm-10">
-                                    <input type="file" class="btn btn-default" title="Select file">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <input type="submit" class="form-control" value="submit"
-                                           style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"/>
+                                <button class="col-sm-10">
+                                    <button type="button" id="btn-register-user" class="form-control"
+                                            style="background-color:#68C39F;color:#FFFFFF;font-size:16px;width:50%;margin:auto;display:block;border:0;border-radius:16px"/> Submit </button>
                                 </div>
                             </div>
                             <div id="Message" style="color:green;display:none">Please enter a valid password</div>
@@ -579,8 +561,73 @@
 
 <script>
 
-    $(document).on('submit', 'form', function () {
+    function formValidation() {
+        var isVlaid = true;
+        if ($('input#inp-rider-name').val() == '') {
+            $('input#inp-rider-name').next('div').html("*This field is required can't be empty");
+            $('input#inp-rider-name').next('div').css('display', 'block');
+            isVlaid = false;
+        } else {
+            if ($('input#inp-rider-name').val().length > 16) {
+                $('input#inp-rider-name').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-rider-name').next('div').css('display', 'block');
+                isVlaid = false;
+            }
 
+        }
+        if ($('input#inp-rider-email').val() == '') {
+            $('input#inp-rider-email').next('div').html("*This field is required can't be empty");
+            $('input#inp-rider-email').next('div').css('display', 'block');
+            isVlaid = false;
+        }
+        if ($('#rowId').val() == "") {
+            if ($('input#inp-rider-pass').val() == '') {
+                $('input#inp-rider-pass').next('div').html("*This field is required can't be empty");
+                $('input#inp-rider-pass').next('div').css('display', 'block');
+                isVlaid = false;
+            } else {
+                if ($('input#inp-rider-pass').val().length > 16) {
+                    $('input#inp-rider-pass').next('div').html('*Input value must be less then equal to 16 character');
+                    $('input#inp-rider-pass').next('div').css('display', 'block');
+                    isVlaid = false;
+                }
+
+            }
+        }
+        if ($('input#inp-rider-phoneNum').val() == '') {
+            $('input#inp-rider-phoneNum').next('div').html("*This field is required can't be empty");
+            $('input#inp-rider-phoneNum').next('div').css('display', 'block');
+            isVlaid = false;
+        } else {
+            if ($('input#inp-rider-phoneNum').val().length > 16) {
+                $('input#inp-rider-phoneNum').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-rider-phoneNum').next('div').css('display', 'block');
+                isVlaid = false;
+            }
+
+        }
+        if ($('input#inp-rider-cnic').val() == '') {
+            $('input#inp-rider-cnic').next('div').html("*This field is required can't be empty");
+            $('input#inp-rider-cnic').next('div').css('display', 'block');
+            isVlaid = false;
+        } else {
+            if ($('input#inp-rider-cnic').val().length > 16) {
+                $('input#inp-rider-cnic').next('div').html('*Input value must be less then equal to 16 character');
+                $('input#inp-rider-cnic').next('div').css('display', 'block');
+                isVlaid = false;
+            }
+
+        }
+
+        return isVlaid;
+    }
+
+
+
+    $('#btn-register-user').on('click',function(){
+    if(!formValidation){
+        return;
+    }
 
         var dataString = '{ "riderName" :"' + $('#inp-rider-name').val() + '",' +
             '"riderEmail" :"' + $('#inp-rider-email').val() + '",' +
@@ -588,14 +635,8 @@
             '"foodmakerNic" :"' + $('#inp-rider-cnic').val() + '", ' +
             '"riderPhoneNumber" :"' + $('#inp-rider-phoneNum').val() + '", ' +
             '"riderActive" :"' + $('#inp-rider-status').val() + '" ,' +
-            '"riderAddresId" : {' +
-            '"address": "' + $('#inp-rider-address').val() + '",' +
-            '"city":"karachi"' +
-            '},' +
-            '"riderVehicleId" : {' +
-            '"vehicleNumber": "' + $('#vichle-num').val() + '",' +
-            '"vehicleName":"' + $('#vichle-name').val() + '" ' +
-            '}' +
+            '"riderAddresId" : 1,' +
+            '"riderVehicleId" : 1' +
 
             '}';
 

@@ -431,6 +431,18 @@
                     </div>
                 </div>
 
+                <%
+                   int orderStatus =  data.getOrderStatus();
+                   String orderStatusTxt = "";
+                   if(orderStatus == 1){
+                       orderStatusTxt = "Requested By Customer";
+                   } else if (orderStatus == 2){
+                       orderStatusTxt = "Acknownledge By Foodmaker";
+                   }else if (orderStatus == 3){
+                       orderStatusTxt = "Deliever to Customer";
+                   }
+
+                %>
                 <div class="bill-to">
                     <div class="row">
                         <div class="col-sm-6">
@@ -438,16 +450,14 @@
                             <p><%= data.getCustomer().getCustomerName() %>
                             </p>
                             <address>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
+                                <%= data.getCustomer().getCustomerAddressId().getAddress() %><br>
                                 <abbr title="Phone">P:</abbr> <%= data.getCustomer().getCustomerPhoneNumber() %>
                             </address>
                         </div>
                         <div class="col-sm-6"><br>
                             <small class="text-right">
                                 <p><strong>ORDER DATE : </strong> January 15, 2014</p>
-                                <p><strong>ORDER TIME : </strong> January 15, 2014</p>
-                                <p><strong>ORDER STATUS : </strong> <span class="label label-warning">Pending</span></p>
+                                <p><strong>ORDER STATUS : </strong> <span class="label label-warning"><%=orderStatusTxt%></span></p>
                                 <p><strong>ORDER ID : </strong> #<%= data.getOrderId() %>
                                 </p>
                             </small>
@@ -464,16 +474,14 @@
                             <p><%= data.getFoodmaker().getFoodmakerName() %>
                             </p>
                             <address>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
+                                <%= data.getFoodmaker().getFoodmakerAddresId().getAddress() %>
                                 <abbr title="Phone">P:</abbr> <%= data.getFoodmaker().getFoodmakerPhoneNumber() %>
                             </address>
                         </div>
                         <div class="col-sm-6"><br>
                             <small class="text-right">
-                                <p><strong>ORDER DATE : </strong> January 15, 2014</p>
-                                <p><strong>ORDER TIME : </strong> January 15, 2014</p>
-                                <p><strong>ORDER STATUS : </strong> <span class="label label-warning">Pending</span></p>
+                                <p><strong>ORDER DATE : </strong>  <%= data.getOrderDate() %></p>
+                                <p><strong>ORDER STATUS : </strong> <span class="label label-warning"><%=orderStatusTxt%></span></p>
                                 <p><strong>ORDER ID : </strong> #${orderDetail.orderId}</p>
                             </small>
                         </div>
